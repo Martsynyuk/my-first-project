@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="keywords" content="">
+<meta name="description" content="">
+<title></title>
+
+</head>
+<body>
+	<ul>
+		<li><a href="/contacts/index">Home</a></li>
+		<li><a href="/user/autorization">Autorization</a></li>
+		<li><a href="/user/registration">Registration</a></li>
+		<li><a href="/user/logout">logout</a></li>
+	</ul>
+	<p>Autorization</p>
+	<form name="login" action="/user/autorization" method="POST">
+
+		<p>Login:</p>
+		<input type="text" name="login"
+			value="<?= (!empty($_POST['login'])) ? $_POST['login'] : ''; ?>"
+			size="35">
+
+		<p>Password:</p>
+		<input type="password" name="password" size="35">
+
+		<ul>
+			<li><a href="/">Forgot password?</a></li>
+			<li><a href="/user/registration">Register Now</a></li>
+		</ul>
+		<input type="submit" name="enter" value="Login">
+	</form>
+</body>
+</html>

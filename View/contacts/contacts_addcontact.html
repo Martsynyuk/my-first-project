@@ -1,0 +1,108 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="keywords" content="">
+<meta name="description" content="">
+<title>project</title>
+
+</head>
+<body>
+	<ul>
+		<li><a href="/">Home</a></li>
+		<li><a href="/user/autorization">Autorization</a></li>
+		<li><a href="/user/Registration">Registration</a></li>
+		<li><a href="/user/logout">Logout</a></li>
+	</ul>
+	<form name="addcontact" method="POST" action="/contacts/addcontact">
+		<ul>
+			<li><span>Information</span></li>
+			<li><span>First Name:</span> <input type="text" name="FirstName"
+				value="<?php if(!empty($res['FirstName'])) echo $res['FirstName'];?>"
+				size="25"></li>
+			<li><span>Last Name:</span> <input type="text" name="LastName"
+				value="<?php if(!empty($res['LastName'])) echo $res['LastName'];?>"
+				size="25"></li>
+			<li><span>E-mail:</span> <input type="email" name="Email"
+				value="<?php if(!empty($res['Email'])) echo $res['Email'];?>"
+				size="25"></li>
+			<li><span>Home:</span> <input type="radio" name="radio" value="Home">
+				<input type="text" name="Home"
+				value="<?php if(!empty($res['Home'])) echo $res['Home'];?>"
+				size="25"></li>
+			<li><span>Work:</span> <input type="radio" name="radio" value="Work">
+				<input type="text" name="Work"
+				value="<?php if(!empty($res['Work'])) echo $res['Work'];?>"
+				size="25"></li>
+			<li><span>Cell:</span> <input type="radio" name="radio" value="Cell">
+				<input type="text" name="Cell"
+				value="<?php if(!empty($res['Cell'])) echo $res['Cell'];?>"
+				size="25"></li>
+			<li><span>Adress 1:</span> <input type="text" name="Adress1"
+				value="<?php if(!empty($res['Adress1'])) echo $res['Adress1'];?>"
+				size="25"></li>
+			<li><span>Adress 2:</span> <input type="text" name="Adress2"
+				value="<?php if(!empty($res['Adress2'])) echo $res['Adress2'];?>"
+				size="25"></li>
+			<li><span>City:</span> <input type="text" name="City"
+				value="<?php if(!empty($res['City'])) echo $res['City'];?>"
+				size="25"></li>
+			<li><span>State:</span> <input type="text" name="State"
+				value="<?php if(!empty($res['State'])) echo $res['State'];?>"
+				size="25"></li>
+			<li><span>Zip:</span> <input type="text" name="Zip"
+				value="<?php if(!empty($res['Zip'])) echo $res['Zip'];?>" size="25">
+			</li>
+			<li><span>Country:</span> <input type="text" name="Country"
+				value="<?php if(!empty($res['Country'])) echo $res['Country'];?>"
+				size="25"></li>
+			<li>
+		<?php if(!empty($_GET['id'])) { ?>
+					<span>Birth Date:</span> <select size="1" name="day">
+					<option value="<?= $backdate['day']; ?>"><?= $backdate['day']; ?></option>;
+										
+			<?php for($i = 1; $i <= 31; $i++) : ?>
+						<option value="<?= $i; ?>"><?= $i; ?></option>;			
+			<?php endfor; ?>
+										
+					</select> <select size="1" name="month">
+					<option value="<?= $backdate['month']; ?>"><?= $backdate['month']; ?></option>;
+										
+			<?php for($i = 1; $i <= 12; $i++) : ?>
+						<option value="<?= $i; ?>"><?= $i; ?></option>;
+			<?php endfor; ?>
+										
+					</select> <select size="1" name="year">
+					<option value="<?= $backdate['year']; ?>"><?= $backdate['year']; ?></option>;
+										
+			<?php for($i = idate("Y")-100; $i <= idate("Y"); $i++) : ?>
+						<option value="<?= $i; ?>"><?= $i; ?></option>;
+			<?php endfor; ?>
+										
+					</select>
+		<?php } else { ?>
+					<span>Birth Date:</span> <select size="1" name="day">	
+									
+			<?php for($i = 1; $i <= 31; $i++) : ?>
+						<option value="<?= $i; ?>"><?= $i; ?></option>;			
+			<?php endfor; ?>
+										
+					</select> <select size="1" name="month">	
+									
+			<?php for($i = 1; $i <= 12; $i++) : ?>
+						<option value="<?= $i; ?>"><?= $i; ?></option>;
+			<?php endfor; ?>
+										
+					</select> <select size="1" name="year">
+									
+			<?php for($i = idate("Y")-100; $i <= idate("Y"); $i++) : ?>
+						<option value="<?= $i; ?>"><?= $i; ?></option>;
+			<?php endfor; ?>
+										
+					</select>
+		<?php }?>
+				</li>
+		</ul>
+		<input type="submit" name="information" value="Done">
+	</form>
+
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>project</title>
+</head>
+<body>
+	<ul>
+		<li><a href="/">Home</a></li>
+		<li><a href="/user/autorization">Autorization</a></li>
+		<li><a href="/user/registration">Registration</a></li>
+		<li><a href="/user/logout">Logout</a></li>
+	</ul>
+
+		<?php if(!empty($contacts)){ ?>
+			<table>
+		<tr>
+			<th></th>
+			<th>First Name<a href="<?= $sortup . '&sortparam=FirstName'?>"
+				style="margin: 0 10px;">&#8593 </a> <a
+				href="<?= $sortdown . '&sortparam=FirstName'?>">&#8595 </a></th>
+			<th>Last Name<a href="<?= $sortup . '&sortparam=LastName'?>"
+				style="margin: 0 10px;">&#8593 </a> <a
+				href="<?= $sortdown . '&sortparam=LastName'?>">&#8595 </a></th>
+			<th>E-mail</th>
+			<th>Cellular</th>
+			<th>Action</th>
+		</tr>																
+		<?php 
+			$i = 1;
+			($page > 1) ? $i = $page * ROWLIMIT - ROWLIMIT + 1 : '';
+			
+			foreach ( $contacts as $contact ) :
+				?>	
+				<tr>
+			<td><?= $i . '.'; ?></td>
+			<td><?= $contact['FirstName']; ?></td>
+			<td><?= $contact['LastName']; ?></td>
+			<td><?= $contact['Email']; ?></td>
+			<td><?= $contact['Telephone']; ?></td>
+			<td><a href="<?= $editcontact . $contact['id']?>">edit</a> 
+				<a href="<?= $viewcontact . $contact['id']?>">view</a> 
+				<a href="<?= $deletecontact .$contact['id']?>">delete</a>
+			</td>
+		</tr>
+		<?php $i++;?>	
+		<?php endforeach;?>									
+			</table>
+	</br>
+	<a href="/contacts/addcontact">Add contact</a>
+	</br>
+	<a href="/contacts/selectcontact">Select contact</a>
+		<?php } else { ?>
+			<span>Your contact book is empty. Please add some contacts.</span>
+	</br>
+	</br>
+		<?php } ;?>
+		<?php if($userContact->countContacts($_SESSION['id']) == 0) { ?>
+			<a href="/contacts/addcontact">Add contact</a>
+		<?php } else {?>
+			<ul>
+		<li>
+					<?php  if ($page != 1) : ?>
+						<a
+			href="<?php
+				
+				if ($page == 1) {
+					echo $url;
+				} else {
+					echo $url_page . ($page - 1);
+				}
+				?>"
+			title="last page">Back </a>
+					<?php endif;?>										
+				</li>
+		<li>
+					<?php for ($i = $count_for_pagin[0]; $i <= $count_for_pagin[1]; $i++) { ?>
+						<?php if ($i == $page) { ?>
+									<span><?=$i?></span>
+						<?php } else { ?>
+							<a
+			href="<?php
+					
+					if ($i == 1) {
+						echo $url;
+					} else {
+						echo $url_page . $i;
+					}
+					?>">
+								<?=$i?>
+							</a>
+						<?php } ?>
+					<?php } ?>							
+				</li>
+		<li>								
+					<?php
+			
+			if ($userContact->countContacts ( $_SESSION ['id'] ) > 0) :
+				if ($page != $count_pages) :
+					?>
+									<a href="<?=$url_page.($page + 1) ?>" title="next page">Next</a>									
+								<?php endif; ?>
+					<?php endif; ?>										
+				</li>
+	</ul>
+		<?php } ?>
+</body>
+</html>

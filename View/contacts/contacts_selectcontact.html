@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="keywords" content="">
+<meta name="description" content="">
+<title></title>
+
+</head>
+<body>
+	<ul>
+		<li><a href="/">Home</a></li>
+		<li><a href="/user/autorization">Autorization</a></li>
+		<li><a href="/user/registration">Registration</a></li>
+		<li><a href="/user/logout">Logout</a></li>
+	</ul>
+	<form name="selectcontact" method="POST"
+		action="/contacts/selectcontact">
+		<table border="0">
+			<tr>
+				<th><input type="checkbox" name="all" value="all">All</th>
+				<th>First Name<a href="<?= $sortup . '&sortparam=FirstName'?>"
+					style="margin: 0 10px;">&#8593 </a> <a
+					href="<?= $sortdown . '&sortparam=FirstName'?>">&#8595 </a></th>
+				<th>Last Name<a href="<?= $sortup . '&sortparam=LastName'?>"
+					style="margin: 0 10px;">&#8593 </a> <a
+					href="<?= $sortdown . '&sortparam=LastName'?>">&#8595 </a></th>
+				<th>E-mail</th>
+				<th>Cellular</th>
+			</tr>		
+		<?php
+		$i = 1;
+		($page > 1) ? $i = $page * ROWLIMIT - ROWLIMIT + 1 : '';
+		
+		foreach ( $contacts as $contact ) :
+			?>	
+				<tr>
+				<td><input type="checkbox" name="<?= $contact['id']; ?>"
+					value="<?= $contact['Email']; ?>"></td>
+				<td><?= $contact['FirstName']; ?></td>
+				<td><?= $contact['LastName']; ?></td>
+				<td><?= $contact['Email']; ?></td>
+				<td><?= $contact['Telephone']; ?></td>
+			</tr>
+		<?php $i++;?>	
+		<?php endforeach;?>									
+			</table>
+		</br> <input type="submit" name="Select" value="Accept"><a href="">Cancel</a></br>
+		</br> <a href="/contacts/index">Back</a>
+		<ul>
+			<li>
+					<?php  if ($page != 1) : ?>
+						<a
+				href="<?php
+						
+						if ($page == 1) {
+							echo $url;
+						} else {
+							echo $url_page . ($page - 1);
+						}
+						?>"
+				title="last page">Back </a>
+					<?php endif; ?>										
+				</li>
+			<li>
+					<?php for ($i = $count_for_pagin[0]; $i <= $count_for_pagin[1]; $i++) { ?>
+						<?php if ($i == $page) { ?>
+									<span><?=$i?></span>
+						<?php } else { ?>
+							<a
+				href="<?php
+							
+							if ($i == 1) {
+								echo $url;
+							} else {
+								echo $url_page . $i;
+							}
+							?>">
+								<?=$i?>
+							</a>
+						<?php } ?>
+					<?php } ?>							
+				</li>
+			<li>								 
+				<?php if ($page != $count_pages) : ?>
+					<a href="<?=$url_page.($page + 1) ?>" title="next page">Next</a>									
+				<?php endif; ?>									
+				</li>
+		</ul>
+
+</body>
+</html>
