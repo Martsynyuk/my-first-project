@@ -1,5 +1,5 @@
 <?php
-		// for TEST
+		// for TEST 22
 	/*$what = array(
 			'users_id' => $_SESSION ['id'], // mast be int its importent
 			'Firstname' => $_POST ['FirstName'],
