@@ -1,4 +1,16 @@
 <?php
+
+	/**
+	 * 
+	 * parent class for working whith database
+	 * 
+	 * 
+	 * 
+	 * @author Тоха
+	 * @package app.model
+	 *
+	 *
+	 */
 	Class Model implements For_model
 	{
 		
@@ -9,7 +21,7 @@
 		 * @param string $db_name
 		 * @param string $user_name
 		 * @param string $password
-		 * @return array mysqli
+		 * @return array $mysqli
 		 * 
 		 */
 		
@@ -60,6 +72,8 @@
 		*											 'end'=> ''
 		*										 )
 		*					 );
+		*
+		*@return string|array $result
 		*/
 		
 		function select($what)
@@ -139,7 +153,9 @@
 		*				'user_id' => 101, // mast be int its importent
 		*				'firstname' => 'Terr'
 		*			
-		*				)
+		*				);
+		*
+		*@return string|array $result
 		* 
 		*/
 	
@@ -197,6 +213,8 @@
 		*				'id' => 1
         *
 		*				);
+		*
+		*@return string|array $result
 		* 
 		*/
 		
@@ -238,7 +256,7 @@
 		 * 
 		 * 
 		 * @param $value
-		 * @return string|array
+		 * @return string $result
 		 */
 		
 		function delete($value)
@@ -259,7 +277,7 @@
 				
 				$this->disconect('localhost', 'user', 'root', '');
 				
-				$result = TRUE;
+				$result = '';
 				
 			}
 
@@ -269,6 +287,8 @@
 		/**
 		* 
 		* @param $sql
+		* 
+		* @return array $result
 		* 
 		*/
 		
