@@ -34,8 +34,6 @@
 	$_POST ['month'] = '09';
 	$_POST ['day'] = '31';
 	
-	// strpbrk — Ищет в строке любой символ из заданного набора string strpbrk ( string $haystack , string $char_list )
-	
 	
 	if(!isset($_POST ['FirstName']))
 	{
@@ -52,7 +50,7 @@
 		header('Location: /');
 	}
 	
-	foreach ($_POST as $key)
+	foreach ($_POST as $key => $value)
 	{
 		
 		if(iconv_strlen($_POST [$key]) < 1 && iconv_strlen($_POST [$key]) > 25)
