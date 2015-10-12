@@ -16,12 +16,13 @@
 		
 		/**
 		 * 
+		 * to connect to the database
 		 * 
 		 * @param string $host
 		 * @param string $db_name
 		 * @param string $user_name
 		 * @param string $password
-		 * @return array $mysqli
+		 * @return ArrayObject $mysqli
 		 * 
 		 */
 		
@@ -40,6 +41,17 @@
 				
 		}
 		
+		/**
+		 * 
+		 * to disconnect to the database
+		 * 
+		 * @param string $host
+		 * @param string $db_name
+		 * @param string $user_name
+		 * @param string $password
+		 * 
+		 */
+		
 		function disconect($host, $db_name, $user_name, $password)
 		{
 			
@@ -48,7 +60,7 @@
 		
 		/**
 		* 
-		* 
+		* fetch data from the database
 		* 
 		* 
 		* @param array $what = array(
@@ -148,6 +160,7 @@
 		
 		/**
 		* 
+		* write data to the database
 		* 
 		* @param array $what = array(
 		*				'user_id' => 101, // mast be int its importent
@@ -202,7 +215,7 @@
 		
 		/**
 		* 
-		* 
+		* changing data in the database
 		* 
 		* @param array $what = array(
 		*				 'fields' => array(
@@ -254,6 +267,7 @@
 		
 		/**
 		 * 
+		 * deleting data in database
 		 * 
 		 * @param $value
 		 * @return string $result
@@ -285,6 +299,8 @@
 		}
 		
 		/**
+		* 
+		* implementation of the request
 		* 
 		* @param $sql
 		* 

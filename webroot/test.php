@@ -13,8 +13,51 @@
 			'City' => $_POST ['City'],
 			'State' => $_POST ['State'],
 			'Zip' => $_POST ['Zip'],
-			'Country' => $_POST ['Zip'],
+			'Country' => $_POST ['Country'],
 			'BirthDate' => $_POST ['year'] . '-' . $_POST ['month'] . '-' . $_POST ['day'],
 			'Telephone' => $phone
 	
 	);*/
+		
+	$_POST ['FirstName'] = 'Terr';
+	$_POST ['LastName'] = 'Infanti';
+	$_POST ['Home'] = '15464545';
+	$_POST ['Work'] = '1545545';
+	$_POST ['Cell'] = '1544554';
+	$_POST ['Adress1'] = 'dsfdf';
+	$_POST ['Adress2'] = 'sdfds';
+	$_POST ['City'] = 'dsfdsf'; 
+	$_POST ['State'] = 'dsfsdf';
+	$_POST ['Zip'] = 'dsf';
+	$_POST ['Country'] = 'sdf';
+	$_POST ['year'] = '1512';
+	$_POST ['month'] = '09';
+	$_POST ['day'] = '31';
+	
+	//
+	
+	
+	if(!isset($_POST ['FirstName']))
+	{
+		header('Location: /');
+	}
+	
+	if (!isset($_POST ['LastName']))
+	{
+		header('Location: /');
+	}
+	
+	if (!isset($_POST ['Home']))
+	{
+		header('Location: /');
+	}
+	
+	foreach ($_POST as $key)
+	{
+		
+		if(iconv_strlen($_POST [$key]) < 1 && iconv_strlen($_POST [$key]) > 25)
+		{
+			
+			header('Location: /');
+		}
+	}
