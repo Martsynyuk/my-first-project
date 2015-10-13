@@ -35,6 +35,9 @@
 	$_POST ['day'] = '31';
 	
 	
+	// count_chars ( string $string [, int $mode = 0 ] )
+	
+	
 	if(!isset($_POST ['FirstName']))
 	{
 		header('Location: /');
