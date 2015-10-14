@@ -2,7 +2,7 @@
 	class Contacts extends Controller
 	{
 		
-		public function  addContact()
+		public function  add_contact()
 		{
 			
 			if (! empty ( $_POST ['FirstName'] )) 
@@ -69,10 +69,10 @@
 			$view->render('contacts_addcontact');
 		}
 		
-		public function editcontact()
+		public function edit_contact()
 		{
 			
-			$this->contactsDefender ( $_GET ['id'], $_SESSION ['id'] );
+			$this->contacts_defender ( $_GET ['id'], $_SESSION ['id'] );
 				
 				$select_user_contacts = new Information();
 				
@@ -201,7 +201,7 @@
 			if(! empty ( $_GET ['id'] ) && ! empty ( $_SESSION ['id'] ))
 			{
 				
-				$this->deleteContact ( $_GET ['id'], $_SESSION ['id'] );
+				$this->delete_contact ( $_GET ['id'], $_SESSION ['id'] );
 			}
 			
 			if(empty ( $_GET ['page'] ))
@@ -220,10 +220,10 @@
 			$userContact = new Contacts();
 			
 			$contacts = array ();
-			$contacts = $this->returnContact ( $_SESSION ['id'], $page, $_GET ['sort'], $_GET ['sortparam'] );
+			$contacts = $this->return_contact ( $_SESSION ['id'], $page, $_GET ['sort'], $_GET ['sortparam'] );
 			
-			$count_for_pagin = $this->countPages ( $_SESSION ['id'], $page );
-			$count_pages = ceil ( $this->countContacts () / 5 );
+			$count_for_pagin = $this->count_pages ( $_SESSION ['id'], $page );
+			$count_pages = ceil ( $this->count_contacts () / 5 );
 			
 			$url = $this->url;
 			$url_page = $this->url_page;
@@ -252,7 +252,7 @@
 			$view->render('contacts_index');
 		}
 		
-		public function selectcontact()
+		public function select_contact()
 		{
 
 			
@@ -272,8 +272,8 @@
 			$contacts = array ();
 			$contacts = $this->returnContact ( $_SESSION ['id'], $page, $_GET ['sort'], $_GET ['sortparam'] );
 			
-			$count_for_pagin = $this->countPages ( $_SESSION ['id'], $page );
-			$count_pages = ceil ( $this->countContacts ( $_SESSION ['id'] ) / 5 );
+			$count_for_pagin = $this->count_pages ( $_SESSION ['id'], $page );
+			$count_pages = ceil ( $this->count_contacts ( $_SESSION ['id'] ) / 5 );
 			
 			$url = $this->url;
 			$url_page = $this->url_page;
@@ -295,7 +295,7 @@
 			$view->render('contacts_selectcontact');
 		}
 		
-		public function viewcontact()
+		public function view_contact()
 		{	
 		
 			$contact_view = new Information();
@@ -358,9 +358,9 @@
 			return;
 		}
 		
-		function deleteContact($id, $user)
+		function delete_contact($id, $user)
 		{
-			$protection = $this->contactsDefender ( $id, $user );
+			$protection = $this->contacts_defender ( $id, $user );
 
 			if(!empty($protection))
 			{	
@@ -382,7 +382,7 @@
 			}
 		}
 		
-		function contactsDefender($id, $user_id)
+		function contacts_defender($id, $user_id)
 		{
 			if (( int ) $id > 0)
 			{
@@ -431,11 +431,11 @@
 			return $user_contact;
 		}
 		
-		function countContacts()
+		function count_contacts()
 		{	
-			$countContacts = new Information();
+			$count_contacts = new Information();
 			
-			$res = $countContacts->select(
+			$res = $count_contacts->select(
 											$what = array(
 														'fields' => array(
 																			'COUNT(*)'
@@ -460,9 +460,9 @@
 			return $res ['0']['COUNT(*)'];
 		}
 		
-		function countPages($page)
+		function count_pages($page)
 		{
-			$count_pages = ceil ( $this->countContacts () / 5 );
+			$count_pages = ceil ( $this->count_contacts () / 5 );
 			$count_show_pages = SHOWPAGES;
 			$start = 1;
 			$end = 1;
@@ -500,7 +500,7 @@
 			);
 		}
 		
-		function returnContact($user_id, $page, $sorting, $sortparam) 
+		function return_contact($user_id, $page, $sorting, $sortparam) 
 		{
 				$sort = '';
 				$deck = '';
@@ -520,9 +520,9 @@
 					header ( 'Location: index.php' );
 				}
 
-			$returnContact = new Information();
+			$return_contact = new Information();
 			
-			$result = $returnContact->select(
+			$result = $return_contact->select(
 												$what = array(
 														'fields' => array(	
 																			'id',
@@ -554,7 +554,7 @@
 				$contacts = array ();
 			}
 		
-			return ($contacts);
+			return $contacts;
 		}
 
 	}

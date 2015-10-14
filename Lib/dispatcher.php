@@ -8,6 +8,7 @@ class Dispatcher {
 		}
 		
 		$arguments = explode ( '/', ltrim ( $path, '/' ));
+		
 		if(!empty($arguments[1]))
 		{
 			$get = explode('?', $arguments[1]);
@@ -28,6 +29,7 @@ class Dispatcher {
 		$class = ucfirst($arguments[0]);
 
 		$load = new $class;	
+		
 		$load->$arguments[1]();
 		
 		return;

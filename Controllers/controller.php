@@ -2,10 +2,10 @@
 	class Controller
 	{
 		
-		public $url = '?page=1';
-		public $url_page = '?page=';
-		public $sortup = '?sort=up';
-		public $sortdown = '?sort=down';
+		public $url = '/contacts/index?page=1';
+		public $url_page = '/contacts/index?page=';
+		public $sortup = '/contacts/index?sort=up';
+		public $sortdown = '/contacts/index?sort=down';
 		
 		function __construct()
 		{
