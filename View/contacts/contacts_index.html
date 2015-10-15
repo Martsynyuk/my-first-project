@@ -47,16 +47,16 @@
 		<?php endforeach;?>									
 			</table>
 	</br>
-	<a href="/contacts/addcontact">Add contact</a>
+	<a href="/contacts/add_contact">Add contact</a>
 	</br>
-	<a href="/contacts/selectcontact">Select contact</a>
+	<a href="/contacts/select_contact">Select contact</a>
 		<?php } else { ?>
 			<span>Your contact book is empty. Please add some contacts.</span>
 	</br>
 	</br>
 		<?php } ;?>
 		<?php if($userContact->count_contacts($_SESSION['id']) == 0) { ?>
-			<a href="/contacts/addcontact">Add contact</a>
+			<a href="/contacts/add_contact">Add contact</a>
 		<?php } else {?>
 			<ul>
 		<li>

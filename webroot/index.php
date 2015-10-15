@@ -2,13 +2,15 @@
 	
 	session_start ();
 
-	if (! defined ( 'WEBROOT' ))
+	if ( ! defined ( 'WEBROOT' ))
 	{
+		
 		define ( 'WEBROOT', dirname ( __FILE__ ) );
 	}
 
-	if (! defined ( 'APP' ))
+	if ( ! defined ( 'APP' ))
 	{
+		
 		define ( 'APP', dirname ( dirname ( __FILE__ ) ) );
 	}
 	

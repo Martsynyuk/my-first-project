@@ -14,7 +14,7 @@
 		<li><a href="/user/registration">Registration</a></li>
 		<li><a href="/user/logout">Logout</a></li>
 	</ul>
-	<form name="viewcontact" method="POST" action="/contacts/viewcontact">
+	<form name="viewcontact" method="POST" action="/contacts/view_contact">
 		<?php 
 		foreach ( $contactUser as $key => $volue ) {
 			$res [$key] = $volue;
@@ -56,7 +56,7 @@
 					<?= $backdate['year']; ?>
 			</li>
 		</ul>
-		<a href="/contacts/index">Back</a>
+		<a href="/">Back</a>
 	</form>
 </body>
 </html>

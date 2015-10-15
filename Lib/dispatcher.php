@@ -1,22 +1,29 @@
 <?php
+
+
 class Dispatcher {	
 	
-	public function dispatch($path) {
-		if (empty ( $path ))
+	public function dispatch ( $path ) 
+	{
+		
+		if (empty ( $path ) )
 		{
+			
 			header ( 'Location: /error_pages/404.html', 404 );
 		}
 		
-		$arguments = explode ( '/', ltrim ( $path, '/' ));
+		$arguments = explode ( '/', ltrim ( $path, '/' ) );
 		
-		if(!empty($arguments[1]))
+		if ( ! empty  ($arguments[1] ) )
 		{
-			$get = explode('?', $arguments[1]);
+			
+			$get = explode ( '?', $arguments[1] );
 			$arguments[1] = $get[0];
 		}
 		
-		if (empty ( $arguments ))
+		if ( empty ( $arguments ) )
 		{
+			
 			header ( 'Location: /error_pages/404.html', 404 );
 		}
 		
@@ -26,7 +33,7 @@ class Dispatcher {
 			$arguments [1] = 'index';
 		}
 		
-		$class = ucfirst($arguments[0]);
+		$class = ucfirst ( $arguments[0] );
 
 		$load = new $class;	
 		

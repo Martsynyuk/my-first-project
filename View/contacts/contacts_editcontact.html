@@ -13,7 +13,7 @@
 		<li><a href="/user/logout">Logout</a></li>
 	</ul>
 	<form name="editcontact" method="POST"
-		action="<?= '/contacts/editcontact?id=' . $_GET['id'] ?>">
+		action="<?= '/contacts/edit_contact?id=' . $_GET['id'] ?>">
 	<?php 
 	foreach ($contactUser as $key => $volue )
 	 {
@@ -26,7 +26,7 @@
 		<ul>
 			<li><span>Information</span></li>
 			<li><span>First Name:</span> <input type="text" name="FirstName"
-				value="<?= (!empty($res['0']['Firstname'])) ? $res['0']['Firstname'] : ' ';?>"
+				value="<?= (!empty($res['0']['Firstname'])) ? $res['0']['Firstname'] : '';?>"
 				size="25"></li>
 			<li><span>Last Name:</span> <input type="text" name="LastName"
 				value="<?= (!empty($res['0']['Lastname'])) ? $res['0']['Lastname'] : '';?>"
