@@ -2,8 +2,18 @@
 
 function autoload ( $classname )
 {
-		
-	switch ($classname)
+	
+	$load_class = explode('_', $classname);
+
+	//echo '<pre>'; var_dump($load_class); echo '</pre>'; 
+	
+		if ( file_exists(APP . '/' . ucfirst ( $load_class[1] ) . '/' . $load_class[0] . '_' . $load_class[1] . '.php') )
+		{
+	
+			include_once APP . '/' . ucfirst ( $load_class[1] ) . '/' . $load_class[0] . '_' . $load_class[1] . '.php';
+		}	
+	
+	/*switch ($classname)
 	{
 		case file_exists(APP . '/Lib/' . $classname . '.php'): 
 				
@@ -20,7 +30,7 @@ function autoload ( $classname )
 			include_once APP . '/Models/' . $classname . '.php';
 			break;
 			
-	}
+	}*/
 		
 }
 	

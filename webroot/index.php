@@ -19,7 +19,7 @@
 	require_once APP . '/Lib/constant.php';	
 	require_once APP . '/Models/interface.php';
 	
-	$dispatcher = new Dispatcher ();
+	$dispatcher = new Dispatcher_lib ();
 	
 	$dispatcher->dispatch ( $_SERVER ['REQUEST_URI'] );
 	

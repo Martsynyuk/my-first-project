@@ -10,11 +10,11 @@
 <body>
 	<ul>
 		<li><a href="/">Home</a></li>
-		<li><a href="/user/autorization">Autorization</a></li>
-		<li><a href="/user/registration">Registration</a></li>
-		<li><a href="/user/logout">Logout</a></li>
+		<li><a href="/user_controllers/autorization">Autorization</a></li>
+		<li><a href="/user_controllers/registration">Registration</a></li>
+		<li><a href="/user_controllers/logout">Logout</a></li>
 	</ul>
-	<form name="viewcontact" method="POST" action="/contacts/view_contact">
+	<form name="viewcontact" method="POST" action="/contacts_controllers/view_contact">
 		<?php 
 		foreach ( $contactUser as $key => $volue ) {
 			$res [$key] = $volue;
