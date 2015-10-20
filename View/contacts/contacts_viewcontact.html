@@ -16,37 +16,35 @@
 	</ul>
 	<form name="viewcontact" method="POST" action="/contacts_controllers/view_contact">
 		<?php 
-		foreach ( $contactUser as $key => $volue ) {
-			$res [$key] = $volue;
-		}
-		
-		$backdate = (date_parse ( $res ['0']['BirthDate'] ));
+		foreach ( $contactUser as $res ) :
+	
+		$backdate = (date_parse ( $res ['BirthDate'] ));
 		?>
 			<ul>
 			<li><span>Information</span></li>
-			<li><span>First Name: - </span><?= (!empty($res['0']['Firstname'])) ? $res['0']['Firstname'] : '';?>
+			<li><span>First Name: - </span><?= (!empty($res ['Firstname'])) ? $res['Firstname'] : '';?>
 			</li>
-			<li><span>Last Name: - </span><?= (!empty($res['0']['Lastname'])) ? $res['0']['Lastname'] : '';?>
+			<li><span>Last Name: - </span><?= (!empty($res['Lastname'])) ? $res['Lastname'] : '';?>
 			</li>
-			<li><span>E-mail: - </span><?= (!empty($res['0']['Email'])) ? $res['0']['Email'] : '';?>
+			<li><span>E-mail: - </span><?= (!empty($res['Email'])) ? $res['Email'] : '';?>
 			</li>
-			<li><span>Home: - </span><?= (!empty($res['0']['Home'])) ? $res['0']['Home'] : '';?>
+			<li><span>Home: - </span><?= (!empty($res['Home'])) ? $res['Home'] : '';?>
 			</li>
-			<li><span>Work: - </span><?= (!empty($res['0']['Work'])) ? $res['0']['Work'] : '';?>
+			<li><span>Work: - </span><?= (!empty($res['Work'])) ? $res['Work'] : '';?>
 			</li>
-			<li><span>Cell: - </span><?= (!empty($res['0']['Cell'])) ? $res['0']['Cell'] : '';?>
+			<li><span>Cell: - </span><?= (!empty($res['Cell'])) ? $res['Cell'] : '';?>
 			</li>
-			<li><span>Adress 1: - </span> <?= (!empty($res['0']['Adress1'])) ? $res['0']['Adress1'] : '';?>
+			<li><span>Adress 1: - </span> <?= (!empty($res['Adress1'])) ? $res['Adress1'] : '';?>
 			</li>
-			<li><span>Adress 2: - </span> <?= (!empty($res['0']['Adress2'])) ? $res['0']['Adress2'] : '';?>
+			<li><span>Adress 2: - </span> <?= (!empty($res['Adress2'])) ? $res['Adress2'] : '';?>
 			</li>
-			<li><span>City: - </span><?= (!empty($res['0']['City'])) ? $res['0']['City'] : '';?>
+			<li><span>City: - </span><?= (!empty($res['City'])) ? $res['City'] : '';?>
 			</li>
-			<li><span>State: - </span><?= (!empty($res['0']['State'])) ? $res['0']['State'] : '';?>
+			<li><span>State: - </span><?= (!empty($res['State'])) ? $res['State'] : '';?>
 			</li>
-			<li><span>Zip: - </span><?= (!empty($res['0']['Zip'])) ? $res['0']['Zip'] : '';?>
+			<li><span>Zip: - </span><?= (!empty($res['Zip'])) ? $res['Zip'] : '';?>
 			</li>
-			<li><span>Country: - </span><?= (!empty($res['0']['Country'])) ? $res['0']['Country'] : '';?>
+			<li><span>Country: - </span><?= (!empty($res['Country'])) ? $res['Country'] : '';?>
 			</li>
 			<li><span>Birth Date:</span>
 					<?= $backdate['day']; ?>.
@@ -55,6 +53,7 @@
 										
 					<?= $backdate['year']; ?>
 			</li>
+		<?php endforeach; ?>
 		</ul>
 		<a href="/">Back</a>
 	</form>

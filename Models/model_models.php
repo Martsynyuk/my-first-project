@@ -166,7 +166,7 @@ Class Model_models implements For_model
 						
 				if ( ! empty( $res) )
 				{
-					
+
 					$result = mysqli_fetch_all ( $res,MYSQLI_ASSOC );
 				}
 			}

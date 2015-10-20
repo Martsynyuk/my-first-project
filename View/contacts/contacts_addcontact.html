@@ -17,64 +17,64 @@
 		<ul>
 			<li><span>Information</span></li>
 			<li><span>First Name:</span> <input type="text" name="FirstName"
-				value="<?= (!empty($res['FirstName'])) ?  $res['FirstName'] : '';?>"
+				value="<?= ( ! empty ( $res ['FirstName'] ) ) ?  $res ['FirstName'] : '';?>"
 				size="25"></li>
 			<li><span>Last Name:</span> <input type="text" name="LastName"
-				value="<?= (!empty($res['LastName'])) ? $res['LastName'] : '';?>"
+				value="<?= ( ! empty ( $res ['LastName'] ) ) ? $res ['LastName'] : '';?>"
 				size="25"></li>
 			<li><span>E-mail:</span> <input type="email" name="Email"
-				value="<?= (!empty($res['Email'])) ? $res['Email'] : '';?>"
+				value="<?= ( ! empty ( $res ['Email'] ) ) ? $res['Email'] : '';?>"
 				size="25"></li>
 			<li><span>Home:</span> <input type="radio" name="radio" value="Home">
 				<input type="text" name="Home"
-				value="<?= (!empty($res['Home'])) ? $res['Home'] : '';?>"
+				value="<?= ( ! empty ( $res ['Home'] ) ) ? $res ['Home'] : '';?>"
 				size="25"></li>
 			<li><span>Work:</span> <input type="radio" name="radio" value="Work">
 				<input type="text" name="Work"
-				value="<?= (!empty($res['Work'])) ? $res['Work'] : '';?>"
+				value="<?= ( ! empty ( $res ['Work'] ) ) ? $res ['Work'] : '';?>"
 				size="25"></li>
 			<li><span>Cell:</span> <input type="radio" name="radio" value="Cell">
 				<input type="text" name="Cell"
-				value="<?= (!empty($res['Cell'])) ? $res['Cell'] : '';?>"
+				value="<?= ( ! empty ( $res ['Cell'] ) ) ? $res ['Cell'] : '';?>"
 				size="25"></li>
 			<li><span>Adress 1:</span> <input type="text" name="Adress1"
-				value="<?= (!empty($res['Adress1'])) ? $res['Adress1'] : '';?>"
+				value="<?= ( ! empty ( $res ['Adress1'] ) ) ? $res ['Adress1'] : '';?>"
 				size="25"></li>
 			<li><span>Adress 2:</span> <input type="text" name="Adress2"
-				value="<?= (!empty($res['Adress2'])) ? $res['Adress2'] : '';?>"
+				value="<?= ( ! empty ( $res ['Adress2'] ) ) ? $res ['Adress2'] : '';?>"
 				size="25"></li>
 			<li><span>City:</span> <input type="text" name="City"
-				value="<?= (!empty($res['City'])) ? $res['City'] : '';?>"
+				value="<?= ( ! empty ( $res ['City'] ) ) ? $res ['City'] : '';?>"
 				size="25"></li>
 			<li><span>State:</span> <input type="text" name="State"
-				value="<?= (!empty($res['State'])) ? $res['State'] : '';?>"
+				value="<?= ( ! empty ( $res ['State'] ) ) ? $res ['State'] : '';?>"
 				size="25"></li>
 			<li><span>Zip:</span> <input type="text" name="Zip"
-				value="<?= (!empty($res['Zip'])) ? $res['Zip'] : '';?>" size="25">
+				value="<?= ( ! empty ( $res ['Zip'] ) ) ? $res ['Zip'] : '';?>" size="25">
 			</li>
 			<li><span>Country:</span> <input type="text" name="Country"
-				value="<?= (!empty($res['Country'])) ? $res['Country'] : '';?>"
+				value="<?= ( ! empty ( $res ['Country'] ) ) ? $res ['Country'] : '';?>"
 				size="25"></li>
 			<li>
 		<?php if(!empty($_GET['id'])) { ?>
 					<span>Birth Date:</span> <select size="1" name="day">
-					<option value="<?= $backdate['day']; ?>"><?= $backdate['day']; ?></option>;
+					<option value="<?= $backdate ['day']; ?>"><?= $backdate ['day']; ?></option>;
 										
 			<?php for($i = 1; $i <= 31; $i++) : ?>
 						<option value="<?= $i; ?>"><?= $i; ?></option>;			
 			<?php endfor; ?>
 										
 					</select> <select size="1" name="month">
-					<option value="<?= $backdate['month']; ?>"><?= $backdate['month']; ?></option>;
+					<option value="<?= $backdate ['month']; ?>"><?= $backdate ['month']; ?></option>;
 										
 			<?php for($i = 1; $i <= 12; $i++) : ?>
 						<option value="<?= $i; ?>"><?= $i; ?></option>;
 			<?php endfor; ?>
 										
 					</select> <select size="1" name="year">
-					<option value="<?= $backdate['year']; ?>"><?= $backdate['year']; ?></option>;
+					<option value="<?= $backdate ['year']; ?>"><?= $backdate ['year']; ?></option>;
 										
-			<?php for($i = idate("Y")-100; $i <= idate("Y"); $i++) : ?>
+			<?php for ( $i = idate ( "Y" )-100; $i <= idate ( "Y" ); $i++) : ?>
 						<option value="<?= $i; ?>"><?= $i; ?></option>;
 			<?php endfor; ?>
 										

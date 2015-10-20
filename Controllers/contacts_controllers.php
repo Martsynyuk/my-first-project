@@ -472,8 +472,14 @@ class Contacts_controllers extends Controller_controllers
 									)
 																	
 							);
-
-		return $res ['0']['COUNT(*)'];
+		
+		foreach ( $res as $key => $val ) 
+		{
+			
+			$res = $val;			
+		}
+		
+		return $res ['COUNT(*)'];
 	}
 		
 	function count_pages ( $page )
