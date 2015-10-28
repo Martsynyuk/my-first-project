@@ -15,11 +15,11 @@
 	}
 	
 	require_once APP . '/Lib/error_report.php';
-	require_once APP . '/Lib/autoload_classes.php';
+	require_once APP . '/Lib/dispatcher.php';
 	require_once APP . '/Lib/constant.php';	
 	require_once APP . '/Models/interface.php';
 	
-	$dispatcher = new Dispatcher_lib ();
+	$dispatcher = new Dispatcher ();
 	
 	$dispatcher->dispatch ( $_SERVER ['REQUEST_URI'] );
 	

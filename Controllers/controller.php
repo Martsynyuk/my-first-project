@@ -2,14 +2,14 @@
 class Controller
 {
 		
-	public $url = '/contacts/index?page=1';
-	public $url_page = '/contacts/index?page=';
-	public $sortup = '/contacts/index?sort=up';
-	public $sortdown = '/contacts/index?sort=down';
+	public $url = '?page=1';
+	public $url_page = '?page=';
+	public $sortup = '?sort=up';
+	public $sortdown = '?sort=down';
 		
 	function __construct ()
 	{
-		//'For a future';
+	
 	}
 		
 	function contacts_defender ( $id, $user_id )
@@ -17,7 +17,7 @@ class Controller
 		if ( ( int ) $id > 0 )
 		{
 		
-			$protection_contact = new Information ();
+			$protection_contact = new Information_models();
 		
 			$user_contact = $protection_contact->select (
 					
@@ -54,8 +54,6 @@ class Controller
 			
 		if ( $user_contact === 'No connect' )
 		{
-			
-			echo $delete_contact;
 		
 				header('Location: /');
 		}

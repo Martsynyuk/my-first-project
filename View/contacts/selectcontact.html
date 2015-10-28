@@ -9,13 +9,18 @@
 </head>
 <body>
 	<ul>
-		<li><a href="/">Home</a></li>
-		<li><a href="/user_controllers/autorization">Autorization</a></li>
-		<li><a href="/user_controllers/registration">Registration</a></li>
-		<li><a href="/user_controllers/logout">Logout</a></li>
+		<?php if ( empty ( $_SESSION ['id'] ) ) { ?>
+		 
+		<?= '<li><a href="user/autorization">Autorization</a></li>' ?>
+		<?= '<li><a href="user/registration">Registration</a></li>' ?>
+		
+		<?php } else { ?>
+		<?= '<li><a href="/">Home</a></li>' ?>
+		<?= '<li><a href="/user/logout">Logout</a></li>' ?>
+		<?php }; ?>
 	</ul>
 	<form name="selectcontact" method="POST"
-		action="/contacts_controllers/select_contact">
+		action="/contacts/select_contact">
 		<table border="0">
 			<tr>
 				<th><input type="checkbox" name="all" value="all">All</th>

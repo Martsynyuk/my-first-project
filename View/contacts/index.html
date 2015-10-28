@@ -5,11 +5,15 @@
 <title>project</title>
 </head>
 <body>
-	<ul>
-		<li><a href="/">Home</a></li>
-		<li><a href="/user_controllers/autorization">Autorization</a></li>
-		<li><a href="/user_controllers/registration">Registration</a></li>
-		<li><a href="/user_controllers/logout">Logout</a></li>
+	<ul><?php if ( empty ( $_SESSION ['id'] ) ) { ?>
+		 
+		<?= '<li><a href="user/autorization">Autorization</a></li>' ?>
+		<?= '<li><a href="user/registration">Registration</a></li>' ?>
+		
+		<?php } else { ?>
+		<?= '<li><a href="/">Home</a></li>' ?>
+		<?= '<li><a href="user/logout">Logout</a></li>' ?>
+		<?php }; ?>
 	</ul>
 
 		<?php if(!empty($contacts)){ ?>
@@ -27,7 +31,7 @@
 			<th>Action</th>
 		</tr>																
 		<?php 
-			
+
 			foreach ( $contacts as $contact ) :
 				?>	
 				<tr>
@@ -38,23 +42,33 @@
 			<td><?= $contact['Telephone']; ?></td>
 			<td><a href="<?= $editcontact . $contact['id']?>">edit</a> 
 				<a href="<?= $viewcontact . $contact['id']?>">view</a> 
-				<a href="<?= $deletecontact .$contact['id']?>">delete</a>
+				<a href="<?= $deletecontact . $contact['id'] ?>">delete</a>
 			</td>
 		</tr>
 		<?php $i++;?>	
-		<?php endforeach;?>									
+		<?php endforeach;?>	
+		<?php if ( ! empty ( $_GET['id'] ) ) { ?>
+		<?= 'you want to delete? </br></br> 
+			<form name="delete" method="POST" action="' . $deletecontact . $contact['id'] . '">
+		
+				<button name="del" value="Yes">Yes</button></br></br>
+				<button name="del" value="No">No</button>
+
+			</form>'		
+		?>	
+		<?php }; ?>							
 			</table>
 	</br>
-	<a href="/contacts_controllers/add_contact">Add contact</a>
+	<a href="contacts/add_contact">Add contact</a>
 	</br>
-	<a href="/contacts_controllers/select_contact">Select contact</a>
+	<a href="contacts/select_contact">Select contact</a>
 		<?php } else { ?>
 			<span>Your contact book is empty. Please add some contacts.</span>
 	</br>
 	</br>
 		<?php } ;?>
 		<?php if($userContact->count_contacts($_SESSION['id']) == 0) { ?>
-			<a href="/contacts_controllers/add_contact">Add contact</a>
+			<a href="/contacts/add_contact">Add contact</a>
 		<?php } else {?>
 			<ul>
 		<li>

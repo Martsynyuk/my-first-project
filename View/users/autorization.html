@@ -9,17 +9,22 @@
 </head>
 <body>
 	<ul>
-		<li><a href="/contacts/index">Home</a></li>
-		<li><a href="/user/autorization">Autorization</a></li>
-		<li><a href="/user/registration">Registration</a></li>
-		<li><a href="/user/logout">logout</a></li>
+		<?php if ( empty ( $_SESSION ['id'] ) ) { ?>
+		 
+		<?= '<li><a href="autorization">Autorization</a></li>' ?>
+		<?= '<li><a href="registration">Registration</a></li>' ?>
+		
+		<?php } else { ?>
+		<?= '<li><a href="/">Home</a></li>' ?>
+		<?= '<li><a href="user/logout">Logout</a></li>' ?>
+		<?php }; ?>
 	</ul>
 	<p>Autorization</p>
-	<form name="login" action="/user/autorization" method="POST">
+	<form name="login" action="autorization" method="POST">
 
 		<p>Login:</p>
 		<input type="text" name="login"
-			value="<?= (!empty($_POST['login'])) ? $_POST['login'] : ''; ?>"
+			value="<?= ( ! empty ( $_POST ['login'] ) ) ? $_POST ['login'] : ''; ?>"
 			size="35">
 
 		<p>Password:</p>

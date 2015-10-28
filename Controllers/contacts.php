@@ -37,7 +37,7 @@ class Contacts extends Controller
 				$phone = $_POST ['Cell'];
 			}
 				
-			$add_user_contact = new Information();
+			$add_user_contact = new Information_models();
 				
 			$new_contact = $add_user_contact->insert (
 				
@@ -59,20 +59,18 @@ class Contacts extends Controller
 													'BirthDate' => $_POST ['year'] . '-' . $_POST ['month'] . '-' . $_POST ['day'],
 													'Telephone' => $phone  
 												
-													)
+											)
 						
 						);
 				
 			if( $new_contact === 'No connect' )
 			{
 			
-				echo $new_contact;
-				
 					header('Location: /contacts/addcontact');
 			}
 		}
 		
-		$view = new View ();
+		$view = new View_lib ();
 			
 		if( ! empty ( $phone ) )
 		{
@@ -87,7 +85,7 @@ class Contacts extends Controller
 			
 		$this->contacts_defender ( $_GET ['id'], $_SESSION ['id'] );
 				
-		$select_user_contacts = new Information ();
+		$select_user_contacts = new Information_models ();
 				
 		$contactUser = $select_user_contacts->select(
 				
@@ -109,36 +107,36 @@ class Contacts extends Controller
 															'Country',
 															'BirthDate'
 													
-														),
+												),
 													
-													'conditions' => array(
+												'conditions' => array(
 															
-															'id' => $_GET['id'],
+														  	'id' => $_GET['id'],
 			
-														),
+												),
 													
-													'order' => array(
+												'order' => array(
 															
 															'by' => '',
 															'direction' => ''
 															
-														),
+												),
 													
-													'limit' => array(
+												'limit' => array(
 															
 															'start' => '',
 															'end'=> ''
 															
-														)	
 												)
-										);
+													
+											)
+				
+									);
 			
 
 		if ( $contactUser === 'No connect' )
 		{
-			
-			echo $contactUser;
-				
+		
 			header( 'Location: /' );
 		}
 			
@@ -168,7 +166,7 @@ class Contacts extends Controller
 				}
 			}
 				
-			$update_contact = new Information ();
+			$update_contact = new Information_models ();
 				
 			$update_contact->update (
 					
@@ -191,17 +189,16 @@ class Contacts extends Controller
 												'BirthDate' => $_POST ['year'] . '-' . $_POST ['month'] . '-' . $_POST ['day'],
 												'Telephone' => $phone,
 											
-											),
+									),
 												
 									'id' => $_GET ['id']
 						
-											)
+								)
 						
 						);
 				
 			if ( $update_contact === 'No connect' )
 			{
-				echo $update_contact;
 				
 				header ( 'Location: /contacts/editcontact' );
 			}
@@ -209,7 +206,7 @@ class Contacts extends Controller
 				header ( 'Location: /' );
 		}
 			
-		$view = new View ();
+		$view = new View_lib ();
 			
 		$view->set ( 'contactUser', $contactUser );
 
@@ -226,20 +223,22 @@ class Contacts extends Controller
 		
 	public function index ()
 	{
-
+		
 		if ( empty ( $_SESSION ['id'] ) )
 		{
+			
 			header ( 'Location: /user/autorization' );
 		}
 			
 		if( ! empty ( $_GET ['id'] ) && ! empty ( $_SESSION ['id'] ) )
 		{
 			
-			$this->delete_contact ( $_GET ['id'], $_SESSION ['id'] );
+			$this->delete_contact ( $_GET ['id'], $_SESSION ['id'], @$_POST['del'] );
 		}
 			
 		if ( empty ( $_GET ['page'] ) )
 		{
+			
 			$page = 1;
 		}
 		else{
@@ -260,17 +259,20 @@ class Contacts extends Controller
 			
 		$count_for_pagin = $this->count_pages ( $_SESSION ['id'], $page );
 		$count_pages = ceil ( $this->count_contacts () / 5 );
+		
+		$i = 1;
+		($page > 1) ? $i = $page * ROWLIMIT - ROWLIMIT + 1 : '';  // to number of contacts
 			
 		$url = $this->url;
 		$url_page = $this->url_page;
 		$sortup = $this->sortup;
 		$sortdown = $this->sortdown;
 			
-		$editcontact = "/contacts/edit_contact?id=";
-		$viewcontact = "/contacts/view_contact?id=";
-		$deletecontact = "/?id=";
+		$editcontact = "contacts/edit_contact?id=";
+		$viewcontact = "contacts/view_contact?id=";
+		$deletecontact = "?id=";
 			
-		$view = new View ();
+		$view = new View_lib ();
 			
 		$view->set ( 'userContact', $userContact );
 		$view->set ( 'count_for_pagin', $count_for_pagin );
@@ -284,13 +286,15 @@ class Contacts extends Controller
 		$view->set ( 'sortdown', $sortdown );
 		$view->set ( 'url', $url );
 		$view->set ( 'url_page', $url_page );
+		$view->set ( 'i', $i);
 			
 		$view->render ( 'contacts_index' );
+		
 	}
 		
 	public function select_contact ()
 	{
-			
+	
 		if ( empty ( $_GET ['page'] ) ) 
 		{
 			
@@ -319,7 +323,7 @@ class Contacts extends Controller
 		$sortup = $this->sortup;
 		$sortdown = $this->sortdown;
 			
-		$view = new View ();
+		$view = new View_lib ();
 			
 		$view->set ( 'count_for_pagin', $count_for_pagin );
 		$view->set ( 'page', $page );
@@ -328,8 +332,7 @@ class Contacts extends Controller
 		$view->set ( 'sortup', $sortup );
 		$view->set ( 'sortdown', $sortdown );
 		$view->set ( 'url', $url );
-		$view->set ( 'url_page', $url_page );
-			
+		$view->set ( 'url_page', $url_page );			
 			
 		$view->render ( 'contacts_selectcontact' );
 	}
@@ -337,7 +340,7 @@ class Contacts extends Controller
 	public function view_contact ()
 	{	
 		
-		$contact_view = new Information ();
+		$contact_view = new Information_models ();
 
 		if ( ( int ) $_GET['id'] > 0 )
 		{
@@ -363,35 +366,35 @@ class Contacts extends Controller
 																'Country',
 																'BirthDate'
 													
-																 ),
+													 ),
 													
-														'conditions' => array(
+													'conditions' => array(
 																
 																'id' => $_GET['id'],
 			
-																),
+													),
 													
-														'order' => array(
+													'order' => array(
 																
 																'by' => '',
 																'direction' => ''
 																
-																),
+													),
 													
-														'limit' => array(
+													'limit' => array(
 																
 																'start' => '',
 																'end'=> ''
 																
-																)	
-														)
-											);
+													)	
+													
+											 	)
+					
+										);
 				
 			if($contactUser === 'No connect')
 			{
-				
-				echo $contactUser;
-				
+	
 				header('Location: /');
 			}
 		}
@@ -400,45 +403,46 @@ class Contacts extends Controller
 			header ( 'Location: /' );
 		}
 		
-		$view = new View ();
+		$view = new View_lib ();
 			
 		$view->set ( 'contactUser', $contactUser );
 			
-		$view->render ( ' contacts_viewcontact' );
+		$view->render ( 'contacts_viewcontact' );
 			
 		return;
 	}
 		
-	function delete_contact ( $id, $user )
+	function delete_contact ( $id, $user, $del )
 	{
-		
+				
 		$protection = $this->contacts_defender ( $id, $user );
 
-		if ( ! empty ( $protection ) )
+		if ( ! empty ( $protection )  )
 		{	
-
-				$delete_contact = new Information ();
-					
-				$delete_contact->delete ( $id );
-					
-				if ( $delete_contact === 'No connect' )
-				{
-					
-					echo $delete_contact;
-					
-					header('Location: /index');
-				}
-		}
-		else{
+			
+			if ( ! empty ($del) && $del === 'Yes' )
+			{
 				
-			echo'You have no rights to this';
+				$delete_contact = new Information_models ();
+						
+				$delete_contact->delete ( $id );
+	
+				header('Location: /');
+			}
+			elseif ( ! empty ($del) && $del === 'No' )
+			{
+				
+				header('Location: /');
+			}
+		
 		}
+
 	}
 			
 	function count_contacts ()
 	{	
 		
-		$count_contacts = new Information ();
+		$count_contacts = new Information_models ();
 			
 		$res = $count_contacts->select(
 				
@@ -448,31 +452,39 @@ class Contacts extends Controller
 													
 															'COUNT(*)'
 																			
-														),
+											),
+											
 											'conditions' => array(
 													
 															'users_id' => $_SESSION['id'],
 																				
-														),
+											),
 											
 											'order' => array(
 													
 															'by' => '',
 															'direction' => ''
 													
-														),
+											),
 											
 											'limit' => array(
 													
 														 	'start' => '',
 															'end'=> ''
 													
-															)											
-												)
+											)
+											
+									)
 																	
-									);
-
-		return $res ['0']['COUNT(*)'];
+							);
+		
+		foreach ( $res as $key => $val ) 
+		{
+			
+			$res = $val;			
+		}
+		
+		return $res ['COUNT(*)'];
 	}
 		
 	function count_pages ( $page )
@@ -541,7 +553,7 @@ class Contacts extends Controller
 			header ( 'Location: /' );
 		}
 
-		$return_contact = new Information ();
+		$return_contact = new Information_models ();
 			
 		$result = $return_contact->select (
 				
@@ -555,31 +567,31 @@ class Contacts extends Controller
 														'Email',
 														'Telephone'
 												
-														),
+											),
 											
 											'conditions' => array(
 													
 														'users_id' => $user_id,
 							
-														),
+											),
 											
 											'order' => array(
 													
 														'by' => $sort,
 														'direction' => $deck
 													
-														),
+											),
 											
 											'limit' => array(
 													
 														'start' => ($page - 1) * ROWLIMIT,
 														'end'=> ROWLIMIT
 													
-														)	
+											)	
 											
-												)
+									)
 												
-									);
+							);
 
 		$contacts = $result;
 

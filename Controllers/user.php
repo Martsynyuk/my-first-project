@@ -2,7 +2,7 @@
 
 
 Class User extends Controller
-{
+{     
 		
 	public function autorization ()
 	{
@@ -15,11 +15,11 @@ Class User extends Controller
 			$loginUser = $this->login ( $_POST ['login'], $_POST ['password'] );
 		}
 			
-		$view = new View ();
+		$view = new View_lib ();
 			
 		$view->set ( 'loginUser', $loginUser );
 			
-		$view->render ( 'user_autorization' );
+		$view->render ( 'users_autorization' );
 	}
 		
 	public function logout ()
@@ -40,7 +40,7 @@ Class User extends Controller
 			if ( $_POST['password1'] === $_POST['password2'] ) 
 			{
 					
-				$registration = new Users ();
+				$registration = new Users_models();
 					
 				$user = $registration->select (
 						
@@ -76,7 +76,6 @@ Class User extends Controller
 					
 				if ( $user === 'No connect' )
 				{
-					echo $user;
 						
 					header('Location: /user/regictration');
 				}
@@ -100,23 +99,23 @@ Class User extends Controller
 				}
 				else{
 						
-					echo 'User already exists ';
 				}
 			} 
 			else {
-				echo 'Bad login';
+
+				
 			}
 		}
 			
-		$view= new View();		
+		$view= new View_lib();		
 			
-		$view->render ( 'user_registration' );
+		$view->render ( 'users_registration' );
 	}
 		
 	function login ( $login, $password )
 	{
 			
-		$login_user = new Users ();
+		$login_user = new Users_models ();
 			
 		$what = array(
 				
@@ -147,6 +146,7 @@ Class User extends Controller
 								'end'=> ''
 							
 					)
+				
 			);
 			
 		$login_user = $login_user->select ( $what );
@@ -154,16 +154,20 @@ Class User extends Controller
 		if ( $login_user === 'No connect' )
 		{
 				
-			echo ' -' . $login_user;
 		}
 		else{
 
 			if ( !empty ( $login_user ) )
-			{
-							
-				$_SESSION ['id'] = $login_user ['0']['id'];
-				$_SESSION ['login'] = $login_user ['0']['login'];
-		
+			{	
+				foreach ($login_user as $login_user => $val )
+				{
+					
+					$login_user = $val;
+				}
+
+				$_SESSION ['id'] = $login_user['id'];
+				$_SESSION ['login'] = $login_user['login'];
+					
 				header ( 'Location: /' );
 			}
 		}

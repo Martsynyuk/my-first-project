@@ -53,10 +53,8 @@ Class Model_models implements For_model
 	* 
 	*/
 		
-	function disconect()
+	function disconect($mysqli)
 	{
-			
-		$mysqli = new mysqli();
 			
 		mysqli_close($mysqli);
 	}
@@ -112,7 +110,7 @@ Class Model_models implements For_model
 		}
 		else{
 						
-				$this->disconect ();
+				$this->disconect ($mysqli);
 					
 				if( ! empty( $what['fields']) )
 				{
@@ -166,8 +164,9 @@ Class Model_models implements For_model
 						
 				if ( ! empty( $res) )
 				{
-
-					$result = mysqli_fetch_all ( $res,MYSQLI_ASSOC );
+						
+					$result = mysqli_fetch_all ( $res,MYSQLI_ASSOC );		
+		
 				}
 			}
 
@@ -200,7 +199,7 @@ Class Model_models implements For_model
 			}
 			else{
 				
-				$this->disconect();
+				$this->disconect($mysqli);
 			
 				if( ! empty( $what ) )
 				{
@@ -221,7 +220,7 @@ Class Model_models implements For_model
 					$sql ='INSERT INTO ' . $this->table . ' (' . $key . ') VALUE (' . $val . ');';
 					
 				}
-					
+	
 					$this->query( $sql );
 					
 					$result = TRUE;
@@ -264,7 +263,7 @@ Class Model_models implements For_model
 		}
 		else{
 				
-			$this->disconect();
+			$this->disconect($mysqli);
 				
 			if( ! empty ( $what ) && ( int )( $what['id'] > 0 ) )
 			{
@@ -311,13 +310,15 @@ Class Model_models implements For_model
 		}
 		else{
 			
+			$this->disconect($mysqli);
+			
 			$sql = 'DELETE FROM ' . $this->table . ' WHERE id=' . $value . ';';
 				
 			$mysqli = $this->conect ( HOST, DB_NAME, USER_NAME, PASSWORD );
 				
 			$result = $mysqli->query ( $sql );
 				
-				$this->disconect ();
+				$this->disconect ($mysqli);
 				
 				$result = '';
 				
@@ -342,7 +343,7 @@ Class Model_models implements For_model
 			
 		$result = $mysqli->query( $sql );
 				
-		$this->disconect ();
+		$this->disconect ($mysqli);
 			
 		return $result;
 			

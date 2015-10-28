@@ -17,16 +17,17 @@ Class View_lib {
 		ob_start();
 			
 		extract($this->var);
-		
+
 		$dir = explode('_', $view);
-		
-		if ( file_exists(APP . '/View/' . $dir[0] . '/' . $view . '.html') )
+
+		if ( file_exists(APP . '/View/' . $dir[0] . '/' . $dir[1] . '.html') )
 		{
 			
-			include_once APP . '/View/' . $dir[0] . '/' . $view . '.html';
+			include_once APP . '/View/' . $dir[0] . '/' . $dir[1] . '.html';
 		}
 			
 		echo ob_get_clean();
+		
 	}
 		
 }

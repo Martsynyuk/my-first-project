@@ -7,13 +7,18 @@
 <title>project</title>
 <body>
 	<ul>
-		<li><a href="/">Home</a></li>
-		<li><a href="/user_controllers/autorization">Autorization</a></li>
-		<li><a href="/user_controllers/registration">Registration</a></li>
-		<li><a href="/user_controllers/logout">Logout</a></li>
+		<?php if ( empty ( $_SESSION ['id'] ) ) { ?>
+		 
+		<?= '<li><a href="user/autorization">Autorization</a></li>' ?>
+		<?= '<li><a href="user/registration">Registration</a></li>' ?>
+		
+		<?php } else { ?>
+		<?= '<li><a href="/">Home</a></li>' ?>
+		<?= '<li><a href="/user/logout">Logout</a></li>' ?>
+		<?php }; ?>
 	</ul>
 	<form name="editcontact" method="POST"
-		action="<?= '/contacts_controllers/edit_contact?id=' . $_GET['id'] ?>">
+		action="<?= 'edit_contact?id=' . $_GET['id'] ?>">
 	<?php 
 	foreach ($contactUser as $res ) :
 
@@ -23,42 +28,42 @@
 		<ul>
 			<li><span>Information</span></li>
 			<li><span>First Name:</span> <input type="text" name="FirstName"
-				value="<?= (!empty($res['Firstname'])) ? $res['Firstname'] : '';?>"
+				value="<?= ( ! empty ($res['Firstname'])) ? $res['Firstname'] : '';?>"
 				size="25"></li>
 			<li><span>Last Name:</span> <input type="text" name="LastName"
-				value="<?= (!empty($res['Lastname'])) ? $res['Lastname'] : '';?>"
+				value="<?= ( ! empty ($res['Lastname'])) ? $res['Lastname'] : '';?>"
 				size="25"></li>
 			<li><span>E-mail:</span> <input type="email" name="Email"
-				value="<?= (!empty($res['Email'])) ? $res['Email'] : '';?>"
+				value="<?= ( ! empty ($res['Email'])) ? $res['Email'] : '';?>"
 				size="25"></li>
 			<li><span>Home:</span> <input type="radio" name="radio" value="Home">
 				<input type="text" name="Home"
-				value="<?= (!empty($res['Home'])) ? $res['Home'] : '';?>" size="25">
+				value="<?= ( ! empty ($res['Home'])) ? $res['Home'] : '';?>" size="25">
 			</li>
 			<li><span>Work:</span> <input type="radio" name="radio" value="Work">
 				<input type="text" name="Work"
-				value="<?= (!empty($res['Work'])) ? $res['Work'] : '';?>" size="25">
+				value="<?= ( ! empty ($res['Work'])) ? $res['Work'] : '';?>" size="25">
 			</li>
 			<li><span>Cell:</span> <input type="radio" name="radio" value="Cell">
 				<input type="text" name="Cell"
-				value="<?= (!empty($res['Cell'])) ? $res['Cell'] : '';?>" size="25">
+				value="<?= ( ! empty ($res['Cell'])) ? $res['Cell'] : '';?>" size="25">
 			</li>
 			<li><span>Adress 1:</span> <input type="text" name="Adress1"
-				value="<?= (!empty($res['Adress1'])) ? $res['Adress1'] : '';?>"
+				value="<?= ( ! empty ($res['Adress1'])) ? $res['Adress1'] : '';?>"
 				size="25"></li>
 			<li><span>Adress 2:</span> <input type="text" name="Adress2"
-				value="<?= (!empty($res['Adress2'])) ? $res['Adress2'] : '';?>"
+				value="<?= ( ! empty ($res['Adress2'])) ? $res['Adress2'] : '';?>"
 				size="25"></li>
 			<li><span>City:</span> <input type="text" name="City"
-				value="<?= (!empty($res['City'])) ? $res['City'] : '';?>" size="25">
+				value="<?= ( ! empty ($res['City'])) ? $res['City'] : '';?>" size="25">
 			</li>
 			<li><span>State:</span> <input type="text" name="State"
-				value="<?= (!empty($res['State'])) ? $res['State'] : '';?>"
+				value="<?= ( ! empty ($res['State'])) ? $res['State'] : '';?>"
 				size="25"></li>
 			<li><span>Zip:</span> <input type="text" name="Zip"
-				value="<?= (!empty($res['Zip'])) ? $res['Zip'] : '';?>" size="25"></li>
+				value="<?= ( ! empty ($res['Zip'])) ? $res['Zip'] : '';?>" size="25"></li>
 			<li><span>Country:</span> <input type="text" name="Country"
-				value="<?= (!empty($res['Country'])) ? $res['Country'] : '';?>"
+				value="<?= ( ! empty($res['Country'])) ? $res['Country'] : '';?>"
 				size="25"></li>
 			<li>
 	<?php endforeach; ?>						
