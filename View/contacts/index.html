@@ -7,16 +7,20 @@
 <body>
 	<ul><?php if ( empty ( $_SESSION ['id'] ) ) { ?>
 		 
-		<?= '<li><a href="user/autorization">Autorization</a></li>' ?>
-		<?= '<li><a href="user/registration">Registration</a></li>' ?>
+		<?= '<li> <a href="user/autorization">Autorization</a> </li>' ?>
+		<?= '<li> <a href="user/registration">Registration</a> </li>' ?>
 		
 		<?php } else { ?>
-		<?= '<li><a href="/">Home</a></li>' ?>
-		<?= '<li><a href="user/logout">Logout</a></li>' ?>
+		
+		<?= '<li> <a href="/">Home</a> </li>' ?>
+		<?= '<li> <a href="user/logout">Logout</a> </li>' ?>
+		
 		<?php }; ?>
+		
 	</ul>
 
 		<?php if(!empty($contacts)){ ?>
+		
 			<table>
 		<tr>
 			<th></th>
@@ -29,26 +33,30 @@
 			<th>E-mail</th>
 			<th>Cellular</th>
 			<th>Action</th>
-		</tr>																
-		<?php 
-
-			foreach ( $contacts as $contact ) :
-				?>	
+		</tr>
+																		
+		<?php foreach ( $contacts as $contact ) : ?>
+					
 				<tr>
 			<td><?= $i . '.'; ?></td>
 			<td><?= $contact['FirstName']; ?></td>
 			<td><?= $contact['LastName']; ?></td>
 			<td><?= $contact['Email']; ?></td>
 			<td><?= $contact['Telephone']; ?></td>
-			<td><a href="<?= $editcontact . $contact['id']?>">edit</a> 
+			<td>
+				<a href="<?= $editcontact . $contact['id']?>">edit</a> 
 				<a href="<?= $viewcontact . $contact['id']?>">view</a> 
 				<a href="<?= $deletecontact . $contact['id'] ?>">delete</a>
 			</td>
 		</tr>
 		<?php $i++;?>	
+		
 		<?php endforeach;?>	
+		
 		<?php if ( ! empty ( $_GET['id'] ) ) { ?>
+		
 		<?= 'you want to delete? </br></br> 
+
 			<form name="delete" method="POST" action="' . $deletecontact . $contact['id'] . '">
 		
 				<button name="del" value="Yes">Yes</button></br></br>
@@ -56,65 +64,87 @@
 
 			</form>'		
 		?>	
-		<?php }; ?>							
+		
+		<?php }; ?>	
+								
 			</table>
 	</br>
 	<a href="contacts/add_contact">Add contact</a>
 	</br>
 	<a href="contacts/select_contact">Select contact</a>
+	
 		<?php } else { ?>
+		
 			<span>Your contact book is empty. Please add some contacts.</span>
 	</br>
 	</br>
+	
 		<?php } ;?>
+		
 		<?php if($userContact->count_contacts($_SESSION['id']) == 0) { ?>
-			<a href="/contacts/add_contact">Add contact</a>
+		
+			<a href="contacts/add_contact">Add contact</a>
+			
 		<?php } else {?>
+		
 			<ul>
-		<li>
+				<li>
 					<?php  if ($page != 1) : ?>
 						<a
-			href="<?php
-				
-				if ($page == 1) {
-					echo $url;
-				} else {
-					echo $url_page . ($page - 1);
-				}
-				?>"
-			title="last page">Back </a>
-					<?php endif;?>										
+							href="<?php
+								
+								if ($page == 1) {
+									echo $url;
+								} else {
+									echo $url_page . ($page - 1);
+								}
+								?>"
+								title="last page">Back 
+						</a>
+					<?php endif;?>	
+														
 				</li>
-		<li>
+				<li>
 					<?php for ($i = $count_for_pagin[0]; $i <= $count_for_pagin[1]; $i++) { ?>
+					
 						<?php if ($i == $page) { ?>
 									<span><?=$i?></span>
 						<?php } else { ?>
-							<a
-			href="<?php
-					
-					if ($i == 1) {
-						echo $url;
-					} else {
-						echo $url_page . $i;
-					}
-					?>">
+							<a	href="<?php										
+											if ($i == 1) {
+												echo $url;
+											} else {
+												echo $url_page . $i;
+											}
+										?>"
+								>
+								
 								<?=$i?>
+								
 							</a>
+							
 						<?php } ?>
-					<?php } ?>							
+						
+					<?php } ?>
+												
 				</li>
-		<li>								
-					<?php
-			
-			if ($userContact->count_contacts ( $_SESSION ['id'] ) > 0) :
-				if ($page != $count_pages) :
+				<li>	
+											
+					<?php if ($userContact->count_contacts ( $_SESSION ['id'] ) > 0) :
+
+							if ($page != $count_pages) :
 					?>
-									<a href="<?=$url_page.($page + 1) ?>" title="next page">Next</a>									
+					
+									<a href="<?=$url_page.($page + 1) ?>" title="next page">Next</a>
+																		
 								<?php endif; ?>
-					<?php endif; ?>										
+								
+					<?php endif; ?>	
+														
 				</li>
-	</ul>
+			</ul>
+			
 		<?php } ?>
+		
 </body>
 </html>

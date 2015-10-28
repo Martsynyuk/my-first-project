@@ -66,7 +66,7 @@ class Contacts extends Controller
 			if( $new_contact === 'No connect' )
 			{
 			
-					header('Location: /contacts/addcontact');
+					header('Location: contacts/addcontact');
 			}
 		}
 		
@@ -200,7 +200,7 @@ class Contacts extends Controller
 			if ( $update_contact === 'No connect' )
 			{
 				
-				header ( 'Location: /contacts/editcontact' );
+				header ( 'Location: contacts/editcontact' );
 			}
 				
 				header ( 'Location: /' );
@@ -227,7 +227,7 @@ class Contacts extends Controller
 		if ( empty ( $_SESSION ['id'] ) )
 		{
 			
-			header ( 'Location: /user/autorization' );
+			header ( 'Location: user/autorization' );
 		}
 			
 		if( ! empty ( $_GET ['id'] ) && ! empty ( $_SESSION ['id'] ) )

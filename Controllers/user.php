@@ -28,7 +28,7 @@ Class User extends Controller
 		unset ( $_SESSION ['id'] );
 		unset ( $_SESSION ['login'] );
 			
-		header ( 'Location: /user/autorization' );
+		header ( 'Location: user/autorization' );
 	}
 		
 	public function registration ()
@@ -77,7 +77,7 @@ Class User extends Controller
 				if ( $user === 'No connect' )
 				{
 						
-					header('Location: /user/regictration');
+					header('Location: user/regictration');
 				}
 					
 				

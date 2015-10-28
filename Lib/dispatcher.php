@@ -20,7 +20,7 @@ class Dispatcher {
 		
 		$arguments = explode ( '/', ltrim ( $path, '/' ) );
 		 
-		if ( ! empty  ($arguments[1] ) )            
+		if ( ! empty  ( $arguments[1] ) )            
 		{
 			
 			$get = explode ( '?', $arguments[1] );

@@ -110,9 +110,9 @@ Class Model_models implements For_model
 		}
 		else{
 						
-				$this->disconect ($mysqli);
+				$this->disconect ( $mysqli );
 					
-				if( ! empty( $what['fields']) )
+				if( ! empty( $what['fields'] ) )
 				{
 					
 					$fields = implode ( ', ', $what['fields'] );
@@ -124,7 +124,7 @@ Class Model_models implements For_model
 						
 				$sql = 'SELECT ' . $fields . ' FROM  '. $this->table;
 						
-				if( ! empty ( $what['conditions']) )
+				if( ! empty ( $what['conditions'] ) )
 				{		
 							
 					$where = '';
@@ -141,12 +141,12 @@ Class Model_models implements For_model
 			
 				}
 						
-				if ( ! empty( $what['order']['by'] ) && ! empty( $what['order']['direction']) )
+				if ( ! empty( $what['order']['by'] ) && ! empty ( $what['order']['direction'] ) )
 				{
 						
 					$sql = $sql . ' ORDER BY ' . $what['order']['by'] . ' ' . $what['order']['direction'] ;
 				}
-				elseif( ! empty ( $what['order']['by']) )
+				elseif( ! empty ( $what['order']['by'] ) )
 				{
 					
 					$sql = $sql . ' ORDER BY ' . $what['order']['by'] ;
@@ -162,7 +162,7 @@ Class Model_models implements For_model
 						
 				$res = $this->query ( $sql );
 						
-				if ( ! empty( $res) )
+				if ( ! empty ( $res) )
 				{
 						
 					$result = mysqli_fetch_all ( $res,MYSQLI_ASSOC );		
@@ -199,9 +199,9 @@ Class Model_models implements For_model
 			}
 			else{
 				
-				$this->disconect($mysqli);
+				$this->disconect ( $mysqli );
 			
-				if( ! empty( $what ) )
+				if( ! empty ( $what ) )
 				{
 					
 					$val = '';
@@ -263,7 +263,7 @@ Class Model_models implements For_model
 		}
 		else{
 				
-			$this->disconect($mysqli);
+			$this->disconect ( $mysqli );
 				
 			if( ! empty ( $what ) && ( int )( $what['id'] > 0 ) )
 			{
@@ -310,7 +310,7 @@ Class Model_models implements For_model
 		}
 		else{
 			
-			$this->disconect($mysqli);
+			$this->disconect ( $mysqli );
 			
 			$sql = 'DELETE FROM ' . $this->table . ' WHERE id=' . $value . ';';
 				
@@ -343,7 +343,7 @@ Class Model_models implements For_model
 			
 		$result = $mysqli->query( $sql );
 				
-		$this->disconect ($mysqli);
+		$this->disconect ( $mysqli );
 			
 		return $result;
 			
