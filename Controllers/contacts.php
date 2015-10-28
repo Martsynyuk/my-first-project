@@ -270,7 +270,7 @@ class Contacts extends Controller
 			
 		$editcontact = "contacts/edit_contact?id=";
 		$viewcontact = "contacts/view_contact?id=";
-		$deletecontact = "?id=";
+		$deletecontact = "delete?id=";
 			
 		$view = new View_lib ();
 			
