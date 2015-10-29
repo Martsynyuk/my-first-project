@@ -8,7 +8,7 @@
 class Contacts extends Controller
 {
 		
-	public function  add_contact ()
+	public function  add ()
 	{
 			
 		if ( ! empty ( $_POST ['FirstName'] ) ) 
@@ -77,13 +77,13 @@ class Contacts extends Controller
 			$view->set ( 'phone', $phone );
 		}
 			
-			$view->render ( 'contacts_addcontact' );
+			$view->render ( 'contacts', 'add' );
 		}
 		
-	public function edit_contact ()
+	public function edit ($id)
 	{
 			
-		$this->contacts_defender ( $_GET ['id'], $_SESSION ['id'] );
+		$this->contacts_defender ( $id, $_SESSION ['id'] );
 				
 		$select_user_contacts = new Information_models ();
 				
@@ -111,7 +111,7 @@ class Contacts extends Controller
 													
 												'conditions' => array(
 															
-														  	'id' => $_GET['id'],
+														  	'id' => $id,
 			
 												),
 													
@@ -191,7 +191,7 @@ class Contacts extends Controller
 											
 									),
 												
-									'id' => $_GET ['id']
+									'id' => $id
 						
 								)
 						
@@ -216,12 +216,12 @@ class Contacts extends Controller
 			$view->set ( 'phone', $phone );
 		}
 			
-		$view->render ( 'contacts_editcontact' );
+		$view->render ( 'contacts', 'edit' );
 			
 		return;
 	}
 		
-	public function index ()
+	public function index ($id)
 	{
 		
 		if ( empty ( $_SESSION ['id'] ) )
@@ -230,10 +230,10 @@ class Contacts extends Controller
 			header ( 'Location: user/autorization' );
 		}
 			
-		if( ! empty ( $_GET ['id'] ) && ! empty ( $_SESSION ['id'] ) )
+		if( ! empty ( $id ) && ! empty ( $_SESSION ['id'] ) )
 		{
 			
-			$this->delete_contact ( $_GET ['id'], $_SESSION ['id'], @$_POST['del'] );
+			$this->delete_contact ( $id, $_SESSION ['id'], @$_POST['del'] );
 		}
 			
 		if ( empty ( $_GET ['page'] ) )
@@ -252,7 +252,9 @@ class Contacts extends Controller
 			$_GET ['sort'] = 0 & $_GET ['sortparam'] = 0 ;
 		}
 			
-		$userContact = new Contacts ();
+		$user_contact = new Contacts ();
+		
+		$count_contacts = $user_contact->count_contacts($_SESSION['id']);
 			
 		$contacts = array ();
 		$contacts = $this->return_contact ( $_SESSION ['id'], $page, $_GET ['sort'], $_GET ['sortparam'] );
@@ -263,38 +265,23 @@ class Contacts extends Controller
 		$i = 1;
 		($page > 1) ? $i = $page * ROWLIMIT - ROWLIMIT + 1 : '';  // to number of contacts
 			
-		$url = $this->url;
-		$url_page = $this->url_page;
-		$sortup = $this->sortup;
-		$sortdown = $this->sortdown;
-			
-		$editcontact = "contacts/edit_contact?id=";
-		$viewcontact = "contacts/view_contact?id=";
-		$deletecontact = "delete?id=";
-			
 		$view = new View_lib ();
 			
-		$view->set ( 'userContact', $userContact );
+		$view->set ( 'count_contacts', $count_contacts );
 		$view->set ( 'count_for_pagin', $count_for_pagin );
 		$view->set ( 'page', $page );
 		$view->set ( 'count_pages', $count_pages );
 		$view->set ( 'contacts', $contacts );
-		$view->set ( 'editcontact', $editcontact );
-		$view->set ( 'viewcontact', $viewcontact );
-		$view->set ( 'deletecontact', $deletecontact );
-		$view->set ( 'sortup', $sortup );
-		$view->set ( 'sortdown', $sortdown );
-		$view->set ( 'url', $url );
-		$view->set ( 'url_page', $url_page );
 		$view->set ( 'i', $i);
+		$view->set ( 'id', $id);
 			
-		$view->render ( 'contacts_index' );
+		$view->render ( 'contacts', 'index' );
 		
 	}
 		
-	public function select_contact ()
+	public function select ()
 	{
-	
+
 		if ( empty ( $_GET ['page'] ) ) 
 		{
 			
@@ -311,6 +298,9 @@ class Contacts extends Controller
 			$_GET ['sort'] = 0;
 			$_GET ['sortparam'] = 0;
 		}
+		
+		$i = 1;
+		($page > 1) ? $i = $page * ROWLIMIT - ROWLIMIT + 1 : '';  // to number of contacts
 			
 		$contacts = array ();
 		$contacts = $this->return_contact ( $_SESSION ['id'], $page, $_GET ['sort'], $_GET ['sortparam'] );
@@ -318,31 +308,24 @@ class Contacts extends Controller
 		$count_for_pagin = $this->count_pages ( $_SESSION ['id'], $page );
 		$count_pages = ceil ( $this->count_contacts ( $_SESSION ['id'] ) / 5 );
 			
-		$url = $this->url;
-		$url_page = $this->url_page;
-		$sortup = $this->sortup;
-		$sortdown = $this->sortdown;
 			
 		$view = new View_lib ();
 			
 		$view->set ( 'count_for_pagin', $count_for_pagin );
 		$view->set ( 'page', $page );
 		$view->set ( 'count_pages', $count_pages );
-		$view->set ( 'contacts', $contacts );			
-		$view->set ( 'sortup', $sortup );
-		$view->set ( 'sortdown', $sortdown );
-		$view->set ( 'url', $url );
-		$view->set ( 'url_page', $url_page );			
+		$view->set ( 'contacts', $contacts );
+		$view->set ( 'i', $i);
 			
-		$view->render ( 'contacts_selectcontact' );
+		$view->render ( 'contacts', 'select' );
 	}
 		
-	public function view_contact ()
+	public function view ($id)
 	{	
 		
 		$contact_view = new Information_models ();
 
-		if ( ( int ) $_GET['id'] > 0 )
+		if ( ( int ) ($id) > 0 )
 		{
 				
 			$contactUser = $contact_view->select (	
@@ -370,7 +353,7 @@ class Contacts extends Controller
 													
 													'conditions' => array(
 																
-																'id' => $_GET['id'],
+																'id' => $id,
 			
 													),
 													
@@ -407,16 +390,16 @@ class Contacts extends Controller
 			
 		$view->set ( 'contactUser', $contactUser );
 			
-		$view->render ( 'contacts_viewcontact' );
+		$view->render ( 'contacts', 'view' );
 			
 		return;
 	}
 		
 	function delete_contact ( $id, $user, $del )
 	{
-				
+		
 		$protection = $this->contacts_defender ( $id, $user );
-
+		
 		if ( ! empty ( $protection )  )
 		{	
 			

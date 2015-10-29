@@ -6,12 +6,6 @@ class Dispatcher {
 	public function dispatch ( $path ) 
 	{
 		
-		if ( ! empty ( $_POST ) )
-		{
-			
-			
-		}
-		
 		if (empty ( $path ) )
 		{
 			
@@ -19,7 +13,13 @@ class Dispatcher {
 		}
 		
 		$arguments = explode ( '/', ltrim ( $path, '/' ) );
-		 
+
+		if ( empty ( $arguments ) )
+		{
+				
+			header ( 'Location: /error_pages/404.html', 404 );
+		}
+		
 		if ( ! empty  ( $arguments[1] ) )            
 		{
 			
@@ -33,18 +33,28 @@ class Dispatcher {
 			$arguments [1] = 'index';
 			$arguments [0] = 'contacts';
 		}
-		
-		if ( empty ( $arguments ) )
+		$contact_id = NULL;
+		foreach ( $arguments as $key => $val )
 		{
 			
-			header ( 'Location: /error_pages/404.html', 404 );
+			if( ( int )( $val ) )
+			{
+				
+				$contact_id = $val;
+			}
+			if( $val === 'delete' )
+			{
+				
+				$arguments [1] = 'index';
+				$arguments [0] = 'contacts';
+			}
 		}
 		
 		$class = ucfirst ( $arguments[0] );
 
 		$load = new $class;	
 		
-		$variables = $load->$arguments[1]();
+		$variables = $load->$arguments[1]($contact_id);
 
 		return;
 	}

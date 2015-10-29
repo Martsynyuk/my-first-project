@@ -220,7 +220,7 @@ Class Model_models implements For_model
 					$sql ='INSERT INTO ' . $this->table . ' (' . $key . ') VALUE (' . $val . ');';
 					
 				}
-	
+
 					$this->query( $sql );
 					
 					$result = TRUE;

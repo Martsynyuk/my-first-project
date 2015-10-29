@@ -19,7 +19,7 @@ Class User extends Controller
 			
 		$view->set ( 'loginUser', $loginUser );
 			
-		$view->render ( 'users_autorization' );
+		$view->render ( 'users', 'autorization' );
 	}
 		
 	public function logout ()
@@ -28,7 +28,7 @@ Class User extends Controller
 		unset ( $_SESSION ['id'] );
 		unset ( $_SESSION ['login'] );
 			
-		header ( 'Location: user/autorization' );
+		header ( 'Location: autorization' );
 	}
 		
 	public function registration ()
@@ -109,7 +109,7 @@ Class User extends Controller
 			
 		$view= new View_lib();		
 			
-		$view->render ( 'users_registration' );
+		$view->render ( 'users', 'registration' );
 	}
 		
 	function login ( $login, $password )

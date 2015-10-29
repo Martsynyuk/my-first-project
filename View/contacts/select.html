@@ -22,26 +22,27 @@
 		<?php }; ?>
 		
 	</ul>
-	<form name="selectcontact" method="POST" action="contacts/select_contact">
+	<form name="selectcontact" method="POST" action="select">
 		
 		<table border="0">
 			<tr>
-				<th><input type="checkbox" name="all" value="all">All</th>
+				<th><button name="rex" value="all"><input type="checkbox" name="all" value="all"></button>All
+				</th>
 				
 				<th>First Name
 				
-					<a href="<?= $sortup . '&sortparam=FirstName'?>"
+					<a href="<?= '?sort=up&sortparam=FirstName'?>"
 						style="margin: 0 10px;">&#8593 </a> <a
-						href="<?= $sortdown . '&sortparam=FirstName'?>">&#8595 
+						href="<?= '?sort=down&sortparam=FirstName'?>">&#8595 
 					</a>
 					
 				</th>
 				
 				<th>Last Name
 				
-					<a href="<?= $sortup . '&sortparam=LastName'?>"
+					<a href="<?= '?sort=up&sortparam=LastName'?>"
 						style="margin: 0 10px;">&#8593 </a> <a
-						href="<?= $sortdown . '&sortparam=LastName'?>">&#8595 
+						href="<?= '?sort=down&sortparam=LastName'?>">&#8595 
 					</a>
 					
 				</th>
@@ -54,15 +55,15 @@
 		<?php foreach ( $contacts as $contact ) : ?>	
 		
 				<tr>
-				<td> <input type="checkbox" name="<?= $contact['id']; ?>"
-					value="<?= $contact['Email']; ?>">
+				<td> 
+					<input type="checkbox" name="<?= $i; ?>" value="<?= $contact['Email']; ?>" >
 				</td>
 				
 				<td><?= $contact['FirstName']; ?></td>
 				<td><?= $contact['LastName']; ?></td>
 				<td><?= $contact['Email']; ?></td>
 				<td><?= $contact['Telephone']; ?></td>
-				
+				<?php $i++; ?>
 			</tr>	
 			
 		<?php endforeach;?>	
@@ -77,9 +78,9 @@
 							href="<?php
 								
 								if ($page == 1) {
-									echo $url;
+									echo '?page=1';
 								} else {
-									echo $url_page . ($page - 1);
+									echo '?page=' . ($page - 1);
 								}
 								?>"
 								
@@ -102,9 +103,9 @@
 								href="<?php
 											
 										if ($i == 1) {
-											echo $url;
+											echo '?page=1';
 										} else {
-											echo $url_page . $i;
+											echo '?page=' . $i;
 										}
 										?>">
 								<?=$i?>
@@ -118,7 +119,7 @@
 			<li>								 
 				<?php if ($page != $count_pages) : ?>
 				
-					<a href="<?=$url_page.($page + 1) ?>" title="next page">Next</a>
+					<a href="<?= '?page=' . ( $page + 1 ) ?>" title="next page">Next</a>
 														
 				<?php endif; ?>	
 												

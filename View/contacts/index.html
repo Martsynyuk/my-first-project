@@ -24,12 +24,12 @@
 			<table>
 		<tr>
 			<th></th>
-			<th>First Name<a href="<?= $sortup . '&sortparam=FirstName'?>"
+			<th>First Name<a href="<?= '?sort=up&sortparam=FirstName'?>"
 				style="margin: 0 10px;">&#8593 </a> <a
-				href="<?= $sortdown . '&sortparam=FirstName'?>">&#8595 </a></th>
-			<th>Last Name<a href="<?= $sortup . '&sortparam=LastName'?>"
+				href="<?= '?sort=down&sortparam=FirstName'?>">&#8595 </a></th>
+			<th>Last Name<a href="<?= '?sort=up&sortparam=LastName'?>"
 				style="margin: 0 10px;">&#8593 </a> <a
-				href="<?= $sortdown . '&sortparam=LastName'?>">&#8595 </a></th>
+				href="<?= '?sort=down&sortparam=LastName'?>">&#8595 </a></th>
 			<th>E-mail</th>
 			<th>Cellular</th>
 			<th>Action</th>
@@ -44,20 +44,20 @@
 			<td><?= $contact['Email']; ?></td>
 			<td><?= $contact['Telephone']; ?></td>
 			<td>
-				<a href="<?= $editcontact . $contact['id']?>">edit</a> 
-				<a href="<?= $viewcontact . $contact['id']?>">view</a> 
-				<a href="<?= $deletecontact . $contact['id'] ?>">delete</a>
+				<a href="<?= 'contacts/edit/' . $contact['id']?>">edit</a> 
+				<a href="<?= 'contacts/view/' . $contact['id']?>">view</a> 
+				<a href="<?= 'delete/' . $contact['id'] ?>">delete</a>
 			</td>
 		</tr>
 		<?php $i++;?>	
 		
 		<?php endforeach;?>	
 		
-		<?php if ( ! empty ( $_GET['id'] ) ) { ?>
+		<?php if ( ! empty ( $id ) ) { ?>
 		
 		<?= 'you want to delete? </br></br> 
 
-			<form name="delete" method="POST" action="' . $deletecontact . $contact['id'] . '">
+			<form name="delete" method="POST" action="' . 'delete/' . $contact['id'] . '">
 		
 				<button name="del" value="Yes">Yes</button></br></br>
 				<button name="del" value="No">No</button>
@@ -69,9 +69,9 @@
 								
 			</table>
 	</br>
-	<a href="contacts/add_contact">Add contact</a>
+	<a href="contacts/add">Add contact</a>
 	</br>
-	<a href="contacts/select_contact">Select contact</a>
+	<a href="contacts/select">Select contact</a>
 	
 		<?php } else { ?>
 		
@@ -81,9 +81,9 @@
 	
 		<?php } ;?>
 		
-		<?php if($userContact->count_contacts($_SESSION['id']) == 0) { ?>
+		<?php if($count_contacts == 0) { ?>
 		
-			<a href="contacts/add_contact">Add contact</a>
+			<a href="contacts/add">Add contact</a>
 			
 		<?php } else {?>
 		
@@ -94,9 +94,9 @@
 							href="<?php
 								
 								if ($page == 1) {
-									echo $url;
+									echo '?page=1';
 								} else {
-									echo $url_page . ($page - 1);
+									echo '?page=' . ($page - 1);
 								}
 								?>"
 								title="last page">Back 
@@ -112,9 +112,9 @@
 						<?php } else { ?>
 							<a	href="<?php										
 											if ($i == 1) {
-												echo $url;
+												echo '?page=1';
 											} else {
-												echo $url_page . $i;
+												echo '?page=' . $i;
 											}
 										?>"
 								>
@@ -130,12 +130,12 @@
 				</li>
 				<li>	
 											
-					<?php if ($userContact->count_contacts ( $_SESSION ['id'] ) > 0) :
+					<?php if ($count_contacts > 0) :
 
 							if ($page != $count_pages) :
 					?>
 					
-									<a href="<?=$url_page.($page + 1) ?>" title="next page">Next</a>
+									<a href="<?= '?page=' . ( $page + 1 ) ?>" title="next page">Next</a>
 																		
 								<?php endif; ?>
 								

@@ -11,19 +11,17 @@ Class View_lib {
 		$this->var[$name] = $value; 
 	} 
 		
-	public function render ( $view )
+	public function render ( $dir, $file_name )
 	{
 			
 		ob_start();
 			
 		extract($this->var);
 
-		$dir = explode('_', $view);
-
-		if ( file_exists(APP . '/View/' . $dir[0] . '/' . $dir[1] . '.html') )
+		if ( file_exists(APP . '/View/' . $dir . '/' . $file_name . '.html') )
 		{
 			
-			include_once APP . '/View/' . $dir[0] . '/' . $dir[1] . '.html';
+			include_once APP . '/View/' . $dir . '/' . $file_name . '.html';
 		}
 			
 		echo ob_get_clean();
