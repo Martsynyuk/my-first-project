@@ -1,7 +1,8 @@
 <?php
 
 
-Class View_lib {
+Class View
+{
 		
 	private $var = array();
 		

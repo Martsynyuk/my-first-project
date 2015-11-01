@@ -1,21 +1,20 @@
 <?php
-		// for TEST 22
-	/*$what = array(
-			'users_id' => $_SESSION ['id'], // mast be int its importent
-			'Firstname' => $_POST ['FirstName'],
-			'LastName' => $_POST ['LastName'],
-			'Email' => $_POST ['Email'],
-			'Home' => $_POST ['Home'],
-			'Work' => $_POST ['Work'],
-			'Cell' => $_POST ['Cell'],
-			'Adress1' => $_POST ['Adress1'],
-			'Adress2' => $_POST ['Adress2'],
-			'City' => $_POST ['City'],
-			'State' => $_POST ['State'],
-			'Zip' => $_POST ['Zip'],
-			'Country' => $_POST ['Country'],
-			'BirthDate' => $_POST ['year'] . '-' . $_POST ['month'] . '-' . $_POST ['day'],
-			'Telephone' => $phone
 	
-	);*/
+
+$a = array(
+		'contacts',
+		'controller',
+		'user'
+);
+$b = array(
+		'contacts_controllers',
+		'controller_controllers',
+		'user_controllers'
+);
+$string = 'controller';
+
+echo str_ireplace($a,$b,$string);
+
+// Echo I like to eat an orange with my cat in my ford
+?>
 		

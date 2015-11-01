@@ -80,30 +80,31 @@ class Dispatcher {
 }
 
 function autoload ( $classname )
-{
-
-	$load_class = explode('_', $classname);
+{	
 	
+	$search = array(
+			'model',
+			'controller',		
+			'contacts',
+			'user',
+			'view',		
+			'information',			
+			'users'
+	);
 	
-	if ( file_exists ( APP . '/Controllers/' . $load_class[0] . '.php' ) )
-	{
-		
-		include_once APP . '/Controllers/' . $load_class[0] . '.php';
-	}
+	$replace = array(	
+			'model-Models',
+			'controller-Controllers',		
+			'contacts-Controllers',
+			'user-Controllers',
+			'view-Lib',		
+			'information-Models',			
+			'users-Models'		
+	);
 	
-	if ( ! empty ( $load_class[1] ) )
-	{
-		if ( file_exists(APP . '/' . ucfirst ( $load_class[1] ) . '/' . $load_class[0] . '_' . $load_class[1] . '.php') )
-		{
+	$class = explode('-', str_ireplace ( $search , $replace, $classname));
 	
-			include_once APP . '/' . ucfirst ( $load_class[1] ) . '/' . $load_class[0] . '_' . $load_class[1] . '.php';
-		}
-		else{
-			
-			//header('location: /');
-		}
-	}
-
+	require_once APP . '/' . $class[1] . '/' .$class[0] . '.php';
 }
 
 spl_autoload_register('autoload');

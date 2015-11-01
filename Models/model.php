@@ -12,7 +12,7 @@
 *
 *
 */
-Class Model_models implements For_model
+Class Model implements For_model
 {
 		
 	/**

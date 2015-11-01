@@ -37,7 +37,7 @@ class Contacts extends Controller
 				$phone = $_POST ['Cell'];
 			}
 				
-			$add_user_contact = new Information_models();
+			$add_user_contact = new Information();
 				
 			$new_contact = $add_user_contact->insert (
 				
@@ -70,7 +70,7 @@ class Contacts extends Controller
 			}
 		}
 		
-		$view = new View_lib ();
+		$view = new View ();
 			
 		if( ! empty ( $phone ) )
 		{
@@ -85,7 +85,7 @@ class Contacts extends Controller
 			
 		$this->contacts_defender ( $get['id'], $_SESSION ['id'] );
 				
-		$select_user_contacts = new Information_models ();
+		$select_user_contacts = new Information ();
 				
 		$contactUser = $select_user_contacts->select(
 				
@@ -166,7 +166,7 @@ class Contacts extends Controller
 				}
 			}
 				
-			$update_contact = new Information_models ();
+			$update_contact = new Information ();
 				
 			$update_contact->update (
 					
@@ -206,7 +206,7 @@ class Contacts extends Controller
 				header ( 'Location: /' );
 		}
 			
-		$view = new View_lib ();
+		$view = new View ();
 			
 		$view->set ( 'contactUser', $contactUser );
 
@@ -259,7 +259,7 @@ class Contacts extends Controller
 		$i = 1;
 		($page > 1) ? $i = $page * ROWLIMIT - ROWLIMIT + 1 : '';  // to number of contacts
 			
-		$view = new View_lib ();
+		$view = new View();
 			
 		$view->set ( 'count_contacts', $count_contacts );
 		$view->set ( 'count_for_pagin', $count_for_pagin );
@@ -267,6 +267,7 @@ class Contacts extends Controller
 		$view->set ( 'count_pages', $count_pages );
 		$view->set ( 'contacts', $contacts );
 		$view->set ( 'i', $i);
+		$view->set ( 'get[\'sort\']', $get['sort']);
 			
 		$view->render ( 'contacts', 'index' );
 		
@@ -302,13 +303,14 @@ class Contacts extends Controller
 		$count_pages = ceil ( $this->count_contacts ( $_SESSION ['id'] ) / 5 );
 			
 			
-		$view = new View_lib ();
+		$view = new View ();
 			
 		$view->set ( 'count_for_pagin', $count_for_pagin );
 		$view->set ( 'page', $page );
 		$view->set ( 'count_pages', $count_pages );
 		$view->set ( 'contacts', $contacts );
 		$view->set ( 'i', $i);
+		$view->set ( 'get[\'sort\']', $get['sort']);
 			
 		$view->render ( 'contacts', 'select' );
 	}
@@ -316,7 +318,7 @@ class Contacts extends Controller
 	public function view ( $get )
 	{	
 		
-		$contact_view = new Information_models ();
+		$contact_view = new Information ();
 
 		if ( ( int ) ($get['id']) > 0 )
 		{
@@ -379,7 +381,7 @@ class Contacts extends Controller
 			header ( 'Location: /' );
 		}
 		
-		$view = new View_lib ();
+		$view = new View ();
 			
 		$view->set ( 'contactUser', $contactUser );
 			
@@ -399,7 +401,7 @@ class Contacts extends Controller
 			if ( ! empty ( $protection )  )
 			{	
 				
-				$delete_contact = new Information_models ();
+				$delete_contact = new Information ();
 						
 				$delete_contact->delete ( $get['id'] );
 	
@@ -413,7 +415,7 @@ class Contacts extends Controller
 	function count_contacts ()
 	{	
 		
-		$count_contacts = new Information_models ();
+		$count_contacts = new Information ();
 			
 		$res = $count_contacts->select(
 				
@@ -524,7 +526,7 @@ class Contacts extends Controller
 			header ( 'Location: /' );
 		}
 
-		$return_contact = new Information_models ();
+		$return_contact = new Information ();
 			
 		$result = $return_contact->select (
 				

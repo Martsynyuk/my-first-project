@@ -12,7 +12,7 @@ class Controller
 		if ( ( int ) $id > 0 )
 		{
 		
-			$protection_contact = new Information_models();
+			$protection_contact = new Information();
 		
 			$user_contact = $protection_contact->select (
 					

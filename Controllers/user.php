@@ -15,7 +15,7 @@ Class User extends Controller
 			$loginUser = $this->login ( $_POST ['login'], $_POST ['password'] );
 		}
 			
-		$view = new View_lib ();
+		$view = new View ();
 			
 		$view->set ( 'loginUser', $loginUser );
 			
@@ -40,7 +40,7 @@ Class User extends Controller
 			if ( $_POST['password1'] === $_POST['password2'] ) 
 			{
 					
-				$registration = new Users_models();
+				$registration = new Users();
 					
 				$user = $registration->select (
 						
@@ -107,7 +107,7 @@ Class User extends Controller
 			}
 		}
 			
-		$view= new View_lib();		
+		$view= new View();		
 			
 		$view->render ( 'users', 'registration' );
 	}
@@ -115,7 +115,7 @@ Class User extends Controller
 	function login ( $login, $password )
 	{
 			
-		$login_user = new Users_models ();
+		$login_user = new Users ();
 			
 		$what = array(
 				

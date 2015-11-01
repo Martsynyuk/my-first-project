@@ -1,7 +1,7 @@
 <?php
 
 
-Class Information_models extends Model_models
+Class Information extends Model
 {
 		
 	public $table = 'information';
