@@ -26,35 +26,53 @@ class Dispatcher {
 			$get = explode ( '?', $arguments[1] );
 			$arguments[1] = $get[0];
 		}
-	
-		elseif( ! empty ( $arguments[0] ) && $arguments[0]  !== '' or $path == '/' )
-		{
 			
-			$arguments [1] = 'index';
-			$arguments [0] = 'contacts';
-		}
-		$contact_id = NULL;
+		$get = NULL;
+		
 		foreach ( $arguments as $key => $val )
 		{
 			
 			if( ( int )( $val ) )
 			{
 				
-				$contact_id = $val;
+				$get['id'] = $val;
 			}
-			if( $val === 'delete' )
+			
+			$arg = explode ( '-', $val );
+			
+			if ( $arg[0] === 'sort' )
 			{
 				
-				$arguments [1] = 'index';
-				$arguments [0] = 'contacts';
+				if ( $arg[1] === 'up' || $arg[1] === 'down' )
+				{
+					
+					$get['sort'] = $arg[1];
+				}
+				if ( $arg[2] === 'FirstName' || $arg[2] === 'LastName' )
+				{
+					
+					$get['sortparam'] = $arg[2];
+				}
 			}
+			if ( $arg[0] === 'page' )
+			{
+				
+				$get['page'] = $arg[1];
+			}
+		}
+		
+		if(  empty ( $arguments[0] ) || $path == '/' || count( explode('-', $arguments[0] ) ) > 1 )
+		{
+				
+			$arguments [1] = 'index';
+			$arguments [0] = 'contacts';
 		}
 		
 		$class = ucfirst ( $arguments[0] );
 
 		$load = new $class;	
 		
-		$variables = $load->$arguments[1]($contact_id);
+		$variables = $load->$arguments[1]( $get );
 
 		return;
 	}

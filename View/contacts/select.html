@@ -31,18 +31,18 @@
 				
 				<th>First Name
 				
-					<a href="<?= '?sort=up&sortparam=FirstName'?>"
+					<a href="<?= 'sort-up-FirstName'?>"
 						style="margin: 0 10px;">&#8593 </a> <a
-						href="<?= '?sort=down&sortparam=FirstName'?>">&#8595 
+						href="<?= 'sort-down-FirstName'?>">&#8595 
 					</a>
 					
 				</th>
 				
 				<th>Last Name
 				
-					<a href="<?= '?sort=up&sortparam=LastName'?>"
+					<a href="<?= 'sort-up-LastName'?>"
 						style="margin: 0 10px;">&#8593 </a> <a
-						href="<?= '?sort=down&sortparam=LastName'?>">&#8595 
+						href="<?= 'sort-down-LastName'?>">&#8595 
 					</a>
 					
 				</th>
@@ -78,9 +78,9 @@
 							href="<?php
 								
 								if ($page == 1) {
-									echo '?page=1';
+									echo 'page-1';
 								} else {
-									echo '?page=' . ($page - 1);
+									echo 'page-' . ($page - 1);
 								}
 								?>"
 								
@@ -103,9 +103,9 @@
 								href="<?php
 											
 										if ($i == 1) {
-											echo '?page=1';
+											echo 'page-1';
 										} else {
-											echo '?page=' . $i;
+											echo 'page-' . $i;
 										}
 										?>">
 								<?=$i?>
@@ -119,7 +119,7 @@
 			<li>								 
 				<?php if ($page != $count_pages) : ?>
 				
-					<a href="<?= '?page=' . ( $page + 1 ) ?>" title="next page">Next</a>
+					<a href="<?= 'page-' . ( $page + 1 ) ?>" title="next page">Next</a>
 														
 				<?php endif; ?>	
 												

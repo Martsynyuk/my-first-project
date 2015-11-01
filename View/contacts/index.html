@@ -19,17 +19,17 @@
 		
 	</ul>
 
-		<?php if(!empty($contacts)){ ?>
+		<?php if ( ! empty ( $contacts ) ){ ?>
 		
 			<table>
 		<tr>
 			<th></th>
-			<th>First Name<a href="<?= '?sort=up&sortparam=FirstName'?>"
+			<th>First Name<a href="<?= 'sort-up-FirstName'?>"
 				style="margin: 0 10px;">&#8593 </a> <a
-				href="<?= '?sort=down&sortparam=FirstName'?>">&#8595 </a></th>
-			<th>Last Name<a href="<?= '?sort=up&sortparam=LastName'?>"
+				href="<?= 'sort-down-FirstName'?>">&#8595 </a></th>
+			<th>Last Name<a href="<?= 'sort-up-LastName'?>"
 				style="margin: 0 10px;">&#8593 </a> <a
-				href="<?= '?sort=down&sortparam=LastName'?>">&#8595 </a></th>
+				href="<?= 'sort-down-LastName'?>">&#8595 </a></th>
 			<th>E-mail</th>
 			<th>Cellular</th>
 			<th>Action</th>
@@ -46,32 +46,19 @@
 			<td>
 				<a href="<?= 'contacts/edit/' . $contact['id']?>">edit</a> 
 				<a href="<?= 'contacts/view/' . $contact['id']?>">view</a> 
-				<a href="<?= 'delete/' . $contact['id'] ?>">delete</a>
+				<a href="<?= 'contacts/delete/' . $contact['id'] ?>">delete</a>
 			</td>
 		</tr>
 		<?php $i++;?>	
 		
 		<?php endforeach;?>	
 		
-		<?php if ( ! empty ( $id ) ) { ?>
-		
-		<?= 'you want to delete? </br></br> 
-
-			<form name="delete" method="POST" action="' . 'delete/' . $contact['id'] . '">
-		
-				<button name="del" value="Yes">Yes</button></br></br>
-				<button name="del" value="No">No</button>
-
-			</form>'		
-		?>	
-		
-		<?php }; ?>	
 								
 			</table>
 	</br>
 	<a href="contacts/add">Add contact</a>
 	</br>
-	<a href="contacts/select">Select contact</a>
+	<a href="contacts/select/">Select contact</a>
 	
 		<?php } else { ?>
 		
@@ -94,9 +81,9 @@
 							href="<?php
 								
 								if ($page == 1) {
-									echo '?page=1';
+									echo 'page-1';
 								} else {
-									echo '?page=' . ($page - 1);
+									echo 'page-' . ($page - 1);
 								}
 								?>"
 								title="last page">Back 
@@ -112,9 +99,9 @@
 						<?php } else { ?>
 							<a	href="<?php										
 											if ($i == 1) {
-												echo '?page=1';
+												echo 'page-1';
 											} else {
-												echo '?page=' . $i;
+												echo 'page-' . $i;
 											}
 										?>"
 								>
@@ -135,7 +122,7 @@
 							if ($page != $count_pages) :
 					?>
 					
-									<a href="<?= '?page=' . ( $page + 1 ) ?>" title="next page">Next</a>
+									<a href="<?= 'page-' . ( $page + 1 ) ?>" title="next page">Next</a>
 																		
 								<?php endif; ?>
 								
