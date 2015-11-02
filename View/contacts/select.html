@@ -22,11 +22,11 @@
 		<?php }; ?>
 		
 	</ul>
-	<form name="selectcontact" method="POST" action="select">
+	<form name="selectcontact" method="POST" action="/contacts/select/">
 		
 		<table border="0">
 			<tr>
-				<th><button name="rex" value="all"><input type="checkbox" name="all" value="all"></button>All
+				<th><button name="button" value="on"><input type="checkbox" name="all" value="on"></button>All
 				</th>
 				
 				<th>First Name
@@ -56,7 +56,9 @@
 		
 				<tr>
 				<td> 
-					<input type="checkbox" name="<?= $i; ?>" value="<?= $contact['Email']; ?>" >
+					<input type="checkbox" name="<?= $contact['id']; ?>" value="<?= $contact['Email']; ?>" 
+									<?= (!empty($_POST['all'])) ? 'checked' : '' ; ?>>
+															
 				</td>
 				
 				<td><?= $contact['FirstName']; ?></td>
@@ -70,6 +72,7 @@
 										
 		</table>
 		</br> <input type="submit" name="Select" value="Accept"><a href="">Cancel</a></br>
+		</form>
 		</br> <a href="/">Back</a>
 		<ul>
 			<li>
@@ -125,6 +128,27 @@
 												
 			</li>
 		</ul>
+		<?= ( ! empty ( $mail ) ) ? 
 
+			'<form name="add_letter" method="POST" action="/contacts/select/">
+
+				<input name="mails" type="text" size="40" value="' . $mail . '"></br></br>
+
+				<input name="text" type="text"size="60" value="for some text"></br></br>
+
+				<input type="submit" name="add" value="add">
+
+			</form>' : '';
+		?>
+		<?= ( ! empty ( $new_mail ) ) ? 
+
+			'<form name="add_new_mail" method="POST" action="/contacts/select/">
+				
+				<input name="mails" type="text" size="20" value="' . $new_mail . '"></br>you want to add these e-mail addresses?</br>
+				<button name="Yes" value="Yes">Yes</button>
+				<button name="No" value="No">No</button></br>
+
+			</form>' : '';
+		?>
 </body>
 </html>

@@ -3,7 +3,7 @@
 
 Class User extends Controller
 {     
-		
+	
 	public function autorization ()
 	{
 			
@@ -27,6 +27,7 @@ Class User extends Controller
 			
 		unset ( $_SESSION ['id'] );
 		unset ( $_SESSION ['login'] );
+		unset ( $_SESSION ['mail'] );
 			
 		header ( 'Location: autorization' );
 	}

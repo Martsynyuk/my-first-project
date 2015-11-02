@@ -1,12 +1,15 @@
 <?php
 class Controller
 {
-		
-	function __construct ()
-	{
 	
-	}
+	function __construct()
+	{
 		
+		require_once APP . '/Models/model.php';
+		require_once APP . '/Models/users.php';
+		require_once APP . '/Models/information.php';
+		require_once APP . '/Lib/View.php';
+	}
 	function contacts_defender ( $id, $user_id )
 	{
 		if ( ( int ) $id > 0 )

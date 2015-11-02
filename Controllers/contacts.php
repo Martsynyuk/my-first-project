@@ -7,7 +7,7 @@
  
 class Contacts extends Controller
 {
-		
+
 	public function  add ()
 	{
 			
@@ -275,7 +275,24 @@ class Contacts extends Controller
 		
 	public function select ( $get )
 	{
-
+		
+		$mail = NULL;
+		$new_mail = NULL;
+		
+		if ( ! empty ( $_POST['mails'] ) && ! empty ( $_SESSION['mail'] ) && ! empty ( $_POST['add'] ) )
+		{
+			
+			$new_mail = implode ( ', ', array_diff ( explode ( ', ', $_POST['mails'] ), $_SESSION['mail'] ) ) ;
+			
+			unset ( $_SESSION ['mail'] );
+		}
+		
+		if ( ! empty ( $_POST['Select'] ) )
+		{
+			
+			$mail = $this->add_letter();			
+		}		
+		
 		if ( empty ( $get['page'] ) ) 
 		{
 			
@@ -294,6 +311,7 @@ class Contacts extends Controller
 		}
 		
 		$i = 1;
+		
 		($page > 1) ? $i = $page * ROWLIMIT - ROWLIMIT + 1 : '';  // to number of contacts
 			
 		$contacts = array ();
@@ -311,6 +329,8 @@ class Contacts extends Controller
 		$view->set ( 'contacts', $contacts );
 		$view->set ( 'i', $i);
 		$view->set ( 'get[\'sort\']', $get['sort']);
+		$view->set ( 'mail', $mail);
+		$view->set ( 'new_mail', $new_mail);
 			
 		$view->render ( 'contacts', 'select' );
 	}
@@ -575,7 +595,30 @@ class Contacts extends Controller
 		
 		return $contacts;
 	}
+	
+	function add_letter ()
+	{
+		$mail = array();
+		
+		if ( count($_POST) > 1 && ! empty ( $_POST['Select'] ) )
+		{	
+			
+			foreach ( $_POST as $key => $val )
+			{
+					
+				if ( is_int ( $key ) )
+				{
+						
+					$mail[] = $val;
+				}
+			}
+			$_SESSION['mail'] = array_unique ( $mail );
+			
+			$mail = implode ( ', ', array_unique ( $mail ) );
+		}
+		
+		return $mail;
+	}
 
 }
-
 	

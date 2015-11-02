@@ -3,6 +3,13 @@
 
 class Dispatcher {	
 	
+	function __construct()
+	{
+		require_once APP . '/Controllers/controller.php';
+		require_once APP . '/Controllers/contacts.php';
+		require_once APP . '/Controllers/user.php';
+	}
+	
 	public function dispatch ( $path ) 
 	{
 		
@@ -81,30 +88,33 @@ class Dispatcher {
 
 function autoload ( $classname )
 {	
-	
+	/*var_dump($classname);
 	$search = array(
-			'model',
-			'controller',		
-			'contacts',
-			'user',
-			'view',		
-			'information',			
-			'users'
+			
+			'Controller',	// Controllers	
+			'Contacts',
+			'User',
+			'View',			// Lib
+			'Model',		// Models
+			'Information',			
+			//'Users'
 	);
 	
 	$replace = array(	
-			'model-Models',
-			'controller-Controllers',		
+			
+			'controller-Controllers',	// Controllers 	
 			'contacts-Controllers',
 			'user-Controllers',
-			'view-Lib',		
+			'view-Lib',					// Lib
+			'model-Models',				// Models
 			'information-Models',			
-			'users-Models'		
+			//'users-Models'		
 	);
 	
-	$class = explode('-', str_ireplace ( $search , $replace, $classname));
+	$class = explode ( '-', str_ireplace ( $search, $replace, $classname ) );
 	
 	require_once APP . '/' . $class[1] . '/' .$class[0] . '.php';
+	require_once APP . '/Models/users.php';*/
 }
 
 spl_autoload_register('autoload');
