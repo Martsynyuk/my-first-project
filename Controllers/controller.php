@@ -10,6 +10,7 @@ class Controller
 		require_once APP . '/Models/information.php';
 		require_once APP . '/Lib/View.php';
 	}
+	
 	function contacts_defender ( $id, $user_id )
 	{
 		if ( ( int ) $id > 0 )
@@ -68,5 +69,18 @@ class Controller
 	}
 				
 	return $user_contact;
+	}
+	
+	function post_controller ()
+	{	
+		$post = array();
+		
+		foreach( $_POST as $key => $val )
+		{
+			
+			$post[$key] = htmlspecialchars ( trim ( $val ) );
+		}	
+				
+		return $post;
 	}
 }

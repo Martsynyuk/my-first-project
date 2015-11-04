@@ -6,18 +6,25 @@ Class User extends Controller
 	
 	public function autorization ()
 	{
+		
+		if ( ! empty ( $_POST ) )
+		{
 			
+			$post = $this->post_controller();
+		}
+		
 		$loginUser = '';	
 
-		if ( ! empty ( $_POST ['login'] ) && ! empty ( $_POST ['password'] ) )
+		if ( ! empty ( $post['login'] ) && ! empty ( $post['password'] ) )
 		{
 
-			$loginUser = $this->login ( $_POST ['login'], $_POST ['password'] );
+			$loginUser = $this->login ( $post['login'], $post['password'] );
 		}
 			
 		$view = new View ();
 			
 		$view->set ( 'loginUser', $loginUser );
+		$view->set ( 'post', $post );
 			
 		$view->render ( 'users', 'autorization' );
 	}
@@ -34,11 +41,17 @@ Class User extends Controller
 		
 	public function registration ()
 	{
-
-		if( ! empty ( $_POST['login'] ) && ! empty ( $_POST['password1'] ) && ! empty ( $_POST['password2'] ) )
+		
+		if ( ! empty ( $_POST ) )
+		{
+				
+			$post = $this->post_controller();
+		}
+		
+		if( ! empty ( $post['login'] ) && ! empty ( $post['password1'] ) && ! empty ( $post['password2'] ) )
 		{	
 
-			if ( $_POST['password1'] === $_POST['password2'] ) 
+			if ( $post['password1'] === $post['password2'] ) 
 			{
 					
 				$registration = new Users();
@@ -55,7 +68,7 @@ Class User extends Controller
 												
 												'conditions' => array(
 														
-															'login' => $_POST['login']
+															'login' => $post['login']
 														
 												),
 												
@@ -89,8 +102,8 @@ Class User extends Controller
 							
 											$what = array(
 													
-													'password' => md5( $_POST['password1'] . 'lyly' ) , // mast be int its importent
-													'login' => $_POST['login']
+													'password' => md5( $post['password1'] . 'lyly' ) , // mast be int its importent
+													'login' => $post['login']
 											
 											)
 																		
@@ -108,7 +121,9 @@ Class User extends Controller
 			}
 		}
 			
-		$view= new View();		
+		$view= new View();	
+		
+		$view->set ( 'post', $post );
 			
 		$view->render ( 'users', 'registration' );
 	}

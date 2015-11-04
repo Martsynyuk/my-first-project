@@ -10,31 +10,36 @@ class Contacts extends Controller
 
 	public function  add ()
 	{
+		if ( ! empty ( $_POST ) )
+		{
+				
+			$post = $this->post_controller();
+		}
 			
-		if ( ! empty ( $_POST ['FirstName'] ) ) 
+		if ( ! empty ( $post['FirstName'] ) ) 
 		{
 			
-			if ( isset ( $_POST ['radio'] ) ) 
+			if ( isset ( $post['radio'] ) ) 
 			{
 				
-				if ( $_POST ['radio'] === 'Home' )
+				if ( $post['radio'] === 'Home' )
 				{
-					$phone = $_POST ['Home'];
+					$phone = $post['Home'];
 				}
 				
-				if ( $_POST ['radio'] === 'Work' )
+				if ( $post['radio'] === 'Work' )
 				{
-					$phone = $_POST ['Work'];
+					$phone = $post['Work'];
 				}
 				
-				if ( $_POST ['radio'] === 'Cell' )
+				if ( $post['radio'] === 'Cell' )
 				{
-					$phone = $_POST ['Cell'];
+					$phone = $post['Cell'];
 				}
 			} 
 			else{
 				
-				$phone = $_POST ['Cell'];
+				$phone = $post['Cell'];
 			}
 				
 			$add_user_contact = new Information();
@@ -44,19 +49,21 @@ class Contacts extends Controller
 											$what = array(
 													
 													'users_id' => $_SESSION ['id'], // mast be int its important
-													'Firstname' => $_POST ['FirstName'],
-													'LastName' => $_POST ['LastName'],
-													'Email' => $_POST ['Email'],
-													'Home' => $_POST ['Home'],
-													'Work' => $_POST ['Work'],
-													'Cell' => $_POST ['Cell'],
-													'Adress1' => $_POST ['Adress1'],
-													'Adress2' => $_POST ['Adress2'],
-													'City' => $_POST ['City'],
-													'State' => $_POST ['State'],
-													'Zip' => $_POST ['Zip'],
-													'Country' => $_POST ['Zip'],
-													'BirthDate' => $_POST ['year'] . '-' . $_POST ['month'] . '-' . $_POST ['day'],
+													'Firstname' => $post['FirstName'],
+													'LastName' => $post['LastName'],
+													'Email' => $post['Email'],
+													'Home' => $post['Home'],
+													'Work' => $post['Work'],
+													'Cell' => $post['Cell'],
+													'Adress1' => $post['Adress1'],
+													'Adress2' => $post['Adress2'],
+													'City' => $post['City'],
+													'State' => $post['State'],
+													'Zip' => $post['Zip'],
+													'Country' => $post['Zip'],
+													'BirthDate' => $post['year'] . '-' 
+																	. $post['month'] . '-' 
+																	. $post['day'],
 													'Telephone' => $phone  
 												
 											)
@@ -80,9 +87,15 @@ class Contacts extends Controller
 			$view->render ( 'contacts', 'add' );
 		}
 		
-	public function edit ($get)
+	public function edit ( $get )
 	{
-			
+		
+		if ( ! empty ( $_POST ) )
+		{
+				
+			$post = $this->post_controller();
+		}
+		
 		$this->contacts_defender ( $get['id'], $_SESSION ['id'] );
 				
 		$select_user_contacts = new Information ();
@@ -140,29 +153,29 @@ class Contacts extends Controller
 			header( 'Location: /' );
 		}
 			
-		if ( ! empty ( $_POST ['FirstName'] ) ) 
+		if ( ! empty ( $post['FirstName'] ) ) 
 		{
 			
-			if ( empty ( $_POST ['radio'] ) ) 
+			if ( empty ( $post['radio'] ) ) 
 			{
-				$phone = $_POST ['Cell'];
+				$phone = $post['Cell'];
 			}
 				
-			if ( isset ( $_POST ['radio'] ) ) 
+			if ( isset ( $post['radio'] ) ) 
 			{
-				if ( $_POST ['radio'] === 'Home' )
+				if ( $post['radio'] === 'Home' )
 				{
-					$phone = $_POST ['Home'];
+					$phone = $post['Home'];
 				}
 				
-				if ( $_POST ['radio'] === 'Work' )
+				if ( $post['radio'] === 'Work' )
 				{
-					$phone = $_POST ['Work'];
+					$phone = $post['Work'];
 				}
 				
-				if ( $_POST ['radio'] === 'Cell' )
+				if ( $post['radio'] === 'Cell' )
 				{
-					$phone = $_POST ['Cell'];
+					$phone = $post['Cell'];
 				}
 			}
 				
@@ -174,19 +187,21 @@ class Contacts extends Controller
 										
 									'fields' => array(
 												
-												'Firstname' => $_POST ['FirstName'],
-												'Lastname' => $_POST ['LastName'],
-												'Email' => $_POST ['Email'],
-												'Home' => $_POST ['Home'],
-												'Work' => $_POST ['Work'],
-												'Cell' => $_POST ['Cell'],
-												'Adress1' => $_POST ['Adress1'],
-												'Adress2' => $_POST ['Adress2'],
-												'City' => $_POST ['City'],
-												'State' => $_POST ['State'],
-												'Zip' => $_POST ['Zip'],
-												'Country' => $_POST ['Country'],
-												'BirthDate' => $_POST ['year'] . '-' . $_POST ['month'] . '-' . $_POST ['day'],
+												'Firstname' => $post['FirstName'],
+												'Lastname' => $post['LastName'],
+												'Email' => $post['Email'],
+												'Home' => $post['Home'],
+												'Work' => $post['Work'],
+												'Cell' => $post['Cell'],
+												'Adress1' => $post['Adress1'],
+												'Adress2' => $post['Adress2'],
+												'City' => $post['City'],
+												'State' => $post['State'],
+												'Zip' => $post['Zip'],
+												'Country' => $post['Country'],
+												'BirthDate' => $post['year'] . '-' 
+																. $post['month'] . '-' 
+																. $post ['day'],
 												'Telephone' => $phone,
 											
 									),
@@ -209,6 +224,7 @@ class Contacts extends Controller
 		$view = new View ();
 			
 		$view->set ( 'contactUser', $contactUser );
+		$view->set ( 'get', $get );
 
 		if( ! empty ( $phone ) )
 		{
@@ -276,18 +292,24 @@ class Contacts extends Controller
 	public function select ( $get )
 	{
 		
+		if ( ! empty ( $_POST ) )
+		{
+				
+			$post = $this->post_controller();
+		}
+		
 		$mail = NULL;
 		$new_mail = NULL;
 		
-		if ( ! empty ( $_POST['mails'] ) && ! empty ( $_SESSION['mail'] ) && ! empty ( $_POST['add'] ) )
+		if ( ! empty ( $post['mails'] ) && ! empty ( $_SESSION['mail'] ) && ! empty ( $post['add'] ) )
 		{
 			
-			$new_mail = implode ( ', ', array_diff ( explode ( ', ', $_POST['mails'] ), $_SESSION['mail'] ) ) ;
+			$new_mail = implode ( ', ', array_diff ( explode ( ', ', $post['mails'] ), $_SESSION['mail'] ) ) ;
 			
 			unset ( $_SESSION ['mail'] );
 		}
 		
-		if ( ! empty ( $_POST['Select'] ) )
+		if ( ! empty ( $post['Select'] ) )
 		{
 			
 			$mail = $this->add_letter();			
@@ -598,12 +620,19 @@ class Contacts extends Controller
 	
 	function add_letter ()
 	{
+		
+		if ( ! empty ( $_POST ) )
+		{
+				
+			$post = $this->post_controller();
+		}
+		
 		$mail = array();
 		
-		if ( count($_POST) > 1 && ! empty ( $_POST['Select'] ) )
+		if ( count ( $post ) > 1 && ! empty ( $post['Select'] ) )
 		{	
 			
-			foreach ( $_POST as $key => $val )
+			foreach ( $post as $key => $val )
 			{
 					
 				if ( is_int ( $key ) )
