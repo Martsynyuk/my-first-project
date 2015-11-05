@@ -301,12 +301,12 @@ class Contacts extends Controller
 		$mail = NULL;
 		$new_mail = NULL;
 		
-		if ( ! empty ( $post['mails'] ) && ! empty ( $_SESSION['mail'] ) && ! empty ( $post['add'] ) )
+		if ( ! empty ( $post['mails'] ) && ! empty ( $_COOKIE['mail'] ) && ! empty ( $post['add'] ) )
 		{
 			
-			$new_mail = implode ( ', ', array_diff ( explode ( ', ', $post['mails'] ), $_SESSION['mail'] ) ) ;
+			$new_mail = implode ( ', ', array_diff ( explode ( ', ', $post['mails'] ), explode(', ', $_COOKIE['mail']) ) ) ;
 			
-			unset ( $_SESSION ['mail'] );
+			unset ( $_COOKIE['mail'] );
 		}
 		
 		if ( ! empty ( $post['Select'] ) )
@@ -641,9 +641,11 @@ class Contacts extends Controller
 					$mail[] = $val;
 				}
 			}
-			$_SESSION['mail'] = array_unique ( $mail );
 			
-			$mail = implode ( ', ', array_unique ( $mail ) );
+			$mail = implode ( ', ', $mail );
+			
+			setcookie('mail', $mail , strtotime("12 hours"));
+			
 		}
 		
 		return $mail;

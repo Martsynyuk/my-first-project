@@ -12,6 +12,10 @@ Class User extends Controller
 			
 			$post = $this->post_controller();
 		}
+		else{
+			
+			$post = NULL;
+		}
 		
 		$loginUser = '';	
 
@@ -32,9 +36,9 @@ Class User extends Controller
 	public function logout ()
 	{
 			
-		unset ( $_SESSION ['id'] );
-		unset ( $_SESSION ['login'] );
-		unset ( $_SESSION ['mail'] );
+		unset ( $_SESSION['id'] );
+		unset ( $_SESSION['login'] );
+		unset ( $_COOKIE['mail'] );
 			
 		header ( 'Location: autorization' );
 	}
