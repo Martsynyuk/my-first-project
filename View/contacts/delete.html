@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>project</title>
+</head>
+<body>
+	<ul><?php if ( empty ( $_SESSION ['id'] ) ) { ?>
+		 
+		<?= '<li> <a href="user/autorization">Autorization</a> </li>' ?>
+		<?= '<li> <a href="user/registration">Registration</a> </li>' ?>
+		
+		<?php } else { ?>
+		
+		<?= '<li> <a href="/">Home</a> </li>' ?>
+		<?= '<li> <a href="user/logout">Logout</a> </li>' ?>
+		
+		<?php }; ?>	
+		
+		<?= ( ! empty ( $select ) && ! empty ( $id ) ) ?
+			
+			'<form name="delete" value="delete" method="POST" action="/contacts/delete/' . $id .'"></br>
+				you really want to delete - ' . $select['Firstname'] . ' ? </br></br>
+				<button name="del" value="Yes">Yes</button>
+				<button name="del" value="No">No</button>
+			</form>'
+		: '' ?>
+</body>
+</html>

@@ -261,12 +261,11 @@ class Contacts extends Controller
 				
 			$get['sort'] = 0 & $get['sortparam'] = 0 ;
 		}
-			
-		$user_contact = new Contacts ();
 		
-		$count_contacts = $user_contact->count_contacts($_SESSION['id']);
+		$count_contacts = $this->count_contacts($_SESSION['id']);
 			
 		$contacts = array ();
+		
 		$contacts = $this->return_contact ( $_SESSION ['id'], $page, $get['sort'], $get['sortparam'] );
 			
 		$count_for_pagin = $this->count_pages ( $_SESSION ['id'], $page );
@@ -435,22 +434,79 @@ class Contacts extends Controller
 	function delete ( $get )
 	{
 		
-		if ( ! empty ( $get['id'] ) )
+		$post = NULL;
+		
+		if ( ! empty ( $_POST ) )
 		{
 			
-			$protection = $this->contacts_defender ( $get['id'], $_SESSION ['id'] );
+			$post = $this->post_controller();
+		}
 		
-			if ( ! empty ( $protection )  )
-			{	
+		$select = NULL;
+		
+		if ( ! empty ( $get['id'] ) && (int)( $get['id'] ) >0 )
+		{
+			
+			$select = new Information();
+			
+			$select = $select->select ( 
+										$what = array(
+												'fields' => array(
+															
+														'Firstname'
+												),
+												'conditions' => array(
+												
+														'id' => $get['id'],
+												),
+												'limit' => array(
+												
+														'start' => '',
+														'end'=> ''
+												
+												)
+												
+										)
+					);
+			
+			if ( ! empty ( $post['del'] ) && $post['del'] === 'Yes')
+			{
+			
+				$protection = $this->contacts_defender ( $get['id'], $_SESSION ['id'] );
+			
+				if ( ! empty ( $protection ) )
+				{	
+					
+					$delete_contact = new Information ();
+							
+					$delete_contact->delete ( $get['id'] );
+		
+					header('Location: /');
+			
+				}
+			}
+			elseif ( $post['del'] === 'No' )
+			{
 				
-				$delete_contact = new Information ();
-						
-				$delete_contact->delete ( $get['id'] );
-	
 				header('Location: /');
-		
 			}
 		}
+		else{
+			
+			header('Location: /');
+		}
+		
+		$view = new View();
+		
+		foreach ( $select as $select => $val)
+		{
+			$select = $val;
+		}
+		
+		$view->set ( 'select', $select);
+		$view->set ( 'id', $get['id']);
+		
+		$view->render ( 'contacts', 'delete' );
 
 	}
 			
