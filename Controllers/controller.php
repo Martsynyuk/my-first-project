@@ -9,6 +9,10 @@ class Controller
 		require_once APP . '/Models/users.php';
 		require_once APP . '/Models/information.php';
 		require_once APP . '/Lib/View.php';
+		
+		$this->information = new Information();
+		$this->users  = new Users();
+		$this->view = new View();
 	}
 	
 	function contacts_defender ( $id, $user_id )

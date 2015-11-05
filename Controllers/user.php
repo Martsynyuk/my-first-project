@@ -25,12 +25,11 @@ Class User extends Controller
 			$loginUser = $this->login ( $post['login'], $post['password'] );
 		}
 			
-		$view = new View ();
 			
-		$view->set ( 'loginUser', $loginUser );
-		$view->set ( 'post', $post );
+		$this->view->set ( 'loginUser', $loginUser );
+		$this->view->set ( 'post', $post );
 			
-		$view->render ( 'users', 'autorization' );
+		$this-> view->render ( 'users', 'autorization' );
 	}
 		
 	public function logout ()
@@ -46,6 +45,8 @@ Class User extends Controller
 	public function registration ()
 	{
 		
+		$post = NULL;
+		
 		if ( ! empty ( $_POST ) )
 		{
 				
@@ -58,9 +59,8 @@ Class User extends Controller
 			if ( $post['password1'] === $post['password2'] ) 
 			{
 					
-				$registration = new Users();
 					
-				$user = $registration->select (
+				$user = $this->users->select (
 						
 										$what = array(
 												
@@ -102,7 +102,7 @@ Class User extends Controller
 				if (empty ( $user ) )
 				{
 						
-					$user = $registration->insert (
+					$user = $this->users->insert (
 							
 											$what = array(
 													
@@ -124,18 +124,14 @@ Class User extends Controller
 				
 			}
 		}
-			
-		$view= new View();	
 		
-		$view->set ( 'post', $post );
+		$this->view->set ( 'post', $post );
 			
-		$view->render ( 'users', 'registration' );
+		$this->view->render ( 'users', 'registration' );
 	}
 		
 	function login ( $login, $password )
 	{
-			
-		$login_user = new Users ();
 			
 		$what = array(
 				
@@ -169,7 +165,7 @@ Class User extends Controller
 				
 			);
 			
-		$login_user = $login_user->select ( $what );
+		$login_user = $this->users->select ( $what );
 			
 		if ( $login_user === 'No connect' )
 		{

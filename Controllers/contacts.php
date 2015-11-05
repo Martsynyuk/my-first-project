@@ -42,9 +42,7 @@ class Contacts extends Controller
 				$phone = $post['Cell'];
 			}
 				
-			$add_user_contact = new Information();
-				
-			$new_contact = $add_user_contact->insert (
+			$new_contact = $this->information->insert (
 				
 											$what = array(
 													
@@ -76,15 +74,13 @@ class Contacts extends Controller
 					header('Location: contacts/addcontact');
 			}
 		}
-		
-		$view = new View ();
 			
 		if( ! empty ( $phone ) )
 		{
-			$view->set ( 'phone', $phone );
+			$this->view->set ( 'phone', $phone );
 		}
 			
-			$view->render ( 'contacts', 'add' );
+			$this->view->render ( 'contacts', 'add' );
 		}
 		
 	public function edit ( $get )
@@ -96,11 +92,9 @@ class Contacts extends Controller
 			$post = $this->post_controller();
 		}
 		
-		$this->contacts_defender ( $get['id'], $_SESSION ['id'] );
+		$this->contacts_defender ( $get['id'], $_SESSION ['id'] );;
 				
-		$select_user_contacts = new Information ();
-				
-		$contactUser = $select_user_contacts->select(
+		$contactUser = $this->information->select(
 				
 											$what = array(
 													
@@ -179,9 +173,7 @@ class Contacts extends Controller
 				}
 			}
 				
-			$update_contact = new Information ();
-				
-			$update_contact->update (
+			$this->information->update (
 					
 								$what = array(
 										
@@ -221,18 +213,16 @@ class Contacts extends Controller
 				header ( 'Location: /' );
 		}
 			
-		$view = new View ();
-			
-		$view->set ( 'contactUser', $contactUser );
-		$view->set ( 'get', $get );
+		$this->view->set ( 'contactUser', $contactUser );
+		$this->view->set ( 'get', $get );
 
 		if( ! empty ( $phone ) )
 		{
 			
-			$view->set ( 'phone', $phone );
+			$this->view->set ( 'phone', $phone );
 		}
 			
-		$view->render ( 'contacts', 'edit' );
+		$this->view->render ( 'contacts', 'edit' );
 			
 		return;
 	}
@@ -273,18 +263,16 @@ class Contacts extends Controller
 		
 		$i = 1;
 		($page > 1) ? $i = $page * ROWLIMIT - ROWLIMIT + 1 : '';  // to number of contacts
+		
+		$this->view->set ( 'count_contacts', $count_contacts );
+		$this->view->set ( 'count_for_pagin', $count_for_pagin );
+		$this->view->set ( 'page', $page );
+		$this->view->set ( 'count_pages', $count_pages );
+		$this->view->set ( 'contacts', $contacts );
+		$this->view->set ( 'i', $i);
+		$this->view->set ( 'get[\'sort\']', $get['sort']);
 			
-		$view = new View();
-			
-		$view->set ( 'count_contacts', $count_contacts );
-		$view->set ( 'count_for_pagin', $count_for_pagin );
-		$view->set ( 'page', $page );
-		$view->set ( 'count_pages', $count_pages );
-		$view->set ( 'contacts', $contacts );
-		$view->set ( 'i', $i);
-		$view->set ( 'get[\'sort\']', $get['sort']);
-			
-		$view->render ( 'contacts', 'index' );
+		$this->view->render ( 'contacts', 'index' );
 		
 	}
 		
@@ -340,31 +328,26 @@ class Contacts extends Controller
 			
 		$count_for_pagin = $this->count_pages ( $_SESSION ['id'], $page );
 		$count_pages = ceil ( $this->count_contacts ( $_SESSION ['id'] ) / 5 );
+	
+		$this->view->set ( 'count_for_pagin', $count_for_pagin );
+		$this->view->set ( 'page', $page );
+		$this->view->set ( 'count_pages', $count_pages );
+		$this->view->set ( 'contacts', $contacts );
+		$this->view->set ( 'i', $i);
+		$this->view->set ( 'get[\'sort\']', $get['sort']);
+		$this->view->set ( 'mail', $mail);
+		$this->view->set ( 'new_mail', $new_mail);
 			
-			
-		$view = new View ();
-			
-		$view->set ( 'count_for_pagin', $count_for_pagin );
-		$view->set ( 'page', $page );
-		$view->set ( 'count_pages', $count_pages );
-		$view->set ( 'contacts', $contacts );
-		$view->set ( 'i', $i);
-		$view->set ( 'get[\'sort\']', $get['sort']);
-		$view->set ( 'mail', $mail);
-		$view->set ( 'new_mail', $new_mail);
-			
-		$view->render ( 'contacts', 'select' );
+		$this->view->render ( 'contacts', 'select' );
 	}
 		
 	public function view ( $get )
 	{	
-		
-		$contact_view = new Information ();
 
 		if ( ( int ) ($get['id']) > 0 )
 		{
 				
-			$contactUser = $contact_view->select (	
+			$contactUser = $this->information->select (	
 					
 											$what = array(
 													
@@ -421,12 +404,10 @@ class Contacts extends Controller
 				
 			header ( 'Location: /' );
 		}
-		
-		$view = new View ();
+	
+		$this->view->set ( 'contactUser', $contactUser );
 			
-		$view->set ( 'contactUser', $contactUser );
-			
-		$view->render ( 'contacts', 'view' );
+		$this->view->render ( 'contacts', 'view' );
 			
 		return;
 	}
@@ -447,9 +428,7 @@ class Contacts extends Controller
 		if ( ! empty ( $get['id'] ) && (int)( $get['id'] ) >0 )
 		{
 			
-			$select = new Information();
-			
-			$select = $select->select ( 
+			$select = $this->information->select ( 
 										$what = array(
 												'fields' => array(
 															
@@ -496,26 +475,22 @@ class Contacts extends Controller
 			header('Location: /');
 		}
 		
-		$view = new View();
-		
 		foreach ( $select as $select => $val)
 		{
 			$select = $val;
 		}
 		
-		$view->set ( 'select', $select);
-		$view->set ( 'id', $get['id']);
+		$this->view->set ( 'select', $select);
+		$this->view->set ( 'id', $get['id']);
 		
-		$view->render ( 'contacts', 'delete' );
+		$this->view->render ( 'contacts', 'delete' );
 
 	}
 			
 	function count_contacts ()
 	{	
-		
-		$count_contacts = new Information ();
 			
-		$res = $count_contacts->select(
+		$res = $this->information->select(
 				
 									$what = array(
 											
@@ -623,10 +598,8 @@ class Contacts extends Controller
 		else {
 			header ( 'Location: /' );
 		}
-
-		$return_contact = new Information ();
 			
-		$result = $return_contact->select (
+		$result = $this->information->select (
 				
 									$what = array(
 											
