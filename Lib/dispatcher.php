@@ -52,7 +52,7 @@ class Dispatcher {
 				
 				if ( $arg[1] === 'up' || $arg[1] === 'down' )
 				{
-					
+					$get['sort_all'] = $val;
 					$get['sort'] = $arg[1];
 				}
 				if ( $arg[2] === 'FirstName' || $arg[2] === 'LastName' )

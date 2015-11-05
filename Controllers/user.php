@@ -4,18 +4,13 @@
 Class User extends Controller
 {     
 	
+	public $model = 'Users';
+	
 	public function autorization ()
 	{
-		
-		if ( ! empty ( $_POST ) )
-		{
+
 			
-			$post = $this->post_controller();
-		}
-		else{
-			
-			$post = NULL;
-		}
+		if ( ! $post = $this->post_controller());
 		
 		$loginUser = '';	
 
@@ -44,15 +39,9 @@ Class User extends Controller
 		
 	public function registration ()
 	{
-		
-		$post = NULL;
-		
-		if ( ! empty ( $_POST ) )
-		{
 				
-			$post = $this->post_controller();
-		}
-		
+		if ( ! $post = $this->post_controller());
+
 		if( ! empty ( $post['login'] ) && ! empty ( $post['password1'] ) && ! empty ( $post['password2'] ) )
 		{	
 
@@ -60,7 +49,7 @@ Class User extends Controller
 			{
 					
 					
-				$user = $this->users->select (
+				$user = $this->model->select (
 						
 										$what = array(
 												
@@ -102,7 +91,7 @@ Class User extends Controller
 				if (empty ( $user ) )
 				{
 						
-					$user = $this->users->insert (
+					$user = $this->model->insert (
 							
 											$what = array(
 													
@@ -165,7 +154,7 @@ Class User extends Controller
 				
 			);
 			
-		$login_user = $this->users->select ( $what );
+		$login_user = $this->model->select ( $what );
 			
 		if ( $login_user === 'No connect' )
 		{

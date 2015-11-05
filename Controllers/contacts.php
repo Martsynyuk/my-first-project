@@ -7,14 +7,13 @@
  
 class Contacts extends Controller
 {
-
+	
+	public $model = 'Information';
+	
 	public function  add ()
 	{
-		if ( ! empty ( $_POST ) )
-		{
 				
-			$post = $this->post_controller();
-		}
+		if ( ! $post = $this->post_controller());
 			
 		if ( ! empty ( $post['FirstName'] ) ) 
 		{
@@ -42,7 +41,7 @@ class Contacts extends Controller
 				$phone = $post['Cell'];
 			}
 				
-			$new_contact = $this->information->insert (
+			$new_contact = $this->model->insert (
 				
 											$what = array(
 													
@@ -86,15 +85,11 @@ class Contacts extends Controller
 	public function edit ( $get )
 	{
 		
-		if ( ! empty ( $_POST ) )
-		{
-				
-			$post = $this->post_controller();
-		}
+		if ( ! $post = $this->post_controller());
 		
 		$this->contacts_defender ( $get['id'], $_SESSION ['id'] );;
 				
-		$contactUser = $this->information->select(
+		$contactUser = $this->model->select(
 				
 											$what = array(
 													
@@ -173,7 +168,7 @@ class Contacts extends Controller
 				}
 			}
 				
-			$this->information->update (
+			$this->model->update (
 					
 								$what = array(
 										
@@ -235,7 +230,7 @@ class Contacts extends Controller
 			
 			header ( 'Location: user/autorization' );
 		}
-			
+
 		if ( empty ( $get['page'] ) )
 		{
 			
@@ -249,7 +244,9 @@ class Contacts extends Controller
 		if ( empty ( $get['sort'] ) && empty ( $get['sortparam'] ) )
 		{
 				
-			$get['sort'] = 0 & $get['sortparam'] = 0 ;
+			$get['sort'] = 0;
+			$get['sortparam'] = 0;
+			$get['sort_all'] = 0;
 		}
 		
 		$count_contacts = $this->count_contacts($_SESSION['id']);
@@ -270,7 +267,7 @@ class Contacts extends Controller
 		$this->view->set ( 'count_pages', $count_pages );
 		$this->view->set ( 'contacts', $contacts );
 		$this->view->set ( 'i', $i);
-		$this->view->set ( 'get[\'sort\']', $get['sort']);
+		$this->view->set ( 'get[\'sort_all\']', $get['sort_all']);
 			
 		$this->view->render ( 'contacts', 'index' );
 		
@@ -279,11 +276,7 @@ class Contacts extends Controller
 	public function select ( $get )
 	{
 		
-		if ( ! empty ( $_POST ) )
-		{
-				
-			$post = $this->post_controller();
-		}
+		if ( ! $post = $this->post_controller());
 		
 		$mail = NULL;
 		$new_mail = NULL;
@@ -347,7 +340,7 @@ class Contacts extends Controller
 		if ( ( int ) ($get['id']) > 0 )
 		{
 				
-			$contactUser = $this->information->select (	
+			$contactUser = $this->model->select (	
 					
 											$what = array(
 													
@@ -415,20 +408,14 @@ class Contacts extends Controller
 	function delete ( $get )
 	{
 		
-		$post = NULL;
-		
-		if ( ! empty ( $_POST ) )
-		{
-			
-			$post = $this->post_controller();
-		}
+		if ( ! $post = $this->post_controller());
 		
 		$select = NULL;
 		
 		if ( ! empty ( $get['id'] ) && (int)( $get['id'] ) >0 )
 		{
 			
-			$select = $this->information->select ( 
+			$select = $this->model->select ( 
 										$what = array(
 												'fields' => array(
 															
@@ -455,10 +442,8 @@ class Contacts extends Controller
 			
 				if ( ! empty ( $protection ) )
 				{	
-					
-					$delete_contact = new Information ();
 							
-					$delete_contact->delete ( $get['id'] );
+					$this->model->delete ( $get['id'] );
 		
 					header('Location: /');
 			
@@ -490,7 +475,7 @@ class Contacts extends Controller
 	function count_contacts ()
 	{	
 			
-		$res = $this->information->select(
+		$res = $this->model->select(
 				
 									$what = array(
 											
@@ -599,7 +584,7 @@ class Contacts extends Controller
 			header ( 'Location: /' );
 		}
 			
-		$result = $this->information->select (
+		$result = $this->model->select (
 				
 									$what = array(
 											
@@ -650,11 +635,7 @@ class Contacts extends Controller
 	function add_letter ()
 	{
 		
-		if ( ! empty ( $_POST ) )
-		{
-				
-			$post = $this->post_controller();
-		}
+		if ( ! $post = $this->post_controller());
 		
 		$mail = array();
 		

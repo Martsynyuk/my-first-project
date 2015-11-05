@@ -10,8 +10,7 @@ class Controller
 		require_once APP . '/Models/information.php';
 		require_once APP . '/Lib/View.php';
 		
-		$this->information = new Information();
-		$this->users  = new Users();
+		$this->model = new $this->model();
 		$this->view = new View();
 	}
 	
@@ -77,14 +76,21 @@ class Controller
 	
 	function post_controller ()
 	{	
-		$post = array();
-		
-		foreach( $_POST as $key => $val )
+		if ( ! empty ( $_POST ) )
 		{
+			$post = array();
 			
-			$post[$key] = htmlspecialchars ( trim ( $val ) );
-		}	
+			foreach( $_POST as $key => $val )
+			{
 				
-		return $post;
+				$post[$key] = htmlspecialchars ( trim ( $val ) );
+			}
+			return $post;
+		}		
+		else{
+			
+			return false;
+		}
+		
 	}
 }
