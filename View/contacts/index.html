@@ -26,18 +26,24 @@
 			<th></th>
 			<th>First Name
 				<a 
-					href="<?= 'sort-up-FirstName'?>" style="margin: 0 10px;">&#8593 
+					href="<?=  ( $page > 1 ) ? '/sort-up-FirstName/page-' . $page : '/sort-up-FirstName/' ; 							
+													
+							?>" style="margin: 0 10px;">&#8593 
 				</a>
 				 <a
-					href="<?= 'sort-down-FirstName'?>">&#8595 
+					href="<?= ( $page > 1 ) ? '/sort-down-FirstName/page-' . $page : '/sort-down-FirstName/';
+					
+							?>">&#8595 
 				</a>
 			</th>
 			<th>Last Name
 				<a 
-					href="<?= 'sort-up-LastName'?>" style="margin: 0 10px;">&#8593 
+					href="<?= ( $page > 1 ) ? '/sort-up-LastName/page-' . $page : '/sort-up-LastName/';
+					
+							?>" style="margin: 0 10px;">&#8593 
 				</a> 
 				<a
-					href="<?= 'sort-down-LastName'?>">&#8595 
+					href="<?= ( $page > 1 ) ? '/sort-down-LastName/page-' . $page : '/sort-down-LastName/'; ?>">&#8595 
 				</a>
 			</th>
 			<th>E-mail</th>
