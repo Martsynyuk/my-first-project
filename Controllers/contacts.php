@@ -13,7 +13,7 @@ class Contacts extends Controller
 	public function  add ()
 	{
 				
-		if ( ! $post = $this->post_controller() );
+		$post = $this->post_controller();
 			
 		if ( ! empty ( $post['FirstName'] ) ) 
 		{
@@ -85,8 +85,10 @@ class Contacts extends Controller
 	public function edit ( $get )
 	{
 		
-		if ( ! $post = $this->post_controller());
+		$post = $this->post_controller ();
 		
+		$get = $this->parse_argument( $get );
+
 		$this->contacts_defender ( $get['id'], $_SESSION ['id'] );;
 				
 		$contactUser = $this->model->select(
@@ -223,7 +225,11 @@ class Contacts extends Controller
 	}
 		
 	public function index ( $get )
-	{
+	{	
+		
+		$get = $this->parse_argument( $get );
+		
+		//var_dump($get);
 		
 		if ( empty ( $_SESSION ['id'] ) )
 		{
@@ -276,66 +282,67 @@ class Contacts extends Controller
 	public function select ( $get )
 	{
 		
-		if ( ! $post = $this->post_controller());
+		$post = $this->post_controller ();	
 		
-		$mail = NULL;
-		$new_mail = NULL;
-		
-		if ( ! empty ( $post['mails'] ) && ! empty ( $_COOKIE['mail'] ) && ! empty ( $post['add'] ) )
+		$get = $this->parse_argument($get);
+
+		if ( ! empty ($post['Select']) )
 		{
 			
-			$new_mail = implode ( ', ', array_diff ( explode ( ', ', $post['mails'] ), explode(', ', $_COOKIE['mail']) ) ) ;
-			
-			unset ( $_COOKIE['mail'] );
-		}
-		
-		if ( ! empty ( $post['Select'] ) )
-		{
-			
-			$mail = $this->add_letter();			
-		}		
-		
-		if ( empty ( $get['page'] ) ) 
-		{
-			
-			$page = 1;
+			$this->letter();
 		}
 		else{
 			
-			$page = $get['page'];
+			if ( empty ( $get['all'] ) )
+			{
+					
+				$get['all'] = NULL;
+			}
+			
+			if ( empty ( $get['page'] ) )
+			{
+					
+				$page = 1;
+			}
+			else{
+					
+				$page = $get['page'];
+			}
+				
+			if ( empty ( $get['sort'] ) && empty ( $get['sortparam'] ) )
+			{
+					
+				$get['sort'] = 0;
+				$get['sortparam'] = 0;
+			}
+			
+			$i = 1;
+			
+			($page > 1) ? $i = $page * ROWLIMIT - ROWLIMIT + 1 : '';  // to number of contacts
+				
+			$contacts = array ();
+			$contacts = $this->return_contact ( $_SESSION ['id'], $page, $get['sort'], $get['sortparam'] );
+				
+			$count_for_pagin = $this->count_pages ( $_SESSION ['id'], $page );
+			$count_pages = ceil ( $this->count_contacts ( $_SESSION ['id'] ) / 5 );
+			
+			$this->view->set ( 'count_for_pagin', $count_for_pagin );
+			$this->view->set ( 'page', $page );
+			$this->view->set ( 'count_pages', $count_pages );
+			$this->view->set ( 'contacts', $contacts );
+			$this->view->set ( 'i', $i);
+			$this->view->set ( 'get[\'sort\']', $get['sort']);
+			$this->view->set ( 'all', $get['all'] );
+				
+			$this->view->render ( 'contacts', 'select' );
 		}
 			
-		if ( empty ( $get['sort'] ) && empty ( $get['sortparam'] ) )
-		{
-			
-			$get['sort'] = 0;
-			$get['sortparam'] = 0;
-		}
-		
-		$i = 1;
-		
-		($page > 1) ? $i = $page * ROWLIMIT - ROWLIMIT + 1 : '';  // to number of contacts
-			
-		$contacts = array ();
-		$contacts = $this->return_contact ( $_SESSION ['id'], $page, $get['sort'], $get['sortparam'] );
-			
-		$count_for_pagin = $this->count_pages ( $_SESSION ['id'], $page );
-		$count_pages = ceil ( $this->count_contacts ( $_SESSION ['id'] ) / 5 );
-	
-		$this->view->set ( 'count_for_pagin', $count_for_pagin );
-		$this->view->set ( 'page', $page );
-		$this->view->set ( 'count_pages', $count_pages );
-		$this->view->set ( 'contacts', $contacts );
-		$this->view->set ( 'i', $i);
-		$this->view->set ( 'get[\'sort\']', $get['sort']);
-		$this->view->set ( 'mail', $mail);
-		$this->view->set ( 'new_mail', $new_mail);
-			
-		$this->view->render ( 'contacts', 'select' );
 	}
 		
 	public function view ( $get )
 	{	
+		
+		$get = $this->parse_argument ( $get );
 
 		if ( ( int ) ($get['id']) > 0 )
 		{
@@ -408,7 +415,9 @@ class Contacts extends Controller
 	function delete ( $get )
 	{
 		
-		if ( ! $post = $this->post_controller());
+		$get = $this->parse_argument( $get );
+		
+		$post = $this->post_controller ();
 		
 		$select = NULL;
 		
@@ -632,33 +641,70 @@ class Contacts extends Controller
 		return $contacts;
 	}
 	
-	function add_letter ()
+	function letter ()
 	{
+
+		$post = $this->post_controller ();
 		
-		if ( ! $post = $this->post_controller());
-		
-		$mail = array();
+		$mail = NULL;
+		$new_mail = NULL;
 		
 		if ( count ( $post ) > 1 && ! empty ( $post['Select'] ) )
-		{	
-			
+		{
+	
 			foreach ( $post as $key => $val )
 			{
 					
 				if ( is_int ( $key ) )
 				{
-						
+		
 					$mail[] = $val;
 				}
 			}
-			
+				
 			$mail = implode ( ', ', $mail );
-			
-			setcookie('mail', $mail , strtotime("12 hours"));
-			
+				
+			setcookie('mail', $mail , strtotime("12 hours"), '/');
+				
 		}
 		
-		return $mail;
+		if ( ! empty ( $post['mails'] ) && ! empty ( $_COOKIE['mail'] ) && ! empty ( $post['add'] ) )
+		{
+			
+			$new_mail = implode ( ', ', array_diff ( explode ( ', ', $post['mails'] ), explode(', ', $_COOKIE['mail']) ) ) ;
+		
+			setcookie('mail', $new_mail , strtotime("12 hours"), '/');
+		}
+		
+		if ( ! empty ( $post['Yes'] ) )
+		{	
+			
+			foreach ( explode(', ', $_COOKIE['mail']) as $key => $mail)
+			{
+				
+				$this->model->insert (
+								$what = array(
+										'users_id' => $_SESSION['id'],
+										'FirstName' => 'somenew',
+										'Email' => $mail
+								)					
+						);
+			}
+			
+			unset ( $_COOKIE['mail'] );
+			
+			header ( 'Location: / ');
+		} 
+		elseif ( ! empty ( $post['No'] ) )
+		{
+			
+			header ( 'Location: / ');
+		}
+		
+		$this->view->set ( 'mail', $mail );
+		$this->view->set ( 'new_mail', $new_mail );
+		
+		$this->view->render ( 'contacts', 'letter' );
 	}
 
 }

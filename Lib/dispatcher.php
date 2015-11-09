@@ -1,6 +1,5 @@
 <?php
 
-
 class Dispatcher {	
 	
 	function __construct()
@@ -27,53 +26,18 @@ class Dispatcher {
 			header ( 'Location: /error_pages/404.html', 404 );
 		}
 		
-		if ( ! empty  ( $arguments[1] ) )            
+		if( $path == '/' || count( explode('-', $arguments[0] ) ) > 1 )
 		{
-			
-			$get = explode ( '?', $arguments[1] );
-			$arguments[1] = $get[0];
-		}
-			
-		$get = NULL;
-		
-		foreach ( $arguments as $key => $val )
-		{
-			
-			if( ( int )( $val ) )
+			for ( $i=0; $i<2 ; $i++ )
 			{
-				
-				$get['id'] = $val;
-			}
-			
-			$arg = explode ( '-', $val );
-			
-			if ( $arg[0] === 'sort' )
-			{
-				
-				if ( $arg[1] === 'up' || $arg[1] === 'down' )
+				if ( ! empty ( $arguments[$i] ) )
 				{
 					
-					$get['sort_all'] = $val;
-					$get['sort'] = $arg[1];
+					$arguments[$i+2] = $arguments[$i];
 				}
 				
-				if ( $arg[2] === 'FirstName' || $arg[2] === 'LastName' )
-				{
-					
-					$get['sortparam'] = $arg[2];
-				}
 			}
 			
-			if ( $arg[0] === 'page' )
-			{
-				
-				$get['page'] = $arg[1];
-			}
-		}
-		
-		if(  empty ( $arguments[0] ) || $path == '/' || count( explode('-', $arguments[0] ) ) > 1 )
-		{
-				
 			$arguments [1] = 'index';
 			$arguments [0] = 'contacts';
 		}
@@ -82,8 +46,8 @@ class Dispatcher {
 
 		$load = new $class;	
 		
-		$variables = $load->$arguments[1]( $get );
-
+		$variables = $load->$arguments[1]( $arguments );
+	
 		return;
 	}
 	
@@ -91,33 +55,7 @@ class Dispatcher {
 
 function autoload ( $classname )
 {	
-	/*var_dump($classname);
-	$search = array(
-			
-			'Controller',	// Controllers	
-			'Contacts',
-			'User',
-			'View',			// Lib
-			'Model',		// Models
-			'Information',			
-			//'Users'
-	);
-	
-	$replace = array(	
-			
-			'controller-Controllers',	// Controllers 	
-			'contacts-Controllers',
-			'user-Controllers',
-			'view-Lib',					// Lib
-			'model-Models',				// Models
-			'information-Models',			
-			//'users-Models'		
-	);
-	
-	$class = explode ( '-', str_ireplace ( $search, $replace, $classname ) );
-	
-	require_once APP . '/' . $class[1] . '/' .$class[0] . '.php';
-	require_once APP . '/Models/users.php';*/
+
 }
 
 spl_autoload_register('autoload');

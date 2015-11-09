@@ -8,9 +8,8 @@ Class User extends Controller
 	
 	public function autorization ()
 	{
-
 			
-		if ( ! $post = $this->post_controller());
+		$post = $this->post_controller ();
 		
 		$loginUser = '';	
 
@@ -40,7 +39,7 @@ Class User extends Controller
 	public function registration ()
 	{
 				
-		if ( ! $post = $this->post_controller());
+		$post = $this->post_controller ();
 
 		if( ! empty ( $post['login'] ) && ! empty ( $post['password1'] ) && ! empty ( $post['password2'] ) )
 		{	

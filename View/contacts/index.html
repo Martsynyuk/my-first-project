@@ -60,9 +60,9 @@
 			<td><?= $contact['Email']; ?></td>
 			<td><?= $contact['Telephone']; ?></td>
 			<td>
-				<a href="<?= 'contacts/edit/' . $contact['id']?>">edit</a> 
-				<a href="<?= 'contacts/view/' . $contact['id']?>">view</a> 
-				<a href="<?= 'contacts/delete/' . $contact['id'] ?>">delete</a>
+				<a href="<?= '/contacts/edit/' . $contact['id']?>">edit</a> 
+				<a href="<?= '/contacts/view/' . $contact['id']?>">view</a> 
+				<a href="<?= '/contacts/delete/' . $contact['id'] ?>">delete</a>
 			</td>
 		</tr>
 		<?php $i++;?>	
@@ -72,9 +72,9 @@
 								
 			</table>
 	</br>
-	<a href="contacts/add/">Add contact</a>
-	</br>
-	<a href="contacts/select/">Select contact</a>
+	<a href="/contacts/add/">Add contact</a></br>
+	<a href="/contacts/select/">Select contact</a></br>
+	<a href="/contacts/letter/">letter</a>
 	
 		<?php } else { ?>
 		
