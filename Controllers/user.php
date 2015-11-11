@@ -2,47 +2,53 @@
 
 
 Class User extends Controller
-{
-		
+{     
+	
+	public $model = 'Users';
+	
 	public function autorization ()
 	{
 			
+		$post = $this->post_controller ();
+		
 		$loginUser = '';	
 
-		if ( ! empty ( $_POST ['login'] ) && ! empty ( $_POST ['password'] ) )
+		if ( ! empty ( $post['login'] ) && ! empty ( $post['password'] ) )
 		{
 
-			$loginUser = $this->login ( $_POST ['login'], $_POST ['password'] );
+			$loginUser = $this->login ( $post['login'], $post['password'] );
 		}
 			
-		$view = new View ();
 			
-		$view->set ( 'loginUser', $loginUser );
+		$this->view->set ( 'loginUser', $loginUser );
+		$this->view->set ( 'post', $post );
 			
-		$view->render ( 'user_autorization' );
+		$this-> view->render ( 'users', 'autorization' );
 	}
 		
 	public function logout ()
 	{
 			
-		unset ( $_SESSION ['id'] );
-		unset ( $_SESSION ['login'] );
+		unset ( $_SESSION['id'] );
+		unset ( $_SESSION['login'] );
+		unset ( $_COOKIE['mail'] );
 			
-		header ( 'Location: /user/autorization' );
+		header ( 'Location: autorization' );
 	}
 		
 	public function registration ()
 	{
+				
+		$post = $this->post_controller ();
 
-		if( ! empty ( $_POST['login'] ) && ! empty ( $_POST['password1'] ) && ! empty ( $_POST['password2'] ) )
+		if( ! empty ( $post['login'] ) && ! empty ( $post['password1'] ) && ! empty ( $post['password2'] ) )
 		{	
 
-			if ( $_POST['password1'] === $_POST['password2'] ) 
+			if ( $post['password1'] === $post['password2'] ) 
 			{
 					
-				$registration = new Users ();
 					
-				$user = $registration->select (
+				$user = $this->model->select (
 						
 										$what = array(
 												
@@ -54,7 +60,7 @@ Class User extends Controller
 												
 												'conditions' => array(
 														
-															'login' => $_POST['login']
+															'login' => $post['login']
 														
 												),
 												
@@ -76,21 +82,20 @@ Class User extends Controller
 					
 				if ( $user === 'No connect' )
 				{
-					echo $user;
 						
-					header('Location: /user/regictration');
+					header('Location: user/regictration');
 				}
 					
 				
 				if (empty ( $user ) )
 				{
 						
-					$user = $registration->insert (
+					$user = $this->model->insert (
 							
 											$what = array(
 													
-													'password' => md5( $_POST['password1'] . 'lyly' ) , // mast be int its importent
-													'login' => $_POST['login']
+													'password' => md5( $post['password1'] . 'lyly' ) , // mast be int its importent
+													'login' => $post['login']
 											
 											)
 																		
@@ -100,23 +105,21 @@ Class User extends Controller
 				}
 				else{
 						
-					echo 'User already exists ';
 				}
 			} 
 			else {
-				echo 'Bad login';
+
+				
 			}
 		}
+		
+		$this->view->set ( 'post', $post );
 			
-		$view= new View();		
-			
-		$view->render ( 'user_registration' );
+		$this->view->render ( 'users', 'registration' );
 	}
 		
 	function login ( $login, $password )
 	{
-			
-		$login_user = new Users ();
 			
 		$what = array(
 				
@@ -147,23 +150,28 @@ Class User extends Controller
 								'end'=> ''
 							
 					)
+				
 			);
 			
-		$login_user = $login_user->select ( $what );
+		$login_user = $this->model->select ( $what );
 			
 		if ( $login_user === 'No connect' )
 		{
 				
-			echo ' -' . $login_user;
 		}
 		else{
 
 			if ( !empty ( $login_user ) )
-			{
-							
-				$_SESSION ['id'] = $login_user ['0']['id'];
-				$_SESSION ['login'] = $login_user ['0']['login'];
-		
+			{	
+				foreach ($login_user as $login_user => $val )
+				{
+					
+					$login_user = $val;
+				}
+
+				$_SESSION ['id'] = $login_user['id'];
+				$_SESSION ['login'] = $login_user['login'];
+					
 				header ( 'Location: /' );
 			}
 		}

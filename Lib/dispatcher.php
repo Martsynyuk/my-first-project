@@ -1,7 +1,14 @@
 <?php
 
-
 class Dispatcher {	
+	
+	function __construct()
+	{
+		require_once APP . '/Controllers/controller.php';
+		require_once APP . '/Controllers/contacts.php';
+		require_once APP . '/Controllers/user.php';
+		require_once APP . '/Lib/View.php';
+	}
 	
 	public function dispatch ( $path ) 
 	{
@@ -13,32 +20,37 @@ class Dispatcher {
 		}
 		
 		$arguments = explode ( '/', ltrim ( $path, '/' ) );
-		
-		if ( ! empty  ($arguments[1] ) )
-		{
-			
-			$get = explode ( '?', $arguments[1] );
-			$arguments[1] = $get[0];
-		}
-		
+
 		if ( empty ( $arguments ) )
 		{
-			
+				
 			header ( 'Location: /error_pages/404.html', 404 );
 		}
 		
-		if ($path == '/')
+		$count = count($arguments);
+		
+		if( $path == '/' || count( explode('-', $arguments[0] ) ) > 1 )
 		{
-			$arguments [0] = 'contacts';
+			for ( $i=0; $i < $count ; $i++ )
+			{
+				if ( ! empty ( $arguments[$i] ) )
+				{
+					
+					$arguments[$i+2] = $arguments[$i];
+				}
+				
+			}
+			
 			$arguments [1] = 'index';
+			$arguments [0] = 'contacts';
 		}
 		
 		$class = ucfirst ( $arguments[0] );
 
 		$load = new $class;	
 		
-		$load->$arguments[1]();
-		
-		return;
+		$variables = $load->$arguments[1]( $arguments );
+	
 	}
+	
 }

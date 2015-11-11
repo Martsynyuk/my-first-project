@@ -1,7 +1,8 @@
 <?php
 
 
-Class View {
+Class View
+{
 		
 	private $var = array();
 		
@@ -11,28 +12,21 @@ Class View {
 		$this->var[$name] = $value; 
 	} 
 		
-	public function render ( $view )
+	public function render ( $dir, $file_name )
 	{
 			
 		ob_start();
 			
 		extract($this->var);
-			
-		switch ($view)
+
+		if ( file_exists(APP . '/View/' . $dir . '/' . $file_name . '.html') )
 		{
 			
-			case file_exists(APP . '/View/contacts/' . $view . '.html'):
-					
-				include_once APP . '/View/contacts/' . $view . '.html';
-				break;
-					
-			case file_exists(APP . '/View/users/' . $view . '.html');
-				
-				include_once APP . '/View/users/' . $view . '.html';
-				break;
+			include_once APP . '/View/' . $dir . '/' . $file_name . '.html';
 		}
 			
 		echo ob_get_clean();
+		
 	}
 		
 }

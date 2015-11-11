@@ -26,11 +26,23 @@ Class Model implements For_model
 	* @return ArrayObject $mysqli
 	* 
 	*/
+	
+	function __construct()
+	{
 		
+		$this->mysqli = $this->conect( HOST, DB_NAME, USER_NAME, PASSWORD );
+	}
+	
+	function __destruct()
+	{
+		
+		$this->disconect($this->mysqli);
+	}
+	
 	function conect ( $host, $db_name, $user_name, $password )
 	{			
 			
-		$mysqli = @new mysqli ( $host, $user_name, $password, $db_name );
+		$mysqli = new mysqli ( $host, $user_name, $password, $db_name );
 			
 		if ( $mysqli->connect_errno ) 
 		{
@@ -38,8 +50,7 @@ Class Model implements For_model
 							
 		}
 
-		return $mysqli;
-				
+		return $mysqli;			
 	}
 		
 	/**
@@ -53,10 +64,8 @@ Class Model implements For_model
 	* 
 	*/
 		
-	function disconect()
+	function disconect($mysqli)
 	{
-			
-		$mysqli = new mysqli();
 			
 		mysqli_close($mysqli);
 	}
@@ -103,75 +112,65 @@ Class Model implements For_model
 		
 	function select ( $what )
 	{
-		$mysqli = $this->conect ( HOST, DB_NAME, USER_NAME, PASSWORD );
-			
-		if ( $mysqli->connect_errno ) 
-		{
 					
-			$result = 'No connect';			
-		}
-		else{
-						
-				$this->disconect ();
+			if( ! empty( $what['fields'] ) )
+			{
 					
-				if( ! empty( $what['fields']) )
-				{
-					
-					$fields = implode ( ', ', $what['fields'] );
-				}
-				else{
-							
-					$fields = '*';
-				}
-						
-				$sql = 'SELECT ' . $fields . ' FROM  '. $this->table;
-						
-				if( ! empty ( $what['conditions']) )
-				{		
-							
-					$where = '';
-						
-					foreach ( $what['conditions'] as $key => $value )
-					{
-			
-						$where= $where . ' AND ' .  $key . '=\'' . $value . '\'';				
-					}
-							
-					$where = ltrim ( $where, ' AND' );
-								
-					$sql = $sql . ' WHERE  ' . $where ;
-			
-				}
-						
-				if ( ! empty( $what['order']['by'] ) && ! empty( $what['order']['direction']) )
-				{
-						
-					$sql = $sql . ' ORDER BY ' . $what['order']['by'] . ' ' . $what['order']['direction'] ;
-				}
-				elseif( ! empty ( $what['order']['by']) )
-				{
-					
-					$sql = $sql . ' ORDER BY ' . $what['order']['by'] ;
-				}
-						
-				if( ! empty ( $what['limit']['start'] ) or $what['limit']['start'] == 0 && ! empty ( $what['limit']['end']) )
-				{
-						
-					$sql = $sql . ' LIMIT ' . $what['limit']['start'] . ',' . $what['limit']['end'];
-				}
-						
-				$sql = $sql . ' ;' ;
-						
-				$res = $this->query ( $sql );
-						
-				if ( ! empty( $res) )
-				{
-					
-					$result = mysqli_fetch_all ( $res,MYSQLI_ASSOC );
-				}
+				$fields = implode ( ', ', $what['fields'] );
 			}
+			else{
+							
+				$fields = '*';
+			}
+						
+			$sql = 'SELECT ' . $fields . ' FROM  '. $this->table;
+						
+			if( ! empty ( $what['conditions'] ) )
+			{		
+							
+				$where = '';
+						
+				foreach ( $what['conditions'] as $key => $value )
+				{
+			
+					$where= $where . ' AND ' .  $key . '=\'' . $value . '\'';				
+				}
+							
+				$where = ltrim ( $where, ' AND' );
+								
+				$sql = $sql . ' WHERE  ' . $where ;
+			
+			}
+						
+			if ( ! empty( $what['order']['by'] ) && ! empty ( $what['order']['direction'] ) )
+			{
+						
+				$sql = $sql . ' ORDER BY ' . $what['order']['by'] . ' ' . $what['order']['direction'] ;
+			}
+			elseif( ! empty ( $what['order']['by'] ) )
+			{
+					
+				$sql = $sql . ' ORDER BY ' . $what['order']['by'] ;
+			}
+						
+			if( ! empty ( $what['limit']['start'] ) or $what['limit']['start'] == 0 && ! empty ( $what['limit']['end']) )
+			{
+						
+				$sql = $sql . ' LIMIT ' . $what['limit']['start'] . ',' . $what['limit']['end'];
+			}
+						
+			$sql = $sql . ' ;' ;
+						
+			$res = $this->query ( $sql );
+						
+			if ( ! empty ( $res) )
+			{
+						
+				$result = mysqli_fetch_all ( $res,MYSQLI_ASSOC );			
+			}
+			//var_dump($sql);
 
-			return $result;
+		return $result;
 	}
 		
 	/**
@@ -191,43 +190,30 @@ Class Model implements For_model
 	
 		function insert ( $what )
 		{
-			$mysqli = $this->conect ( HOST, DB_NAME, USER_NAME, PASSWORD );
-				
-			if ( $mysqli->connect_errno )
+								
+			if( ! empty ( $what ) )
 			{
-				 	
-				$result = 'No connect';
-			}
-			else{
-				
-				$this->disconect();
-			
-				if( ! empty( $what ) )
-				{
 					
-					$val = '';
-					$key = '';
+				$val = '';
+				$key = '';
 						
-					foreach ( $what as $index => $value )
-					{
+				foreach ( $what as $index => $value )
+				{
 
-						$key = $key . ', ' . $index;
-						$val = $val . ', \'' . $value . '\'';				
-					}
-					
-					$key = ltrim ( $key, ', ' );
-					$val = ltrim ( $val, ', ' );
-					
-					$sql ='INSERT INTO ' . $this->table . ' (' . $key . ') VALUE (' . $val . ');';
-					
+					$key = $key . ', ' . $index;
+					$val = $val . ', \'' . $value . '\'';				
 				}
 					
-					$this->query( $sql );
+				$key = ltrim ( $key, ', ' );
+				$val = ltrim ( $val, ', ' );
 					
-					$result = TRUE;
+				$sql ='INSERT INTO ' . $this->table . ' (' . $key . ') VALUE (' . $val . ');';
+					
 			}
-
-			return $result;
+	
+			$this->query( $sql );
+			
+			return ;
 		}
 		
 	/**
@@ -254,40 +240,26 @@ Class Model implements For_model
 		
 	function update ( $what )
 	{
-			
-		$mysqli = $this->conect ( HOST, DB_NAME, USER_NAME, PASSWORD );
-			
-		if ( $mysqli->connect_errno )
+							
+		if( ! empty ( $what ) && ( int )( $what['id'] > 0 ) )
 		{
-			
-			$result = 'No connect';
-		}
-		else{
-				
-			$this->disconect();
-				
-			if( ! empty ( $what ) && ( int )( $what['id'] > 0 ) )
+		
+			$field = '';
+					
+			foreach ( $what['fields'] as $key => $value )
 			{
 		
-				$field = '';
+				$field = $field . ', ' . $key . '= \'' . $value . '\'';					
+			}
 					
-				foreach ( $what['fields'] as $key => $value )
-				{
+			$field = ltrim ( $field, ', ' );
+						
+			$sql = 'UPDATE information SET ' . $field . ' WHERE id=' . $what['id'] . ';';			
 		
-					$field = $field . ', ' . $key . '= \'' . $value . '\'';					
-				}
-					
-					$field = ltrim ( $field, ', ' );
+		}	
 						
-					$sql = 'UPDATE information SET ' . $field . ' WHERE id=' . $what['id'] . ';';			
-		
-				}	
-						
-				$this->query ( $sql );
-						
-				$result = TRUE;
-		}
-			
+		$this->query ( $sql );
+											
 		return $result;
 	}
 		
@@ -301,29 +273,12 @@ Class Model implements For_model
 		
 	function delete ( $value )
 	{	
-			
-		$mysqli = $this->conect ( HOST, DB_NAME, USER_NAME, PASSWORD );
-			
-		if ( $mysqli->connect_errno )
-		{
-					
-			$result = 'No connect';
-		}
-		else{
-			
-			$sql = 'DELETE FROM ' . $this->table . ' WHERE id=' . $value . ';';
-				
-			$mysqli = $this->conect ( HOST, DB_NAME, USER_NAME, PASSWORD );
-				
-			$result = $mysqli->query ( $sql );
-				
-				$this->disconect ();
-				
-				$result = '';
-				
-		}
-
-		return $result;
+						
+		$sql = 'DELETE FROM ' . $this->table . ' WHERE id=' . $value . ';';
+							
+		$this->mysqli->query ( $sql );
+										
+		return;
 	}
 		
 	/**
@@ -338,12 +293,9 @@ Class Model implements For_model
 		
 	function query ( $sql )
 	{
-		$mysqli = $this->conect ( HOST, DB_NAME, USER_NAME, PASSWORD );
 			
-		$result = $mysqli->query( $sql );
-				
-		$this->disconect ();
-			
+		$result = $this->mysqli->query( $sql );
+						
 		return $result;
 			
 	}

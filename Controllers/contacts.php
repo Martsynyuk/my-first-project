@@ -7,89 +7,91 @@
  
 class Contacts extends Controller
 {
-		
-	public function  add_contact ()
+	
+	public $model = 'Information';
+	
+	public function  add ()
 	{
+				
+		$post = $this->post_controller();
 			
-		if ( ! empty ( $_POST ['FirstName'] ) ) 
+		if ( ! empty ( $post['FirstName'] ) ) 
 		{
 			
-			if ( isset ( $_POST ['radio'] ) ) 
+			if ( isset ( $post['radio'] ) ) 
 			{
 				
-				if ( $_POST ['radio'] === 'Home' )
+				if ( $post['radio'] === 'Home' )
 				{
-					$phone = $_POST ['Home'];
+					$phone = $post['Home'];
 				}
 				
-				if ( $_POST ['radio'] === 'Work' )
+				if ( $post['radio'] === 'Work' )
 				{
-					$phone = $_POST ['Work'];
+					$phone = $post['Work'];
 				}
 				
-				if ( $_POST ['radio'] === 'Cell' )
+				if ( $post['radio'] === 'Cell' )
 				{
-					$phone = $_POST ['Cell'];
+					$phone = $post['Cell'];
 				}
 			} 
 			else{
 				
-				$phone = $_POST ['Cell'];
+				$phone = $post['Cell'];
 			}
 				
-			$add_user_contact = new Information();
-				
-			$new_contact = $add_user_contact->insert (
+			$new_contact = $this->model->insert (
 				
 											$what = array(
 													
 													'users_id' => $_SESSION ['id'], // mast be int its important
-													'Firstname' => $_POST ['FirstName'],
-													'LastName' => $_POST ['LastName'],
-													'Email' => $_POST ['Email'],
-													'Home' => $_POST ['Home'],
-													'Work' => $_POST ['Work'],
-													'Cell' => $_POST ['Cell'],
-													'Adress1' => $_POST ['Adress1'],
-													'Adress2' => $_POST ['Adress2'],
-													'City' => $_POST ['City'],
-													'State' => $_POST ['State'],
-													'Zip' => $_POST ['Zip'],
-													'Country' => $_POST ['Zip'],
-													'BirthDate' => $_POST ['year'] . '-' . $_POST ['month'] . '-' . $_POST ['day'],
+													'Firstname' => $post['FirstName'],
+													'LastName' => $post['LastName'],
+													'Email' => $post['Email'],
+													'Home' => $post['Home'],
+													'Work' => $post['Work'],
+													'Cell' => $post['Cell'],
+													'Adress1' => $post['Adress1'],
+													'Adress2' => $post['Adress2'],
+													'City' => $post['City'],
+													'State' => $post['State'],
+													'Zip' => $post['Zip'],
+													'Country' => $post['Zip'],
+													'BirthDate' => $post['year'] . '-' 
+																	. $post['month'] . '-' 
+																	. $post['day'],
 													'Telephone' => $phone  
 												
-													)
+											)
 						
 						);
 				
 			if( $new_contact === 'No connect' )
 			{
 			
-				echo $new_contact;
-				
-					header('Location: /contacts/addcontact');
+					header('Location: contacts/addcontact');
 			}
 		}
-		
-		$view = new View ();
 			
 		if( ! empty ( $phone ) )
 		{
-			$view->set ( 'phone', $phone );
+			$this->view->set ( 'phone', $phone );
 		}
 			
-			$view->render ( 'contacts_addcontact' );
+			$this->view->render ( 'contacts', 'add' );
 		}
 		
-	public function edit_contact ()
+	public function edit ( $get )
 	{
-			
-		$this->contacts_defender ( $_GET ['id'], $_SESSION ['id'] );
+		
+		$post = $this->post_controller ();
+		
+		$get = $this->parse_argument( $get );
+
+		$this->contacts_defender ( $get['id'], $_SESSION ['id'] );;
 				
-		$select_user_contacts = new Information ();
-				
-		$contactUser = $select_user_contacts->select(
+		$contactUser = $this->model->select(
 				
 											$what = array(
 													
@@ -109,240 +111,241 @@ class Contacts extends Controller
 															'Country',
 															'BirthDate'
 													
-														),
+												),
 													
-													'conditions' => array(
+												'conditions' => array(
 															
-															'id' => $_GET['id'],
+														  	'id' => $get['id'],
 			
-														),
+												),
 													
-													'order' => array(
+												'order' => array(
 															
 															'by' => '',
 															'direction' => ''
 															
-														),
+												),
 													
-													'limit' => array(
+												'limit' => array(
 															
 															'start' => '',
 															'end'=> ''
 															
-														)	
 												)
-										);
+													
+											)
+				
+									);
 			
 
 		if ( $contactUser === 'No connect' )
 		{
-			
-			echo $contactUser;
-				
+		
 			header( 'Location: /' );
 		}
 			
-		if ( ! empty ( $_POST ['FirstName'] ) ) 
+		if ( ! empty ( $post['FirstName'] ) ) 
 		{
 			
-			if ( empty ( $_POST ['radio'] ) ) 
+			if ( empty ( $post['radio'] ) ) 
 			{
-				$phone = $_POST ['Cell'];
+				$phone = $post['Cell'];
 			}
 				
-			if ( isset ( $_POST ['radio'] ) ) 
+			if ( isset ( $post['radio'] ) ) 
 			{
-				if ( $_POST ['radio'] === 'Home' )
+				if ( $post['radio'] === 'Home' )
 				{
-					$phone = $_POST ['Home'];
+					$phone = $post['Home'];
 				}
 				
-				if ( $_POST ['radio'] === 'Work' )
+				if ( $post['radio'] === 'Work' )
 				{
-					$phone = $_POST ['Work'];
+					$phone = $post['Work'];
 				}
 				
-				if ( $_POST ['radio'] === 'Cell' )
+				if ( $post['radio'] === 'Cell' )
 				{
-					$phone = $_POST ['Cell'];
+					$phone = $post['Cell'];
 				}
 			}
 				
-			$update_contact = new Information ();
-				
-			$update_contact->update (
+			$this->model->update (
 					
 								$what = array(
 										
 									'fields' => array(
 												
-												'Firstname' => $_POST ['FirstName'],
-												'Lastname' => $_POST ['LastName'],
-												'Email' => $_POST ['Email'],
-												'Home' => $_POST ['Home'],
-												'Work' => $_POST ['Work'],
-												'Cell' => $_POST ['Cell'],
-												'Adress1' => $_POST ['Adress1'],
-												'Adress2' => $_POST ['Adress2'],
-												'City' => $_POST ['City'],
-												'State' => $_POST ['State'],
-												'Zip' => $_POST ['Zip'],
-												'Country' => $_POST ['Country'],
-												'BirthDate' => $_POST ['year'] . '-' . $_POST ['month'] . '-' . $_POST ['day'],
+												'Firstname' => $post['FirstName'],
+												'Lastname' => $post['LastName'],
+												'Email' => $post['Email'],
+												'Home' => $post['Home'],
+												'Work' => $post['Work'],
+												'Cell' => $post['Cell'],
+												'Adress1' => $post['Adress1'],
+												'Adress2' => $post['Adress2'],
+												'City' => $post['City'],
+												'State' => $post['State'],
+												'Zip' => $post['Zip'],
+												'Country' => $post['Country'],
+												'BirthDate' => $post['year'] . '-' 
+																. $post['month'] . '-' 
+																. $post ['day'],
 												'Telephone' => $phone,
 											
-											),
+									),
 												
-									'id' => $_GET ['id']
+									'id' => $get['id']
 						
-											)
+								)
 						
 						);
 				
 			if ( $update_contact === 'No connect' )
 			{
-				echo $update_contact;
 				
-				header ( 'Location: /contacts/editcontact' );
+				header ( 'Location: contacts/editcontact' );
 			}
 				
 				header ( 'Location: /' );
 		}
 			
-		$view = new View ();
-			
-		$view->set ( 'contactUser', $contactUser );
+		$this->view->set ( 'contactUser', $contactUser );
+		$this->view->set ( 'get', $get );
 
 		if( ! empty ( $phone ) )
 		{
 			
-			$view->set ( 'phone', $phone );
+			$this->view->set ( 'phone', $phone );
 		}
 			
-		$view->render ( 'contacts_editcontact' );
+		$this->view->render ( 'contacts', 'edit' );
 			
 		return;
 	}
 		
-	public function index ()
-	{
-
+	public function index ( $get )
+	{	
+		
+		$get = $this->parse_argument( $get );
+		
 		if ( empty ( $_SESSION ['id'] ) )
 		{
-			header ( 'Location: /user/autorization' );
-		}
 			
-		if( ! empty ( $_GET ['id'] ) && ! empty ( $_SESSION ['id'] ) )
+			header ( 'Location: user/autorization' );
+		}
+
+		if ( empty ( $get['page'] ) )
 		{
 			
-			$this->delete_contact ( $_GET ['id'], $_SESSION ['id'] );
-		}
-			
-		if ( empty ( $_GET ['page'] ) )
-		{
 			$page = 1;
 		}
 		else{
 			
-			$page = $_GET ['page'];
+			$page = $get['page'];
 		}
 			
-		if ( empty ( $_GET ['sort'] ) && empty ( $_GET ['sortparam'] ) )
+		if ( empty ( $get['sort'] ) && empty ( $get['sortparam'] ) )
 		{
 				
-			$_GET ['sort'] = 0 & $_GET ['sortparam'] = 0 ;
+			$get['sort'] = 0;
+			$get['sortparam'] = 0;
+			$get['sort_all'] = 0;
 		}
-			
-		$userContact = new Contacts ();
+		
+		$count_contacts = $this->count_contacts($_SESSION['id']);
 			
 		$contacts = array ();
-		$contacts = $this->return_contact ( $_SESSION ['id'], $page, $_GET ['sort'], $_GET ['sortparam'] );
+		
+		$contacts = $this->return_contact ( $_SESSION ['id'], $page, $get['sort'], $get['sortparam'] );
 			
 		$count_for_pagin = $this->count_pages ( $_SESSION ['id'], $page );
 		$count_pages = ceil ( $this->count_contacts () / 5 );
+		
+		$i = 1;
+		($page > 1) ? $i = $page * ROWLIMIT - ROWLIMIT + 1 : '';  // to number of contacts
+		;
+		$this->view->set ( 'count_contacts', $count_contacts );
+		$this->view->set ( 'count_for_pagin', $count_for_pagin );
+		$this->view->set ( 'page', $page );
+		$this->view->set ( 'count_pages', $count_pages );
+		$this->view->set ( 'contacts', $contacts );
+		$this->view->set ( 'i', $i);
+		$this->view->set ( 'sort_all', $get['sort_all']);
 			
-		$url = $this->url;
-		$url_page = $this->url_page;
-		$sortup = $this->sortup;
-		$sortdown = $this->sortdown;
-			
-		$editcontact = "/contacts/edit_contact?id=";
-		$viewcontact = "/contacts/view_contact?id=";
-		$deletecontact = "/?id=";
-			
-		$view = new View ();
-			
-		$view->set ( 'userContact', $userContact );
-		$view->set ( 'count_for_pagin', $count_for_pagin );
-		$view->set ( 'page', $page );
-		$view->set ( 'count_pages', $count_pages );
-		$view->set ( 'contacts', $contacts );
-		$view->set ( 'editcontact', $editcontact );
-		$view->set ( 'viewcontact', $viewcontact );
-		$view->set ( 'deletecontact', $deletecontact );
-		$view->set ( 'sortup', $sortup );
-		$view->set ( 'sortdown', $sortdown );
-		$view->set ( 'url', $url );
-		$view->set ( 'url_page', $url_page );
-			
-		$view->render ( 'contacts_index' );
+		$this->view->render ( 'contacts', 'index' );
+		
 	}
 		
-	public function select_contact ()
+	public function select ( $get )
 	{
-			
-		if ( empty ( $_GET ['page'] ) ) 
+		
+		$post = $this->post_controller ();	
+		
+		$get = $this->parse_argument($get);
+
+		if ( ! empty ($post['Select']) )
 		{
 			
-			$page = 1;
+			$this->letter();
 		}
 		else{
 			
-			$page = $_GET ['page'];
+			if ( empty ( $get['all'] ) )
+			{
+					
+				$get['all'] = NULL;
+			}
+			
+			if ( empty ( $get['page'] ) )
+			{
+					
+				$page = 1;
+			}
+			else{
+					
+				$page = $get['page'];
+			}
+				
+			if ( empty ( $get['sort'] ) && empty ( $get['sortparam'] ) )
+			{
+					
+				$get['sort'] = 0;
+				$get['sortparam'] = 0;
+			}
+			
+			$i = 1;
+			
+			($page > 1) ? $i = $page * ROWLIMIT - ROWLIMIT + 1 : '';  // to number of contacts
+				
+			$contacts = array ();
+			$contacts = $this->return_contact ( $_SESSION ['id'], $page, $get['sort'], $get['sortparam'] );
+				
+			$count_for_pagin = $this->count_pages ( $_SESSION ['id'], $page );
+			$count_pages = ceil ( $this->count_contacts ( $_SESSION ['id'] ) / 5 );
+			
+			$this->view->set ( 'count_for_pagin', $count_for_pagin );
+			$this->view->set ( 'page', $page );
+			$this->view->set ( 'count_pages', $count_pages );
+			$this->view->set ( 'contacts', $contacts );
+			$this->view->set ( 'i', $i);
+			$this->view->set ( 'get[\'sort\']', $get['sort']);
+			$this->view->set ( 'all', $get['all'] );
+				
+			$this->view->render ( 'contacts', 'select' );
 		}
 			
-		if ( empty ( $_GET ['sort'] ) && empty ( $_GET ['sortparam'] ) )
-		{
-			
-			$_GET ['sort'] = 0;
-			$_GET ['sortparam'] = 0;
-		}
-			
-		$contacts = array ();
-		$contacts = $this->return_contact ( $_SESSION ['id'], $page, $_GET ['sort'], $_GET ['sortparam'] );
-			
-		$count_for_pagin = $this->count_pages ( $_SESSION ['id'], $page );
-		$count_pages = ceil ( $this->count_contacts ( $_SESSION ['id'] ) / 5 );
-			
-		$url = $this->url;
-		$url_page = $this->url_page;
-		$sortup = $this->sortup;
-		$sortdown = $this->sortdown;
-			
-		$view = new View ();
-			
-		$view->set ( 'count_for_pagin', $count_for_pagin );
-		$view->set ( 'page', $page );
-		$view->set ( 'count_pages', $count_pages );
-		$view->set ( 'contacts', $contacts );			
-		$view->set ( 'sortup', $sortup );
-		$view->set ( 'sortdown', $sortdown );
-		$view->set ( 'url', $url );
-		$view->set ( 'url_page', $url_page );
-			
-			
-		$view->render ( 'contacts_selectcontact' );
 	}
 		
-	public function view_contact ()
+	public function view ( $get )
 	{	
 		
-		$contact_view = new Information ();
+		$get = $this->parse_argument ( $get );
 
-		if ( ( int ) $_GET['id'] > 0 )
+		if ( ( int ) ($get['id']) > 0 )
 		{
 				
-			$contactUser = $contact_view->select (	
+			$contactUser = $this->model->select (	
 					
 											$what = array(
 													
@@ -363,35 +366,35 @@ class Contacts extends Controller
 																'Country',
 																'BirthDate'
 													
-																 ),
+													 ),
 													
-														'conditions' => array(
+													'conditions' => array(
 																
-																'id' => $_GET['id'],
+																'id' => $get['id'],
 			
-																),
+													),
 													
-														'order' => array(
+													'order' => array(
 																
 																'by' => '',
 																'direction' => ''
 																
-																),
+													),
 													
-														'limit' => array(
+													'limit' => array(
 																
 																'start' => '',
 																'end'=> ''
 																
-																)	
-														)
-											);
+													)	
+													
+											 	)
+					
+										);
 				
 			if($contactUser === 'No connect')
 			{
-				
-				echo $contactUser;
-				
+	
 				header('Location: /');
 			}
 		}
@@ -399,48 +402,87 @@ class Contacts extends Controller
 				
 			header ( 'Location: /' );
 		}
-		
-		$view = new View ();
+	
+		$this->view->set ( 'contactUser', $contactUser );
 			
-		$view->set ( 'contactUser', $contactUser );
-			
-		$view->render ( ' contacts_viewcontact' );
+		$this->view->render ( 'contacts', 'view' );
 			
 		return;
 	}
 		
-	function delete_contact ( $id, $user )
+	function delete ( $get )
 	{
 		
-		$protection = $this->contacts_defender ( $id, $user );
-
-		if ( ! empty ( $protection ) )
-		{	
-
-				$delete_contact = new Information ();
-					
-				$delete_contact->delete ( $id );
-					
-				if ( $delete_contact === 'No connect' )
-				{
-					
-					echo $delete_contact;
-					
-					header('Location: /index');
+		$get = $this->parse_argument( $get );
+		
+		$post = $this->post_controller ();
+		
+		$select = NULL;
+		
+		if ( ! empty ( $get['id'] ) && (int)( $get['id'] ) >0 )
+		{
+			
+			$select = $this->model->select ( 
+										$what = array(
+												'fields' => array(
+															
+														'Firstname'
+												),
+												'conditions' => array(
+												
+														'id' => $get['id'],
+												),
+												'limit' => array(
+												
+														'start' => '',
+														'end'=> ''
+												
+												)
+												
+										)
+					);
+			
+			if ( ! empty ( $post['del'] ) && $post['del'] === 'Yes')
+			{
+			
+				$protection = $this->contacts_defender ( $get['id'], $_SESSION ['id'] );
+			
+				if ( ! empty ( $protection ) )
+				{	
+							
+					$this->model->delete ( $get['id'] );
+		
+					header('Location: /');
+			
 				}
+			}
+			elseif ( $post['del'] === 'No' )
+			{
+				
+				header('Location: /');
+			}
 		}
 		else{
-				
-			echo'You have no rights to this';
+			
+			header('Location: /');
 		}
+		
+		foreach ( $select as $select => $val)
+		{
+			$select = $val;
+		}
+		
+		$this->view->set ( 'select', $select);
+		$this->view->set ( 'id', $get['id']);
+		
+		$this->view->render ( 'contacts', 'delete' );
+
 	}
 			
 	function count_contacts ()
 	{	
-		
-		$count_contacts = new Information ();
 			
-		$res = $count_contacts->select(
+		$res = $this->model->select(
 				
 									$what = array(
 											
@@ -448,31 +490,39 @@ class Contacts extends Controller
 													
 															'COUNT(*)'
 																			
-														),
+											),
+											
 											'conditions' => array(
 													
 															'users_id' => $_SESSION['id'],
 																				
-														),
+											),
 											
 											'order' => array(
 													
 															'by' => '',
 															'direction' => ''
 													
-														),
+											),
 											
 											'limit' => array(
 													
 														 	'start' => '',
 															'end'=> ''
 													
-															)											
-												)
+											)
+											
+									)
 																	
-									);
-
-		return $res ['0']['COUNT(*)'];
+							);
+		
+		foreach ( $res as $key => $val ) 
+		{
+			
+			$res = $val;			
+		}
+		
+		return $res ['COUNT(*)'];
 	}
 		
 	function count_pages ( $page )
@@ -525,25 +575,37 @@ class Contacts extends Controller
 		
 		$sort = '';
 		$deck = '';
+
+		if ( $sorting === 'up' && $sortparam === 'FirstName' || $sorting === 'up' && $sortparam === 'LastName' )
+		{	
+			
+			if ( $sortparam === 'FirstName' )
+			{
 				
-		if ( $sorting == 'up' && $sortparam == 'FirstName' or $sortparam == 'LastName' )
+				$sort = $sortparam . ', LastName';
+			}
+			else{
+				
+				$sort = $sortparam . ', FirstName';
+			}
+		}
+		elseif ( $sorting === 'down' && $sortparam === 'FirstName' || $sorting === 'down' && $sortparam === 'LastName' )
 		{
+				
+			if ( $sortparam === 'FirstName' )
+			{
+				
+				$deck = 'DESC , LastName DESC' ;
+			}
+			else{
+				
+				$deck = 'DESC , FirstName DESC' ;
+			}
 					
 			$sort = $sortparam;
-		}
-		elseif ( $sorting == 'down' && $sortparam == 'FirstName' or $sortparam == 'LastName' )
-		{
-					
-			$sort = $sortparam;
-			$deck = 'DESC';
-		}
-		else {
-			header ( 'Location: /' );
 		}
 
-		$return_contact = new Information ();
-			
-		$result = $return_contact->select (
+		$result = $this->model->select (
 				
 									$what = array(
 											
@@ -555,31 +617,31 @@ class Contacts extends Controller
 														'Email',
 														'Telephone'
 												
-														),
+											),
 											
 											'conditions' => array(
 													
 														'users_id' => $user_id,
 							
-														),
+											),
 											
 											'order' => array(
 													
 														'by' => $sort,
 														'direction' => $deck
 													
-														),
+											),
 											
 											'limit' => array(
 													
 														'start' => ($page - 1) * ROWLIMIT,
 														'end'=> ROWLIMIT
 													
-														)	
+											)	
 											
-												)
+									)
 												
-									);
+							);
 
 		$contacts = $result;
 
@@ -590,7 +652,72 @@ class Contacts extends Controller
 		
 		return $contacts;
 	}
+	
+	function letter ()
+	{
+
+		$post = $this->post_controller ();
+		
+		$mail = NULL;
+		$new_mail = NULL;
+		
+		if ( count ( $post ) > 1 && ! empty ( $post['Select'] ) )
+		{
+	
+			foreach ( $post as $key => $val )
+			{
+					
+				if ( is_int ( $key ) )
+				{
+		
+					$mail[] = $val;
+				}
+			}
+				
+			$mail = implode ( ', ', $mail );
+				
+			setcookie('mail', $mail , strtotime("12 hours"), '/');
+				
+		}
+		
+		if ( ! empty ( $post['mails'] ) && ! empty ( $_COOKIE['mail'] ) && ! empty ( $post['add'] ) )
+		{
+			
+			$new_mail = implode ( ', ', array_diff ( explode ( ', ', $post['mails'] ), explode(', ', $_COOKIE['mail']) ) ) ;
+		
+			setcookie('mail', $new_mail , strtotime("12 hours"), '/');
+		}
+		
+		if ( ! empty ( $post['Yes'] ) )
+		{	
+			
+			foreach ( explode(', ', $_COOKIE['mail']) as $key => $mail)
+			{
+				
+				$this->model->insert (
+								$what = array(
+										'users_id' => $_SESSION['id'],
+										'FirstName' => 'somenew',
+										'Email' => $mail
+								)					
+						);
+			}
+			
+			unset ( $_COOKIE['mail'] );
+			
+			header ( 'Location: / ');
+		} 
+		elseif ( ! empty ( $post['No'] ) )
+		{
+			
+			header ( 'Location: / ');
+		}
+		
+		$this->view->set ( 'mail', $mail );
+		$this->view->set ( 'new_mail', $new_mail );
+		
+		$this->view->render ( 'contacts', 'letter' );
+	}
 
 }
-
 	
