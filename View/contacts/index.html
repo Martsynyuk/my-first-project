@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>project</title>
+</head>
+<body>
+	<ul><?php if ( empty ( $_SESSION ['id'] ) ) { ?>
+		 
+		<?= '<li> <a href="user/autorization">Autorization</a> </li>' ?>
+		<?= '<li> <a href="user/registration">Registration</a> </li>' ?>
+		
+		<?php } else { ?>
+		
+		<?= '<li> <a href="/">Home</a> </li>' ?>
+		<?= '<li> <a href="user/logout">Logout</a> </li>' ?>
+		
+		<?php }; ?>
+		
+	</ul>
+
+		<?php if ( ! empty ( $contacts ) ){ ?>
+		
+			<table>
+		<tr>
+			<th></th>
+			<th>First Name
+				<a 
+					href="<?=  ( $page > 1 ) ? '/sort-up-FirstName/page-' . $page : '/sort-up-FirstName/' ; 							
+													
+							?>" style="margin: 0 10px;">&#8593 
+				</a>
+				 <a
+					href="<?= ( $page > 1 ) ? '/sort-down-FirstName/page-' . $page : '/sort-down-FirstName/';
+					
+							?>">&#8595 
+				</a>
+			</th>
+			<th>Last Name
+				<a 
+					href="<?= ( $page > 1 ) ? '/sort-up-LastName/page-' . $page : '/sort-up-LastName/';
+					
+							?>" style="margin: 0 10px;">&#8593 
+				</a> 
+				<a
+					href="<?= ( $page > 1 ) ? '/sort-down-LastName/page-' . $page : '/sort-down-LastName/'; ?>">&#8595 
+				</a>
+			</th>
+			<th>E-mail</th>
+			<th>Cellular</th>
+			<th>Action</th>
+		</tr>
+																		
+		<?php foreach ( $contacts as $contact ) : ?>
+					
+				<tr>
+			<td><?= $i . '.'; ?></td>
+			<td><?= $contact['FirstName']; ?></td>
+			<td><?= $contact['LastName']; ?></td>
+			<td><?= $contact['Email']; ?></td>
+			<td><?= $contact['Telephone']; ?></td>
+			<td>
+				<a href="<?= '/contacts/edit/' . $contact['id']?>">edit</a> 
+				<a href="<?= '/contacts/view/' . $contact['id']?>">view</a> 
+				<a href="<?= '/contacts/delete/' . $contact['id'] ?>">delete</a>
+			</td>
+		</tr>
+		<?php $i++;?>	
+		
+		<?php endforeach;?>	
+		
+								
+			</table>
+	</br>
+	<a href="/contacts/add/">Add contact</a></br>
+	<a href="/contacts/select/">Select contact</a></br>
+	<a href="/contacts/letter/">letter</a>
+	
+		<?php } else { ?>
+		
+			<span>Your contact book is empty. Please add some contacts.</span>
+	</br>
+	</br>
+	
+		<?php } ;?>
+		
+		<?php if($count_contacts == 0) { ?>
+		
+			<a href="contacts/add">Add contact</a>
+			
+		<?php } else {?>
+		
+			<ul>
+				<li>
+					<?php  if ($page != 1) : ?>
+						<a
+							href="<?php
+								
+								if ($page == 1) {
+									echo 'page-1';
+								} else {
+									echo 'page-' . ($page - 1);
+								}
+								?>"
+								title="last page">Back 
+						</a>
+					<?php endif;?>	
+														
+				</li>
+				<li>
+					<?php for ($i = $count_for_pagin[0]; $i <= $count_for_pagin[1]; $i++) { ?>
+					
+						<?php if ($i == $page) { ?>
+									<span><?=$i?></span>
+						<?php } else { ?>
+							<a	href="<?php										
+											if ($i == 1) {
+												echo 'page-1';
+											} else {
+												echo 'page-' . $i;
+											}
+										?>"
+								>
+								
+								<?=$i?>
+								
+							</a>
+							
+						<?php } ?>
+						
+					<?php } ?>
+												
+				</li>
+				<li>	
+											
+					<?php if ($count_contacts > 0) :
+
+							if ($page != $count_pages) :
+					?>
+					
+									<a href="<?= 'page-' . ( $page + 1 ) ?>" title="next page">Next</a>
+																		
+								<?php endif; ?>
+								
+					<?php endif; ?>	
+														
+				</li>
+			</ul>
+			
+		<?php } ?>
+		
+</body>
+</html>

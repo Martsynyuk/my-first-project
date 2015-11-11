@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>project</title>
+</head>
+<body>
+	<ul><?php if ( empty ( $_SESSION ['id'] ) ) { ?>
+		 
+		<?= '<li> <a href="/user/autorization">Autorization</a> </li>' ?>
+		<?= '<li> <a href="/user/registration">Registration</a> </li>' ?>
+		
+		<?php } else { ?>
+		
+		<?= '<li> <a href="/">Home</a> </li>' ?>
+		<?= '<li> <a href="/user/logout">Logout</a> </li>' ?>
+		
+		<?php }; ?>
+		
+	</ul>
+	
+	<h3>Some message</h3></br>
+	<?php if( ! empty ( $new_mail ) ) { ?> 
+		<form name="add_new_mail" method="POST" action="/contacts/letter">
+			Do you whant add new email - <?= $new_mail ?>? 
+			<button name="Yes" value="Yes">Yes</button>
+			<button name="No" value="No">No</button>
+		</form>
+	<?php }else{ ?>
+
+		<form name="add_letter" method="POST" action="/contacts/letter/">
+
+			<input name="mails" type="text" size="60" value="<?= ( ! empty ($mail) ) ? $mail : 'write some e-mail' ; ?>">
+		
+			<a href="/contacts/select/">add e-mail from contacts</a></br></br>
+		
+			<input name="text" type="text"size="60" value="for some text"></br></br>
+		
+			<input type="submit" name="add" value="add">
+
+		</form>
+	<?php } ?>
+	
+</body>
+</html>

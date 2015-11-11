@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="keywords" content="">
+<meta name="description" content="">
+<title></title>
+
+</head>
+<body>
+	<ul>
+		<?php if ( empty ( $_SESSION ['id'] ) ) { ?>
+		 
+		<?= '<li> <a href="user/autorization">Autorization</a> </li>' ?>
+		<?= '<li> <a href="user/registration">Registration</a> </li>' ?>
+		
+		<?php } else { ?>
+		
+		<?= '<li> <a href="/">Home</a> </li>' ?>
+		<?= '<li> <a href="/user/logout">Logout</a> </li>' ?>
+		
+		<?php }; ?>
+		
+	</ul>
+	<form name="selectcontact" method="POST" action="/contacts/select/">
+		
+		<table border="0">
+			<tr>
+				<th>
+					 <?= ( empty ( $all ) ) ? '<a href="/contacts/select/all/">Select all </a>' 
+														: '<a href="/contacts/select/">All off</a>'
+						?>
+				</th>
+				
+				<th>First Name
+				
+					<a 
+						href="<?=  ( $page > 1 ) ? '/contacts/select/sort-up-FirstName/page-' . $page 
+														: '/contacts/select/sort-up-FirstName/' ; 							
+														
+								?>" style="margin: 0 10px;">&#8593 
+					</a>
+					
+					 <a
+						href="<?= ( $page > 1 ) ? '/contacts/select/sort-down-FirstName/page-' . $page 
+														: '/contacts/select/sort-down-FirstName/';
+						
+								?>">&#8595 
+					</a>
+					
+				</th>
+				<th>Last Name
+				
+					<a 
+						href="<?= ( $page > 1 ) ? '/contacts/select/sort-up-LastName/page-' . $page 
+														: '/contacts/select/sort-up-LastName/';
+						
+								?>" style="margin: 0 10px;">&#8593 
+					</a> 
+					
+					<a
+						href="<?= ( $page > 1 ) ? '/contacts/select/sort-down-LastName/page-' . $page 
+														: '/contacts/select/sort-down-LastName/'; 
+														
+								?>">&#8595 
+					</a>
+				
+				</th>
+				<th>E-mail</th>
+				<th>Cellular</th>
+			</tr>
+					
+		<?php foreach ( $contacts as $contact ) : ?>	
+		
+				<tr>
+				<td> 
+					<input type="checkbox" name="<?= $contact['id']; ?>" value="<?= $contact['Email']; ?>" 
+									<?= ( ! empty ($all) ) ? 'checked' : '' ; ?>>
+															
+				</td>
+				
+				<td><?= $contact['FirstName']; ?></td>
+				<td><?= $contact['LastName']; ?></td>
+				<td><?= $contact['Email']; ?></td>
+				<td><?= $contact['Telephone']; ?></td>
+				<?php $i++; ?>
+			</tr>	
+			
+		<?php endforeach;?>	
+										
+		</table>
+		</br> <input type="submit" name="Select" value="Accept"><a href="">Cancel</a></br>
+		</form>
+		</br> <a href="/">Back</a>
+		<ul>
+			<li>
+				<?php  if ($page != 1) : ?>
+						<a
+							href="<?php
+								
+								if ($page == 1) {
+									echo 'page-1';
+								} else {
+									echo 'page-' . ($page - 1);
+								}
+								?>"
+								
+							title="last page">Back
+						</a>
+						
+					<?php endif; ?>	
+														
+			</li>
+			
+			<li>
+					<?php for ($i = $count_for_pagin[0]; $i <= $count_for_pagin[1]; $i++) { ?>
+					
+						<?php if ($i == $page) { ?>
+						
+									<span><?=$i?></span>
+						<?php } else { ?>
+						
+							<a
+								href="<?php
+											
+										if ($i == 1) {
+											echo 'page-1';
+										} else {
+											echo 'page-' . $i;
+										}
+										?>">
+								<?=$i?>
+							</a>
+							
+						<?php } ?>
+						
+					<?php } ?>
+						
+				</li>
+			<li>								 
+				<?php if ($page != $count_pages) : ?>
+				
+					<a href="<?= 'page-' . ( $page + 1 ) ?>" title="next page">Next</a>
+														
+				<?php endif; ?>	
+												
+			</li>
+		</ul>
+</body>
+</html>

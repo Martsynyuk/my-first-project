@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="keywords" content="">
+<meta name="description" content="">
+<title></title>
+
+</head>
+<body>
+	<ul>
+		<?php if ( empty ( $_SESSION ['id'] ) ) { ?>
+		 
+		<?= '<li> <a href="user/autorization">Autorization</a> </li>' ?>
+		<?= '<li> <a href="user/registration">Registration</a> </li>' ?>
+		
+		<?php } else { ?>
+		
+		<?= '<li> <a href="/">Home</a> </li>' ?>
+		<?= '<li> <a href="/user/logout">Logout</a </li>' ?>
+		
+		<?php }; ?>
+		
+	</ul>
+	<form name="viewcontact" method="POST" action="contacts/view">
+		<?php 
+		foreach ( $contactUser as $res ) :
+	
+		$backdate = (date_parse ( $res ['BirthDate'] ));
+		?>
+			<ul>
+			<li><span>Information</span></li>
+			<li><span>First Name: - </span><?= ( ! empty ( $res['Firstname'] ) ) ? $res['Firstname'] : '';?>
+			</li>
+			<li><span>Last Name: - </span><?= ( ! empty ( $res['Lastname'] ) ) ? $res['Lastname'] : '';?>
+			</li>
+			<li><span>E-mail: - </span><?= ( ! empty ( $res['Email'] ) ) ? $res['Email'] : '';?>
+			</li>
+			<li><span>Home: - </span><?= (  !empty ( $res['Home'] ) ) ? $res['Home'] : '';?>
+			</li>
+			<li><span>Work: - </span><?= ( ! empty ( $res['Work'] ) ) ? $res['Work'] : '';?>
+			</li>
+			<li><span>Cell: - </span><?= ( ! empty ( $res['Cell'] ) ) ? $res['Cell'] : '';?>
+			</li>
+			<li><span>Adress 1: - </span> <?= ( ! empty ( $res['Adress1'] ) ) ? $res['Adress1'] : '';?>
+			</li>
+			<li><span>Adress 2: - </span> <?= ( ! empty ( $res['Adress2'] ) ) ? $res['Adress2'] : '';?>
+			</li>
+			<li><span>City: - </span><?= ( ! empty($res['City'] ) ) ? $res['City'] : '';?>
+			</li>
+			<li><span>State: - </span><?= ( ! empty ( $res['State'] ) ) ? $res['State'] : '';?>
+			</li>
+			<li><span>Zip: - </span><?= ( ! empty ( $res['Zip'] ) ) ? $res['Zip'] : '';?>
+			</li>
+			<li><span>Country: - </span><?= ( ! empty ( $res['Country'] ) ) ? $res['Country'] : '';?>
+			</li>
+			<li><span>Birth Date:</span>
+			
+					<?= $backdate['day']; ?>.
+										
+					<?= $backdate['month']; ?>.
+										
+					<?= $backdate['year']; ?>
+			</li>
+			
+		<?php endforeach; ?>
+		
+		</ul>
+		<a href="/">Back</a>
+	</form>
+</body>
+</html>
