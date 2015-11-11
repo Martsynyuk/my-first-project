@@ -595,11 +595,11 @@ class Contacts extends Controller
 			if ( $sortparam === 'FirstName' )
 			{
 				
-				$deck = 'DESC , LastName DESC' ;
+				$deck = 'DESC , LastName' ;
 			}
 			else{
 				
-				$deck = 'DESC , FirstName DESC' ;
+				$deck = 'DESC , FirstName' ;
 			}
 					
 			$sort = $sortparam;
