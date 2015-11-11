@@ -8,7 +8,6 @@ class Controller
 		require_once APP . '/Models/model.php';
 		require_once APP . '/Models/users.php';
 		require_once APP . '/Models/information.php';
-		require_once APP . '/Lib/View.php';
 		
 		$this->model = new $this->model();
 		$this->view = new View();

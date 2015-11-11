@@ -7,6 +7,7 @@ class Dispatcher {
 		require_once APP . '/Controllers/controller.php';
 		require_once APP . '/Controllers/contacts.php';
 		require_once APP . '/Controllers/user.php';
+		require_once APP . '/Lib/View.php';
 	}
 	
 	public function dispatch ( $path ) 
@@ -26,9 +27,11 @@ class Dispatcher {
 			header ( 'Location: /error_pages/404.html', 404 );
 		}
 		
+		$count = count($arguments);
+		
 		if( $path == '/' || count( explode('-', $arguments[0] ) ) > 1 )
 		{
-			for ( $i=0; $i<2 ; $i++ )
+			for ( $i=0; $i < $count ; $i++ )
 			{
 				if ( ! empty ( $arguments[$i] ) )
 				{
@@ -48,14 +51,6 @@ class Dispatcher {
 		
 		$variables = $load->$arguments[1]( $arguments );
 	
-		return;
 	}
 	
 }
-
-function autoload ( $classname )
-{	
-
-}
-
-spl_autoload_register('autoload');

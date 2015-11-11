@@ -229,8 +229,6 @@ class Contacts extends Controller
 		
 		$get = $this->parse_argument( $get );
 		
-		//var_dump($get);
-		
 		if ( empty ( $_SESSION ['id'] ) )
 		{
 			
@@ -577,22 +575,38 @@ class Contacts extends Controller
 		
 		$sort = '';
 		$deck = '';
+		
+		if ( $sorting == 'up' && $sortparam === 'FirstName' or $sortparam === 'LastName' )
+		{	
+			
+			if ( $sortparam === 'FirstName' )
+			{
 				
-		if ( $sorting == 'up' && $sortparam == 'FirstName' or $sortparam == 'LastName' )
-		{
-					
-			$sort = $sortparam;
+				$sort = $sortparam . ', LastName';
+			}
+			else{
+				
+				$sort = $sortparam . ', FirstName';
+			}
 		}
 		elseif ( $sorting == 'down' && $sortparam == 'FirstName' or $sortparam == 'LastName' )
 		{
 					
-			$sort = $sortparam;
+			if ( $sortparam === 'FirstName' )
+			{
+				
+				$sort = $sortparam . ', LastName';
+			}
+			else{
+				
+				$sort = $sortparam . ', FirstName';
+			}
 			$deck = 'DESC';
 		}
 		else {
 			header ( 'Location: /' );
 		}
-			
+		var_dump($sort);
 		$result = $this->model->select (
 				
 									$what = array(
