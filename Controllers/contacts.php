@@ -10,7 +10,7 @@ class Contacts extends Controller
 	
 	public $model = 'Information';
 	
-	public function  add ()
+	public function  add ($argument)
 	{
 				
 		$post = $this->post_controller();
@@ -79,15 +79,15 @@ class Contacts extends Controller
 			$this->view->set ( 'phone', $phone );
 		}
 			
-			$this->view->render ( 'contacts', 'add' );
+			$this->view->render ( $argument );
 		}
 		
-	public function edit ( $get )
+	public function edit ( $argument )
 	{
 		
 		$post = $this->post_controller ();
 		
-		$get = $this->parse_argument( $get );
+		$get = $this->parse_argument( $argument );
 
 		$this->contacts_defender ( $get['id'], $_SESSION ['id'] );;
 				
@@ -219,15 +219,14 @@ class Contacts extends Controller
 			$this->view->set ( 'phone', $phone );
 		}
 			
-		$this->view->render ( 'contacts', 'edit' );
-			
-		return;
+		$this->view->render ( $argument );
+
 	}
 		
-	public function index ( $get )
+	public function index ( $argument )
 	{	
 		
-		$get = $this->parse_argument( $get );
+		$get = $this->parse_argument( $argument );
 		
 		if ( empty ( $_SESSION ['id'] ) )
 		{
@@ -272,17 +271,17 @@ class Contacts extends Controller
 		$this->view->set ( 'contacts', $contacts );
 		$this->view->set ( 'i', $i);
 		$this->view->set ( 'sort_all', $get['sort_all']);
-			
-		$this->view->render ( 'contacts', 'index' );
+		
+		$this->view->render ( $argument );
 		
 	}
 		
-	public function select ( $get )
+	public function select ( $argument )
 	{
 		
 		$post = $this->post_controller ();	
 		
-		$get = $this->parse_argument($get);
+		$get = $this->parse_argument ( $argument );
 
 		if ( ! empty ($post['Select']) )
 		{
@@ -332,15 +331,15 @@ class Contacts extends Controller
 			$this->view->set ( 'get[\'sort\']', $get['sort']);
 			$this->view->set ( 'all', $get['all'] );
 				
-			$this->view->render ( 'contacts', 'select' );
+			$this->view->render ( $argument );
 		}
 			
 	}
 		
-	public function view ( $get )
+	public function view ( $argument )
 	{	
 		
-		$get = $this->parse_argument ( $get );
+		$get = $this->parse_argument ( $argument );
 
 		if ( ( int ) ($get['id']) > 0 )
 		{
@@ -405,15 +404,14 @@ class Contacts extends Controller
 	
 		$this->view->set ( 'contactUser', $contactUser );
 			
-		$this->view->render ( 'contacts', 'view' );
-			
-		return;
+		$this->view->render ( $argument );
+
 	}
 		
-	function delete ( $get )
+	function delete ( $argument )
 	{
 		
-		$get = $this->parse_argument( $get );
+		$get = $this->parse_argument( $argument );
 		
 		$post = $this->post_controller ();
 		
@@ -475,7 +473,7 @@ class Contacts extends Controller
 		$this->view->set ( 'select', $select);
 		$this->view->set ( 'id', $get['id']);
 		
-		$this->view->render ( 'contacts', 'delete' );
+		$this->view->render ( $argument );
 
 	}
 			
@@ -653,7 +651,7 @@ class Contacts extends Controller
 		return $contacts;
 	}
 	
-	function letter ()
+	function letter ( $argument )
 	{
 
 		$post = $this->post_controller ();
@@ -716,7 +714,7 @@ class Contacts extends Controller
 		$this->view->set ( 'mail', $mail );
 		$this->view->set ( 'new_mail', $new_mail );
 		
-		$this->view->render ( 'contacts', 'letter' );
+		$this->view->render ( $argument );
 	}
 
 }

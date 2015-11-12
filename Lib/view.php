@@ -12,17 +12,17 @@ Class View
 		$this->var[$name] = $value; 
 	} 
 		
-	public function render ( $dir, $file_name )
+	public function render ( $argument )
 	{
 			
 		ob_start();
 			
 		extract($this->var);
 
-		if ( file_exists(APP . '/View/' . $dir . '/' . $file_name . '.html') )
+		if ( file_exists(APP . '/View/' . $argument[0] . '/' . $argument[1] . '.html') )
 		{
 			
-			include_once APP . '/View/' . $dir . '/' . $file_name . '.html';
+			include_once APP . '/View/' . $argument[0] . '/' . $argument[1] . '.html';
 		}
 			
 		echo ob_get_clean();
