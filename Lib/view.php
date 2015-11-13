@@ -18,7 +18,7 @@ Class View
 		ob_start();
 			
 		extract($this->var);
-
+		
 		if ( file_exists(APP . '/View/' . $argument[0] . '/' . $argument[1] . '.html') )
 		{
 			

@@ -8,11 +8,13 @@
 class Contacts extends Controller
 {
 	
-	public $model = 'Information';
+	public $model = array(
+			'Information'
+	);
 	
 	public function  add ($argument)
 	{
-				
+			
 		$post = $this->post_controller();
 			
 		if ( ! empty ( $post['FirstName'] ) ) 
@@ -91,7 +93,7 @@ class Contacts extends Controller
 
 		$this->contacts_defender ( $get['id'], $_SESSION ['id'] );;
 				
-		$contactUser = $this->model->select(
+		$contactUser = $this->Information->select(
 				
 											$what = array(
 													
@@ -170,7 +172,7 @@ class Contacts extends Controller
 				}
 			}
 				
-			$this->model->update (
+			$this->Information->update (
 					
 								$what = array(
 										
@@ -278,15 +280,23 @@ class Contacts extends Controller
 		
 	public function select ( $argument )
 	{
-		
+
 		$post = $this->post_controller ();	
 		
 		$get = $this->parse_argument ( $argument );
-
-		if ( ! empty ($post['Select']) )
+		
+		if( ! empty ( $post['page'] ) && count ( $post ) > 1 )
 		{
 			
-			$this->letter();
+			echo 'sd';
+		}
+		
+		if ( ! empty ($post['Select']) )
+		{
+			$argument[0] = 'contacts';
+			$argument[1] = 'letter';
+			
+			$this->letter ( $argument );
 		}
 		else{
 			
@@ -344,7 +354,7 @@ class Contacts extends Controller
 		if ( ( int ) ($get['id']) > 0 )
 		{
 				
-			$contactUser = $this->model->select (	
+			$contactUser = $this->Information->select (	
 					
 											$what = array(
 													
@@ -420,7 +430,7 @@ class Contacts extends Controller
 		if ( ! empty ( $get['id'] ) && (int)( $get['id'] ) >0 )
 		{
 			
-			$select = $this->model->select ( 
+			$select = $this->Information->select ( 
 										$what = array(
 												'fields' => array(
 															
@@ -448,7 +458,7 @@ class Contacts extends Controller
 				if ( ! empty ( $protection ) )
 				{	
 							
-					$this->model->delete ( $get['id'] );
+					$this->Information->delete ( $get['id'] );
 		
 					header('Location: /');
 			
@@ -480,7 +490,7 @@ class Contacts extends Controller
 	function count_contacts ()
 	{	
 			
-		$res = $this->model->select(
+		$res = $this->Information->select(
 				
 									$what = array(
 											
@@ -603,7 +613,7 @@ class Contacts extends Controller
 			$sort = $sortparam;
 		}
 
-		$result = $this->model->select (
+		$result = $this->Information->select (
 				
 									$what = array(
 											
@@ -692,7 +702,7 @@ class Contacts extends Controller
 			foreach ( explode(', ', $_COOKIE['mail']) as $key => $mail)
 			{
 				
-				$this->model->insert (
+				$this->Information->insert (
 								$what = array(
 										'users_id' => $_SESSION['id'],
 										'FirstName' => 'somenew',

@@ -13,7 +13,7 @@
 		<?php } else { ?>
 		
 		<?= '<li> <a href="/">Home</a> </li>' ?>
-		<?= '<li> <a href="user/logout">Logout</a> </li>' ?>
+		<?= '<li> <a href="users/logout">Logout</a> </li>' ?>
 		
 		<?php }; ?>
 		
@@ -91,8 +91,8 @@
 		<?php } else {?>
 		
 			<ul>
-				<li>
-					<?php  if ($page != 1) : ?>
+			<li>
+				<?php  if ($page != 1) : ?>
 						<a
 							href="<?php
 								
@@ -102,50 +102,50 @@
 									echo 'page-' . ($page - 1);
 								}
 								?>"
-								title="last page">Back 
+								
+							title="last page"><button>Back</button>
 						</a>
-					<?php endif;?>	
+						
+					<?php endif; ?>	
 														
-				</li>
-				<li>
+			</li>
+			
+			<li>
 					<?php for ($i = $count_for_pagin[0]; $i <= $count_for_pagin[1]; $i++) { ?>
 					
 						<?php if ($i == $page) { ?>
-									<span><?=$i?></span>
+						
+									<button><?=$i?></button>
 						<?php } else { ?>
-							<a	href="<?php										
-											if ($i == 1) {
-												echo 'page-1';
-											} else {
-												echo 'page-' . $i;
-											}
-										?>"
-								>
-								
-								<?=$i?>
-								
+						
+							<a
+								href="<?php
+											
+										if ($i == 1) {
+											echo 'page-1';
+										} else {
+											echo 'page-' . $i;
+										}
+										?>">
+								<?= '<button>' . $i . '</button>'?>
 							</a>
 							
 						<?php } ?>
 						
 					<?php } ?>
-												
+						
 				</li>
-				<li>	
-											
-					<?php if ($count_contacts > 0) :
-
-							if ($page != $count_pages) :
-					?>
-					
-									<a href="<?= 'page-' . ( $page + 1 ) ?>" title="next page">Next</a>
-																		
-								<?php endif; ?>
-								
-					<?php endif; ?>	
+			<li>								 
+				<?php if ($page != $count_pages) : ?>
+				
+					<a href="<?= 'page-' . ( $page + 1 ) ?>" title="next page">
+						<button>Next</button>
+					</a>
 														
-				</li>
-			</ul>
+				<?php endif; ?>	
+												
+			</li>
+		</ul>
 			
 		<?php } ?>
 		

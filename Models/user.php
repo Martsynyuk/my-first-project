@@ -1,5 +1,5 @@
 <?php
-Class Users extends Model
+Class User extends Model
 {
 		
 	public $table = 'users';

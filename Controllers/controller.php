@@ -6,10 +6,14 @@ class Controller
 	{
 		
 		require_once APP . '/Models/model.php';
-		require_once APP . '/Models/users.php';
+		require_once APP . '/Models/user.php';
 		require_once APP . '/Models/information.php';
 		
-		$this->model = new $this->model();
+		foreach ($this->model as $madel => $class)
+		{
+			$this->$class = new $class();
+		}
+
 		$this->view = new View();
 	}
 	

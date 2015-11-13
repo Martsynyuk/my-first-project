@@ -6,7 +6,7 @@ class Dispatcher {
 	{
 		require_once APP . '/Controllers/controller.php';
 		require_once APP . '/Controllers/contacts.php';
-		require_once APP . '/Controllers/user.php';
+		require_once APP . '/Controllers/users.php';
 		require_once APP . '/Lib/View.php';
 	}
 	

@@ -22,7 +22,7 @@
 		<?php }; ?>
 		
 	</ul>
-	<form name="selectcontact" method="POST" action="/contacts/select/">
+	<form name="selectcontact" method="POST" action="<?= $_SERVER ['REQUEST_URI'] ; ?>">
 		
 		<table border="0">
 			<tr>
@@ -89,8 +89,8 @@
 		<?php endforeach;?>	
 										
 		</table>
-		</br> <input type="submit" name="Select" value="Accept"><a href="">Cancel</a></br>
-		</form>
+		</br> <input type="submit" name="Select" value="Accept"><a href="/">Cancel</a></br>
+		</form>	
 		</br> <a href="/">Back</a>
 		<ul>
 			<li>
@@ -105,7 +105,7 @@
 								}
 								?>"
 								
-							title="last page">Back
+							title="last page"><button name="page" value="page">Back</button>
 						</a>
 						
 					<?php endif; ?>	
@@ -117,7 +117,7 @@
 					
 						<?php if ($i == $page) { ?>
 						
-									<span><?=$i?></span>
+									<button name="page" value="page"><?=$i?></button>
 						<?php } else { ?>
 						
 							<a
@@ -129,7 +129,7 @@
 											echo 'page-' . $i;
 										}
 										?>">
-								<?=$i?>
+								<?= '<button name="page" value="page">' . $i . '</button>'?>
 							</a>
 							
 						<?php } ?>
@@ -140,8 +140,10 @@
 			<li>								 
 				<?php if ($page != $count_pages) : ?>
 				
-					<a href="<?= 'page-' . ( $page + 1 ) ?>" title="next page">Next</a>
-														
+					<a href="<?= 'page-' . ( $page + 1 ) ?>" title="next page">
+						<button name="page" value="page">Next</button>
+					</a>
+													
 				<?php endif; ?>	
 												
 			</li>

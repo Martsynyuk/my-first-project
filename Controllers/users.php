@@ -1,12 +1,14 @@
 <?php
 
 
-Class User extends Controller
+Class Users extends Controller
 {     
 	
-	public $model = 'Users';
+	public $model = array(
+			'User'
+	) ;
 	
-	public function autorization ()
+	public function autorization ( $argument )
 	{
 			
 		$post = $this->post_controller ();
@@ -16,14 +18,67 @@ Class User extends Controller
 		if ( ! empty ( $post['login'] ) && ! empty ( $post['password'] ) )
 		{
 
-			$loginUser = $this->login ( $post['login'], $post['password'] );
+			$what = array(
+					
+						'fields' => array(
+							
+				 					'id',
+				 					'login'
+				
+						 ),
+					
+						'conditions' => array(
+								
+									'login' => $post['login'],
+									'password' => md5 ( $post['password'] . 'lyly' )
+								
+						 ),
+								 
+						'order' => array(
+								
+									'by' => '',
+									'direction' => ''
+								
+						),
+					
+						'limit' => array(
+								
+									'start' => '',
+									'end'=> ''
+								
+						)
+					
+				);
+				
+			$login_user = $this->User->select ( $what );
+				
+			if ( $login_user === 'No connect' )
+			{
+					
+			}
+			else{
+	
+				if ( !empty ( $login_user ) )
+				{	
+					foreach ($login_user as $login_user => $val )
+					{
+						
+						$login_user = $val;
+					}
+	
+					$_SESSION ['id'] = $login_user['id'];
+					$_SESSION ['login'] = $login_user['login'];
+						
+					header ( 'Location: /' );
+				}
+			}
 		}
 			
 			
 		$this->view->set ( 'loginUser', $loginUser );
 		$this->view->set ( 'post', $post );
 			
-		$this-> view->render ( 'users', 'autorization' );
+		$this->view->render ( $argument );
 	}
 		
 	public function logout ()
@@ -36,7 +91,7 @@ Class User extends Controller
 		header ( 'Location: autorization' );
 	}
 		
-	public function registration ()
+	public function registration ( $argument )
 	{
 				
 		$post = $this->post_controller ();
@@ -48,7 +103,7 @@ Class User extends Controller
 			{
 					
 					
-				$user = $this->model->select (
+				$user = $this->User->select (
 						
 										$what = array(
 												
@@ -90,7 +145,7 @@ Class User extends Controller
 				if (empty ( $user ) )
 				{
 						
-					$user = $this->model->insert (
+					$user = $this->User->insert (
 							
 											$what = array(
 													
@@ -115,65 +170,7 @@ Class User extends Controller
 		
 		$this->view->set ( 'post', $post );
 			
-		$this->view->render ( 'users', 'registration' );
+		$this->view->render ( $argument );
 	}
 		
-	function login ( $login, $password )
-	{
-			
-		$what = array(
-				
-					'fields' => array(
-						
-			 					'id',
-			 					'login'
-			
-					 ),
-				
-					'conditions' => array(
-							
-								'login' => $login,
-								'password' => md5 ( $password . 'lyly' )
-							
-					 ),
-							 
-					'order' => array(
-							
-								'by' => '',
-								'direction' => ''
-							
-					),
-				
-					'limit' => array(
-							
-								'start' => '',
-								'end'=> ''
-							
-					)
-				
-			);
-			
-		$login_user = $this->model->select ( $what );
-			
-		if ( $login_user === 'No connect' )
-		{
-				
-		}
-		else{
-
-			if ( !empty ( $login_user ) )
-			{	
-				foreach ($login_user as $login_user => $val )
-				{
-					
-					$login_user = $val;
-				}
-
-				$_SESSION ['id'] = $login_user['id'];
-				$_SESSION ['login'] = $login_user['login'];
-					
-				header ( 'Location: /' );
-			}
-		}
-	}
 }
