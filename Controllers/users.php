@@ -6,7 +6,7 @@ Class Users extends Controller
 	
 	public $model = array(
 			'User'
-	) ;
+	);
 	
 	public function autorization ( $argument )
 	{
