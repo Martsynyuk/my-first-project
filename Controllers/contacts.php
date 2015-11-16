@@ -9,7 +9,8 @@ class Contacts extends Controller
 {
 	
 	public $model = array(
-			'Information'
+			'Information',
+			'Login'
 	);
 	
 	public function  add ($argument)
@@ -42,12 +43,14 @@ class Contacts extends Controller
 				
 				$phone = $post['Cell'];
 			}
+			
+			$user = $this->Login->user();
 				
-			$new_contact = $this->model->insert (
+			$new_contact = $this->Information->insert (
 				
 											$what = array(
 													
-													'users_id' => $_SESSION ['id'], // mast be int its important
+													'users_id' => $user['id'], // mast be int its important
 													'Firstname' => $post['FirstName'],
 													'LastName' => $post['LastName'],
 													'Email' => $post['Email'],
@@ -69,11 +72,6 @@ class Contacts extends Controller
 						
 						);
 				
-			if( $new_contact === 'No connect' )
-			{
-			
-					header('Location: contacts/addcontact');
-			}
 		}
 			
 		if( ! empty ( $phone ) )
@@ -90,8 +88,10 @@ class Contacts extends Controller
 		$post = $this->post_controller ();
 		
 		$get = $this->parse_argument( $argument );
-
-		$this->contacts_defender ( $get['id'], $_SESSION ['id'] );;
+		
+		$user = $this->Login->user();
+		
+		$this->contacts_defender ( $get['id'], $user['id'] );
 				
 		$contactUser = $this->Information->select(
 				
@@ -233,7 +233,7 @@ class Contacts extends Controller
 		if ( empty ( $_SESSION ['id'] ) )
 		{
 			
-			header ( 'Location: user/autorization' );
+			header ( 'Location: users/autorization' );
 		}
 
 		if ( empty ( $get['page'] ) )
@@ -285,64 +285,48 @@ class Contacts extends Controller
 		
 		$get = $this->parse_argument ( $argument );
 		
-		if( ! empty ( $post['page'] ) && count ( $post ) > 1 )
+		if ( empty ( $get['all'] ) )
 		{
-			
-			echo 'sd';
+					
+			$get['all'] = NULL;
 		}
-		
-		if ( ! empty ($post['Select']) )
-		{
-			$argument[0] = 'contacts';
-			$argument[1] = 'letter';
 			
-			$this->letter ( $argument );
+		if ( empty ( $get['page'] ) )
+		{
+					
+			$page = 1;
 		}
 		else{
-			
-			if ( empty ( $get['all'] ) )
-			{
 					
-				$get['all'] = NULL;
-			}
-			
-			if ( empty ( $get['page'] ) )
-			{
-					
-				$page = 1;
-			}
-			else{
-					
-				$page = $get['page'];
-			}
-				
-			if ( empty ( $get['sort'] ) && empty ( $get['sortparam'] ) )
-			{
-					
-				$get['sort'] = 0;
-				$get['sortparam'] = 0;
-			}
-			
-			$i = 1;
-			
-			($page > 1) ? $i = $page * ROWLIMIT - ROWLIMIT + 1 : '';  // to number of contacts
-				
-			$contacts = array ();
-			$contacts = $this->return_contact ( $_SESSION ['id'], $page, $get['sort'], $get['sortparam'] );
-				
-			$count_for_pagin = $this->count_pages ( $_SESSION ['id'], $page );
-			$count_pages = ceil ( $this->count_contacts ( $_SESSION ['id'] ) / 5 );
-			
-			$this->view->set ( 'count_for_pagin', $count_for_pagin );
-			$this->view->set ( 'page', $page );
-			$this->view->set ( 'count_pages', $count_pages );
-			$this->view->set ( 'contacts', $contacts );
-			$this->view->set ( 'i', $i);
-			$this->view->set ( 'get[\'sort\']', $get['sort']);
-			$this->view->set ( 'all', $get['all'] );
-				
-			$this->view->render ( $argument );
+			$page = $get['page'];
 		}
+				
+		if ( empty ( $get['sort'] ) && empty ( $get['sortparam'] ) )
+		{
+					
+			$get['sort'] = 0;
+			$get['sortparam'] = 0;
+		}
+			
+		$i = 1;
+			
+		($page > 1) ? $i = $page * ROWLIMIT - ROWLIMIT + 1 : '';  // to number of contacts
+				
+		$contacts = array ();
+		$contacts = $this->return_contact ( $_SESSION ['id'], $page, $get['sort'], $get['sortparam'] );
+				
+		$count_for_pagin = $this->count_pages ( $_SESSION ['id'], $page );
+		$count_pages = ceil ( $this->count_contacts ( $_SESSION ['id'] ) / 5 );
+			
+		$this->view->set ( 'count_for_pagin', $count_for_pagin );
+		$this->view->set ( 'page', $page );
+		$this->view->set ( 'count_pages', $count_pages );
+		$this->view->set ( 'contacts', $contacts );
+		$this->view->set ( 'i', $i);
+		$this->view->set ( 'get[\'sort\']', $get['sort']);
+		$this->view->set ( 'all', $get['all'] );
+				
+		$this->view->render ( $argument );
 			
 	}
 		

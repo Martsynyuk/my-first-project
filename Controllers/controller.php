@@ -1,4 +1,5 @@
 <?php
+
 class Controller
 {
 	
@@ -13,7 +14,7 @@ class Controller
 		{
 			$this->$class = new $class();
 		}
-
+		
 		$this->view = new View();
 	}
 	
@@ -56,12 +57,6 @@ class Controller
 						)
 							
 				);
-			
-		if ( $user_contact === 'No connect' )
-		{
-		
-				header('Location: /');
-		}
 					
 		if ( empty ( $user_contact ) )
 		{
