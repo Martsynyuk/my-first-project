@@ -89,11 +89,9 @@ class Contacts extends Controller
 		
 		$post = $this->post_controller ();
 		
-		$get = $this->parse_argument( $argument );
-		
 		$user = $this->Login->user();
 		
-		$this->contacts_defender ( $get['id'], $user['id'] );
+		$this->contacts_defender ( $argument[2], $user['id'] );
 				
 		$contactUser = $this->Information->select(
 				
@@ -119,7 +117,7 @@ class Contacts extends Controller
 													
 												'conditions' => array(
 															
-														  	'id' => $get['id'],
+														  	'id' => $argument[2],
 			
 												),
 													
@@ -192,7 +190,7 @@ class Contacts extends Controller
 											
 									),
 												
-									'id' => $get['id']
+									'id' => $argument[2]
 						
 								)
 						
@@ -202,7 +200,7 @@ class Contacts extends Controller
 		}
 			
 		$this->view->set ( 'contactUser', $contactUser );
-		$this->view->set ( 'get', $get );
+		$this->view->set ( 'get', $argument[2] );
 
 		if( ! empty ( $phone ) )
 		{
@@ -218,6 +216,8 @@ class Contacts extends Controller
 	{	
 		
 		$get = $this->parse_argument( $argument );
+		
+		echo'<pre>' ;var_dump($argument); echo'</pre>' ;
 		
 		$user = $this->Login->user();
 		
@@ -326,9 +326,7 @@ class Contacts extends Controller
 	public function view ( $argument )
 	{	
 		
-		$get = $this->parse_argument ( $argument );
-
-		if ( ( int ) ($get['id']) > 0 )
+		if ( ( int ) ($argument[2]) > 0 )
 		{
 				
 			$contactUser = $this->Information->select (	
@@ -337,7 +335,7 @@ class Contacts extends Controller
 													
 													'fields' => array(
 															
-												    			'Firstname',
+												    		'Firstname',
 																'Lastname',
 																'Email',
 																'Home',
@@ -356,7 +354,7 @@ class Contacts extends Controller
 													
 													'conditions' => array(
 																
-																'id' => $get['id'],
+																'id' => $argument[2],
 			
 													),
 													
@@ -377,6 +375,12 @@ class Contacts extends Controller
 											 	)
 					
 										);
+
+			if ( empty ( $contactUser ) )
+			{
+				
+				echo 'No contacts';
+			}
 				
 		}
 		else{

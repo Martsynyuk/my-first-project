@@ -22,7 +22,7 @@
 		<?php }; ?>
 		
 	</ul>
-	<form name="selectcontact" method="POST" action="/contacts/letter/">
+	<form name="selectcontact" method="POST">
 		
 		<table border="0">
 			<tr>
@@ -89,7 +89,7 @@
 		<?php endforeach;?>	
 										
 		</table>
-		</br> <input type="submit" name="Select" value="Accept"><a href="/">Cancel</a></br>
+		</br> <input type="submit" name="Select" value="Accept" formaction="/contacts/letter/"><a href="/">Cancel</a></br>
 		</form>	
 		</br> <a href="/">Back</a>
 		<ul>
