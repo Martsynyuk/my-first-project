@@ -17,6 +17,8 @@ class Contacts extends Controller
 	{
 			
 		$post = $this->post_controller();
+		
+		$user = $this->Login->user();
 			
 		if ( ! empty ( $post['FirstName'] ) ) 
 		{
@@ -43,12 +45,10 @@ class Contacts extends Controller
 				
 				$phone = $post['Cell'];
 			}
-			
-			$user = $this->Login->user();
 				
 			$new_contact = $this->Information->insert (
 				
-											$what = array(
+										$what = array(
 													
 													'users_id' => $user['id'], // mast be int its important
 													'Firstname' => $post['FirstName'],
@@ -73,14 +73,16 @@ class Contacts extends Controller
 						);
 				
 		}
-			
+		
 		if( ! empty ( $phone ) )
 		{
 			$this->view->set ( 'phone', $phone );
 		}
 			
+			$this->view->set ( 'user', $user );
+		
 			$this->view->render ( $argument );
-		}
+	}
 		
 	public function edit ( $argument )
 	{
@@ -139,13 +141,6 @@ class Contacts extends Controller
 				
 									);
 			
-
-		if ( $contactUser === 'No connect' )
-		{
-		
-			header( 'Location: /' );
-		}
-			
 		if ( ! empty ( $post['FirstName'] ) ) 
 		{
 			
@@ -203,12 +198,6 @@ class Contacts extends Controller
 						
 						);
 				
-			if ( $update_contact === 'No connect' )
-			{
-				
-				header ( 'Location: contacts/editcontact' );
-			}
-				
 				header ( 'Location: /' );
 		}
 			
@@ -230,7 +219,9 @@ class Contacts extends Controller
 		
 		$get = $this->parse_argument( $argument );
 		
-		if ( empty ( $_SESSION ['id'] ) )
+		$user = $this->Login->user();
+		
+		if ( empty ( $user['id'] ) )
 		{
 			
 			header ( 'Location: users/autorization' );
@@ -254,18 +245,18 @@ class Contacts extends Controller
 			$get['sort_all'] = 0;
 		}
 		
-		$count_contacts = $this->count_contacts($_SESSION['id']);
+		$count_contacts = $this->count_contacts($user['id']);
 			
 		$contacts = array ();
 		
-		$contacts = $this->return_contact ( $_SESSION ['id'], $page, $get['sort'], $get['sortparam'] );
+		$contacts = $this->return_contact ( $user['id'], $page, $get['sort'], $get['sortparam'] );
 			
-		$count_for_pagin = $this->count_pages ( $_SESSION ['id'], $page );
+		$count_for_pagin = $this->count_pages ( $user['id'], $page );
 		$count_pages = ceil ( $this->count_contacts () / 5 );
 		
 		$i = 1;
 		($page > 1) ? $i = $page * ROWLIMIT - ROWLIMIT + 1 : '';  // to number of contacts
-		;
+		
 		$this->view->set ( 'count_contacts', $count_contacts );
 		$this->view->set ( 'count_for_pagin', $count_for_pagin );
 		$this->view->set ( 'page', $page );
@@ -311,12 +302,14 @@ class Contacts extends Controller
 		$i = 1;
 			
 		($page > 1) ? $i = $page * ROWLIMIT - ROWLIMIT + 1 : '';  // to number of contacts
+		
+		$user = $this->Login->user();
 				
 		$contacts = array ();
-		$contacts = $this->return_contact ( $_SESSION ['id'], $page, $get['sort'], $get['sortparam'] );
+		$contacts = $this->return_contact ( $user['id'], $page, $get['sort'], $get['sortparam'] );
 				
-		$count_for_pagin = $this->count_pages ( $_SESSION ['id'], $page );
-		$count_pages = ceil ( $this->count_contacts ( $_SESSION ['id'] ) / 5 );
+		$count_for_pagin = $this->count_pages ( $user['id'], $page );
+		$count_pages = ceil ( $this->count_contacts ( $user['id'] ) / 5 );
 			
 		$this->view->set ( 'count_for_pagin', $count_for_pagin );
 		$this->view->set ( 'page', $page );
@@ -385,11 +378,6 @@ class Contacts extends Controller
 					
 										);
 				
-			if($contactUser === 'No connect')
-			{
-	
-				header('Location: /');
-			}
 		}
 		else{
 				
@@ -434,10 +422,12 @@ class Contacts extends Controller
 										)
 					);
 			
+			$user = $this->Login->user();
+			
 			if ( ! empty ( $post['del'] ) && $post['del'] === 'Yes')
 			{
 			
-				$protection = $this->contacts_defender ( $get['id'], $_SESSION ['id'] );
+				$protection = $this->contacts_defender ( $get['id'], $user['id'] );
 			
 				if ( ! empty ( $protection ) )
 				{	
@@ -473,7 +463,9 @@ class Contacts extends Controller
 			
 	function count_contacts ()
 	{	
-			
+		
+		$user = $this->Login->user();
+		
 		$res = $this->Information->select(
 				
 									$what = array(
@@ -486,7 +478,7 @@ class Contacts extends Controller
 											
 											'conditions' => array(
 													
-															'users_id' => $_SESSION['id'],
+															'users_id' => $user['id'],
 																				
 											),
 											
@@ -552,7 +544,7 @@ class Contacts extends Controller
 				{
 					$start = 1;
 				}
-			}                                 //
+			}                              
 		}
 		
 		return array (
@@ -650,6 +642,8 @@ class Contacts extends Controller
 
 		$post = $this->post_controller ();
 		
+		$user = $this->Login->user();
+		
 		$mail = NULL;
 		$new_mail = NULL;
 		
@@ -688,7 +682,7 @@ class Contacts extends Controller
 				
 				$this->Information->insert (
 								$what = array(
-										'users_id' => $_SESSION['id'],
+										'users_id' => $user['id'],
 										'FirstName' => 'somenew',
 										'Email' => $mail
 								)					

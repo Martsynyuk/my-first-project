@@ -76,13 +76,6 @@ Class Users extends Controller
 												)
 										)
 							);
-					
-				if ( $user === 'No connect' )
-				{
-						
-					header('Location: user/regictration');
-				}
-					
 				
 				if (empty ( $user ) )
 				{
