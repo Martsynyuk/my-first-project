@@ -27,23 +27,36 @@
 		<table border="0">
 			<tr>
 				<th>
-					 <?= ( empty ( $all ) ) ? '<a href="/contacts/select/all">Select all </a>' 
-														: '<a href="/contacts/select/">All off</a>'
+					 <?php if( empty ( $argument['all'] ) ) 
+									{
+										 echo	'<a href="' . $_SERVER ['REQUEST_URI'] . 'all">Select all </a>' ;
+									}
+									else{
+											echo '<a href="/contacts/select/';
+												
+											if( ! empty ($argument['sort']) && ! empty ($argument['sortparam']) )
+											{
+												echo $argument['sortparam'] . '/' . $argument['sort'] . '/' ;
+											}
+											echo $page . '/';
+											
+											echo '"\>All off</a>';
+									}					
 						?>
 				</th>
 				
 				<th>First Name
 				
 					<a 
-						href="<?=  ( $page > 1 ) ? '/contacts/select/sort-up-FirstName/page-' . $page 
-														: '/contacts/select/sort-up-FirstName/' ; 							
+						href="<?=  ( $page > 1 ) ? '/contacts/select/FirstName/asc/' . $page . '/' 
+														: '/contacts/select/FirstName/asc/' ; 							
 														
 								?>" style="margin: 0 10px;">&#8593 
 					</a>
 					
 					 <a
-						href="<?= ( $page > 1 ) ? '/contacts/select/sort-down-FirstName/page-' . $page 
-														: '/contacts/select/sort-down-FirstName/';
+						href="<?= ( $page > 1 ) ? '/contacts/select/FirstName/desc/' . $page . '/' 
+														: '/contacts/select/FirstName/desc';
 						
 								?>">&#8595 
 					</a>
@@ -51,16 +64,16 @@
 				</th>
 				<th>Last Name
 				
-					<a 
-						href="<?= ( $page > 1 ) ? '/contacts/select/sort-up-LastName/page-' . $page 
-														: '/contacts/select/sort-up-LastName/';
+					<a  
+						href="<?= ( $page > 1 ) ? '/contacts/select/LastName/asc/' . $page . '/' 
+														: '/contacts/select/LastName/asc/';
 						
 								?>" style="margin: 0 10px;">&#8593 
 					</a> 
 					
 					<a
-						href="<?= ( $page > 1 ) ? '/contacts/select/sort-down-LastName/page-' . $page 
-														: '/contacts/select/sort-down-LastName/'; 
+						href="<?= ( $page > 1 ) ? '/contacts/select/LastName/desc/' . $page . '/' 
+														: '/contacts/select/LastName/desc/'; 
 														
 								?>">&#8595 
 					</a>
@@ -75,7 +88,7 @@
 				<tr>
 				<td> 
 					<input type="checkbox" name="<?= $contact['id']; ?>" value="<?= $contact['Email']; ?>" 
-									<?= ( ! empty ($all) ) ? 'checked' : '' ; ?>>
+									<?= ( ! empty ($argument['all']) ) ? 'checked' : '' ; ?>>
 															
 				</td>
 				
@@ -90,23 +103,30 @@
 										
 		</table>
 		</br> <input type="submit" name="Select" value="Accept" formaction="/contacts/letter/"><a href="/">Cancel</a></br>
-		</form>	
-		</br> <a href="/">Back</a>
+			
+		</br> 
 		<ul>
 			<li>
 				<?php  if ($page != 1) : ?>
-						<a
-							href="<?php
+						
+				<input type="submit" name="page" value="Back" formaction="<?php
+				
+								echo '/contacts/select/';
+								
+								if( ! empty ($argument['sort']) && ! empty ($argument['sortparam']) )
+								{
+									echo $argument['sortparam'] . '/' . $argument['sort'] . '/' ;
+								}
 								
 								if ($page == 1) {
-									echo 'page-1';
+									echo '1/';
 								} else {
-									echo 'page-' . ($page - 1);
+									echo ($page - 1) . '/';
 								}
 								?>"
+				>
 								
-							title="last page"><button name="page" value="page">Back</button>
-						</a>
+						
 						
 					<?php endif; ?>	
 														
@@ -114,25 +134,20 @@
 			
 			<li>
 					<?php for ($i = $count_for_pagin[0]; $i <= $count_for_pagin[1]; $i++) { ?>
-					
-						<?php if ($i == $page) { ?>
 						
-									<button name="page" value="page"><?=$i?></button>
-						<?php } else { ?>
-						
-							<a
-								href="<?php
+									<input type="submit" name="page" value="<?=$i?>" formaction="<?php
+									
+											echo '/contacts/select/';
+												
+											if( ! empty ($argument['sort']) && ! empty ($argument['sortparam']) )
+											{
+												echo $argument['sortparam'] . '/' . $argument['sort'] . '/' ;
+											}
+											echo $i . '/';
 											
-										if ($i == 1) {
-											echo 'page-1';
-										} else {
-											echo 'page-' . $i;
-										}
-										?>">
-								<?= '<button name="page" value="page">' . $i . '</button>'?>
-							</a>
-							
-						<?php } ?>
+											?>"
+									>
+
 						
 					<?php } ?>
 						
@@ -140,12 +155,22 @@
 			<li>								 
 				<?php if ($page != $count_pages) : ?>
 				
-					<a href="<?= 'page-' . ( $page + 1 ) ?>" title="next page">
-						<button name="page" value="page">Next</button>
-					</a>
+						<input type="submit" name="page" value="Next" formaction="<?php
+						
+								echo '/contacts/select/';
+									
+								if( ! empty ($argument['sort']) && ! empty ($argument['sortparam']) )
+								{
+										echo $argument['sortparam'] . '/' . $argument['sort'] . '/' ;
+								}
+							  echo ( $page + 1 ) . '/' ;
+							  
+							 ?>"
+						 >
+					
 													
 				<?php endif; ?>	
-												
+			</form>									
 			</li>
 		</ul>
 </body>

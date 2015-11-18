@@ -289,53 +289,96 @@ class Contacts extends Controller
 		
 	public function select ( $argument )
 	{
-
+		
 		$post = $this->post_controller ();	
 		
-		$get = $this->parse_argument ( $argument );
+		$user = $this->Login->user();
 		
-		if ( empty ( $get['all'] ) )
+		$count_pages = ceil ( $this->count_contacts ( $user['id'] ) / 5 );
+		
+		foreach ( $argument as $val )
 		{
-					
-			$get['all'] = NULL;
-		}
+			if( $val === 'FirstName' || $val === 'LastName' )
+			{
+		
+				$argument['sortparam'] = $val;
+			}
 			
-		if ( empty ( $get['page'] ) )
+			if( $val === 'asc' || $val === 'desc' )
+			{
+		
+				$argument['sort'] = $val;
+			}
+			
+			if( $val === 'all' )
+			{
+				$argument['all'] = $val;	
+			}
+			
+			if( (int)($val) > 0 && $val <= $count_pages)
+			{
+		
+				$argument['page'] = $val;
+			}
+				
+		}
+		
+		if ( empty ( $argument['page'] ) )
 		{
 					
 			$page = 1;
 		}
 		else{
 					
-			$page = $get['page'];
+			$page = $argument['page'];
 		}
 				
-		if ( empty ( $get['sort'] ) && empty ( $get['sortparam'] ) )
-		{
-					
-			$get['sort'] = 0;
-			$get['sortparam'] = 0;
+		if ( empty ( $argument['sort'] ))
+		{				
+			$argument['sort'] = 0;		
 		}
-			
+		
+		if (empty ( $argument['sortparam'] ))
+		{
+			$argument['sortparam'] = 0;
+		}
+		
+		$mail = array();
+		
+		if ( ! empty ( $post['page'] ) ) // завершити
+		{
+				
+			foreach ($post as $key=>$val)
+			{
+		
+				if( is_int($key) )
+				{
+						
+					$mail[$key] = $val;
+				}
+			}
+				
+			$mail = implode ( ', ', $mail );
+				
+			setcookie($page, $mail , strtotime("12 hours"), '/');
+		}
+		
 		$i = 1;
 			
 		($page > 1) ? $i = $page * ROWLIMIT - ROWLIMIT + 1 : '';  // to number of contacts
-		
-		$user = $this->Login->user();
 				
 		$contacts = array ();
-		$contacts = $this->return_contact ( $user['id'], $page, $get['sort'], $get['sortparam'] );
+		$contacts = $this->return_contact ( $user['id'], $page, $argument['sort'], $argument['sortparam'] );
 				
 		$count_for_pagin = $this->count_pages ( $user['id'], $page );
-		$count_pages = ceil ( $this->count_contacts ( $user['id'] ) / 5 );
+		
 			
 		$this->view->set ( 'count_for_pagin', $count_for_pagin );
 		$this->view->set ( 'page', $page );
 		$this->view->set ( 'count_pages', $count_pages );
 		$this->view->set ( 'contacts', $contacts );
 		$this->view->set ( 'i', $i);
-		$this->view->set ( 'get[\'sort\']', $get['sort']);
-		$this->view->set ( 'all', $get['all'] );
+		$this->view->set ( 'argument', $argument );
 				
 		$this->view->render ( $argument );
 			
