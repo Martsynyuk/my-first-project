@@ -20,26 +20,25 @@ class Dispatcher {
 			header ( 'Location: /error_pages/404.html', 404 );
 		}
 		
-		$arguments = explode ( '/', ltrim ( $path, '/' ) );
+		$argument = explode ( '/', ltrim ( $path, '/' ) );
 
-		if ( empty ( $arguments ) )
+		if ( empty ( $argument ) )
 		{
 				
 			header ( 'Location: /error_pages/404.html', 404 );
 		}
 		
-		$count = count($arguments);
-		
-		if( $path == '/' || count( explode('-', $arguments[0] ) ) > 1 )
-		{
-			for ( $i=0; $i < $count ; $i++ )
-			{
-				if ( ! empty ( $arguments[$i] ) )
+		if( $path == '/' || class_exists($argument[0]) !== true )
+		{ 
+			$count = count($argument);
+			
+			if ( $count > 0 )
+			{	
+				for ( $i=0; $i < $count ; $i++ )
 				{
-					
-					$arguments[$i+2] = $arguments[$i];
+						
+						$arguments[$i+2] = $argument[$i];			
 				}
-				
 			}
 			
 			$arguments [1] = 'index';
@@ -48,9 +47,9 @@ class Dispatcher {
 		
 		$class = ucfirst ( $arguments[0] );
 
-		$load = new $class;	
+		$object = new $class;	
 		
-		$variables = $load->$arguments[1]( $arguments );
+		$object->$arguments[1]( $arguments );
 	
 	}
 	

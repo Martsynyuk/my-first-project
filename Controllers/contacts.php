@@ -215,44 +215,63 @@ class Contacts extends Controller
 	public function index ( $argument )
 	{	
 		
-		$get = $this->parse_argument( $argument );
-		
-		echo'<pre>' ;var_dump($argument); echo'</pre>' ;
-		
 		$user = $this->Login->user();
 		
+		$count_pages = ceil ( $this->count_contacts () / 5 );
+		
+		foreach ( $argument as $val )
+		{
+			if( $val === 'FirstName' || $val === 'LastName' )
+			{
+				
+				$argument['sortparam'] = $val;
+			}
+			if( $val === 'asc' || $val === 'desc' )
+			{
+				
+				$argument['sort'] = $val;
+			}
+			if( (int)($val) > 0 && $val <= $count_pages)
+			{
+				
+				$argument['page'] = $val;
+			}
+			
+		}
+
 		if ( empty ( $user['id'] ) )
 		{
 			
 			header ( 'Location: users/autorization' );
 		}
 
-		if ( empty ( $get['page'] ) )
+		if ( empty ( $argument['page'] ) )
 		{
 			
 			$page = 1;
 		}
 		else{
 			
-			$page = $get['page'];
+			$page = $argument['page'];
 		}
 			
-		if ( empty ( $get['sort'] ) && empty ( $get['sortparam'] ) )
+		if ( empty( $argument['sort'] ) )
 		{
 				
-			$get['sort'] = 0;
-			$get['sortparam'] = 0;
-			$get['sort_all'] = 0;
+			$argument['sort'] = 0;		
 		}
-		
-		$count_contacts = $this->count_contacts($user['id']);
+		if( empty( $argument['sortparam'] ))
+		{
+			$argument['sortparam'] = 0;
+		}
 			
 		$contacts = array ();
 		
-		$contacts = $this->return_contact ( $user['id'], $page, $get['sort'], $get['sortparam'] );
+		$count_contacts = $this->count_contacts($user['id']);
+		
+		$contacts = $this->return_contact ( $user['id'], $page, $argument['sort'], $argument['sortparam'] );
 			
 		$count_for_pagin = $this->count_pages ( $user['id'], $page );
-		$count_pages = ceil ( $this->count_contacts () / 5 );
 		
 		$i = 1;
 		($page > 1) ? $i = $page * ROWLIMIT - ROWLIMIT + 1 : '';  // to number of contacts
@@ -263,7 +282,6 @@ class Contacts extends Controller
 		$this->view->set ( 'count_pages', $count_pages );
 		$this->view->set ( 'contacts', $contacts );
 		$this->view->set ( 'i', $i);
-		$this->view->set ( 'sort_all', $get['sort_all']);
 		
 		$this->view->render ( $argument );
 		
@@ -564,7 +582,7 @@ class Contacts extends Controller
 		$sort = '';
 		$deck = '';
 
-		if ( $sorting === 'up' && $sortparam === 'FirstName' || $sorting === 'up' && $sortparam === 'LastName' )
+		if ( $sorting === 'asc' && $sortparam === 'FirstName' || $sorting === 'asc' && $sortparam === 'LastName' )
 		{	
 			
 			if ( $sortparam === 'FirstName' )
@@ -577,7 +595,7 @@ class Contacts extends Controller
 				$sort = $sortparam . ', FirstName';
 			}
 		}
-		elseif ( $sorting === 'down' && $sortparam === 'FirstName' || $sorting === 'down' && $sortparam === 'LastName' )
+		elseif ( $sorting === 'desc' && $sortparam === 'FirstName' || $sorting === 'desc' && $sortparam === 'LastName' )
 		{
 				
 			if ( $sortparam === 'FirstName' )

@@ -26,24 +26,24 @@
 			<th></th>
 			<th>First Name
 				<a 
-					href="<?=  ( $page > 1 ) ? '/sort-up-FirstName/page-' . $page : '/sort-up-FirstName/' ; 							
+					href="<?=  ( $page > 1 ) ? '/FirstName/asc/' . $page : '/FirstName/asc/' ; 							
 													
 							?>" style="margin: 0 10px;">&#8593 
 				</a>
 				 <a
-					href="<?= ( $page > 1 ) ? '/sort-down-FirstName/page-' . $page : '/sort-down-FirstName/';
+					href="<?= ( $page > 1 ) ? '/FirstName/desc/' . $page : '/FirstName/desc/';
 					
 							?>">&#8595 
 				</a>
 			</th>
 			<th>Last Name
 				<a 
-					href="<?= ( $page > 1 ) ? '/sort-up-LastName/page-' . $page : '/sort-up-LastName/';
+					href="<?= ( $page > 1 ) ? '/LastName/asc/' . $page : '/LastName/asc/';
 					
 							?>" style="margin: 0 10px;">&#8593 
 				</a> 
 				<a
-					href="<?= ( $page > 1 ) ? '/sort-down-LastName/page-' . $page : '/sort-down-LastName/'; ?>">&#8595 
+					href="<?= ( $page > 1 ) ? '/LastName/desc/' . $page : '/LastName/desc/'; ?>">&#8595 
 				</a>
 			</th>
 			<th>E-mail</th>
@@ -97,9 +97,9 @@
 							href="<?php
 								
 								if ($page == 1) {
-									echo 'page-1';
+									echo '1';
 								} else {
-									echo 'page-' . ($page - 1);
+									echo ($page - 1);
 								}
 								?>"
 								
@@ -115,18 +115,12 @@
 					
 						<?php if ($i == $page) { ?>
 						
-									<button><?=$i?></button>
+									<a href="<?= $i	?>">
+										<?= '<button>' . $i . '</button>'?>
+									</a>
 						<?php } else { ?>
 						
-							<a
-								href="<?php
-											
-										if ($i == 1) {
-											echo 'page-1';
-										} else {
-											echo 'page-' . $i;
-										}
-										?>">
+							<a href="<?= $i	?>">
 								<?= '<button>' . $i . '</button>'?>
 							</a>
 							
@@ -138,7 +132,7 @@
 			<li>								 
 				<?php if ($page != $count_pages) : ?>
 				
-					<a href="<?= 'page-' . ( $page + 1 ) ?>" title="next page">
+					<a href="<?= ( $page + 1 ) ?>" title="next page">
 						<button>Next</button>
 					</a>
 														
