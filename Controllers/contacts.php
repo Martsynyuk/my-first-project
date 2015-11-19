@@ -343,7 +343,7 @@ class Contacts extends Controller
 			$argument['sortparam'] = 0;
 		}
 		
-		$mail = array();
+		$id = array();
 		
 		if ( ! empty ( $post['page'] ) ) // завершити
 		{
@@ -354,15 +354,15 @@ class Contacts extends Controller
 				if( is_int($key) )
 				{
 						
-					$mail[$key] = $val;
+					$id[] = $key;
 				}
 			}
 				
-			$mail = implode ( ', ', $mail );
+			$id = implode ( ', ', $id);
 				
-			setcookie($page, $mail , strtotime("12 hours"), '/');
+			setcookie($page, $id , strtotime("12 hours"), '/');
 		}
-		
+		var_dump($_COOKIE);
 		$i = 1;
 			
 		($page > 1) ? $i = $page * ROWLIMIT - ROWLIMIT + 1 : '';  // to number of contacts

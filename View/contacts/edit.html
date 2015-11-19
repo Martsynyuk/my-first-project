@@ -9,13 +9,13 @@
 	<ul>
 		<?php if ( empty ( $_SESSION ['id'] ) ) { ?>
 		 
-		<?= '<li> <a href="user/autorization">Autorization</a> </li>' ?>
-		<?= '<li> <a href="user/registration">Registration</a> </li>' ?>
+		<?= '<li> <a href="users/autorization">Autorization</a> </li>' ?>
+		<?= '<li> <a href="users/registration">Registration</a> </li>' ?>
 		
 		<?php } else { ?>
 		
 		<?= '<li> <a href="/">Home</a> </li>' ?>
-		<?= '<li> <a href="/user/logout">Logout</a> </li>' ?>
+		<?= '<li> <a href="/users/logout">Logout</a> </li>' ?>
 		
 		<?php }; ?>
 		
