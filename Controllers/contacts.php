@@ -91,7 +91,7 @@ class Contacts extends Controller
 		
 		$user = $this->Login->user();
 		
-		$this->contacts_defender ( $argument[2], $user['id'] );
+		$this->Information->contacts_defender ( $argument[2], $user['id'] );
 				
 		$contactUser = $this->Information->select(
 				
@@ -362,7 +362,7 @@ class Contacts extends Controller
 				
 			setcookie($page, $id , strtotime("12 hours"), '/');
 		}
-		var_dump($_COOKIE);
+		
 		$i = 1;
 			
 		($page > 1) ? $i = $page * ROWLIMIT - ROWLIMIT + 1 : '';  // to number of contacts
@@ -458,13 +458,11 @@ class Contacts extends Controller
 	function delete ( $argument )
 	{
 		
-		$get = $this->parse_argument( $argument );
-		
 		$post = $this->post_controller ();
 		
 		$select = NULL;
 		
-		if ( ! empty ( $get['id'] ) && (int)( $get['id'] ) >0 )
+		if ( ! empty ( $argument[2] ) && (int)( $argument[2] ) >0 )
 		{
 			
 			$select = $this->Information->select ( 
@@ -475,7 +473,7 @@ class Contacts extends Controller
 												),
 												'conditions' => array(
 												
-														'id' => $get['id'],
+														'id' => $argument[2],
 												),
 												'limit' => array(
 												
@@ -492,12 +490,12 @@ class Contacts extends Controller
 			if ( ! empty ( $post['del'] ) && $post['del'] === 'Yes')
 			{
 			
-				$protection = $this->contacts_defender ( $get['id'], $user['id'] );
+				$protection = $this->Information->contacts_defender ( $argument[2], $user['id'] );
 			
 				if ( ! empty ( $protection ) )
 				{	
 							
-					$this->Information->delete ( $get['id'] );
+					$this->Information->delete ( $argument[2] );
 		
 					header('Location: /');
 			
@@ -520,7 +518,7 @@ class Contacts extends Controller
 		}
 		
 		$this->view->set ( 'select', $select);
-		$this->view->set ( 'id', $get['id']);
+		$this->view->set ( 'id', $argument[2]);
 		
 		$this->view->render ( $argument );
 
@@ -704,7 +702,7 @@ class Contacts extends Controller
 	
 	function letter ( $argument )
 	{
-
+		
 		$post = $this->post_controller ();
 		
 		$user = $this->Login->user();

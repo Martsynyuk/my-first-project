@@ -11,5 +11,5 @@ interface For_model
 	public function update($what);
 	public function delete($value);
 	public function query($sql); 
-	
+	public function contacts_defender($id, $user_id);
 }

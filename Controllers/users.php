@@ -29,7 +29,6 @@ Class Users extends Controller
 			
 		unset ( $_SESSION['id'] );
 		unset ( $_SESSION['login'] );
-		unset ( $_COOKIE['mail'] );
 			
 		header ( 'Location: autorization' );
 	}

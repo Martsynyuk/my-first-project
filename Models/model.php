@@ -123,7 +123,7 @@ Class Model implements For_model
 				$fields = '*';
 			}
 						
-			$sql = 'SELECT ' . $fields . ' FROM  '. $this->table;
+			$sql = 'SELECT ' . $fields . ' FROM  '. $this->class;
 						
 			if( ! empty ( $what['conditions'] ) )
 			{		
@@ -207,7 +207,7 @@ Class Model implements For_model
 				$key = ltrim ( $key, ', ' );
 				$val = ltrim ( $val, ', ' );
 					
-				$sql ='INSERT INTO ' . $this->table . ' (' . $key . ') VALUE (' . $val . ');';
+				$sql ='INSERT INTO ' . $this->class . ' (' . $key . ') VALUE (' . $val . ');';
 					
 			}
 	
@@ -274,7 +274,7 @@ Class Model implements For_model
 	function delete ( $value )
 	{	
 						
-		$sql = 'DELETE FROM ' . $this->table . ' WHERE id=' . $value . ';';
+		$sql = 'DELETE FROM ' . $this->class . ' WHERE id=' . $value . ';';
 							
 		$this->mysqli->query ( $sql );
 										
@@ -299,5 +299,55 @@ Class Model implements For_model
 		return $result;
 			
 	}
+		
+	function contacts_defender ( $id, $user_id )
+	{
+		if ( ( int ) $id > 0 )
+		{
 			
+			$protection_contact = new $this->class();
+	
+			$user_contact = $protection_contact->select (
+						
+					$what = array(
+	
+							'fields' => array(
+										
+									'*'
+							),
+	
+							'conditions' => array(
+	
+									'id' => $id
+							),
+	
+							'order' => array(
+	
+									'by' => '',
+									'direction' => ''
+							),
+	
+							'limit' => array(
+	
+									'start' => '',
+									'end'=> ''
+							)
+					)
+						
+			);
+				
+			if ( $user_contact['users_id'] !== $user_id )
+			{
+					
+				header ( 'Location: /' );
+			}
+		}
+		else{
+	
+			header ( 'Location: /' );
+		}
+	
+		return $user_contact;
+	}
 }
+

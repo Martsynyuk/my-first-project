@@ -2,7 +2,7 @@
 Class User extends Model
 {
 		
-	public $table = 'users';
+	public $class = 'users';
 		
 	function select ( $what )
 	{

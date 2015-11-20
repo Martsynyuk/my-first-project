@@ -4,7 +4,7 @@
 Class Information extends Model
 {
 		
-	public $table = 'information';
+	public $class = 'information';
 		
 	function select ( $what )
 	{
