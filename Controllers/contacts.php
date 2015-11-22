@@ -91,7 +91,15 @@ class Contacts extends Controller
 		
 		$user = $this->Login->user();
 		
-		$this->Information->contacts_defender ( $argument[2], $user['id'] );
+		if ( (int)($argument[2]) === 0 )
+		{
+			header ( 'Location: /' );
+		}
+		
+		if( ! $this->Information->contacts_defender ( $argument[2], $user['id'] ))
+		{
+			header ( 'Location: /' );
+		}
 				
 		$contactUser = $this->Information->select(
 				
@@ -462,7 +470,7 @@ class Contacts extends Controller
 		
 		$select = NULL;
 		
-		if ( ! empty ( $argument[2] ) && (int)( $argument[2] ) >0 )
+		if ( ! empty ( $argument[2] ) && (int)( $argument[2] ) > 0 )
 		{
 			
 			$select = $this->Information->select ( 
@@ -485,21 +493,27 @@ class Contacts extends Controller
 										)
 					);
 			
+			if ( empty ($select) )
+			{
+				header('Location: /');
+			}
+			
 			$user = $this->Login->user();
 			
 			if ( ! empty ( $post['del'] ) && $post['del'] === 'Yes')
 			{
-			
-				$protection = $this->Information->contacts_defender ( $argument[2], $user['id'] );
-			
-				if ( ! empty ( $protection ) )
-				{	
-							
+					
+				 if ( ! $a=$this->Information->contacts_defender ( $argument[2], $user['id'] ))
+				 {
+				 		
+				  	header('Location: /');
+				 }
+					
+					
 					$this->Information->delete ( $argument[2] );
 		
 					header('Location: /');
-			
-				}
+
 			}
 			elseif ( $post['del'] === 'No' )
 			{

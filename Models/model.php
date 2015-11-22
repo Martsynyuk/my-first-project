@@ -318,7 +318,8 @@ Class Model implements For_model
 	
 							'conditions' => array(
 	
-									'id' => $id
+									'id' => $id,
+									'users_id' => $user_id
 							),
 	
 							'order' => array(
@@ -335,19 +336,21 @@ Class Model implements For_model
 					)
 						
 			);
-				
-			if ( $user_contact['users_id'] !== $user_id )
+			var_dump($user_contact);
+			var_dump($id);
+			if ( empty($user_contact) )
 			{
-					
-				header ( 'Location: /' );
+				return FALSE;
 			}
+			else{
+				return TRUE;
+			}
+		
 		}
 		else{
 	
 			header ( 'Location: /' );
 		}
-	
-		return $user_contact;
 	}
 }
 

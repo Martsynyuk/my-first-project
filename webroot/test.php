@@ -1,5 +1,9 @@
 <?php
 
- $a = '1asdas';
+ $a = array();
+ $a[1] =12;
+ $a[2] = NULL;
+ echo $a[2];
  
- echo (int)$a;
+ 
+ 
