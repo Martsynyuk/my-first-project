@@ -29,7 +29,12 @@ Class Users extends Controller
 			
 		unset ( $_SESSION['id'] );
 		unset ( $_SESSION['login'] );
-		setcookie('mail', '' , strtotime("-1 hours"), '/');
+		
+		if(! empty($_COOKIE['mails']) || ! empty($_COOKIE['new_mail']) )
+		{
+			setcookie('mails', '' , strtotime("12 hours"), '/');
+			setcookie('new_mail', '' , strtotime("12 hours"), '/');
+		}
 			
 		header ( 'Location: autorization' );
 	}

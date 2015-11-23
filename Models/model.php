@@ -211,7 +211,7 @@ Class Model implements For_model
 			}
 	
 			$this->query( $sql );
-			
+			var_dump($sql);
 			return ;
 		}
 		
