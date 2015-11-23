@@ -1,9 +1,21 @@
 <?php
-
+	$c = array(
+			
+			'a',
+			'ss',
+			'asd'
+	);
  $a = array();
- $a[1] =12;
- $a[2] = NULL;
- echo $a[2];
+ $a = '';
+ $b = array();
+ $b ['mail'] = $a;
  
+ foreach ( $c as $val )
+ {
+ 	
+ 		$b[]=$val;
+ }
+ $b = implode ( ', ', $b);
+ var_dump($b);
  
  

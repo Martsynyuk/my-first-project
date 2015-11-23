@@ -169,7 +169,6 @@ Class Model implements For_model
 				$result = mysqli_fetch_all ( $res,MYSQLI_ASSOC );			
 			}
 			//var_dump($sql);
-
 		return $result;
 	}
 		

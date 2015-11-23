@@ -281,6 +281,8 @@ class Contacts extends Controller
 			
 		$count_for_pagin = $this->count_pages ( $user['id'], $page );
 		
+		//setcookie('mail', $id , strtotime("12 hours"), '/');
+		
 		$i = 1;
 		($page > 1) ? $i = $page * ROWLIMIT - ROWLIMIT + 1 : '';  // to number of contacts
 		
@@ -349,28 +351,44 @@ class Contacts extends Controller
 		if (empty ( $argument['sortparam'] ))
 		{
 			$argument['sortparam'] = 0;
-		}
-		
-		$id = array();
+		}	
 		
 		if ( ! empty ( $post['page'] ) ) // завершити
-		{
+		{	
+			
+			if ( empty ( $_COOKIE['mail'] ) )
+			{
+				$id = array();
+			}
+			else{
 				
-			foreach ($post as $key=>$val)
+				$id = array(
+						'mail' => $_COOKIE['mail']
+				);
+			}
+			
+			foreach ( $post as $key=>$val )
 			{
 		
-				if( is_int($key) )
+				if( is_int ($key) )
 				{
-						
+					
 					$id[] = $key;
 				}
 			}
-				
+			
 			$id = implode ( ', ', $id);
-				
-			setcookie($page, $id , strtotime("12 hours"), '/');
+			
+			setcookie('mail', $id , strtotime("12 hours"), '/');
+			
 		}
-		
+		if ( ! empty ($_COOKIE['mail']) )
+		{
+			$checked = explode(', ', $_COOKIE['mail']);
+		}
+		else{
+			$checked = array();
+		}
 		$i = 1;
 			
 		($page > 1) ? $i = $page * ROWLIMIT - ROWLIMIT + 1 : '';  // to number of contacts
@@ -387,6 +405,7 @@ class Contacts extends Controller
 		$this->view->set ( 'contacts', $contacts );
 		$this->view->set ( 'i', $i);
 		$this->view->set ( 'argument', $argument );
+		$this->view->set ( 'checked', $checked );
 				
 		$this->view->render ( $argument );
 			
@@ -503,7 +522,7 @@ class Contacts extends Controller
 			if ( ! empty ( $post['del'] ) && $post['del'] === 'Yes')
 			{
 					
-				 if ( ! $a=$this->Information->contacts_defender ( $argument[2], $user['id'] ))
+				 if ( ! $this->Information->contacts_defender ( $argument[2], $user['id'] ))
 				 {
 				 		
 				  	header('Location: /');
@@ -716,42 +735,78 @@ class Contacts extends Controller
 	
 	function letter ( $argument )
 	{
-		
+		var_dump($_COOKIE['mail']);
 		$post = $this->post_controller ();
 		
 		$user = $this->Login->user();
 		
-		$mail = NULL;
 		$new_mail = NULL;
+		$mail = NULL;
 		
-		if ( count ( $post ) > 1 && ! empty ( $post['Select'] ) )
+		if ( ! empty($_COOKIE['mail']) )
 		{
-	
-			foreach ( $post as $key => $val )
+			$mails = array_unique ( explode(', ', $_COOKIE['mail']) );
+			
+			foreach ($mails as $id)
 			{
+				$email[] = $this->Information->select(
+								$what = array(
+										'fields' => array(
+																						
+												'Email'
+								
+										),
+											
+										'conditions' => array(
+										
+												'id' => $id
+													
+										),
+											
+										'order' => array(
+										
+												'by' => '',
+												'direction' => ''
+										
+										),
+											
+										'limit' => array(
+										
+												'start' => '',
+												'end'=> ''
+										)
+								)
+						);
+				
+			}
 					
-				if ( is_int ( $key ) )
+			foreach ($email as $val)
+			{
+				foreach ($val as $value)
 				{
-		
-					$mail[] = $val;
+					if ( $value['Email'] !== '' )
+					{
+						$mail[] = $value['Email'];
+					}
+				}				
+			}
+			
+			$mail = implode(', ', $mail);
+			
+		}
+		elseif( ! empty ($post['Select']) && empty ( $_COOKIE['mail'] ) )
+		{	
+			foreach ($post as $key=>$post)
+			{	
+				if((int)($key)>1 && $post != '')
+				{
+					$mail[] = $post; 
 				}
 			}
-				
-			$mail = implode ( ', ', $mail );
-				
-			setcookie('mail', $mail , strtotime("12 hours"), '/');
-				
+			$mail = implode(', ', $mail);
 		}
 		
-		if ( ! empty ( $post['mails'] ) && ! empty ( $_COOKIE['mail'] ) && ! empty ( $post['add'] ) )
-		{
-			
-			$new_mail = implode ( ', ', array_diff ( explode ( ', ', $post['mails'] ), explode(', ', $_COOKIE['mail']) ) ) ;
-		
-			setcookie('mail', $new_mail , strtotime("12 hours"), '/');
-		}
-		
-		if ( ! empty ( $post['Yes'] ) )
+		if ( ! empty ($post['Yes']) && $post['Yes'] === 'Yes' )
 		{	
 			
 			foreach ( explode(', ', $_COOKIE['mail']) as $key => $mail)
@@ -766,11 +821,9 @@ class Contacts extends Controller
 						);
 			}
 			
-			unset ( $_COOKIE['mail'] );
-			
 			header ( 'Location: / ');
 		} 
-		elseif ( ! empty ( $post['No'] ) )
+		elseif ( ! empty ($post['No']) && $post['No'] === 'No' )
 		{
 			
 			header ( 'Location: / ');
