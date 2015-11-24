@@ -209,10 +209,10 @@ Class Model implements For_model
 				$sql ='INSERT INTO ' . $this->class . ' (' . $key . ') VALUE (' . $val . ');';
 					
 			}
-	
-			$this->query( $sql );
-			var_dump($sql);
-			return ;
+			
+				$this->query( $sql );
+			
+			
 		}
 		
 	/**

@@ -232,7 +232,7 @@ class Contacts extends Controller
 			//setcookie('new_mail', '' , strtotime("12 hours"), '/');
 			//setcookie('mails', '' , strtotime("12 hours"), '/');
 		}
-		
+	
 		foreach ( $argument as $val )
 		{
 			if( $val === 'FirstName' || $val === 'LastName' )
@@ -285,9 +285,7 @@ class Contacts extends Controller
 		
 		$contacts = $this->return_contact ( $user['id'], $page, $argument['sort'], $argument['sortparam'] );
 			
-		$count_for_pagin = $this->count_pages ( $user['id'], $page );
-		
-		//setcookie('mail', $id , strtotime("12 hours"), '/');
+		$count_for_pagin = $this->count_pages ( $page );
 		
 		$i = 1;
 		($page > 1) ? $i = $page * ROWLIMIT - ROWLIMIT + 1 : '';  // to number of contacts
@@ -317,7 +315,6 @@ class Contacts extends Controller
 			setcookie('mails', '' , strtotime("12 hours"), '/');
 			setcookie('new_mail', '' , strtotime("12 hours"), '/');
 		}
-		
 		if ( ! empty ($_COOKIE['mails']) )
 		{
 			setcookie('mails', '' , strtotime("12 hours"), '/');
@@ -413,7 +410,7 @@ class Contacts extends Controller
 		$contacts = array ();
 		$contacts = $this->return_contact ( $user['id'], $page, $argument['sort'], $argument['sortparam'] );
 				
-		$count_for_pagin = $this->count_pages ( $user['id'], $page );
+		$count_for_pagin = $this->count_pages ( $page );
 		
 			
 		$this->view->set ( 'count_for_pagin', $count_for_pagin );
@@ -637,7 +634,7 @@ class Contacts extends Controller
 			$right = $count_pages - $page;  
 					
 			if ( $left < floor ( $count_show_pages / 2 ) )
-			{
+			{		
 				$start = 1;
 			}
 			else {
