@@ -229,7 +229,7 @@ class Contacts extends Controller
 		
 		if(! empty($_COOKIE['mails']) || ! empty($_COOKIE['new_mail']) )
 		{
-			//setcookie('new_mail', '' , strtotime("12 hours"), '/');
+			setcookie('new_mail', '' , strtotime("12 hours"), '/');
 			//setcookie('mails', '' , strtotime("12 hours"), '/');
 		}
 	
@@ -367,7 +367,7 @@ class Contacts extends Controller
 			$argument['sortparam'] = 0;
 		}	
 		
-		if ( ! empty ( $post['page'] ) ) // завершити
+		if ( ! empty ( $post['page'] ) ) 
 		{	
 			
 			if ( empty ( $_COOKIE['mail'] ) )
@@ -404,14 +404,13 @@ class Contacts extends Controller
 			$checked = array();
 		}
 		$i = 1;
-			
+		
 		($page > 1) ? $i = $page * ROWLIMIT - ROWLIMIT + 1 : '';  // to number of contacts
 				
 		$contacts = array ();
 		$contacts = $this->return_contact ( $user['id'], $page, $argument['sort'], $argument['sortparam'] );
 				
 		$count_for_pagin = $this->count_pages ( $page );
-		
 			
 		$this->view->set ( 'count_for_pagin', $count_for_pagin );
 		$this->view->set ( 'page', $page );
@@ -757,13 +756,17 @@ class Contacts extends Controller
 		$new_mail = NULL;
 		$mail = NULL;
 		
-		if ( ! empty($post['add']) && $post['add'] == 'add' )
+		if ( ! empty($post['add']) && ! empty ($post['mails']) && ! empty ($_COOKIE['mails']))
 		{
 			$new_mail = array_diff(explode(', ', $post['mails']), explode(', ', $_COOKIE['mails']));		
 			$new_mail = implode(', ', $new_mail);
 			setcookie('new_mail', $new_mail , strtotime("12 hours"), '/');
 		}
-		
+		elseif ( ! empty($post['add']) && ! empty ($post['mails']))
+		{
+			$new_mail = $post['mails'];
+			setcookie('new_mail', $new_mail , strtotime("12 hours"), '/');
+		}
 		if ( isset($_COOKIE['mail']) && ! empty ($post['Select']) && $post['Select'] == 'Accept' )
 		{	
 			
