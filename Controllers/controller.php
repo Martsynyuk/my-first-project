@@ -38,10 +38,19 @@ class Controller
 		
 	}
 	
-	function parse_argument ( $arguments )
+	function set_cookie ($name,  $value)
 	{
+		if(is_array($value))
+		{
+			$value = implode(', ', $value);
+		}
 		
-
-		return $argument;
+		$cookie = setcookie($name, $value , strtotime("12 hours"), '/');	
+	}
+	function get_cookie($value)
+	{
+		$array = explode(',' , $value);
+		
+		return $array;
 	}
 }

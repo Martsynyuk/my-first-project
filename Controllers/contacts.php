@@ -312,12 +312,8 @@ class Contacts extends Controller
 		
 		if(! empty($_COOKIE['mails']) || ! empty($_COOKIE['new_mail']) )
 		{			
-			setcookie('mails', '' , strtotime("12 hours"), '/');
-			setcookie('new_mail', '' , strtotime("12 hours"), '/');
-		}
-		if ( ! empty ($_COOKIE['mails']) )
-		{
-			setcookie('mails', '' , strtotime("12 hours"), '/');
+			$this->set_cookie('mails', '');
+			$this->set_cookie('new_mail', '');
 		}
 		
 		foreach ( $argument as $val )
@@ -393,12 +389,12 @@ class Contacts extends Controller
 			
 			$id = implode ( ', ', $id);
 			
-			setcookie('mail', $id , strtotime("12 hours"), '/');
-			
+			$this->set_cookie('mail', $id);
+	
 		}
 		if ( ! empty ($_COOKIE['mail']) )
 		{
-			$checked = explode(', ', $_COOKIE['mail']);
+			$checked = $this->get_cookie( $_COOKIE['mail']);
 		}
 		else{
 			$checked = array();
@@ -759,18 +755,20 @@ class Contacts extends Controller
 		if ( ! empty($post['add']) && ! empty ($post['mails']) && ! empty ($_COOKIE['mails']))
 		{
 			$new_mail = array_diff(explode(', ', $post['mails']), explode(', ', $_COOKIE['mails']));		
-			$new_mail = implode(', ', $new_mail);
-			setcookie('new_mail', $new_mail , strtotime("12 hours"), '/');
+
+			$this->set_cookie('new_mail', $new_mail);
 		}
 		elseif ( ! empty($post['add']) && ! empty ($post['mails']))
 		{
 			$new_mail = $post['mails'];
-			setcookie('new_mail', $new_mail , strtotime("12 hours"), '/');
+
+			$this->set_cookie('new_mail', $new_mail);
 		}
+		
 		if ( isset($_COOKIE['mail']) && ! empty ($post['Select']) && $post['Select'] == 'Accept' )
 		{	
 			
-			$mails = array_unique ( explode(', ', $_COOKIE['mail']) );
+			$mails = array_unique ( $this->get_cookie($_COOKIE['mail']));
 			
 			foreach ($mails as $id)
 			{
@@ -803,7 +801,8 @@ class Contacts extends Controller
 								)
 						);
 				
-			}		
+			}
+			
 			if( isset($email))
 			{
 				foreach ($email as $val)
@@ -819,10 +818,10 @@ class Contacts extends Controller
 				
 				$mail = implode(', ', $mail);
 			}
-					
-			setcookie('mails', $mail , strtotime("12 hours"), '/');
-			setcookie('mail', '' , strtotime("12 hours"), '/');
-			header ( 'Location: /contacts/letter' );
+			
+			$this->set_cookie('mails', $mail);		
+			$this->set_cookie('mail', '');
+			
 		}
 		elseif( ! empty ($post['Select']) && empty ( $_COOKIE['mail'] ) )
 		{	
@@ -831,14 +830,13 @@ class Contacts extends Controller
 				if((int)($key)>1 && $post != '')
 				{
 					$mail[] = $post; 
-				}
+				}				
 			}
+			$mail = implode(', ', $mail);
 			if ( isset($mail) )
 			{
-				$mail = implode(', ', $mail);
 				
-				setcookie('mails', $mail , strtotime("12 hours"), '/');
-				header ( 'Location: /contacts/letter' );
+				$this->set_cookie('mails', $mail);				
 			}
 		}
 		
@@ -850,7 +848,7 @@ class Contacts extends Controller
 		if ( ! empty ($post['Yes']) && $post['Yes'] === 'Yes' )
 		{	
 			
-			foreach ( explode(', ', $_COOKIE['new_mail']) as $mail)
+			foreach ( $this->get_cookie($_COOKIE['new_mail']) as $mail)
 			{
 				
 				$this->Information->insert (
