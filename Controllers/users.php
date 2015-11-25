@@ -29,6 +29,7 @@ Class Users extends Controller
 			
 		unset ( $_SESSION['id'] );
 		unset ( $_SESSION['login'] );
+		unset ( $_SESSION['mail'] );
 		
 		if(! empty($_COOKIE['mails']) || ! empty($_COOKIE['new_mail']) )
 		{

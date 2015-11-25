@@ -230,7 +230,7 @@ class Contacts extends Controller
 		if(! empty($_COOKIE['mails']) || ! empty($_COOKIE['new_mail']) )
 		{
 			setcookie('new_mail', '' , strtotime("12 hours"), '/');
-			//setcookie('mails', '' , strtotime("12 hours"), '/');
+			setcookie('mail', '' , strtotime("12 hours"), '/');
 		}
 	
 		foreach ( $argument as $val )
@@ -363,19 +363,25 @@ class Contacts extends Controller
 			$argument['sortparam'] = 0;
 		}	
 		
+		$i = 1;
+		
+		($page > 1) ? $i = $page * ROWLIMIT - ROWLIMIT + 1 : '';  // to number of contacts
+		
+		$contacts = array ();
+		
+		$contacts = $this->return_contact ( $user['id'], $page, $argument['sort'], $argument['sortparam'] );
+		
+		if ( ! empty ($_SESSION['mail']) )
+		{
+			$checked = $_SESSION['mail'];
+		}
+		else{
+			$checked = array();
+		}
+		
 		if ( ! empty ( $post['page'] ) ) 
 		{	
-			
-			if ( empty ( $_COOKIE['mail'] ) )
-			{
-				$id = array();
-			}
-			else{
-				
-				$id = array(
-						'mail' => $_COOKIE['mail']
-				);
-			}
+			$id = array();
 			
 			foreach ( $post as $key=>$val )
 			{
@@ -384,28 +390,34 @@ class Contacts extends Controller
 				{
 					
 					$id[] = $key;
-				}
+				}		
 			}
 			
-			$id = implode ( ', ', $id);
+			if( ! empty($_SESSION['mail']))
+			{
+				foreach ($contacts as $val)
+				{
+					$contact[] = $val['id'];
+				}
+				
+				$_SESSION['mail'] = array_diff($_SESSION['mail'], $contact);
+				
+				$id = array_diff($id, $_SESSION['mail']);				
+				
+			}		
 			
-			$this->set_cookie('mail', $id);
-	
+			$id = implode(', ', $id);
+
+			if( ! empty($id) && empty ($_SESSION['mail']) )
+			{	
+				$_SESSION['mail'] = explode(', ', $id);					
+			}
+			elseif( ! empty ($id) && ! empty ($_SESSION['mail']) )
+			{
+				$_SESSION['mail'] = explode(', ', $id . ', ' . implode(', ', $_SESSION['mail']));
+			}
 		}
-		if ( ! empty ($_COOKIE['mail']) )
-		{
-			$checked = $this->get_cookie( $_COOKIE['mail']);
-		}
-		else{
-			$checked = array();
-		}
-		$i = 1;
 		
-		($page > 1) ? $i = $page * ROWLIMIT - ROWLIMIT + 1 : '';  // to number of contacts
-				
-		$contacts = array ();
-		$contacts = $this->return_contact ( $user['id'], $page, $argument['sort'], $argument['sortparam'] );
-				
 		$count_for_pagin = $this->count_pages ( $page );
 			
 		$this->view->set ( 'count_for_pagin', $count_for_pagin );
@@ -765,10 +777,12 @@ class Contacts extends Controller
 			$this->set_cookie('new_mail', $new_mail);
 		}
 		
-		if ( isset($_COOKIE['mail']) && ! empty ($post['Select']) && $post['Select'] == 'Accept' )
+		if ( isset($_SESSION['mail']) && ! empty ($post['Select']) && $post['Select'] == 'Accept' )
 		{	
 			
-			$mails = array_unique ( $this->get_cookie($_COOKIE['mail']));
+			$mails = array_unique ( $_SESSION['mail']);
+			
+			unset($_SESSION['mail']);
 			
 			foreach ($mails as $id)
 			{
@@ -816,14 +830,31 @@ class Contacts extends Controller
 					}				
 				}
 				
-				$mail = implode(', ', $mail);
+				$post_mail = '';
+				
+				foreach ($post as $key=>$val)
+				{
+					if((int)($key)>1 && $val != '')
+					{
+						$post_mail[] = $val; 
+					}
+				}
+				if( $post_mail !== '')
+				{
+					$post_mail = implode(', ', $post_mail);
+				}
+					
+					$mail = implode(', ', $mail);
+					
+					$mail = $mail . ', ' . $post_mail;
+	
 			}
 			
 			$this->set_cookie('mails', $mail);		
 			$this->set_cookie('mail', '');
 			
 		}
-		elseif( ! empty ($post['Select']) && empty ( $_COOKIE['mail'] ) )
+		elseif( ! empty ($post['Select']) && empty ( $_SESSION['mail'] ) )
 		{	
 			foreach ($post as $key=>$post)
 			{	
@@ -833,6 +864,7 @@ class Contacts extends Controller
 				}				
 			}
 			$mail = implode(', ', $mail);
+			
 			if ( isset($mail) )
 			{
 				

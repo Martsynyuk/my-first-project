@@ -88,16 +88,24 @@
 				<td> 
 					<input type="checkbox" name="<?= $contact['id']; ?>" value="<?= $contact['Email']; ?>" 
 									
-									<?php if (empty ($checked)) { ?>
-									<?= ( ! empty ($argument['all']) ) ? 'checked' : NULL ; 	?>
-									<?php }else{ ?>
-									<?php foreach ( $checked as $check ) : ?>	
-									<?= ( ! empty ($argument['all']) || $contact['id'] === $check ) ? 'checked' : NULL ; 	?>							
-									<?php endforeach;?>	
-									<?php }?>
+									<?php if( ! empty ($argument['all']) )
+											{	
+												echo 'checked';
+											}
+											elseif( ! empty ($checked) )
+											{	
+												foreach ( $checked as $check )
+												{
+													if ($contact['id'] == $check)
+													{
+														echo 'checked';
+													}
+												}
+											}
+											
+									?>
 					>
 				</td>
-					
 				<td><?= $contact['FirstName']; ?></td>
 				<td><?= $contact['LastName']; ?></td>
 				<td><?= $contact['Email']; ?></td>

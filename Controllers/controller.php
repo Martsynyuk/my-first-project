@@ -47,6 +47,7 @@ class Controller
 		
 		$cookie = setcookie($name, $value , strtotime("12 hours"), '/');	
 	}
+	
 	function get_cookie($value)
 	{
 		$array = explode(',' , $value);
