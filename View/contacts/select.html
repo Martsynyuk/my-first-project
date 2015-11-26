@@ -47,36 +47,35 @@
 				
 				<th>First Name
 				
-					<a 
-						href="<?=  ( $page > 1 ) ? '/contacts/select/FirstName/asc/' . $page . '/' 
+					<input type="submit" name="sort" value="&#8593" formaction=" 
+						<?=  ( $page > 1 ) ? '/contacts/select/FirstName/asc/' . $page . '/' 
 														: '/contacts/select/FirstName/asc/' ; 							
 														
-								?>" style="margin: 0 10px;">&#8593 
-					</a>
+								?>" >
 					
-					 <a
-						href="<?= ( $page > 1 ) ? '/contacts/select/FirstName/desc/' . $page . '/' 
+					
+					<input type="submit" name="sort" value="&#8595" formaction=" 
+						<?= ( $page > 1 ) ? '/contacts/select/FirstName/desc/' . $page . '/' 
 														: '/contacts/select/FirstName/desc';
 						
-								?>">&#8595 
-					</a>
+								?>">
+					
 					
 				</th>
 				<th>Last Name
 				
-					<a  
-						href="<?= ( $page > 1 ) ? '/contacts/select/LastName/asc/' . $page . '/' 
+					<input type="submit" name="sort" value="&#8593" formaction="  
+						<?= ( $page > 1 ) ? '/contacts/select/LastName/asc/' . $page . '/' 
 														: '/contacts/select/LastName/asc/';
 						
-								?>" style="margin: 0 10px;">&#8593 
-					</a> 
+								?>" >
+				 
 					
-					<a
-						href="<?= ( $page > 1 ) ? '/contacts/select/LastName/desc/' . $page . '/' 
+					<input type="submit" name="sort" value="&#8595" formaction=" 
+						<?= ( $page > 1 ) ? '/contacts/select/LastName/desc/' . $page . '/' 
 														: '/contacts/select/LastName/desc/'; 
 														
-								?>">&#8595 
-					</a>
+								?>">
 				
 				</th>
 				<th>E-mail</th>

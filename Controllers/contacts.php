@@ -230,9 +230,9 @@ class Contacts extends Controller
 		if(! empty($_COOKIE['mails']) || ! empty($_COOKIE['new_mail']) )
 		{
 			setcookie('new_mail', '' , strtotime("12 hours"), '/');
-			setcookie('mail', '' , strtotime("12 hours"), '/');
+			//setcookie('mails', '' , strtotime("12 hours"), '/');		
 		}
-	
+		
 		foreach ( $argument as $val )
 		{
 			if( $val === 'FirstName' || $val === 'LastName' )
@@ -379,7 +379,7 @@ class Contacts extends Controller
 			$checked = array();
 		}
 		
-		if ( ! empty ( $post['page'] ) ) 
+		if ( ! empty ( $post['page'] ) || ! empty ( $post['sort'] ) ) 
 		{	
 			$id = array();
 			
@@ -766,14 +766,16 @@ class Contacts extends Controller
 		
 		if ( ! empty($post['add']) && ! empty ($post['mails']) && ! empty ($_COOKIE['mails']))
 		{
-			$new_mail = array_diff(explode(', ', $post['mails']), explode(', ', $_COOKIE['mails']));		
-
+			$new_mail = array_diff(explode(', ', $post['mails']), explode(', ', $_COOKIE['mails']));
+			$new_mail = implode(', ', $new_mail);
+			
 			$this->set_cookie('new_mail', $new_mail);
+			
 		}
 		elseif ( ! empty($post['add']) && ! empty ($post['mails']))
 		{
 			$new_mail = $post['mails'];
-
+			
 			$this->set_cookie('new_mail', $new_mail);
 		}
 		
@@ -856,6 +858,9 @@ class Contacts extends Controller
 		}
 		elseif( ! empty ($post['Select']) && empty ( $_SESSION['mail'] ) )
 		{	
+			
+			$mail = array();
+			
 			foreach ($post as $key=>$post)
 			{	
 				if((int)($key)>1 && $post != '')
