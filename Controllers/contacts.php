@@ -296,7 +296,7 @@ class Contacts extends Controller
 		$this->view->set ( 'count_pages', $count_pages );
 		$this->view->set ( 'contacts', $contacts );
 		$this->view->set ( 'i', $i);
-		$this->view->set ( 'url', $this->view);
+		$this->view->set ( 'html', $this->view);
 		
 		$this->view->render ( $argument );
 		

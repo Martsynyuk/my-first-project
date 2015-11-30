@@ -45,7 +45,7 @@ Class View
 	 	* @param array $argument
 	 	* @return string*/
 	
-	public function url_bilder($argument)
+	public function url($argument)
 	{
 		
 		$controller = NULL;
