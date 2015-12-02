@@ -28,23 +28,27 @@
 			<th>First Name
 			
 				<input type="submit" value="&#8593" formaction="
-					<?=  ( $page > 1 ) ? '/FirstName/asc/' . $page : '/FirstName/asc/' ; 							
+					<?=  ( $page > 1 ) ? $html->url(array('sort'=>'FirstName', 'sortparam'=>'asc', 'page'=>$page )) 
+							 : $html->url(array('sort'=>'FirstName', 'sortparam'=>'asc')) ; 							
 													
 							?>">
 				
 				<input type="submit" value="&#8595" formaction="
-					<?= ( $page > 1 ) ? '/FirstName/desc/' . $page : '/FirstName/desc/';
+					<?= ( $page > 1 ) ? $html->url(array('sort'=>'FirstName', 'sortparam'=>'desc', 'page'=>$page )) 
+							: $html->url(array('sort'=>'FirstName', 'sortparam'=>'desc')) ;
 					
 							?>">
 			</th>
 			<th>Last Name
 				<input type="submit" value="&#8593" formaction="
-					<?= ( $page > 1 ) ? '/LastName/asc/' . $page : '/LastName/asc/';
+					<?= ( $page > 1 ) ? $html->url(array('sort'=>'LastName', 'sortparam'=>'asc', 'page'=>$page ))
+							: $html->url(array('sort'=>'LastName', 'sortparam'=>'asc' )) ;
 					
 							?>"> 
 		 
 				<input type="submit" value="&#8595" formaction="
-					<?= ( $page > 1 ) ? '/LastName/desc/' . $page : '/LastName/desc/'; 
+					<?= ( $page > 1 ) ? $html->url(array('sort'=>'LastName', 'sortparam'=>'desc', 'page'=>$page )) 
+							: $html->url(array('sort'=>'LastName', 'sortparam'=>'desc' )) ; 
 					
 							?>">
 				
@@ -63,9 +67,9 @@
 			<td><?= $contact['Email']; ?></td>
 			<td><?= $contact['Telephone']; ?></td>
 			<td>
-				<a href="<?= '/contacts/edit/' . $contact['id']?>">edit</a> 
-				<a href="<?= '/contacts/view/' . $contact['id']?>">view</a> 
-				<a href="<?= '/contacts/delete/' . $contact['id'] ?>">delete</a>
+				<a href="<?= $html->url(array('controller'=>'contacts', 'action'=>'edit', 'id'=>$contact['id'])) ?>">edit</a> 
+				<a href="<?= $html->url(array('controller'=>'contacts', 'action'=>'view', 'id'=>$contact['id'])) ?>">view</a> 
+				<a href="<?= $html->url(array('controller'=>'contacts', 'action'=>'delete', 'id'=>$contact['id'])) ?>">delete</a>
 			</td>
 		</tr>
 		<?php $i++;?>	

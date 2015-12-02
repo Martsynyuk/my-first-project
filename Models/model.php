@@ -335,8 +335,7 @@ Class Model implements For_model
 					)
 						
 			);
-			var_dump($user_contact);
-			var_dump($id);
+		
 			if ( empty($user_contact) )
 			{
 				return FALSE;

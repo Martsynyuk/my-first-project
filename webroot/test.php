@@ -6,11 +6,11 @@ error_reporting ( E_ALL );
 		
 		'controller' => 'contacts',
 		'action' => 'index',
-		'page' => '1',
-		'sort' => 'first',
-		'sortparam' => 'asc',
+		//'page' => '1',
+		//'sort' => 'first',
+		//'sortparam' => 'asc',
 		'id' => '2',
-		'all' => 'all'
+		//'all' => 'all'
 	);
 		
 		$controller = NULL;
@@ -21,9 +21,6 @@ error_reporting ( E_ALL );
 		$id = NULL;
 		$all = NULL;
 		
-		$find = '//';
-		$change = '/';
-		
 		extract($argument) ;
 		
 		if($sort !== NULL && $sortparam === NULL)
@@ -33,7 +30,7 @@ error_reporting ( E_ALL );
 		
 		$url = '/' . $controller . '/' . $action . '/' . $sort . '/' . $sortparam . '/' . $page . '/' . $id . '/' . $all;
 		
-		$url = str_replace($find, $change, $url);
+		$url = str_replace('//', '/', str_replace('//', '/', $url));
 	
 		var_dump($url);
 		
