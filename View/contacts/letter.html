@@ -29,12 +29,12 @@
 	<?php }else{ ?>
 
 		<form name="add_letter" method="POST" action="/contacts/letter/">
-			write some e-mail</br>
-			<input name="mails" type="text" size="60" value="<?= ( ! empty ($mail) ) ? $mail : '' ; ?>">
+			</br>
+			<input placeholder="write some e-mail" name="mails" type="text" size="60" value="<?= ( ! empty ($mail) ) ? $mail : '' ; ?>">
 		
 			<a href="/contacts/select/">add e-mail from contacts</a></br></br>
 			for some text</br>
-			<input name="text" type="text" size="60" ></br></br>
+			<input placeholder="for some text" name="text" type="text" size="60" ></br></br>
 		
 			<input type="submit" name="add" value="add">
 

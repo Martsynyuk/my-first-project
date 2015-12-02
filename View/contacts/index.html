@@ -24,27 +24,30 @@
 			<table>
 		<tr>
 			<th></th>
+			<form name="index" method="POST">
 			<th>First Name
-				<a 
-					href="<?=  ( $page > 1 ) ? '/FirstName/asc/' . $page : '/FirstName/asc/' ; 							
+			
+				<input type="submit" value="&#8593" formaction="
+					<?=  ( $page > 1 ) ? '/FirstName/asc/' . $page : '/FirstName/asc/' ; 							
 													
-							?>" style="margin: 0 10px;">&#8593 
-				</a>
-				 <a
-					href="<?= ( $page > 1 ) ? '/FirstName/desc/' . $page : '/FirstName/desc/';
+							?>">
+				
+				<input type="submit" value="&#8595" formaction="
+					<?= ( $page > 1 ) ? '/FirstName/desc/' . $page : '/FirstName/desc/';
 					
-							?>">&#8595 
-				</a>
+							?>">
 			</th>
 			<th>Last Name
-				<a 
-					href="<?= ( $page > 1 ) ? '/LastName/asc/' . $page : '/LastName/asc/';
+				<input type="submit" value="&#8593" formaction="
+					<?= ( $page > 1 ) ? '/LastName/asc/' . $page : '/LastName/asc/';
 					
-							?>" style="margin: 0 10px;">&#8593 
-				</a> 
-				<a
-					href="<?= ( $page > 1 ) ? '/LastName/desc/' . $page : '/LastName/desc/'; ?>">&#8595 
-				</a>
+							?>"> 
+		 
+				<input type="submit" value="&#8595" formaction="
+					<?= ( $page > 1 ) ? '/LastName/desc/' . $page : '/LastName/desc/'; 
+					
+							?>">
+				
 			</th>
 			<th>E-mail</th>
 			<th>Cellular</th>
@@ -92,18 +95,16 @@
 			<ul>
 			<li>
 				<?php  if ($page != 1) : ?>
-						<a
-							href="<?php
+				
+						<input type="submit" name="sort" value="Back" formaction="
+							<?php
 								
 								if ($page == 1) {
 									echo '1';
 								} else {
 									echo ($page - 1);
 								}
-								?>"
-								
-							title="last page"><button>Back</button>
-						</a>
+								?>">
 						
 					<?php endif; ?>	
 														
@@ -114,14 +115,11 @@
 					
 						<?php if ($i == $page) { ?>
 						
-									<a href="<?= $i	?>">
-										<?= '<button>' . $i . '</button>'?>
-									</a>
+									<input type="submit" value="<?= $i ?>" formaction="<?= $i	?>">
+									
 						<?php } else { ?>
 						
-							<a href="<?= $i	?>">
-								<?= '<button>' . $i . '</button>'?>
-							</a>
+							<input type="submit" value="<?= $i ?>" formaction="<?= $i	?>">
 							
 						<?php } ?>
 						
@@ -131,9 +129,8 @@
 			<li>								 
 				<?php if ($page != $count_pages) : ?>
 				
-					<a href="<?= ( $page + 1 ) ?>" title="next page">
-						<button>Next</button>
-					</a>
+				<input type="submit" value="Next" formaction="<?= ( $page + 1 ) ?>">
+				
 														
 				<?php endif; ?>	
 												
@@ -141,6 +138,6 @@
 		</ul>
 			
 		<?php } ?>
-		
+		</form>
 </body>
 </html>

@@ -46,7 +46,7 @@ Class View
 	 	* @return string*/
 	
 	public function url($argument)
-	{
+	{	
 		
 		$controller = NULL;
 		$action = NULL;
@@ -56,41 +56,19 @@ Class View
 		$id = NULL;
 		$all = NULL;
 		
-		foreach ($argument as $key=>$val)
-		{
-			switch ($key)
-			{
-				case 'controller' :
-					$controller = '/' . $val;
-					break;
-				case 'action' :
-					$action = '/' . $val;
-					break;
-				case 'page':
-					$page = '/' . $val;
-					break;
-				case 'sort':
-					$sort = '/' . $val;
-					break;
-				case 'sortparam' :
-					$sortparam = '/' . $val;
-					break;
-				case 'id' :
-					$id = '/' . $val;
-					break;
-				case 'all' :
-					$all = '/' . $val;
-					break;
-			}
-				
-		}
+		$find = '//';
+		$change = '/';
+		
+		extract($argument) ;
 		
 		if($sort !== NULL && $sortparam === NULL)
 		{
 			$sortparam = '/asc';
 		}
 		
-		$url = $controller . $action . $sort . $sortparam . $page . $id . $all;
+		$url = '/' . $controller . '/' . $action . '/' . $sort . '/' . $sortparam . '/' . $page . '/' . $id . '/' . $all;
+		
+		$url = str_replace($find, $change, $url);
 		
 		return $url;
 	}

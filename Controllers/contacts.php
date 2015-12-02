@@ -780,6 +780,11 @@ class Contacts extends Controller
 			$this->set_cookie('new_mail', $new_mail);
 		}
 		
+		if( ! empty($post['add']) && empty ($new_mail) )
+		{
+			header ( 'Location: /' );
+		}
+		
 		if ( isset($_SESSION['mail']) && ! empty ($post['Select']) && $post['Select'] == 'Accept' )
 		{	
 			
