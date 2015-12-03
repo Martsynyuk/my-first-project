@@ -11,13 +11,13 @@
 	<ul>
 		<?php if ( empty ( $_SESSION ['id'] ) ) { ?>
 		 
-		<?= '<li> <a href="user/autorization">Autorization</a> </li>' ?>
-		<?= '<li> <a href="user/registration">Registration</a> </li>' ?>
+			<li> <a href="<?= $html->url(array('controller'=>'users', 'action'=>'autorization')) ?>">Autorization</a> </li>
+		<li> <a href=" <?= $html->url(array('controller'=>'users', 'action'=>'registration')) ?>">Registration</a> </li>
 		
 		<?php } else { ?>
 		
-		<?= '<li> <a href="/">Home</a> </li>' ?>
-		<?= '<li> <a href="/users/logout">Logout</a </li>' ?>
+		<li> <a href="<?= $html->url(array()) ?>">Home</a> </li>
+		<li> <a href=" <?= $html->url(array('controller'=>'users', 'action'=>'logout')) ?>">Logout</a> </li>
 		
 		<?php }; ?>
 		
@@ -66,7 +66,7 @@
 		<?php endforeach; ?>
 		
 		</ul>
-		<a href="/">Back</a>
+		<a href="<?= $html->url(array()) ?>">Back</a>
 	</form>
 </body>
 </html>

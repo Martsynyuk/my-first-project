@@ -4,12 +4,12 @@ error_reporting ( E_ALL );
 
 	$argument = array(
 		
-		'controller' => 'contacts',
-		'action' => 'index',
+		//'controller' => 'contacts',
+		//'action' => 'index',
 		//'page' => '1',
 		//'sort' => 'first',
 		//'sortparam' => 'asc',
-		'id' => '2',
+		//'id' => '2',
 		//'all' => 'all'
 	);
 		
@@ -30,7 +30,7 @@ error_reporting ( E_ALL );
 		
 		$url = '/' . $controller . '/' . $action . '/' . $sort . '/' . $sortparam . '/' . $page . '/' . $id . '/' . $all;
 		
-		$url = str_replace('//', '/', str_replace('//', '/', $url));
+		$url =str_replace('//', '/', str_replace('//', '/', str_replace('//', '/', $url)));
 	
 		var_dump($url);
 		

@@ -7,15 +7,15 @@
 <title>project</title>
 <body>
 	<ul>
-		<?php if ( empty ( $_SESSION ['id'] ) ) { ?>
+		<?php if ( empty ( $user['id'] ) ) { ?>
 		 
-		<?= '<li> <a href="users/autorization">Autorization</a> </li>' ?>
-		<?= '<li> <a href="users/registration">Registration</a> </li>' ?>
+		<li> <a href="<?= $html->url(array('controller'=>'users', 'action'=>'autorization')) ?>">Autorization</a> </li>
+		<li> <a href="<?= $html->url(array('controller'=>'users', 'action'=>'registration')) ?>">Registration</a> </li>
 		
 		<?php } else { ?>
 		
-		<?= '<li> <a href="/">Home</a> </li>' ?>
-		<?= '<li> <a href="/users/logout">Logout</a> </li>' ?>
+		<li> <a href="<?= $html->url(array()) ?>">Home</a> </li>
+		<li> <a href="<?= $html->url(array('controller'=>'users', 'action'=>'logout')) ?>">Logout</a> </li>
 		
 		<?php }; ?>
 		

@@ -80,8 +80,9 @@ class Contacts extends Controller
 		}
 			
 			$this->view->set ( 'user', $user );
+			$this->view->set ( 'html', $this->view);
 		
-			$this->view->render ( $argument );
+			$this->view->render ( $argument );			
 	}
 		
 	public function edit ( $argument )
@@ -209,6 +210,8 @@ class Contacts extends Controller
 			
 		$this->view->set ( 'contactUser', $contactUser );
 		$this->view->set ( 'get', $argument[2] );
+		$this->view->set ( 'html', $this->view);
+		$this->view->set ( 'user', $user);
 
 		if( ! empty ( $phone ) )
 		{
@@ -256,7 +259,7 @@ class Contacts extends Controller
 		if ( empty ( $user['id'] ) )
 		{
 			
-			header ( 'Location: users/autorization' );
+			header ( 'Location: /users/autorization' );
 		}
 
 		if ( empty ( $argument['page'] ) )
@@ -296,6 +299,7 @@ class Contacts extends Controller
 		$this->view->set ( 'count_pages', $count_pages );
 		$this->view->set ( 'contacts', $contacts );
 		$this->view->set ( 'i', $i);
+		$this->view->set ( 'user', $user);
 		$this->view->set ( 'html', $this->view);
 		
 		$this->view->render ( $argument );
@@ -508,6 +512,7 @@ class Contacts extends Controller
 	{
 		
 		$post = $this->post_controller ();
+		$user = $this->Login->user();
 		
 		$select = NULL;
 		
@@ -574,6 +579,8 @@ class Contacts extends Controller
 		
 		$this->view->set ( 'select', $select);
 		$this->view->set ( 'id', $argument[2]);
+		$this->view->set ( 'html', $this->view);
+		$this->view->set ( 'user', $user);
 		
 		$this->view->render ( $argument );
 
@@ -911,6 +918,8 @@ class Contacts extends Controller
 			header ( 'Location: / ');
 		}
 		
+		$this->view->set ( 'user', $user );
+		$this->view->set ( 'html', $this->view );
 		$this->view->set ( 'mail', $mail );
 		$this->view->set ( 'new_mail', $new_mail );
 		

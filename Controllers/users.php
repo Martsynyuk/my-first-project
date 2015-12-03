@@ -37,7 +37,7 @@ Class Users extends Controller
 			setcookie('new_mail', '' , strtotime("12 hours"), '/');
 		}
 			
-		header ( 'Location: autorization' );
+		header ( 'Location: /users/autorization' );
 	}
 		
 	public function registration ( $argument )

@@ -11,13 +11,13 @@
 	<ul>
 		<?php if ( empty ( $_SESSION ['id'] ) ) { ?>
 		 
-		<?= '<li> <a href="user/autorization">Autorization</a> </li>' ?>
-		<?= '<li> <a href="user/registration">Registration</a> </li>' ?>
+		<li> <a href="<?= $html->url(array('controller'=>'users', 'action'=>'autorization')) ?>">Autorization</a> </li>
+		<li> <a href=" <?= $html->url(array('controller'=>'users', 'action'=>'registration')) ?>">Registration</a> </li>
 		
 		<?php } else { ?>
 		
-		<?= '<li> <a href="/">Home</a> </li>' ?>
-		<?= '<li> <a href="/users/logout">Logout</a> </li>' ?>
+		<li> <a href="<?= $html->url(array()) ?>">Home</a> </li>
+		<li> <a href=" <?= $html->url(array('controller'=>'users', 'action'=>'logout')) ?>">Logout</a> </li>
 		
 		<?php }; ?>
 		
@@ -48,15 +48,21 @@
 				<th>First Name
 				
 					<input type="submit" name="sort" value="&#8593" formaction=" 
-						<?=  ( $page > 1 ) ? '/contacts/select/FirstName/asc/' . $page . '/' 
-														: '/contacts/select/FirstName/asc/' ; 							
+						<?=  ( $page > 1 ) ?  $html->url(array('controller'=>'contacts', 'action'=>'select', 
+																									'sort'=>'FirstName', 'sortparam'=>'asc', 'page'=>$page)) 
+																									
+														: $html->url(array('controller'=>'contacts', 'action'=>'select', 
+																									'sort'=>'FirstName', 'sortparam'=>'asc')); 							
 														
 								?>" >
 					
 					
 					<input type="submit" name="sort" value="&#8595" formaction=" 
-						<?= ( $page > 1 ) ? '/contacts/select/FirstName/desc/' . $page . '/' 
-														: '/contacts/select/FirstName/desc';
+						<?= ( $page > 1 ) ? $html->url(array('controller'=>'contacts', 'action'=>'select', 
+																									'sort'=>'FirstName', 'sortparam'=>'desc', 'page'=>$page)) 
+																									
+														: $html->url(array('controller'=>'contacts', 'action'=>'select', 
+																									'sort'=>'FirstName', 'sortparam'=>'desc'));
 						
 								?>">
 					
@@ -65,15 +71,21 @@
 				<th>Last Name
 				
 					<input type="submit" name="sort" value="&#8593" formaction="  
-						<?= ( $page > 1 ) ? '/contacts/select/LastName/asc/' . $page . '/' 
-														: '/contacts/select/LastName/asc/';
+						<?= ( $page > 1 ) ?  $html->url(array('controller'=>'contacts', 'action'=>'select', 
+																									'sort'=>'LastName', 'sortparam'=>'asc', 'page'=>$page)) 
+																									
+														: $html->url(array('controller'=>'contacts', 'action'=>'select', 
+																									'sort'=>'LastName', 'sortparam'=>'asc')); 
 						
 								?>" >
 				 
 					
 					<input type="submit" name="sort" value="&#8595" formaction=" 
-						<?= ( $page > 1 ) ? '/contacts/select/LastName/desc/' . $page . '/' 
-														: '/contacts/select/LastName/desc/'; 
+						<?= ( $page > 1 ) ? $html->url(array('controller'=>'contacts', 'action'=>'select', 
+																									'sort'=>'LastName', 'sortparam'=>'desc', 'page'=>$page)) 
+																									
+														: $html->url(array('controller'=>'contacts', 'action'=>'select', 
+																									'sort'=>'LastName', 'sortparam'=>'desc')); 
 														
 								?>">
 				

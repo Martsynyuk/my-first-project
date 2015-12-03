@@ -65,7 +65,7 @@ Class View
 		
 		$url = '/' . $controller . '/' . $action . '/' . $sort . '/' . $sortparam . '/' . $page . '/' . $id . '/' . $all;
 		
-		$url = str_replace('//', '/', str_replace('//', '/', $url));
+		$url = str_replace('//', '/', str_replace('//', '/', str_replace('//', '/', $url)));
 		
 		return $url;
 	}

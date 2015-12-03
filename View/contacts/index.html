@@ -5,15 +5,15 @@
 <title>project</title>
 </head>
 <body>
-	<ul><?php if ( empty ( $_SESSION ['id'] ) ) { ?>
+	<ul><?php if ( empty ( $user['id'] ) ) { ?>
 		 
-		<?= '<li> <a href="user/autorization">Autorization</a> </li>' ?>
-		<?= '<li> <a href="user/registration">Registration</a> </li>' ?>
+		<li> <a href="<?= $html->url(array('controller'=>'users', 'action'=>'autorization')) ?>">Autorization</a> </li>
+		<li> <a href=" <?= $html->url(array('controller'=>'users', 'action'=>'registration')) ?>">Registration</a> </li>
 		
 		<?php } else { ?>
 		
-		<?= '<li> <a href="/">Home</a> </li>' ?>
-		<?= '<li> <a href="/users/logout">Logout</a> </li>' ?>
+		<li> <a href="<?= $html->url(array()) ?>">Home</a> </li>
+		<li> <a href=" <?= $html->url(array('controller'=>'users', 'action'=>'logout')) ?>">Logout</a> </li>
 		
 		<?php }; ?>
 		
@@ -79,8 +79,8 @@
 								
 			</table>
 	</br>
-	<a href="/contacts/add/">Add contact</a></br>
-	<a href="/contacts/letter/">letter</a>
+	<a href="<?= $html->url(array('controller'=>'contacts', 'action'=>'add')) ?>">Add contact</a></br>
+	<a href="<?= $html->url(array('controller'=>'contacts', 'action'=>'letter')) ?>">letter</a>
 	
 		<?php } else { ?>
 		
@@ -92,7 +92,7 @@
 		
 		<?php if($count_contacts == 0) { ?>
 		
-			<a href="contacts/add">Add contact</a>
+			<a href=" <?= $html->url(array('controller'=>'contacts', 'action'=>'add')) ?>">Add contact</a>
 			
 		<?php } else {?>
 		
