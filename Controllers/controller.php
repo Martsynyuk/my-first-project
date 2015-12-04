@@ -50,7 +50,7 @@ class Controller
 	
 	function get_cookie($value)
 	{
-		$array = explode(',' , $value);
+		$array = explode(', ' , $value);
 		
 		return $array;
 	}

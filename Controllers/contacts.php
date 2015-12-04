@@ -376,9 +376,9 @@ class Contacts extends Controller
 		
 		$contacts = $this->return_contact ( $user['id'], $page, $argument['sort'], $argument['sortparam'] );
 		
-		if ( ! empty ($_SESSION['mail']) )
+		if ( ! empty ($_COOKIE['select']) )
 		{
-			$checked = $_SESSION['mail'];
+			$checked = $this->get_cookie($_COOKIE['select']);
 		}
 		else{
 			$checked = array();
@@ -398,33 +398,35 @@ class Contacts extends Controller
 				}		
 			}
 			
-			if( ! empty($_SESSION['mail']))
+			if( ! empty($_COOKIE['select']))
 			{
 				foreach ($contacts as $val)
 				{
 					$contact[] = $val['id'];
 				}
 				
-				$_SESSION['mail'] = array_diff($_SESSION['mail'], $contact);
+				$this->set_cookie('select', array_diff($this->get_cookie($_COOKIE['select']), $contact));
 				
-				$id = array_diff($id, $_SESSION['mail']);				
+				$id = array_diff($id, $this->get_cookie($_COOKIE['select']));				
 				
 			}		
 			
 			$id = implode(', ', $id);
-
-			if( ! empty($id) && empty ($_SESSION['mail']) )
+			
+			if( ! empty($id) && empty ($_COOKIE['select']) )
 			{	
-				$_SESSION['mail'] = explode(', ', $id);					
+				$this->set_cookie('select', $id);					
 			}
-			elseif( ! empty ($id) && ! empty ($_SESSION['mail']) )
+			elseif( ! empty ($id) && ! empty ($_COOKIE['select']) )
 			{
-				$_SESSION['mail'] = explode(', ', $id . ', ' . implode(', ', $_SESSION['mail']));
+				$this->set_cookie('select',  $id . ', ' . $_COOKIE['select']);
 			}
 		}
 		
 		$count_for_pagin = $this->count_pages ( $page );
-			
+		
+		$this->view->set ( 'user', $user);
+		$this->view->set ( 'html', $this->view);
 		$this->view->set ( 'count_for_pagin', $count_for_pagin );
 		$this->view->set ( 'page', $page );
 		$this->view->set ( 'count_pages', $count_pages );
@@ -792,12 +794,10 @@ class Contacts extends Controller
 			header ( 'Location: /' );
 		}
 		
-		if ( isset($_SESSION['mail']) && ! empty ($post['Select']) && $post['Select'] == 'Accept' )
+		if ( isset($_COOKIE['select']) && ! empty ($post['Select']) && $post['Select'] == 'Accept' )
 		{	
 			
-			$mails = array_unique ( $_SESSION['mail']);
-			
-			unset($_SESSION['mail']);
+			$mails = array_unique ( $this->get_cookie($_COOKIE['select']));
 			
 			foreach ($mails as $id)
 			{
@@ -917,6 +917,8 @@ class Contacts extends Controller
 			
 			header ( 'Location: / ');
 		}
+		
+		$this->set_cookie('select', '');
 		
 		$this->view->set ( 'user', $user );
 		$this->view->set ( 'html', $this->view );
