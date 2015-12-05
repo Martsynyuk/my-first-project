@@ -317,7 +317,7 @@ class Contacts extends Controller
 		
 		if(! empty($_COOKIE['mails']) || ! empty($_COOKIE['new_mail']) )
 		{			
-			$this->set_cookie('mails', '');
+			//$this->set_cookie('mails', '');
 			$this->set_cookie('new_mail', '');
 		}
 		
