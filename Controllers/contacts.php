@@ -321,6 +321,7 @@ class Contacts extends Controller
 			$this->set_cookie('new_mail', '');
 			
 			//Comment1
+			//Comment 2
 		}
 		
 		foreach ( $argument as $val )
