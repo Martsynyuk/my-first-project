@@ -20,6 +20,7 @@ Class Users extends Controller
 		}
 					
 		$this->view->set ( 'post', $post );
+		$this->view->set ( 'html', $this->view);
 			
 		$this->view->render ( $argument );
 	}
@@ -107,6 +108,7 @@ Class Users extends Controller
 		}
 		
 		$this->view->set ( 'post', $post );
+		$this->view->set ( 'html', $this->view);
 			
 		$this->view->render ( $argument );
 	}
