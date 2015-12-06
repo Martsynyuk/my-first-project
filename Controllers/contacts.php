@@ -319,12 +319,6 @@ class Contacts extends Controller
 		{			
 			$this->set_cookie('mails', '');
 			$this->set_cookie('new_mail', '');
-			
-			//Comment1
-			//Comment 2
-			
-			
-			//Rebase 1
 		}
 		
 		foreach ( $argument as $val )
