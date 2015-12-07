@@ -24,23 +24,27 @@
 	</div>
 	<div class="content">
 		<div class="content_autorization">
-			<p>Autorization</p>
+			<p class="name_menu">Autorization</p>
+			
 			<form name="login" action="autorization" method="POST">
-		
+			
+			<div class="input_text">
 				<p>Login:</p>
 				<input type="text" name="login"
 				
 					value="<?= ( ! empty ( $post['login'] ) ) ? $post['login'] : ''; ?>"
 					size="35">
-		
+			</div>
+			<div class="input_text">
 				<p>Password:</p>
 				<input type="password" name="password" size="35">
-		
+			</div>
+			
 				<ul>
 					<li><a href="<?= $html->url(array())?>">Forgot password?</a></li>
 					<li><a href="<?= $html->url(array('controller'=>'users', 'action'=>'registration')) ?>">Register Now</a></li>
 				</ul>
-				<input type="submit" name="enter" value="Login">
+				<input class="submit" type="submit" name="enter" value="Login">
 				</form>
 			</div>
 		</div>

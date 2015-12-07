@@ -19,6 +19,9 @@ body{
 	text-decoration: none;
 	color: white;
 }
+.main a:hover{
+	color: rgba(211, 211, 211, 1);
+}
 .header{
 	height: 100px;
 }
@@ -55,6 +58,42 @@ body{
 	height: 260px;
 	background: url(/img/content_grad_login.png);
 	border-radius: 30px;
+}
+.content .content_autorization .name_menu{
+	padding: 5px 0 15px 40px;
+	font-size: 20px;
+}
+.content .content_autorization input{
+	border-radius: 6px;
+}
+.content .content_autorization .input_text{
+	width: 500px;
+	padding: 10px 0 0 10px;
+}
+.content .content_autorization .input_text p{
+	float: left;
+	width: 100px;
+	height: 20px;
+	line-height: 20px;
+}
+.content .content_autorization ul{
+	padding-top: 15px;
+}
+.content .content_autorization li{
+	padding:5px 0 0 25px;
+	font-size: 12px;
+}
+.content .content_autorization .submit{
+	background: url(/img/input.png) no-repeat;
+	width: 95px;
+	outline: none;
+	border: 0;
+	cursor: pointer;
+	margin: 0 auto;
+	display: block;
+}
+.content .content_autorization .submit:hover{
+	color: rgba(211, 211, 211, 0.2);
 }
 .footer{
 	width: 100%;
