@@ -45,9 +45,132 @@ body{
 	padding-left: 40px;
 	height: 23px;
 }
+.header .home{
+	background: url(/img/Home.png) no-repeat;
+	padding-left: 40px;
+	height: 23px;
+	width: 80px;
+}
+.header .logout{
+	background: url(/img/Home.png) no-repeat;
+	padding-left: 40px;
+	height: 23px;
+}
 .content{
 	height: 300px;
 	padding:75px 0 50px 0;
+}
+.content .contact {
+	width: 700px;
+	margin: 0 auto;
+}
+.content .contact .table{
+	background: linear-gradient(to top, #1C1C1C, #363636);
+	display: block;
+	height: 270px;
+	border-radius: 30px;
+}
+.content .contact tr{
+	display: inline-block;
+	width: 700px;
+	position: relative;
+}
+.content .contact .top {
+	background: rgba(65, 65, 65, 1);
+	width: 700px;
+	height: 40px;
+	border-radius: 25px 25px 0 0;
+}
+.content .contact tr>th {
+	padding:3px 30px;
+}
+.content .contact tr>td {
+	padding: 10px 0 0 10px;
+}
+.content .contact .sort{
+	width: 18px;
+	height: 25px;
+	font-size: 15px;
+	font-weidth: 800;
+	border-radius: 8px 8px 0 0;
+	background: none;
+	outline: none;
+	border: 0;
+	cursor: pointer;
+}
+.content .contact .sort:hover{
+	color: red;
+}
+.content .contact .view_contact{
+	background: linear-gradient(to top, #000, #fff);
+}
+.content .contact .page{
+	width: 20px;
+	background: none;
+	outline: none;
+	border: 0;
+	cursor: pointer;
+}
+.content .contact .page_active{
+	background: none;
+	width: 20px;
+	color: white;
+	outline: none;
+	cursor: pointer;
+	border: 0;
+}
+.content  .contact .back{
+	background: url(/img/prew.png) no-repeat;
+	width: 80px;
+	height: 15px;
+	outline: none;
+	border: 0;
+}
+.contact .action{
+	width: 110px;
+}
+.contact .delete{
+	background: rgba(192, 106, 0, 0.1);
+	width: 50px;
+	height: 20px;
+	position: absolute;
+	right: -50px;
+	top: 10px;
+	text-align: center;
+	color: 	#363636;
+	border-radius: 0 7px 7px 0;
+}
+.contact .delete:hover{
+	background: rgba(192, 106, 0, 1);
+	color: white;
+}
+.contact .edit{
+	background: rgba(192, 106, 0, 1);
+	border-radius: 7px;
+	width: 50px;
+	height: 20px;
+	float: left;
+	text-align: center;
+	margin-bottom: 3px;
+}
+.contact .view{
+	background: rgba(192, 106, 0, 1);
+	border-radius: 7px 0 0 7px;
+	width: 50px;
+	height: 20px;
+	float: right;
+	text-align: center;
+	margin-bottom: 3px;
+}
+.contact .number{
+	width: 25px;
+}
+.content .next{
+	background: url(/img/next.png) no-repeat;
+	width: 80px;
+	height: 15px;
+	outline: none;
+	border: 0;
 }
 .content .content_autorization{
 	margin: 0 auto;
@@ -102,6 +225,40 @@ body{
 .content .content_autorization .submit:hover{
 	color: rgba(211, 211, 211, 0.2);
 }
+.content .pagination{
+	background: url(/img/bottom_menu.png) no-repeat;
+	width: 500px;
+	height: 45px;
+	margin: 0 auto;
+	border-radius: 0 0 35px 35px;
+	position: relative;
+}
+.content .pagination ul{
+	padding: 10px 0;
+	height: 20px;
+}
+.content .pagination ul>li{
+	display: inline-block;
+}
+.content .pagination .back_plase{
+	height: 35px;
+	width: 100px;
+	padding-left: 20px;
+	position: absolute;
+	left: 30px;
+}
+.content .pagination .next_plase{
+	height: 35px;
+	width: 50px;
+	position: absolute;
+	left: 395px;
+}
+.content .pagination .page_plase{
+	height: 35px;
+	width: 310px;
+	position: absolute;
+	left: 170px;
+}
 .footer{
 	width: 100%;
 	position: absolute;
@@ -112,6 +269,45 @@ body{
 	display: block;
 	width: 200px;
 	margin: 0 auto;
+}
+.add{
+	background: linear-gradient(to top, #363636, #1C1C1C);
+	position: absolute;
+	top: -30px;
+	width: 100px;
+	height: 25px;
+	line-height:25px;
+	text-align: center;
+	border-radius: 10px;
+}
+.letter{
+	background: linear-gradient(to top, #363636, #1C1C1C);
+	position: absolute;
+	top: -30px;
+	left: 120px;
+	width: 80px;
+	height: 25px;
+	line-height:25px;
+	text-align: center;
+	border-radius: 10px;
+}
+.name{
+	width: 140px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.email{
+	width: 140px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.telephone{
+	width:100px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.line{
+	border-bottom: 1px solid gray; 
 }
 .clear{
 	clear: both;
