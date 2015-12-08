@@ -4,199 +4,223 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="keywords" content="">
 <meta name="description" content="">
-<title></title>
+<title>project</title>
+
+<link rel="stylesheet" type="text/css" href="/css/main.css">
+<link rel="stylesheet" type="text/css" href="/css/reset.css">
 
 </head>
 <body>
-	<ul>
-		<?php if ( empty ( $user['id'] ) ) { ?>
-		 
-		<li> <a href="<?= $html->url(array('controller'=>'users', 'action'=>'autorization')) ?>">Autorization</a> </li>
-		<li> <a href=" <?= $html->url(array('controller'=>'users', 'action'=>'registration')) ?>">Registration</a> </li>
-		
-		<?php } else { ?>
-		
-		<li> <a href="<?= $html->url(array()) ?>">Home</a> </li>
-		<li> <a href=" <?= $html->url(array('controller'=>'users', 'action'=>'logout')) ?>">Logout</a> </li>
-		
-		<?php }; ?>
-		
-	</ul>
-	<form name="selectcontact" method="POST">
-		
-		<table border="0">
-			<tr>
-				<th>
-					 <?php if( empty ( $argument['all'] ) ) 
-									{
-										 echo	'<a href="' . $_SERVER ['REQUEST_URI'] . 'all">Select all </a>' ;
-									}
-									else{
-											echo '<a href="/contacts/select/';
+<div class="main">
+	<div class="header">
+		<img src="/img/logotip.png" alt="logotip">
+		<div class="header_menu">
+			<ul>	 
+				<li class="home"> <a href="<?= $html->url(array()) ?>">Home</a> </li>
+				<li class="logout"> <a href=" <?= $html->url(array('controller'=>'users', 'action'=>'logout')) ?>">Logout</a> </li>		
+			</ul>
+		</div>
+	</div>
+	<div class="content">
+		<div class="contact">
+			<form name="selectcontact" method="POST">
+			
+			<table class="table" border="0">
+				<tr class="top">
+					<th class="all">
+						 <?php if( empty ( $argument['all'] ) ) 
+										{
+											 echo	'<a href="' . $_SERVER ['REQUEST_URI'] . 'all">All </a>' ;
+										}	
+										else{
+												echo '<a href="/contacts/select/';
 												
-											if( ! empty ($argument['sort']) && ! empty ($argument['sortparam']) )
-											{
-												echo $argument['sortparam'] . '/' . $argument['sort'] . '/' ;
-											}
-											echo $page . '/';
-											
-											echo '"\>All off</a>';
-									}					
-						?>
-				</th>
-				
-				<th>First Name
-				
-					<input type="submit" name="sort" value="&#8593" formaction=" 
-						<?=  ( $page > 1 ) ?  $html->url(array('controller'=>'contacts', 'action'=>'select', 
-																									'sort'=>'FirstName', 'sortparam'=>'asc', 'page'=>$page)) 
-																									
-														: $html->url(array('controller'=>'contacts', 'action'=>'select', 
-																									'sort'=>'FirstName', 'sortparam'=>'asc')); 							
-														
-								?>" >
-					
-					
-					<input type="submit" name="sort" value="&#8595" formaction=" 
-						<?= ( $page > 1 ) ? $html->url(array('controller'=>'contacts', 'action'=>'select', 
-																									'sort'=>'FirstName', 'sortparam'=>'desc', 'page'=>$page)) 
-																									
-														: $html->url(array('controller'=>'contacts', 'action'=>'select', 
-																									'sort'=>'FirstName', 'sortparam'=>'desc'));
-						
-								?>">
-					
-					
-				</th>
-				<th>Last Name
-				
-					<input type="submit" name="sort" value="&#8593" formaction="  
-						<?= ( $page > 1 ) ?  $html->url(array('controller'=>'contacts', 'action'=>'select', 
-																									'sort'=>'LastName', 'sortparam'=>'asc', 'page'=>$page)) 
-																									
-														: $html->url(array('controller'=>'contacts', 'action'=>'select', 
-																									'sort'=>'LastName', 'sortparam'=>'asc')); 
-						
-								?>" >
-				 
-					
-					<input type="submit" name="sort" value="&#8595" formaction=" 
-						<?= ( $page > 1 ) ? $html->url(array('controller'=>'contacts', 'action'=>'select', 
-																									'sort'=>'LastName', 'sortparam'=>'desc', 'page'=>$page)) 
-																									
-														: $html->url(array('controller'=>'contacts', 'action'=>'select', 
-																									'sort'=>'LastName', 'sortparam'=>'desc')); 
-														
-								?>">
-				
-				</th>
-				<th>E-mail</th>
-				<th>Cellular</th>
-			</tr>
-				
-		<?php foreach ( $contacts as $contact ) : ?>		
-				<tr>
-				<td> 
-					<input type="checkbox" name="<?= $contact['id']; ?>" value="<?= $contact['Email']; ?>" 
-									
-									<?php if( ! empty ($argument['all']) )
-											{	
-												echo 'checked';
-											}
-											elseif( ! empty ($checked) )
-											{	
-												foreach ( $checked as $check )
+												if( ! empty ($argument['sort']) && ! empty ($argument['sortparam']) )
 												{
-													if ($contact['id'] == $check)
+													echo $argument['sortparam'] . '/' . $argument['sort'] . '/' ;
+												}
+												echo $page . '/';
+											
+												echo '"\>Off</a>';
+										}					
+						?>
+					</th>
+					
+					<th class="table_menu">First Name
+					
+						<input class="sort" type="submit" name="sort" value="&#8593" formaction=" 
+							<?=  ( $page > 1 ) ?  $html->url(array('controller'=>'contacts', 'action'=>'select', 
+																										'sort'=>'FirstName', 'sortparam'=>'asc', 'page'=>$page)) 
+																										
+															: $html->url(array('controller'=>'contacts', 'action'=>'select', 
+																										'sort'=>'FirstName', 'sortparam'=>'asc')); 							
+															
+									?>" >
+						
+						
+						<input class="sort" type="submit" name="sort" value="&#8595" formaction=" 
+							<?= ( $page > 1 ) ? $html->url(array('controller'=>'contacts', 'action'=>'select', 
+																										'sort'=>'FirstName', 'sortparam'=>'desc', 'page'=>$page)) 
+																										
+															: $html->url(array('controller'=>'contacts', 'action'=>'select', 
+																										'sort'=>'FirstName', 'sortparam'=>'desc'));
+							
+									?>">
+						
+						
+					</th>
+					<th class="table_menu">Last Name
+					
+						<input class="sort" type="submit" name="sort" value="&#8593" formaction="  
+							<?= ( $page > 1 ) ?  $html->url(array('controller'=>'contacts', 'action'=>'select', 
+																										'sort'=>'LastName', 'sortparam'=>'asc', 'page'=>$page)) 
+																										
+															: $html->url(array('controller'=>'contacts', 'action'=>'select', 
+																										'sort'=>'LastName', 'sortparam'=>'asc')); 
+							
+									?>" >
+					 
+						
+						<input class="sort" type="submit" name="sort" value="&#8595" formaction=" 
+							<?= ( $page > 1 ) ? $html->url(array('controller'=>'contacts', 'action'=>'select', 
+																										'sort'=>'LastName', 'sortparam'=>'desc', 'page'=>$page)) 
+																										
+															: $html->url(array('controller'=>'contacts', 'action'=>'select', 
+																										'sort'=>'LastName', 'sortparam'=>'desc')); 
+															
+									?>">
+					
+					</th>
+					<th class="table_menu">E-mail</th>
+					<th class="table_menu">Cellular</th>
+				</tr>
+					
+			<?php foreach ( $contacts as $contact ) : ?>		
+					<tr class="line">
+					<td> 
+						<input class="number" type="checkbox" name="<?= $contact['id']; ?>" value="<?= $contact['Email']; ?>" 
+										
+										<?php if( ! empty ($argument['all']) )
+												{	
+													echo 'checked';
+												}
+												elseif( ! empty ($checked) )
+												{	
+													foreach ( $checked as $check )
 													{
-														echo 'checked';
+														if ($contact['id'] == $check)
+														{
+															echo 'checked';
+														}
 													}
 												}
-											}
-											
-									?>
-					>
-				</td>
-				<td><?= $contact['FirstName']; ?></td>
-				<td><?= $contact['LastName']; ?></td>
-				<td><?= $contact['Email']; ?></td>
-				<td><?= $contact['Telephone']; ?></td>
-				<?php $i++; ?>
-			</tr>	
-			
-		<?php endforeach;?>	
-										
-		</table>
-		</br> <input type="submit" name="Select" value="Accept" formaction="/contacts/letter/"><a href="/">Cancel</a></br>
-			
-		</br> 
-		<ul>
-			<li>
-				<?php  if ($page != 1) : ?>
-						
-				<input type="submit" name="page" value="Back" formaction="<?php
-				
-								echo '/contacts/select/';
-								
-								if( ! empty ($argument['sort']) && ! empty ($argument['sortparam']) )
-								{
-									echo $argument['sortparam'] . '/' . $argument['sort'] . '/' ;
-								}
-								
-								if ($page == 1) {
-									echo '1/';
-								} else {
-									echo ($page - 1) . '/';
-								}
-								?>"
-				>
-								
-						
-						
-					<?php endif; ?>	
-														
-			</li>
-			
-			<li>
-					<?php for ($i = $count_for_pagin[0]; $i <= $count_for_pagin[1]; $i++) { ?>
-						
-									<input type="submit" name="page" value="<?=$i?>" formaction="<?php
-									
-											echo '/contacts/select/';
 												
-											if( ! empty ($argument['sort']) && ! empty ($argument['sortparam']) )
-											{
-												echo $argument['sortparam'] . '/' . $argument['sort'] . '/' ;
-											}
-											echo $i . '/';
-											
-											?>"
-									>
-
-						
-					<?php } ?>
-						
-				</li>
-			<li>								 
-				<?php if ($page != $count_pages) : ?>
+										?>
+						>
+					</td>
+					<td class="name"><?= $contact['FirstName']; ?></td>
+					<td class="name"><?= $contact['LastName']; ?></td>
+					<td class="email"><?= $contact['Email']; ?></td>
+					<td class="telephone"><?= $contact['Telephone']; ?></td>
+					<?php $i++; ?>
+				</tr>	
 				
-						<input type="submit" name="page" value="Next" formaction="<?php
+			<?php endforeach;?>	
+											
+			</table>
+			<div class="pagination">
+				<input class="add" type="submit" name="Select" value="Accept" formaction="/contacts/letter/">
+				<a class="letter" href="/">Cancel</a>
+	 
+				<ul>
+					<li class="back_plase">
+						<?php  if ($page != 1) : ?>
+								
+						<input class="back" type="submit" name="page" value="" formaction="<?php
 						
-								echo '/contacts/select/';
-									
-								if( ! empty ($argument['sort']) && ! empty ($argument['sortparam']) )
-								{
-										echo $argument['sortparam'] . '/' . $argument['sort'] . '/' ;
-								}
-							  echo ( $page + 1 ) . '/' ;
-							  
-							 ?>"
-						 >
+										echo '/contacts/select/';
+										
+										if( ! empty ($argument['sort']) && ! empty ($argument['sortparam']) )
+										{
+											echo $argument['sortparam'] . '/' . $argument['sort'] . '/' ;
+										}
+										
+										if ($page == 1) {
+											echo '1/';
+										} else {
+											echo ($page - 1) . '/';
+										}
+										?>"
+						>
+										
+								
+								
+							<?php endif; ?>	
+																
+					</li>
 					
+					<li class="page_plase">
+							<?php for ($i = $count_for_pagin[0]; $i <= $count_for_pagin[1]; $i++) { ?>
+									<?php if ($i == $page) { ?>
+							
+										<input class="page_active" type="submit" name="page" value="<?=$i?>" formaction="<?php
+											
+													echo '/contacts/select/';
+														
+													if( ! empty ($argument['sort']) && ! empty ($argument['sortparam']) )
+													{
+														echo $argument['sortparam'] . '/' . $argument['sort'] . '/' ;
+													}
+													echo $i . '/';
 													
-				<?php endif; ?>	
-			</form>									
-			</li>
-		</ul>
+													?>"
+											>
+										
+									<?php } else { ?>
+											<input class="page" type="submit" name="page" value="<?=$i?>" formaction="<?php
+											
+													echo '/contacts/select/';
+														
+													if( ! empty ($argument['sort']) && ! empty ($argument['sortparam']) )
+													{
+														echo $argument['sortparam'] . '/' . $argument['sort'] . '/' ;
+													}
+													echo $i . '/';
+													
+													?>"
+											>
+										<?php } ?>
+								
+							<?php } ?>
+								
+						</li>
+					<li class="next_plase">								 
+						<?php if ($page != $count_pages) : ?>
+						
+								<input class="next" type="submit" name="page" value="" formaction="<?php
+								
+										echo '/contacts/select/';
+											
+										if( ! empty ($argument['sort']) && ! empty ($argument['sortparam']) )
+										{
+												echo $argument['sortparam'] . '/' . $argument['sort'] . '/' ;
+										}
+									  echo ( $page + 1 ) . '/' ;
+									  
+									 ?>"
+								 >
+							
+															
+						<?php endif; ?>	
+					</form>									
+					</li>
+				</ul>
+			</div
+		</div>
+	</div>
+	<div class="footer">
+		<span>&#169 2007 Wise Engineering</span>
+	</div>
+</div>
 </body>
 </html>

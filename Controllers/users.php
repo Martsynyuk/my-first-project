@@ -98,7 +98,7 @@ Class Users extends Controller
 																		
 									);
 						
-					header ( 'Location: autorization' );
+					header ( 'Location: /users/autorization' );
 				}
 				else{
 						

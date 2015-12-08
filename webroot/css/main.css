@@ -119,18 +119,11 @@ body{
 	cursor: pointer;
 	border: 0;
 }
-.content  .contact .back{
-	background: url(/img/prew.png) no-repeat;
-	width: 80px;
-	height: 15px;
-	outline: none;
-	border: 0;
-}
 .contact .action{
 	width: 110px;
 }
 .contact .delete{
-	background: rgba(192, 106, 0, 0.1);
+	background: rgba(192, 106, 0, 0.2);
 	width: 50px;
 	height: 20px;
 	position: absolute;
@@ -171,6 +164,15 @@ body{
 	height: 15px;
 	outline: none;
 	border: 0;
+	cursor: pointer;
+}
+.content  .contact .back{
+	background: url(/img/prew.png) no-repeat;
+	width: 80px;
+	height: 15px;
+	outline: none;
+	border: 0;
+	cursor: pointer;
 }
 .content .content_autorization{
 	margin: 0 auto;
@@ -270,7 +272,7 @@ body{
 	width: 200px;
 	margin: 0 auto;
 }
-.add{
+.content .add{
 	background: linear-gradient(to top, #363636, #1C1C1C);
 	position: absolute;
 	top: -30px;
@@ -279,6 +281,24 @@ body{
 	line-height:25px;
 	text-align: center;
 	border-radius: 10px;
+	color: white;
+}
+.content .add_some{
+	background: linear-gradient(to top, #363636, #1C1C1C);
+	width: 100px;
+	height: 25px;
+	line-height:25px;
+	text-align: center;
+	border-radius: 10px;
+	display: block;
+	margin-top: 30px;
+}
+.content .contact .all{
+	padding: 8px 10px 8px 15px;
+}
+.content .contact .table_menu{
+	padding: 0;
+	width: 150px;
 }
 .letter{
 	background: linear-gradient(to top, #363636, #1C1C1C);
