@@ -21,6 +21,7 @@ input{
 	outline: none;
 	border: 0;
 	cursor: pointer;
+	padding:3px 5px 4px;
 }
 address,caption,cite,code,dfn,th,var {
 	font-style:normal;
