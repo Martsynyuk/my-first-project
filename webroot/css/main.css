@@ -13,6 +13,10 @@ body{
 	font-weight: 500;
 	font: 16px Arial regular;
 }
+.main input{
+	font: 11pt Arial regular;
+	color: white;
+}
 .main a {
 	text-decoration: none;
 	color: white;
@@ -34,6 +38,9 @@ body{
 .header ul>li{
 	display: inline-block;
 	width: 100px;
+}
+.header .header_menu ul>li{
+	font: 11pt Arial regular;
 }
 .header .autorization{
 	background: url(/img/autorization.png) no-repeat;
@@ -58,7 +65,7 @@ body{
 }
 .content{
 	height: 300px;
-	padding:75px 0 50px 0;
+	padding:75px 0 25px 0;
 }
 .content .contact {
 	width: 700px;
@@ -88,10 +95,10 @@ body{
 	padding: 10px 0 0 10px;
 }
 .content .contact .sort{
-	width: 18px;
+	width: 16px;
 	height: 25px;
 	font-size: 15px;
-	font-weidth: 800;
+	font-weight: 800;
 	border-radius: 8px 8px 0 0;
 	background: none;
 	outline: none;
@@ -177,34 +184,36 @@ body{
 .content .content_autorization{
 	margin: 0 auto;
 	padding-top: 20px;
-	width: 600px;
+	width: 430px;
 	height: 260px;
 	background: url(/img/content_grad_login.png);
 	border-radius: 30px;
 }
 .content .content_autorization .name_menu{
-	padding: 5px 0 15px 40px;
+	padding: 5px 0 15px 70px;
 	font-size: 20px;
+	font: 16pt Arial regular; 
 }
-.content .content_autorization input{
-	border-radius: 6px;
-}
+
 .content .content_autorization .input_text{
-	width: 500px;
-	padding: 10px 0 0 10px;
+	width: 300px;
+	padding: 10px 0 0 70px;
 }
 .content .content_autorization .input_text p{
 	float: left;
-	width: 100px;
+	width: 86px;
 	height: 20px;
 	line-height: 20px;
+	padding-top: 5px;
+	font: 11pt Arial regular;
 }
 .content .content_autorization ul{
 	padding-top: 15px;
 }
 .content .content_autorization li{
-	padding:5px 0 0 25px;
-	font-size: 12px;
+	padding:5px 0 0 160px;
+	font: 11pt Arial regular;
+	text-decoration: underline;
 }
 .content .content_autorization .submit_autorization{
 	background: url(/img/input.png) no-repeat;
@@ -212,7 +221,7 @@ body{
 	outline: none;
 	border: 0;
 	cursor: pointer;
-	margin: 0 auto;
+	margin: 30px auto;
 	display: block;
 }
 .content .content_autorization .submit_registration{
@@ -221,7 +230,7 @@ body{
 	outline: none;
 	border: 0;
 	cursor: pointer;
-	margin: 0 auto;
+	margin: 30px auto;
 	display: block;
 }
 .content .content_autorization .submit:hover{
@@ -257,9 +266,10 @@ body{
 }
 .content .pagination .page_plase{
 	height: 35px;
-	width: 310px;
+	width: 180px;
 	position: absolute;
-	left: 170px;
+	left: 165px;
+	text-align: center;
 }
 .footer{
 	width: 100%;
@@ -294,7 +304,8 @@ body{
 	margin-top: 30px;
 }
 .content .contact .all{
-	padding: 8px 10px 8px 15px;
+	padding: 7px 10px 8px 15px;
+	width: 25px;
 }
 .content .contact .table_menu{
 	padding: 0;

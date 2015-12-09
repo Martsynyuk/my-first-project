@@ -505,6 +505,7 @@ class Contacts extends Controller
 		}
 	
 		$this->view->set ( 'contactUser', $contactUser );
+		$this->view->set ( 'html', $this->view);
 			
 		$this->view->render ( $argument );
 
