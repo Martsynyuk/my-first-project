@@ -74,8 +74,8 @@
 					<td class="telephone"><?= $contact['Telephone']; ?></td>
 					<td class="action">
 						<a class="edit" href="<?= $html->url(array('controller'=>'contacts', 'action'=>'edit', 'id'=>$contact['id'])) ?>">edit</a> 
-						<a class="view" href="<?= $html->url(array('controller'=>'contacts', 'action'=>'view', 'id'=>$contact['id'])) ?>">view</a> 
-						<a class="delete" href="<?= $html->url(array('controller'=>'contacts', 'action'=>'delete', 'id'=>$contact['id'])) ?>">delete</a>
+						<a class="view" href="<?= $html->url(array('controller'=>'contacts', 'action'=>'view', 'id'=>$contact['id'])) ?>">view</a>
+						<a class="delete" href="<?= $html->url(array('controller'=>'contacts', 'action'=>'delete', 'id'=>$contact['id'])) ?>"></a>
 					</td>
 				</tr>
 				<?php $i++;?>	

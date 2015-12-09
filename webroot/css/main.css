@@ -41,6 +41,7 @@ body{
 }
 .header .header_menu ul>li{
 	font: 11pt Arial regular;
+	line-height: 18px;
 }
 .header .autorization{
 	background: url(/img/autorization.png) no-repeat;
@@ -130,25 +131,25 @@ body{
 	width: 110px;
 }
 .contact .delete{
-	background: rgba(192, 106, 0, 0.2);
-	width: 50px;
-	height: 20px;
-	position: absolute;
-	right: -50px;
-	top: 10px;
+	width: 700px;
+	height: 18px;
+	float: right;
 	text-align: center;
 	color: 	#363636;
-	border-radius: 0 7px 7px 0;
+	position: absolute;
+	right: -30px;
+	top: 10px;
+	
 }
 .contact .delete:hover{
-	background: rgba(192, 106, 0, 1);
-	color: white;
+	background: url(/img/delete.png) no-repeat;
+	background-position: right;
 }
 .contact .edit{
 	background: rgba(192, 106, 0, 1);
 	border-radius: 7px;
 	width: 50px;
-	height: 20px;
+	height: 18px;
 	float: left;
 	text-align: center;
 	margin-bottom: 3px;
@@ -157,7 +158,7 @@ body{
 	background: rgba(192, 106, 0, 1);
 	border-radius: 7px 0 0 7px;
 	width: 50px;
-	height: 20px;
+	height: 18px;
 	float: right;
 	text-align: center;
 	margin-bottom: 3px;
