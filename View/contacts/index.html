@@ -18,8 +18,10 @@
 		<a href="/"><img src="/img/logotip.png" alt="logotip"></a>
 		<div class="header_menu">
 			<ul>	
-				<li class="home"> <a href="<?= $html->url(array()) ?>">Home</a> </li>
+				<li class="home"> <a href="<?= $html->url(array()) ?>">Home</a> </li>				
 				<li class="logout"> <a href=" <?= $html->url(array('controller'=>'users', 'action'=>'logout')) ?>">Logout</a> </li>
+				<li class="add_some"> <a href=" <?= $html->url(array('controller'=>'contacts', 'action'=>'add')) ?>">Add contact</a></li>
+				<li class="home"><a  href="<?= $html->url(array('controller'=>'contacts', 'action'=>'letter')) ?>">Letter</a></li>
 			</ul>
 		</div>
 	</div>
@@ -31,7 +33,7 @@
 			<tr class="top">
 				<th></th>
 				<form name="index" method="POST">
-					<th>First Name
+					<th class="first_name">First Name
 					
 						<input class="sort" type="submit" value="&#8593" formaction="
 							<?=  ( $page > 1 ) ? $html->url(array('sort'=>'FirstName', 'sortparam'=>'asc', 'page'=>$page )) 
@@ -45,7 +47,7 @@
 							
 									?>">
 					</th>
-					<th>Last Name
+					<th class="last_name">Last Name
 						<input class="sort" type="submit" value="&#8593" formaction="
 							<?= ( $page > 1 ) ? $html->url(array('sort'=>'LastName', 'sortparam'=>'asc', 'page'=>$page ))
 									: $html->url(array('sort'=>'LastName', 'sortparam'=>'asc' )) ;
@@ -59,9 +61,9 @@
 									?>">
 						
 					</th>
-					<th>E-mail</th>
-					<th>Cellular</th>
-					<th>Action</th>
+					<th class="email">E-mail</th>
+					<th class="cell">Cellular</th>
+					<th class="action_plase">Action</th>
 					
 			</tr>
 																
@@ -85,8 +87,6 @@
 									
 					</table>
 			<div class="pagination">
-			<a class="add" href="<?= $html->url(array('controller'=>'contacts', 'action'=>'add')) ?>">Add contact</a>
-			<a class="letter" href="<?= $html->url(array('controller'=>'contacts', 'action'=>'letter')) ?>">letter</a>
 			
 				<?php } else { ?>
 				
@@ -96,8 +96,6 @@
 				<?php } ;?>
 				
 				<?php if($count_contacts == 0) { ?>
-				
-					<a class="add_some" href=" <?= $html->url(array('controller'=>'contacts', 'action'=>'add')) ?>">Add contact</a>
 					
 			<?php } else {?>
 			

@@ -81,6 +81,7 @@ class Contacts extends Controller
 			
 			$this->view->set ( 'user', $user );
 			$this->view->set ( 'html', $this->view);
+			$this->view->set ( 'post', $post);
 		
 			$this->view->render ( $argument );			
 	}
@@ -684,6 +685,11 @@ class Contacts extends Controller
 		
 	function return_contact ( $user_id, $page, $sorting, $sortparam ) 
 	{
+		if( empty ($sortparam))
+		{
+			$sorting = 'asc';
+			$sortparam = 'FirstName';
+		}
 		
 		$sort = '';
 		$deck = '';
