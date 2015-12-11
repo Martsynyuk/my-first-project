@@ -82,29 +82,30 @@ body{
 	padding:75px 0 25px 0;
 }
 .content .contact {
-	width: 700px;
+	width: 720px;
 	margin: 0 auto;
 }
 .content .contact .table{
-	background: linear-gradient(to top, #1C1C1C, #363636);
+	background: url(/img/for_contact.png) no-repeat;
 	display: block;
-	height: 270px;
+	width:712px;
+	height: 264px;
 	border-radius: 30px;
 }
 .content .contact .table .first_name{
 	width: 130px;
-	padding: 10px 0 3px 45px;
+	padding: 10px 0 3px 52px;
 }
 .content .contact .table .last_name{
 	width: 140px;
-	padding: 10px 0 3px 10px;
+	padding: 10px 0 3px 14px;
 }
 .content .contact .table .email{
 	width: 140px;
 	padding: 10px 0 3px 0;
 }
 .content .contact .table .cell{
-	width: 120px;
+	width: 118px;
 	padding: 10px 0 3px 30px;
 }
 .content .contact .table .name{
@@ -114,25 +115,24 @@ body{
 	padding-left: 5px;
 }
 .content .contact .table .action_plase{
-	width: 110px;
-	padding: 10px 0 3px 10px;
+	width: 90px;
+	padding: 10px 0 3px 30px;
 	text-align: center;
 }
 .content .contact tr{
 	display: inline-block;
-	width: 700px;
+	width: 712px;
 	position: relative;
 	font: 13pt Arial bold;
 }
 .content .contact .top {
-	background: rgba(65, 65, 65, 1);
 	width: 700px;
 	height: 40px;
 	border-radius: 25px 25px 0 0;
 	font: 10pt Arial regular;
 }
 .content .contact tr>td {
-	padding: 9px 0 0 20px;
+	padding: 9px 0 0 23px;
 }
 .content .contact .sort{
 	width: 16px;
@@ -188,7 +188,7 @@ body{
 	background-position: right;
 }
 .contact .edit{
-	background: rgba(192, 106, 0, 1);
+	background: url(/img/edit.png) no-repeat;
 	border-radius: 7px;
 	width: 36px;
 	height: 18px;
@@ -198,7 +198,7 @@ body{
 	margin-left: 28px;
 }
 .contact .view{
-	background: rgba(192, 106, 0, 1);
+	background: url(/img/view.png) no-repeat;
 	border-radius: 7px 0 0 7px;
 	width: 40px;
 	height: 18px;
@@ -208,7 +208,8 @@ body{
 }
 .contact .number{
 	width: 25px;
-	height: 15px;;
+	height: 15px;
+	margin-top: 6px;
 }
 .content .next{
 	background: url(/img/next.png) no-repeat;
@@ -356,6 +357,9 @@ body{
 }
 .line{
 	border-bottom: 1px solid gray; 
+}
+.line:last-child{
+	border-bottom: 0; 
 }
 .clear{
 	clear: both;
