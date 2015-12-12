@@ -213,20 +213,25 @@ body{
 	font: 13px Arial regular;
 }
 .contact .delete{
-	width: 700px;
+	width: 600px;
 	height: 18px;
 	float: right;
 	text-align: center;
 	color: 	#363636;
 	position: absolute;
-	right: -30px;
+	right: 90px;
 	top: 10px;
+}
+.contact .del:hover{
+	background: url(/img/delete.png) no-repeat;
 	
 }
-.contact .delete:hover{
-	background: url(/img/delete.png) no-repeat;
-	background-position: right;
-}
+.contact .delete .del{
+	width: 30px;
+	height: 20px;
+	position: absolute;
+	right: -120px;
+} 
 .contact .edit{
 	background: url(/img/edit.png) no-repeat;
 	border-radius: 7px;
@@ -236,6 +241,7 @@ body{
 	text-align: center;
 	margin-bottom: 3px;
 	margin-left: 28px;
+	z-index: 1500;
 }
 .contact .view{
 	background: url(/img/view.png) no-repeat;
@@ -245,6 +251,7 @@ body{
 	float: right;
 	text-align: center;
 	margin-bottom: 3px;
+	z-index: 100%;
 }
 .contact .number{
 	width: 25px;
@@ -270,10 +277,9 @@ body{
 .content .content_autorization{
 	margin: 0 auto;
 	padding-top: 20px;
-	width: 430px;
-	height: 260px;
-	background: url(/img/content_grad_login.png);
-	border-radius: 30px;
+	width: 427px;
+	height: 262px;
+	background: url(/img/login_plase.png);
 }
 .content .content_autorization .name_menu{
 	padding: 5px 0 15px 70px;
