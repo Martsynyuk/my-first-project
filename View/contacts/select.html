@@ -101,7 +101,7 @@
 			<?php foreach ( $contacts as $contact ) : ?>		
 					<tr class="line">
 					<td> 
-						<input class="number" type="checkbox" name="<?= $contact['id']; ?>" value="<?= $contact['Email']; ?>" 
+						<input class="check" type="checkbox" name="<?= $contact['id']; ?>" value="<?= $contact['Email']; ?>" 
 										
 										<?php if( ! empty ($argument['all']) )
 												{	
@@ -123,7 +123,7 @@
 					</td>
 					<td class="name"><?= $contact['FirstName']; ?></td>
 					<td class="name"><?= $contact['LastName']; ?></td>
-					<td class="email"><?= $contact['Email']; ?></td>
+					<td class="emails"><?= $contact['Email']; ?></td>
 					<td class="telephone"><?= $contact['Telephone']; ?></td>
 					<?php $i++; ?>
 				</tr>	

@@ -80,10 +80,31 @@ body{
 	padding: 10px 0 30px 0;
 }
 .content .form{
-	background: url(/img/add_contact.png) no-repeat;
-	width: 428px;
-	height: 632px;
+	background: url(/img/add_contact_grad.png) repeat-x;
+	width: 386px;
+	height: 631px;
 	margin: 0 auto;
+	position: relative;
+}
+.content .form:before{
+	background: url(/img/add_contact_left.png) no-repeat;
+	display: block;
+	width:20px;
+	height: 631px;
+	content: '';
+	left: -20px;
+	top: 0;
+	position: absolute;
+}
+.content .form:after{
+	background: url(/img/add_contact_right.png) no-repeat;
+	display: block;
+	width:22px;
+	height: 631px;
+	content: '';
+	right: -20px;
+	top: 0;
+	position: absolute;
 }
 .content .form .information{
 	display: block;
@@ -122,57 +143,95 @@ body{
 }
 .content .contact {
 	width: 720px;
-	margin: 0 auto;
+	margin: 0 100px 0 170px;
 	padding-top: 55px;
 }
 .content .contact .table{
-	background: url(/img/for_contact.png) no-repeat;
+	background: url(/img/contact_grad.png) repeat-x;
 	display: block;
-	width:712px;
+	width:660px;
 	height: 264px;
-	border-radius: 30px;
+	position: relative;
+}
+.content .contact .table .telephone{
+	width:100px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	padding-left: 20px;
+}
+.content .contact .table .emails{
+	overflow: hidden;
+	text-overflow: ellipsis;
+	width: 150px;
+}
+.content .contact .table:before{
+	background: url(/img/contact_left.png) no-repeat;
+	display: block;
+	width:20px;
+	height: 264px;
+	content: '';
+	left: -20px;
+	top: 0;
+	position: absolute;
+}
+.content .contact .table:after{
+	background: url(/img/contact_right.png) no-repeat;
+	display: block;
+	width:23px;
+	height: 264px;
+	content: '';
+	right: -20px;
+	top: 0;
+	position: absolute;
 }
 .content .contact .table .first_name{
 	width: 130px;
-	padding: 10px 0 3px 52px;
+	padding: 10px 0 3px 30px;
 }
 .content .contact .table .last_name{
-	width: 140px;
-	padding: 10px 0 3px 14px;
+	width: 130px;
+	padding: 10px 0 3px 4px;
 }
 .content .contact .table .email{
-	width: 140px;
-	padding: 10px 0 3px 0;
+	width: 150px;
+	padding-top: 10px;
 }
 .content .contact .table .cell{
 	width: 118px;
-	padding: 10px 0 3px 30px;
+	padding: 10px 0 3px 20px;
 }
 .content .contact .table .name{
 	width: 130px;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	padding-left: 5px;
+	padding-top: 17px;
 }
 .content .contact .table .action_plase{
 	width: 90px;
-	padding: 10px 0 3px 30px;
+	padding: 10px 0 3px 6px;
 	text-align: center;
 }
 .content .contact tr{
 	display: inline-block;
 	width: 712px;
+	height: 30px;
 	position: relative;
 	font: 13pt Arial bold;
 }
 .content .contact .top {
 	width: 700px;
-	height: 40px;
+	height: 33px;
 	border-radius: 25px 25px 0 0;
 	font: 10pt Arial regular;
 }
 .content .contact tr>td {
-	padding: 9px 0 0 23px;
+	padding-top: 20px;
+}
+.content .contact tr>td .check {
+	width: 16px;
+	height: 16px;
+	margin: 0 5px;
 }
 .content .contact .sort{
 	width: 16px;
@@ -211,27 +270,21 @@ body{
 .contact .action{
 	width: 110px;
 	font: 13px Arial regular;
+	position: relative;
 }
-.contact .delete{
-	width: 600px;
+.contact .delete{		
+	width: 30px;
 	height: 18px;
-	float: right;
 	text-align: center;
 	color: 	#363636;
 	position: absolute;
-	right: 90px;
-	top: 10px;
+	right: -35px;
+	top: 20px;
+	z-index: 500;
 }
-.contact .del:hover{
+.contact .table tr:hover .delete{
 	background: url(/img/delete.png) no-repeat;
-	
 }
-.contact .delete .del{
-	width: 30px;
-	height: 20px;
-	position: absolute;
-	right: -120px;
-} 
 .contact .edit{
 	background: url(/img/edit.png) no-repeat;
 	border-radius: 7px;
@@ -241,17 +294,16 @@ body{
 	text-align: center;
 	margin-bottom: 3px;
 	margin-left: 28px;
-	z-index: 1500;
 }
 .contact .view{
 	background: url(/img/view.png) no-repeat;
-	border-radius: 7px 0 0 7px;
+	right: -5px;
 	width: 40px;
 	height: 18px;
-	float: right;
 	text-align: center;
 	margin-bottom: 3px;
-	z-index: 100%;
+	position: absolute;
+	z-index: 500;
 }
 .contact .number{
 	width: 25px;
@@ -276,10 +328,29 @@ body{
 }
 .content .content_autorization{
 	margin: 0 auto;
-	padding-top: 20px;
-	width: 427px;
+	padding: 20px 0 50px 0;
+	width: 368px;
 	height: 262px;
-	background: url(/img/login_plase.png);
+	background: url(/img/login_grad.png) repeat-x;
+	position: relative;
+}
+.content .content_autorization:before{
+	width: 30px;
+	height: 262px;
+	position: absolute;
+	content: '';
+	left: -30px;
+	top: 0;
+	background: url(/img/login_left.png) no-repeat;
+}
+.content .content_autorization:after{
+	width: 30px;
+	height: 262px;
+	position: absolute;
+	content: '';
+	right: -30px;
+	top: 0;
+	background: url(/img/login_right.png) no-repeat;
 }
 .content .content_autorization .name_menu{
 	padding: 5px 0 15px 70px;
@@ -312,6 +383,7 @@ body{
 	width: 95px;
 	outline: none;
 	border: 0;
+	color: white;
 	cursor: pointer;
 	margin: 30px auto;
 	display: block;
@@ -379,7 +451,7 @@ body{
 	margin: 0 auto;
 }
 .content .contact .all{
-	padding: 14px 4px 8px 22px;
+	padding: 14px 4px 8px 3px;
 	width: 25px;
 }
 .content .contact .table_menu{
@@ -388,7 +460,7 @@ body{
 	height: 15px;
 }
 .content .contact .cell_plase{
-	padding: 6px 0 1px 30px;
+	padding: 6px 0 1px 40px;
 	width: 132px;
 	height: 15px;
 }
@@ -403,17 +475,6 @@ body{
 	width: 140px;
 	overflow: hidden;
 	text-overflow: ellipsis;
-}
-.telephone{
-	width:100px;
-	overflow: hidden;
-	text-overflow: ellipsis;
-}
-.line{
-	border-bottom: 1px solid gray; 
-}
-.line:last-child{
-	border-bottom: 0; 
 }
 .clear{
 	clear: both;

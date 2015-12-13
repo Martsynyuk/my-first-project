@@ -72,14 +72,12 @@
 					<td class="number"><?= $i . '.'; ?></td>
 					<td class="name"><?= $contact['FirstName']; ?></td>
 					<td class="name"><?= $contact['LastName']; ?></td>
-					<td class="email"><?= $contact['Email']; ?></td>
+					<td class="emails"><?= $contact['Email']; ?></td>
 					<td class="telephone"><?= $contact['Telephone']; ?></td>
 					<td class="action">
 						<a class="edit" href="<?= $html->url(array('controller'=>'contacts', 'action'=>'edit', 'id'=>$contact['id'])) ?>">edit</a> 
 						<a class="view" href="<?= $html->url(array('controller'=>'contacts', 'action'=>'view', 'id'=>$contact['id'])) ?>">view</a>
-						<div class="delete">
-							<a class="del" href="<?= $html->url(array('controller'=>'contacts', 'action'=>'delete', 'id'=>$contact['id'])) ?>"></a>
-						</div>
+						<a class="delete" href="<?= $html->url(array('controller'=>'contacts', 'action'=>'delete', 'id'=>$contact['id'])) ?>"></a>
 					</td>
 				</tr>
 				<?php $i++;?>	
