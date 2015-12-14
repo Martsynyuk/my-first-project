@@ -15,6 +15,7 @@
 <body>
 <div class="main">
 	<div class="header">
+	<form name="index" method="POST">
 		<a href="/"><img src="/img/logotip.png" alt="logotip"></a>
 		<div class="header_menu">
 			<ul>	
@@ -32,7 +33,7 @@
 				<table class="table">
 			<tr class="top">
 				<th></th>
-				<form name="index" method="POST">
+				
 					<th class="first_name">First Name
 						<input <?= ( empty($argument['sortparam']) && empty($argument['sort']) || 
 													$argument['sortparam']==='FirstName' && $argument['sort']==='asc' ) ? 'class="active_sort"' : '' ;?> 
