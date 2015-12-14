@@ -19,7 +19,6 @@
 		
 	</ul>
 	
-	<h3>Some message</h3></br>
 	<?php if( ! empty ( $new_mail ) ) { ?> 
 		<form name="add_new_mail" method="POST" action="/contacts/letter">
 			Do you whant add new email - <?= $new_mail ?>? 
@@ -32,8 +31,8 @@
 			</br>
 			<input placeholder="write some e-mail" name="mails" type="text" size="60" value="<?= ( ! empty ($mail) ) ? $mail : '' ; ?>">
 		
-			<a href="<?= $html->url(array('controller'=>'contacts', 'action'=>'select')) ?> ">add e-mail from contacts</a></br></br>
-			for some text</br>
+			<a href="<?= $html->url(array('controller'=>'contacts', 'action'=>'select')) ?> ">add e-mail from contacts</a></br>
+			
 			<input placeholder="for some text" name="text" type="text" size="60" ></br></br>
 		
 			<input type="submit" name="add" value="add">

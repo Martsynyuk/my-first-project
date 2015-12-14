@@ -4,12 +4,13 @@
 Class View
 {
 		
-	private $var = array();
+	private $val = array();
+	private $layout = array();
 		
 	public function set ( $name, $value )
 	{
 			
-		$this->var[$name] = $value; 
+		$this->val[$name] = $value; 
 	} 
 		
 	public function render ( $argument )
@@ -17,7 +18,7 @@ Class View
 			
 		ob_start();
 			
-		extract($this->var);
+		extract($this->val);
 		
 		if ( file_exists(APP . '/View/' . $argument[0] . '/' . $argument[1] . '.html') )
 		{
@@ -28,7 +29,25 @@ Class View
 		echo ob_get_clean();
 		
 	}
-	
+	public function setLayout ($name, $value)
+	{
+		
+		$this->layout[$name] = $value;
+	}
+	public function  renderLayout($name)
+	{
+		ob_start();
+			
+		extract($this->layout);
+		
+		if ( file_exists(APP . '/View/layouts/' . $name . '.html') )
+		{
+				
+			include_once APP . '/View/layouts/' . $name . '.html';
+		}
+			
+		echo ob_get_clean();
+	}
 		/**
 		* 	$argument = array(
 		*		
