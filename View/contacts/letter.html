@@ -2,43 +2,56 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="keywords" content="">
+<meta name="description" content="">
+
 <title>project</title>
+
+<link rel="stylesheet" type="text/css" href="/css/main.css">
+<link rel="stylesheet" type="text/css" href="/css/reset.css">
+
 </head>
 <body>
-	<ul><?php if ( empty ( $_SESSION ['id'] ) ) { ?>
-		 
-		<li> <a href="<?= $html->url(array('controller'=>'users', 'action'=>'autorization')) ?>">Autorization</a> </li>
-		<li> <a href="<?= $html->url(array('controller'=>'users', 'action'=>'registration')) ?>">Registration</a> </li>
+<div class="main">
+	<div class="header">
+		<a href="/"><img src="/img/logotip.png" alt="logotip"></a>
+		<div class="header_menu">
+			<ul>	
+				<li class="home"> <a href="<?= $html->url(array()) ?>">Home</a> </li>
+				<li class="logout"> <a href="<?= $html->url(array('controller'=>'users', 'action'=>'logout')) ?>">Logout</a> </li>
+			</ul>
+		</div>
+	</div>
+	<div class="content">
 		
-		<?php } else { ?>
+			<?php if( ! empty ( $new_mail ) ) { ?> 
+				<form name="add_new_mail" method="POST" action="/contacts/letter">
+				<div class="content_autorization">
+					<span class="text">Do you whant add new email - <?= $new_mail ?>?</span>
+					<button name="del" name="Yes" value="Yes">Yes</button>
+					<button name="del" name="No" value="No">No</button>
+				</div>
+				</form>
+			<?php }else{ ?>
+			<div class="letter">
+				<form name="add_letter" method="POST" action="/contacts/letter/">
+					
+					<input class="email" placeholder="write some e-mail" name="mails" type="text" size="60" value="<?= ( ! empty ($mail) ) ? $mail : '' ; ?>">
+				
+					<a href="<?= $html->url(array('controller'=>'contacts', 'action'=>'select')) ?> ">add e-mail from contacts</a>
+					
+					<textarea class="text" placeholder="for some text" name="text"></textarea>
+				
+					<input class="add" type="submit" name="add" value="add">
 		
-		<li> <a href="<?= $html->url(array()) ?>">Home</a> </li>
-		<li> <a href="<?= $html->url(array('controller'=>'users', 'action'=>'logout')) ?>">Logout</a> </li>
-		
-		<?php }; ?>
-		
-	</ul>
-	
-	<?php if( ! empty ( $new_mail ) ) { ?> 
-		<form name="add_new_mail" method="POST" action="/contacts/letter">
-			Do you whant add new email - <?= $new_mail ?>? 
-			<button name="Yes" value="Yes">Yes</button>
-			<button name="No" value="No">No</button>
-		</form>
-	<?php }else{ ?>
-
-		<form name="add_letter" method="POST" action="/contacts/letter/">
-			</br>
-			<input placeholder="write some e-mail" name="mails" type="text" size="60" value="<?= ( ! empty ($mail) ) ? $mail : '' ; ?>">
-		
-			<a href="<?= $html->url(array('controller'=>'contacts', 'action'=>'select')) ?> ">add e-mail from contacts</a></br>
-			
-			<input placeholder="for some text" name="text" type="text" size="60" ></br></br>
-		
-			<input type="submit" name="add" value="add">
-
-		</form>
-	<?php } ?>
-	
+				</form>
+			<?php } ?>
+		</div>
+	</div>
+	<div class="footer">
+		<span>&#169 2007 Wise Engineering</span>
+	</div>
+</div>
 </body>
 </html>

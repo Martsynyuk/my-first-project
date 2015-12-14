@@ -1,7 +1,7 @@
 @CHARSET "UTF-8";
 
 body{
-	background-color: rgba(0, 0, 0, 0.8);
+	background-color: rgba(0, 0, 0, 1);
 }
 .main{
 	width: 980px;
@@ -164,6 +164,29 @@ body{
 }
 .content .form ul>li .date{
 	width: 95px;
+}
+.content .letter{
+	width: 600px;
+	margin: 100px auto 0;
+	height: 200px;
+}
+.content .letter .email{
+	width: 300px;
+	margin: 5px 5px 10px 5px;
+}
+.content .letter .text{
+	min-width: 309px;
+	margin: 5px 5px 10px 5px;
+	max-width: 480px;
+	min-height: 30px;
+	max-height: 100px
+}
+.content .letter .add{
+	background: url(/img/input.png) no-repeat;
+	width: 100px;
+	color: white;
+	display: block;
+	margin: 0 auto;
 }
 .content .contact {
 	width: 720px;
@@ -357,6 +380,20 @@ body{
 	background: url(/img/login_grad.png) repeat-x;
 	position: relative;
 }
+.content .content_autorization .text{
+	width: 360px;
+	height: 200px;
+	display: block;
+}
+.content .content_autorization button{
+	background: url(/img/input.png) no-repeat;
+	color: white;
+	border: 0;
+	outline: none;
+	width: 100px;
+	padding: 3px 0 0 0;
+	cursor: pointer;
+}
 .content .content_autorization:before{
 	width: 30px;
 	height: 262px;
@@ -494,7 +531,7 @@ body{
 	color: white;
 	font: 11pt Arial regular;
 }
-.content .back{
+.content .form .back{
 	background: url(/img/input.png) no-repeat;
 	margin: 34px 0 0 140px;
 	width: 110px;

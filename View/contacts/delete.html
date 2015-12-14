@@ -2,22 +2,30 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="keywords" content="">
+<meta name="description" content="">
+
 <title>project</title>
+
+<link rel="stylesheet" type="text/css" href="/css/main.css">
+<link rel="stylesheet" type="text/css" href="/css/reset.css">
+
 </head>
 <body>
-	<ul><?php if ( empty ( $user['id'] ) ) { ?>
-		 
-		<li> <a href="<?= $html->url(array('controller'=>'users', 'action'=>'autorization')) ?>">Autorization</a> </li>
-		<li> <a href="<?= $html->url(array('controller'=>'users', 'action'=>'registration')) ?>">Registration</a> </li>
-		
-		<?php } else { ?>
-		
-		<li> <a href="<?= $html->url(array()) ?>">Home</a> </li>
-		<li> <a href="<?= $html->url(array('controller'=>'users', 'action'=>'logout')) ?>">Logout</a> </li>
-		
-		<?php }; ?>	
-		
-		<?= ( ! empty ( $select ) && ! empty ( $id ) ) ?
+<div class="main">
+	<div class="header">
+	<a href="/"><img src="/img/logotip.png" alt="logotip"></a>
+		<div class="header_menu">
+			<ul>
+				<li class="home"> <a href="<?= $html->url(array()) ?>">Home</a> </li>
+				<li class="logout"> <a href="<?= $html->url(array('controller'=>'users', 'action'=>'logout')) ?>">Logout</a> </li>
+			</ul>	
+		</div>
+	</div>
+	<div class="content">
+		<div class="content_autorization">
+			<?= ( ! empty ( $select ) && ! empty ( $id ) ) ?
 			
 			'<form name="delete" value="delete" method="POST" action="/contacts/delete/' . $id .'"></br>
 				you really want to delete - ' . $select['Firstname'] . ' ? </br></br>
@@ -25,5 +33,11 @@
 				<button name="del" value="No">No</button>
 			</form>'
 		: '' ?>
+		</div>
+	</div>
+	<div class="footer">
+		<span>&#169 2007 Wise Engineering</span>
+	</div>
+</div>
 </body>
 </html>
