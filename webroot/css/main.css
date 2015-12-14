@@ -1,7 +1,7 @@
 @CHARSET "UTF-8";
 
 body{
-	background-color: rgba(0, 0, 0, 1);
+	background-color: rgba(0, 0, 0, 0.8);
 }
 .main{
 	width: 980px;
@@ -464,8 +464,7 @@ body{
 	background: url(/img/bottom_menu.png) no-repeat;
 	width: 500px;
 	height: 45px;
-	margin: 0 auto;
-	border-radius: 0 0 35px 35px;
+	margin-left: 90px;
 	position: relative;
 	padding-bottom: 50px;
 }
