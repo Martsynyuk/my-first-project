@@ -51,7 +51,9 @@
 					
 					<th class="table_menu">First Name
 					
-						<input class="sort" type="submit" name="sort" value="&#8593" formaction=" 
+						<input  <?= ( empty($argument['sortparam']) && empty($argument['sort']) || 
+													$argument['sortparam']==='FirstName' && $argument['sort']==='asc' ) ? 'class="active_sort"' : '' ;?> 
+							class="sort" type="submit" name="sort" value="&#8593" formaction=" 
 							<?=  ( $page > 1 ) ?  $html->url(array('controller'=>'contacts', 'action'=>'select', 
 																										'sort'=>'FirstName', 'sortparam'=>'asc', 'page'=>$page)) 
 																										
@@ -61,7 +63,8 @@
 									?>" >
 						
 						
-						<input class="sort" type="submit" name="sort" value="&#8595" formaction=" 
+						<input <?= ( $argument['sortparam']==='FirstName' && $argument['sort']==='desc' ) ? 'class="active_sort"' : '' ;?>
+							class="sort" type="submit" name="sort" value="&#8595" formaction=" 
 							<?= ( $page > 1 ) ? $html->url(array('controller'=>'contacts', 'action'=>'select', 
 																										'sort'=>'FirstName', 'sortparam'=>'desc', 'page'=>$page)) 
 																										
@@ -74,7 +77,8 @@
 					</th>
 					<th class="table_menu">Last Name
 					
-						<input class="sort" type="submit" name="sort" value="&#8593" formaction="  
+						<input <?= ( $argument['sortparam']==='LastName' && $argument['sort']==='asc' ) ? 'class="active_sort"' : '' ;?>
+							class="sort" type="submit" name="sort" value="&#8593" formaction="  
 							<?= ( $page > 1 ) ?  $html->url(array('controller'=>'contacts', 'action'=>'select', 
 																										'sort'=>'LastName', 'sortparam'=>'asc', 'page'=>$page)) 
 																										
@@ -84,7 +88,8 @@
 									?>" >
 					 
 						
-						<input class="sort" type="submit" name="sort" value="&#8595" formaction=" 
+						<input <?= ( $argument['sortparam']==='LastName' && $argument['sort']==='desc' ) ? 'class="active_sort"' : '' ;?>
+							class="sort" type="submit" name="sort" value="&#8595" formaction=" 
 							<?= ( $page > 1 ) ? $html->url(array('controller'=>'contacts', 'action'=>'select', 
 																										'sort'=>'LastName', 'sortparam'=>'desc', 'page'=>$page)) 
 																										

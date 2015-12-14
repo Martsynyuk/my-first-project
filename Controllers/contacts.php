@@ -294,8 +294,6 @@ class Contacts extends Controller
 		$i = 1;
 		($page > 1) ? $i = $page * ROWLIMIT - ROWLIMIT + 1 : '';  // to number of contacts
 		
-		var_dump($argument);
-		
 		$this->view->set ( 'count_contacts', $count_contacts );
 		$this->view->set ( 'count_for_pagin', $count_for_pagin );
 		$this->view->set ( 'page', $page );
@@ -304,6 +302,7 @@ class Contacts extends Controller
 		$this->view->set ( 'i', $i);
 		$this->view->set ( 'user', $user);
 		$this->view->set ( 'html', $this->view);
+		$this->view->set ( 'argument', $argument);
 		
 		$this->view->render ( $argument );
 		

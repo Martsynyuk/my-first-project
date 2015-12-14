@@ -34,27 +34,32 @@
 				<th></th>
 				<form name="index" method="POST">
 					<th class="first_name">First Name
-					
-						<input class="sort" type="submit" value="&#8593" formaction="
+						<input <?= ( empty($argument['sortparam']) && empty($argument['sort']) || 
+													$argument['sortparam']==='FirstName' && $argument['sort']==='asc' ) ? 'class="active_sort"' : '' ;?> 
+								class="sort" type="submit" value="&#8593" formaction="
+								
 							<?=  ( $page > 1 ) ? $html->url(array('sort'=>'FirstName', 'sortparam'=>'asc', 'page'=>$page )) 
 									 : $html->url(array('sort'=>'FirstName', 'sortparam'=>'asc')) ; 							
 															
 									?>">
 						
-						<input class="sort" type="submit" value="&#8595" formaction="
+						<input <?= ( $argument['sortparam']==='FirstName' && $argument['sort']==='desc' ) ? 'class="active_sort"' : '' ;?>
+							class="sort" type="submit" value="&#8595" formaction="
 							<?= ( $page > 1 ) ? $html->url(array('sort'=>'FirstName', 'sortparam'=>'desc', 'page'=>$page )) 
 									: $html->url(array('sort'=>'FirstName', 'sortparam'=>'desc')) ;
 							
 									?>">
 					</th>
 					<th class="last_name">Last Name
-						<input class="sort" type="submit" value="&#8593" formaction="
+						<input <?= ( $argument['sortparam']==='LastName' && $argument['sort']==='asc' ) ? 'class="active_sort"' : '' ;?>
+								class="sort" type="submit" value="&#8593" formaction="
 							<?= ( $page > 1 ) ? $html->url(array('sort'=>'LastName', 'sortparam'=>'asc', 'page'=>$page ))
 									: $html->url(array('sort'=>'LastName', 'sortparam'=>'asc' )) ;
 							
 									?>"> 
 				 
-						<input class="sort" type="submit" value="&#8595" formaction="
+						<input <?= ( $argument['sortparam']==='LastName' && $argument['sort']==='desc' ) ? 'class="active_sort"' : '' ;?>
+								class="sort" type="submit" value="&#8595" formaction="
 							<?= ( $page > 1 ) ? $html->url(array('sort'=>'LastName', 'sortparam'=>'desc', 'page'=>$page )) 
 									: $html->url(array('sort'=>'LastName', 'sortparam'=>'desc' )) ; 
 							

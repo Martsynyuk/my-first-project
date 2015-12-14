@@ -79,6 +79,18 @@ body{
 .content{	
 	padding: 10px 0 30px 0;
 }
+.content .active_sort{
+	color: red;
+	width: 16px;
+	height: 25px;
+	font-size: 15px;
+	font-weight: 1000;
+	background: none;
+	outline: none;
+	border: 0;
+	cursor: pointer;
+	padding: 0;
+}
 .content .form{
 	background: url(/img/add_contact_grad.png) repeat-x;
 	width: 386px;
@@ -250,7 +262,6 @@ body{
 	height: 25px;
 	font-size: 15px;
 	font-weight: 800;
-	border-radius: 8px 8px 0 0;
 	background: none;
 	outline: none;
 	border: 0;
