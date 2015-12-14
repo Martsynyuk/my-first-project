@@ -6,67 +6,74 @@
 <meta name="description" content="">
 <title></title>
 
+<link rel="stylesheet" type="text/css" href="/css/main.css">
+<link rel="stylesheet" type="text/css" href="/css/reset.css">
+
 </head>
 <body>
-	<ul>
-		<?php if ( empty ( $_SESSION ['id'] ) ) { ?>
-		 
-			<li> <a href="<?= $html->url(array('controller'=>'users', 'action'=>'autorization')) ?>">Autorization</a> </li>
-		<li> <a href=" <?= $html->url(array('controller'=>'users', 'action'=>'registration')) ?>">Registration</a> </li>
-		
-		<?php } else { ?>
-		
-		<li> <a href="<?= $html->url(array()) ?>">Home</a> </li>
-		<li> <a href=" <?= $html->url(array('controller'=>'users', 'action'=>'logout')) ?>">Logout</a> </li>
-		
-		<?php }; ?>
-		
-	</ul>
-	<form name="viewcontact" method="POST" action="contacts/view">
-		<?php 
-		foreach ( $contactUser as $res ) :
+<div class="main">
+	<div class="header">
+		<a href="/"><img src="/img/logotip.png" alt="logotip"></a>
+		<div class="header_menu">
+			<ul>	
+				<li class="home"> <a href=" <?= $html->url(array()) ?>">Home</a> </li>
+				<li class="logout"> <a href=" <?= $html->url(array('controller'=>'users', 'action'=>'logout')) ?>">Logout</a> </li>
+			</ul>
+		</div>
+	</div>
+	<div class="content">
+		<div class="form">
+			<form name="viewcontact" method="POST" action="contacts/view">
+				<?php 
+				foreach ( $contactUser as $res ) :
 	
 		$backdate = (date_parse ( $res ['BirthDate'] ));
 		?>
-			<ul>
-			<li><span>Information</span></li>
-			<li><span>First Name: - </span><?= ( ! empty ( $res['Firstname'] ) ) ? $res['Firstname'] : '';?>
-			</li>
-			<li><span>Last Name: - </span><?= ( ! empty ( $res['Lastname'] ) ) ? $res['Lastname'] : '';?>
-			</li>
-			<li><span>E-mail: - </span><?= ( ! empty ( $res['Email'] ) ) ? $res['Email'] : '';?>
-			</li>
-			<li><span>Home: - </span><?= (  !empty ( $res['Home'] ) ) ? $res['Home'] : '';?>
-			</li>
-			<li><span>Work: - </span><?= ( ! empty ( $res['Work'] ) ) ? $res['Work'] : '';?>
-			</li>
-			<li><span>Cell: - </span><?= ( ! empty ( $res['Cell'] ) ) ? $res['Cell'] : '';?>
-			</li>
-			<li><span>Adress 1: - </span> <?= ( ! empty ( $res['Adress1'] ) ) ? $res['Adress1'] : '';?>
-			</li>
-			<li><span>Adress 2: - </span> <?= ( ! empty ( $res['Adress2'] ) ) ? $res['Adress2'] : '';?>
-			</li>
-			<li><span>City: - </span><?= ( ! empty($res['City'] ) ) ? $res['City'] : '';?>
-			</li>
-			<li><span>State: - </span><?= ( ! empty ( $res['State'] ) ) ? $res['State'] : '';?>
-			</li>
-			<li><span>Zip: - </span><?= ( ! empty ( $res['Zip'] ) ) ? $res['Zip'] : '';?>
-			</li>
-			<li><span>Country: - </span><?= ( ! empty ( $res['Country'] ) ) ? $res['Country'] : '';?>
-			</li>
-			<li><span>Birth Date:</span>
-			
-					<?= $backdate['day']; ?>.
-										
-					<?= $backdate['month']; ?>.
-										
-					<?= $backdate['year']; ?>
-			</li>
-			
-		<?php endforeach; ?>
-		
-		</ul>
-		<a href="<?= $html->url(array()) ?>">Back</a>
-	</form>
+					<span class="information">Information</span>
+					<ul class="view_plase">
+						<li><span>First Name: - </span><span class="info"><?= ( ! empty ( $res['Firstname'] ) ) ? $res['Firstname'] : '';?></span>
+						</li>
+						<li><span>Last Name: - </span><span class="info"><?= ( ! empty ( $res['Lastname'] ) ) ? $res['Lastname'] : '';?></span>
+						</li>
+						<li><span>E-mail: - </span><span class="info"><?= ( ! empty ( $res['Email'] ) ) ? $res['Email'] : '';?></span>
+						</li>
+						<li><span>Home: - </span><span class="info"><?= (  !empty ( $res['Home'] ) ) ? $res['Home'] : '';?></span>
+						</li>
+						<li><span>Work: - </span><span class="info"><?= ( ! empty ( $res['Work'] ) ) ? $res['Work'] : '';?></span>
+						</li>
+						<li><span>Cell: - </span><span class="info"><?= ( ! empty ( $res['Cell'] ) ) ? $res['Cell'] : '';?></span>
+						</li>
+						<li><span>Adress 1: - </span><span class="info"><?= ( ! empty ( $res['Adress1'] ) ) ? $res['Adress1'] : '';?></span>
+						</li>
+						<li><span>Adress 2: - </span><span class="info"><?= ( ! empty ( $res['Adress2'] ) ) ? $res['Adress2'] : '';?></span>
+						</li>
+						<li><span>City: - </span><span class="info"><?= ( ! empty($res['City'] ) ) ? $res['City'] : '';?></span>
+						</li>
+						<li><span>State: - </span><span class="info"><?= ( ! empty ( $res['State'] ) ) ? $res['State'] : '';?></span>
+						</li>
+						<li><span>Zip: - </span><span class="info"><?= ( ! empty ( $res['Zip'] ) ) ? $res['Zip'] : '';?></span>
+						</li>
+						<li><span>Country: - </span><span class="info"><?= ( ! empty ( $res['Country'] ) ) ? $res['Country'] : '';?></span>
+						</li>
+						<li><span>Birth Date:</span>
+						
+								<span class="info"><?= $backdate['day']; ?>.
+													
+								<?= $backdate['month']; ?>.
+													
+								<?= $backdate['year']; ?></span>
+						</li>
+						
+					<?php endforeach; ?>
+				
+				</ul>
+				<a class="back" href="<?= $html->url(array()) ?>">Back</a>
+			</form>
+		</div>	
+	</div>
+	<div class="footer">
+		<span>&#169 2007 Wise Engineering</span>
+	</div>
+</div>
 </body>
 </html>

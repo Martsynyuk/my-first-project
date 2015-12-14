@@ -5,188 +5,197 @@
 <meta name="keywords" content="">
 <meta name="description" content="">
 <title>project</title>
+
+<link rel="stylesheet" type="text/css" href="/css/main.css">
+<link rel="stylesheet" type="text/css" href="/css/reset.css">
+
 <body>
-	<ul>
-		<?php if ( empty ( $user['id'] ) ) { ?>
-		 
-		<li> <a href="<?= $html->url(array('controller'=>'users', 'action'=>'autorization')) ?>">Autorization</a> </li>
-		<li> <a href="<?= $html->url(array('controller'=>'users', 'action'=>'registration')) ?>">Registration</a> </li>
-		
-		<?php } else { ?>
-		
-		<li> <a href="<?= $html->url(array()) ?>">Home</a> </li>
-		<li> <a href="<?= $html->url(array('controller'=>'users', 'action'=>'logout')) ?>">Logout</a> </li>
-		
-		<?php }; ?>
-		
-	</ul>
-	<form name="editcontact" method="POST"
-		action="<?= 'cotacts/edit/' . $get['id'] ?>">
-	<?php 
-	
-	foreach ($contactUser as $res ) :
+<div class="main">
+	<div class="header">
+		<a href="/"><img src="/img/logotip.png" alt="logotip"></a>
+		<div class="header_menu">
+			<ul>	
+				<li class="home"> <a href=" <?= $html->url(array()) ?>">Home</a> </li>
+				<li class="logout"> <a href=" <?= $html->url(array('controller'=>'users', 'action'=>'logout')) ?>">Logout</a> </li>
+			</ul>
+		</div>
+	</div>
+	<div class="content">
+		<div class="form">
+			<form name="editcontact" method="POST"
+							action="<?= 'cotacts/edit/' . $get['id'] ?>">
+			
+			<?php 
+			
+			foreach ($contactUser as $res ) :
 
-	$backdate = (date_parse ( $res ['BirthDate'] ));
+			$backdate = (date_parse ( $res ['BirthDate'] ));
 
-	?>
-		<ul>
-			<li><span>Information</span></li>
-			<li><span>First Name:</span> 
-			
-				<input type="text" name="FirstName"			
-					value="<?= ( ! empty ( $res['Firstname'])) ? $res['Firstname'] : '';?>"
-					size="25">
-			</li>
-				
-			<li><span>Last Name:</span> 
-			
-				<input type="text" name="LastName"
-					value="<?= ( ! empty ( $res['Lastname'])) ? $res['Lastname'] : '';?>"
-					size="25">
-			</li>
-			
-			<li><span>E-mail:</span>
-			
-				 <input type="email" name="Email"
-					value="<?= ( ! empty ( $res['Email'])) ? $res['Email'] : '';?>"
-					size="25">
-			</li>
-			
-			<li><span>Home:</span> 
-			
-				<input type="radio" name="radio" value="Home">
-				<input type="text" name="Home"
-					value="<?= ( ! empty ( $res['Home'])) ? $res['Home'] : '';?>" size="25">
-			</li>
-			
-			<li><span>Work:</span> 
-			
-				<input type="radio" name="radio" value="Work">
-				<input type="text" name="Work"
-				value="<?= ( ! empty ( $res['Work'])) ? $res['Work'] : '';?>" size="25">
-			</li>
-			
-			<li><span>Cell:</span>
-			
-				<input type="radio" name="radio" value="Cell">
-				<input type="text" name="Cell"
-				value="<?= ( ! empty ( $res['Cell'])) ? $res['Cell'] : '';?>" size="25">
-			</li>
-			
-			<li><span>Adress 1:</span>
-			
-				<input type="text" name="Adress1"
-					value="<?= ( ! empty ( $res['Adress1'])) ? $res['Adress1'] : '';?>"
-					size="25">
-			</li>
-			
-			<li><span>Adress 2:</span>
-			
-				<input type="text" name="Adress2"
-					value="<?= ( ! empty ( $res['Adress2'])) ? $res['Adress2'] : '';?>"
-					size="25">
-			</li>
-			
-			<li><span>City:</span> 
-			
-				<input type="text" name="City"
-					value="<?= ( ! empty ( $res['City'])) ? $res['City'] : '';?>" size="25">
-			</li>
-			
-			<li><span>State:</span>
-			 
-				<input type="text" name="State"
-					value="<?= ( ! empty ( $res['State'])) ? $res['State'] : '';?>"
-					size="25">
-			</li>
-			
-			<li><span>Zip:</span> 
-			
-				<input type="text" name="Zip"
-					value="<?= ( ! empty ( $res['Zip'] ) ) ? $res['Zip'] : '' ; ?>" size="25">
-			</li>
-			
-			<li><span>Country:</span> 
-			
-				<input type="text" name="Country"
-					value="<?= ( ! empty ( $res['Country'] ) ) ? $res['Country'] : '' ; ?>"
-					size="25">
-			</li>
-			
-			<li>
-			
-	<?php endforeach; ?>
-							
-		<?php if(!empty($_GET['id'])) { ?>
-							
-				<span>Birth Date:</span> 
-				<select size="1" name="day">
-					<option value="<?= $backdate['day']; ?>"><?= $backdate['day']; ?></option>;
-										
-			<?php for($i = 1; $i <= 31; $i++) : ?>
-			
-					<option value="<?= $i; ?>"><?= $i; ?></option>;	
-							
-			<?php endfor; ?>
-										
-				</select>
-				<select size="1" name="month">
-					<option value="<?= $backdate['month']; ?>"><?= $backdate['month']; ?></option>;
-										
-			<?php for($i = 1; $i <= 12; $i++) : ?>
-			
-					<option value="<?= $i; ?>"><?= $i; ?></option>;
+			?>
+				<span class="information">Information</span>
+				<ul>				
+					<li><span>First Name:</span> 
 					
-			<?php endfor; ?>	
-										
-				</select> 
-				<select size="1" name="year">
-					<option value="<?= $backdate['year']; ?>"><?php echo $backdate['year']; ?></option>;
-										
-			<?php for($i = idate("Y")-100; $i <= idate("Y"); $i++) : ?>
-			
-					<option value="<?= $i; ?>"><?= $i; ?></option>;
+						<input class="input" type="text" name="FirstName"			
+							value="<?= ( ! empty ( $res['Firstname'])) ? $res['Firstname'] : '';?>"
+							size="25">
+					</li>
+						
+					<li><span>Last Name:</span> 
 					
-			<?php endfor; ?>	
-										
-				</select>
-									
-		<?php } else { ?>
-							
-				<span>Birth Date:</span> 
-				<select size="1" name="day">	
-									
-			<?php for($i = 1; $i <= 31; $i++) : ?>
-			
-					<option value="<?= $i; ?>"><?= $i; ?></option>;	
-							
-			<?php endfor; ?>	
-										
-				</select> 
-				<select size="1" name="month">	
-									
-			<?php for($i = 1; $i <= 12; $i++) : ?>
-			
-					<option value="<?= $i; ?>"><?= $i; ?></option>;
+						<input class="input" type="text" name="LastName"
+							value="<?= ( ! empty ( $res['Lastname'])) ? $res['Lastname'] : '';?>"
+							size="25">
+					</li>
 					
-			<?php endfor; ?>	
-										
-				</select> 
-				<select size="1" name="year">
-									
-			<?php for($i = idate("Y")-100; $i <= idate("Y"); $i++) : ?>
-			
-					<option value="<?= $i; ?>"><?= $i; ?></option>;
+					<li><span>E-mail:</span>
 					
-			<?php endfor; ?>
-										
-				</select>
+						 <input class="input" type="email" name="Email"
+							value="<?= ( ! empty ( $res['Email'])) ? $res['Email'] : '';?>"
+							size="25">
+					</li>
+					
+					<li><span class="telephone">Home:</span> 
+					
+						<input class="radio" type="radio" name="radio" value="Home">
+						<input class="input" type="text" name="Home"
+							value="<?= ( ! empty ( $res['Home'])) ? $res['Home'] : '';?>" size="25">
+					</li>
+					
+					<li><span class="telephone">Work:</span> 
+					
+						<input class="radio" type="radio" name="radio" value="Work">
+						<input class="input" type="text" name="Work"
+						value="<?= ( ! empty ( $res['Work'])) ? $res['Work'] : '';?>" size="25">
+					</li>
+					
+					<li><span class="telephone">Cell:</span>
+					
+						<input class="radio" type="radio" name="radio" value="Cell">
+						<input class="input" type="text" name="Cell"
+						value="<?= ( ! empty ( $res['Cell'])) ? $res['Cell'] : '';?>" size="25">
+					</li>
+					
+					<li><span>Adress 1:</span>
+					
+						<input class="input" type="text" name="Adress1"
+							value="<?= ( ! empty ( $res['Adress1'])) ? $res['Adress1'] : '';?>"
+							size="25">
+					</li>
+					
+					<li><span>Adress 2:</span>
+					
+						<input class="input" type="text" name="Adress2"
+							value="<?= ( ! empty ( $res['Adress2'])) ? $res['Adress2'] : '';?>"
+							size="25">
+					</li>
+					
+					<li><span>City:</span> 
+					
+						<input class="input" type="text" name="City"
+							value="<?= ( ! empty ( $res['City'])) ? $res['City'] : '';?>" size="25">
+					</li>
+					
+					<li><span>State:</span>
+					 
+						<input class="input" type="text" name="State"
+							value="<?= ( ! empty ( $res['State'])) ? $res['State'] : '';?>"
+							size="25">
+					</li>
+					
+					<li><span>Zip:</span> 
+					
+						<input class="input" type="text" name="Zip"
+							value="<?= ( ! empty ( $res['Zip'] ) ) ? $res['Zip'] : '' ; ?>" size="25">
+					</li>
+					
+					<li><span>Country:</span> 
+					
+						<input class="input" type="text" name="Country"
+							value="<?= ( ! empty ( $res['Country'] ) ) ? $res['Country'] : '' ; ?>"
+							size="25">
+					</li>
+					
+					<li>
+					
+			<?php endforeach; ?>
 									
-		<?php }?>
+				<?php if(!empty($_GET['id'])) { ?>
+									
+						<span class="date">Birth Date:</span> 
+						<select size="1" name="day">
+							<option value="<?= $backdate['day']; ?>"><?= $backdate['day']; ?></option>;
+												
+					<?php for($i = 1; $i <= 31; $i++) : ?>
+					
+							<option value="<?= $i; ?>"><?= $i; ?></option>;	
+									
+					<?php endfor; ?>
+												
+						</select>
+						<select size="1" name="month">
+							<option value="<?= $backdate['month']; ?>"><?= $backdate['month']; ?></option>;
+												
+					<?php for($i = 1; $i <= 12; $i++) : ?>
+					
+							<option value="<?= $i; ?>"><?= $i; ?></option>;
 							
-			</li>
-		</ul>
-		<input type="submit" name="information" value="Done">
-	</form>
+					<?php endfor; ?>	
+												
+						</select> 
+						<select size="1" name="year">
+							<option value="<?= $backdate['year']; ?>"><?php echo $backdate['year']; ?></option>;
+												
+					<?php for($i = idate("Y")-100; $i <= idate("Y"); $i++) : ?>
+					
+							<option value="<?= $i; ?>"><?= $i; ?></option>;
+							
+					<?php endfor; ?>	
+												
+						</select>
+											
+				<?php } else { ?>
+									
+						<span class="date">Birth Date:</span> 
+						<select size="1" name="day">	
+											
+					<?php for($i = 1; $i <= 31; $i++) : ?>
+					
+							<option value="<?= $i; ?>"><?= $i; ?></option>;	
+									
+					<?php endfor; ?>	
+												
+						</select> 
+						<select size="1" name="month">	
+											
+					<?php for($i = 1; $i <= 12; $i++) : ?>
+					
+							<option value="<?= $i; ?>"><?= $i; ?></option>;
+							
+					<?php endfor; ?>	
+												
+						</select> 
+						<select size="1" name="year">
+											
+					<?php for($i = idate("Y")-100; $i <= idate("Y"); $i++) : ?>
+					
+							<option value="<?= $i; ?>"><?= $i; ?></option>;
+							
+					<?php endfor; ?>
+												
+						</select>
+											
+				<?php }?>
+									
+					</li>
+				</ul>
+				<input class="done" type="submit" name="information" value="Done">
+			</form>
+		</div>
+	</div>
+	<div class="footer">
+		<span>&#169 2007 Wise Engineering</span>
+	</div>
+</div>
 </body>
 </html>

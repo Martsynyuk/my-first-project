@@ -86,6 +86,13 @@ body{
 	margin: 0 auto;
 	position: relative;
 }
+.content .form  .view_plase{
+	width: 220px;
+}
+.content .form  .view_plase .info{
+	padding-left: 10px;
+	float: right;
+}
 .content .form:before{
 	background: url(/img/add_contact_left.png) no-repeat;
 	display: block;
@@ -128,6 +135,11 @@ body{
 	float: right;
 	height: 21px;
 	width: 220px;
+	color: black;
+}
+.content .form ul>li .input{
+	height: 14px;
+	width: 210px;
 }
 .content .form ul>li .radio{
 	float: left;
@@ -470,6 +482,16 @@ body{
 	width: 110px;
 	color: white;
 	font: 11pt Arial regular;
+}
+.content .back{
+	background: url(/img/input.png) no-repeat;
+	margin: 34px 0 0 140px;
+	width: 110px;
+	color: white;
+	font: 11pt Arial regular;
+	display: block;
+	text-align: center;
+	padding-top: 3px;
 }
 .email{
 	width: 140px;
