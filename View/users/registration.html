@@ -13,11 +13,11 @@
 <body>
 <div class="main">
 	<div class="header">
-		<img src="/img/logotip.png" alt="logotip">
+		<a href="/"><img src="/img/logotip.png" alt="logotip"></a>
 		<div class="header_menu">
 			<ul>	 
-				<li class="autorization"> <a href="<?= $html->url(array('controller'=>'users', 'action'=>'autorization')) ?>">Autorization</a> </li>
-				<li class="registration"> <a href=" <?= $html->url(array('controller'=>'users', 'action'=>'registration')) ?>">Registration</a> </li>	
+				<li><a class="autorization" href="<?= $html->url(array('controller'=>'users', 'action'=>'autorization')) ?>">Autorization</a> </li>
+				<li><a class="registration" href=" <?= $html->url(array('controller'=>'users', 'action'=>'registration')) ?>">Registration</a> </li>	
 			</ul>
 		</div>
 	</div>
@@ -26,23 +26,25 @@
 			<p class="name_menu">Registration</p>
 			<form name="login" method="POST" action="registration">
 			<div class="input_text">
-				<p>Login:</p>
-				<input type="text" name="login"
-				
+				<p>Login:</p>			
+				<input type="text" name="login"		
 					value="<?= ( ! empty ( $post['login'] ) ) ? $post['login'] : ''; ?>"
 					size="35">
 			</div>
+			<div class="clear"></div>
 			<div class="input_text">
-				<p>Password:</p>
+				<p>Password:</p>		
 				<input type="password" name="password1" value="" size="35">
 			</div>
+			<div class="clear"></div>
 			<div class="input_text">
-				<p>Password:</p>
+				<p>Password:</p>				
 				<input type="password" name="password2" value="" size="35"></br> </br>
 			</div>
-				
-				<input class="submit_registration" type="submit" name="enter" value="Registration">
-		
+			<div class="clear"></div>
+			<div class="submit_registration">
+				<input type="submit" name="enter" value="Registration">
+		  </div>
 			</form>
 		</div>
 	</div>

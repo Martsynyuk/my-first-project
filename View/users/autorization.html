@@ -14,11 +14,11 @@
 <body>
 <div class="main">
 	<div class="header">
-		<img src="/img/logotip.png" alt="logotip">
+		<a href="/"><img src="/img/logotip.png" alt="logotip"></a>
 		<div class="header_menu">
 			<ul>		
-				<li class="autorization"> <a href="<?= $html->url(array('controller'=>'users', 'action'=>'autorization')) ?>">Autorization</a> </li>
-				<li class="registration"> <a href=" <?= $html->url(array('controller'=>'users', 'action'=>'registration')) ?>">Registration</a> </li>	
+				<li><a class="autorization" href="<?= $html->url(array('controller'=>'users', 'action'=>'autorization')) ?>">Autorization</a> </li>
+				<li><a class="registration" href=" <?= $html->url(array('controller'=>'users', 'action'=>'registration')) ?>">Registration</a> </li>	
 			</ul>
 		</div>
 	</div>
@@ -44,7 +44,9 @@
 					<li><a href="<?= $html->url(array())?>">Forgot password?</a></li>
 					<li><a href="<?= $html->url(array('controller'=>'users', 'action'=>'registration')) ?>">Register Now</a></li>
 				</ul>
-				<input class="submit_autorization" type="submit" name="enter" value="Login">
+				<div class="submit_autorization">
+					<input type="submit" name="enter" value="Login">
+				</div>
 				</form>
 			</div>
 	</div>

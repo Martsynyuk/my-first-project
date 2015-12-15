@@ -15,8 +15,8 @@
 		<a href="/"><img src="/img/logotip.png" alt="logotip"></a>
 		<div class="header_menu">
 			<ul>	
-				<li class="home"> <a href=" <?= $html->url(array()) ?>">Home</a> </li>
-				<li class="logout"> <a href=" <?= $html->url(array('controller'=>'users', 'action'=>'logout')) ?>">Logout</a> </li>
+				<li><a class="home" href=" <?= $html->url(array()) ?>">Home</a> </li>
+				<li><a class="home" href=" <?= $html->url(array('controller'=>'users', 'action'=>'logout')) ?>">Logout</a> </li>
 			</ul>
 		</div>
 	</div>
@@ -174,8 +174,9 @@
 					</li>
 					
 				</ul>
-				
-				<input class="done" type="submit" name="information" value="Done">
+				<div class="done">	
+					<input type="submit" name="information" value="Done">
+				</div>
 			</form>
 		</div>
 	</div>

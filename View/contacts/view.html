@@ -16,8 +16,8 @@
 		<a href="/"><img src="/img/logotip.png" alt="logotip"></a>
 		<div class="header_menu">
 			<ul>	
-				<li class="home"> <a href=" <?= $html->url(array()) ?>">Home</a> </li>
-				<li class="logout"> <a href=" <?= $html->url(array('controller'=>'users', 'action'=>'logout')) ?>">Logout</a> </li>
+				<li><a class="home" href=" <?= $html->url(array()) ?>">Home</a> </li>
+				<li><a class="home" href=" <?= $html->url(array('controller'=>'users', 'action'=>'logout')) ?>">Logout</a> </li>
 			</ul>
 		</div>
 	</div>
@@ -67,6 +67,7 @@
 					<?php endforeach; ?>
 				
 				</ul>
+				
 				<a class="back" href="<?= $html->url(array()) ?>">Back</a>
 			</form>
 		</div>	

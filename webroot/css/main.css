@@ -43,16 +43,80 @@ body{
 	line-height: 20px;
 	margin-left: 50px;
 }
-.header .autorization{
-	background: url(/img/autorization.png) no-repeat;
-	padding-left: 40px;
+.header .accept input{
+	background: none;
+	color: white;
+}
+.header .accept{
+	background: url(/img/button_grad.png) repeat-x;
 	height: 23px;
+	padding-left: 10px;
+	display: inline-block;
+	position: relative;
+}
+.header .accept:before{
+	background: url(/img/input_left.png) no-repeat;
+	height: 23px;
+	width: 24px;
+	content: '';
+	position: absolute;
+	left: -24px;
+}
+.header .accept:after{
+	background: url(/img/home_right.png) no-repeat;
+	height: 23px;
+	width: 11px;
+	content: '';
+	position: absolute;
+	right: -11px;
+}
+.header .autorization{
+	background: url(/img/button_grad.png) repeat-x;
+	height: 23px;
+	padding-left: 10px;
+	display: inline-block;
+	position: relative;
+}
+.header .autorization:before{
+	background: url(/img/autor_left.png) no-repeat;
+	height: 23px;
+	width: 31px;
+	content: '';
+	position: absolute;
+	left: -31px;
+}
+.header .autorization:after{
+	background: url(/img/home_right.png) no-repeat;
+	height: 23px;
+	width: 11px;
+	content: '';
+	position: absolute;
+	right: -11px;
 }
 .header .registration{
-	background: url(/img/registration.png) no-repeat;
-	padding-left: 40px;
+	background: url(/img/button_grad.png) repeat-x;
 	height: 23px;
+	padding-left: 10px;
+	display: inline-block;
+	position: relative;
 }
+.header .registration:before{
+	background: url(/img/reg_left.png) no-repeat;
+	height: 23px;
+	width: 34px;
+	content: '';
+	position: absolute;
+	left: -34px;
+}
+.header .registration:after{
+	background: url(/img/home_right.png) no-repeat;
+	height: 23px;
+	width: 11px;
+	content: '';
+	position: absolute;
+	right: -11px;
+}
+.header
 .header .add_some{
 	background: url(/img/registration.png) no-repeat;
 	padding-left: 36px;
@@ -80,20 +144,6 @@ body{
 	content: '';
 	position: absolute;
 	right: -11px;
-}
-.header .add{
-	background: url(/img/Home.png) no-repeat;
-	width: 100px;
-	height: 23px;
-	text-align: left;
-	padding:0 0 0 36px;
-	color: white;
-}
-.header .logout{
-	background: url(/img/Home.png) no-repeat;
-	padding-left: 40px;
-	height: 23px;
-	width: 70px;
 }
 .content{	
 	padding: 10px 0 30px 0;
@@ -152,6 +202,7 @@ body{
 .content .form ul{
 	padding: 0 0 0 68px;
 	width: 315px;
+	margin-bottom: 25px;
 }
 .content .form ul>li{
 	font: 11pt Arial regular;
@@ -200,12 +251,36 @@ body{
 	min-height: 30px;
 	max-height: 100px
 }
-.content .letter .add{
-	background: url(/img/input.png) no-repeat;
-	width: 100px;
+.content .letter .add input{
+	background: none;
+	width: 40px;
 	color: white;
-	display: block;
+	overflow: hidden;
+}
+.content .letter .add{
+	background: url(/img/button_grad.png) repeat-x;
+	height: 23px;
+	width: 45px;
 	margin: 0 auto;
+	position: relative;
+}
+.content .letter .add:before{
+	background: url(/img/input_left.png) no-repeat;
+	height: 23px;
+	width: 24px;
+	content: '';
+	position: absolute;
+	left: -24px;
+	top: 0;
+}
+.content .letter .add:after{
+	background: url(/img/home_right.png) no-repeat;
+	height: 23px;
+	width: 11px;
+	content: '';
+	position: absolute;
+	right: -11px;
+	top: 0;
 }
 .content .contact {
 	width: 720px;
@@ -416,13 +491,34 @@ body{
 	display: block;
 }
 .content .content_autorization button{
-	background: url(/img/input.png) no-repeat;
+	background: url(/img/button_grad.png) repeat-x;
 	color: white;
 	border: 0;
+	height: 23px;
 	outline: none;
-	width: 100px;
 	padding: 3px 0 0 0;
 	cursor: pointer;
+	margin-left: 45px;
+	padding: 1px 3px;
+	position: relative;
+}
+.content .content_autorization button:after{
+	background: url(/img/home_right.png) no-repeat;
+	height: 23px;
+	width: 11px;
+	content: '';
+	position: absolute;
+	right: -11px;
+	top: 0;
+}
+.content .content_autorization button:before{
+	background: url(/img/input_left.png) no-repeat;
+	height: 23px;
+	width: 24px;
+	content: '';
+	position: absolute;
+	left: -24px;
+	top: 0;
 }
 .content .content_autorization:before{
 	width: 30px;
@@ -452,6 +548,9 @@ body{
 	width: 300px;
 	padding: 10px 0 0 70px;
 }
+.content .content_autorization .input_text input{
+	width: 190px;
+} 
 .content .content_autorization .input_text p{
 	float: left;
 	width: 86px;
@@ -468,24 +567,73 @@ body{
 	font: 11pt Arial regular;
 	text-decoration: underline;
 }
+.content .content_autorization .submit_autorization input{
+	background: none;
+	padding: 3px 5px 3px;
+	color: white;
+	width: 46px;
+	overflow: hidden;
+}
 .content .content_autorization .submit_autorization{
-	background: url(/img/input.png) no-repeat;
-	width: 95px;
+	background: url(/img/button_grad.png) repeat-x;
+	width: 50px;
+	height: 23px;
 	outline: none;
 	border: 0;
 	color: white;
 	cursor: pointer;
-	margin: 30px auto;
+	margin: 30px 0 0 160px;
 	display: block;
+	position: relative;
+}
+.content .content_autorization .submit_autorization:after{
+	background: url(/img/home_right.png) no-repeat;
+	height: 23px;
+	width: 11px;
+	content: '';
+	position: absolute;
+	right: -11px;
+}
+.content .content_autorization .submit_autorization:before{
+	background: url(/img/input_left.png) no-repeat;
+	height: 23px;
+	width: 24px;
+	content: '';
+	position: absolute;
+	left: -24px;
+}
+.content .content_autorization .submit_registration input{
+	width: 90px;
+	background: none;
+	color: white;
+	overflow: hidden;
 }
 .content .content_autorization .submit_registration{
-	background: url(/img/registration.png) no-repeat;
-	width: 150px;
+	background: url(/img/button_grad.png) repeat-x;	
+	width: 95px;
+	height: 23px;
 	outline: none;
 	border: 0;
 	cursor: pointer;
-	margin: 30px auto;
+	margin: 30px 0 0 160px;
 	display: block;
+	position: relative;
+}
+.content .content_autorization .submit_registration:before{
+	background: url(/img/reg_left.png) no-repeat;
+	height: 23px;
+	width: 34px;
+	content: '';
+	position: absolute;
+	left: -34px;
+}
+.content .content_autorization .submit_registration:after{
+	background: url(/img/home_right.png) no-repeat;
+	height: 23px;
+	width: 11px;
+	content: '';
+	position: absolute;
+	right: -11px;
 }
 .content .content_autorization .submit:hover{
 	color: rgba(211, 211, 211, 0.2);
@@ -555,21 +703,61 @@ body{
 	height: 15px;
 }
 .content .done{
-	background: url(/img/input.png) no-repeat;
+	background: url(/img/button_grad.png) repeat-x;
 	margin: 34px 0 0 190px;
-	width: 110px;
+	width: 50px;
+	position: relative;
+}
+.content .done:before{
+	background: url(/img/input_left.png) no-repeat;
+	height: 23px;
+	width: 24px;
+	content: '';
+	position: absolute;
+	left: -24px;
+	top: 0;
+}
+.content .done:after{
+	background: url(/img/home_right.png) no-repeat;
+	height: 23px;
+	width: 11px;
+	content: '';
+	position: absolute;
+	right: -11px;
+	top: 0;
+}
+.content .done input{
+	background: none;
 	color: white;
 	font: 11pt Arial regular;
+	width: 50px;
+	overflow: hidden;
 }
 .content .form .back{
-	background: url(/img/input.png) no-repeat;
-	margin: 34px 0 0 140px;
-	width: 110px;
-	color: white;
-	font: 11pt Arial regular;
-	display: block;
-	text-align: center;
-	padding-top: 3px;
+	background: url(/img/button_grad.png) repeat-x;
+	margin-left:140px;
+	margin-top: 50px;
+	padding: 3px 3px;
+	height: 23px;
+	position: relative;
+}
+.content .form .back:before{
+	background: url(/img/input_left.png) no-repeat;
+	height: 23px;
+	width: 24px;
+	content: '';
+	position: absolute;
+	left: -24px;
+	top: 0;
+}
+.content .form .back:after{
+	background: url(/img/home_right.png) no-repeat;
+	height: 23px;
+	width: 11px;
+	content: '';
+	position: absolute;
+	right: -11px;
+	top: 0;
 }
 .email{
 	width: 140px;

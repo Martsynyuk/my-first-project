@@ -17,10 +17,10 @@
 		<a href="/"><img src="/img/logotip.png" alt="logotip"></a>
 		<div class="header_menu">
 			<ul>	 
-				<li class="home"> <a href="<?= $html->url(array()) ?>">Home</a> </li>
-				<li class="logout"> <a href=" <?= $html->url(array('controller'=>'users', 'action'=>'logout')) ?>">Logout</a> </li>
-				<li class="home"><a class="letter" href="/">Cancel</a></li>	
-				<li class="accept"><input class="add" type="submit" name="Select" value="Accept" formaction="/contacts/letter/"></li>			
+				<li><a class="home" href="<?= $html->url(array()) ?>">Home</a> </li>
+				<li> <a class="home" href=" <?= $html->url(array('controller'=>'users', 'action'=>'logout')) ?>">Logout</a> </li>
+				<li><a class="home" class="letter" href="/">Cancel</a></li>	
+				<li class="accept"><input type="submit" name="Select" value="Accept" formaction="/contacts/letter/"></li>			
 			</ul>
 		</div>
 	</div>
