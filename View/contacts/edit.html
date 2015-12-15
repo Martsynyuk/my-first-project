@@ -57,21 +57,24 @@
 					
 					<li><span class="telephone">Home:</span> 
 					
-						<input class="radio" type="radio" name="radio" value="Home">
+						<input class="radio" type="radio" name="radio" value="Home" 
+							<?= ($res['Home'] === $res['Telephone']) ? 'checked' : '' ; ?> >
 						<input class="input" type="text" name="Home"
 							value="<?= ( ! empty ( $res['Home'])) ? $res['Home'] : '';?>" size="25">
 					</li>
 					
 					<li><span class="telephone">Work:</span> 
 					
-						<input class="radio" type="radio" name="radio" value="Work">
+						<input class="radio" type="radio" name="radio" value="Work"
+							<?= ($res['Work'] === $res['Telephone']) ? 'checked' : '' ; ?>>
 						<input class="input" type="text" name="Work"
 						value="<?= ( ! empty ( $res['Work'])) ? $res['Work'] : '';?>" size="25">
 					</li>
 					
 					<li><span class="telephone">Cell:</span>
 					
-						<input class="radio" type="radio" name="radio" value="Cell">
+						<input class="radio" type="radio" name="radio" value="Cell"
+							<?= ($res['Cell'] === $res['Telephone']) ? 'checked' : '' ; ?>>
 						<input class="input" type="text" name="Cell"
 						value="<?= ( ! empty ( $res['Cell'])) ? $res['Cell'] : '';?>" size="25">
 					</li>

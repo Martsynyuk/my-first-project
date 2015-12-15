@@ -10,21 +10,22 @@
 
 <link rel="stylesheet" type="text/css" href="/css/main.css">
 <link rel="stylesheet" type="text/css" href="/css/reset.css">
+<?= (DEBUG === 1) ? '<link rel="stylesheet" type="text/css" href="/css/debug.css">' : '' ;?>
 
 </head>
 <body>
 <div class="main">
 	<div class="header">
-	<form name="index" method="POST">
 		<a href="/"><img src="/img/logotip.png" alt="logotip"></a>
 		<div class="header_menu">
 			<ul>	
-				<li class="home"> <a href="<?= $html->url(array()) ?>">Home</a> </li>				
-				<li class="logout"> <a href=" <?= $html->url(array('controller'=>'users', 'action'=>'logout')) ?>">Logout</a> </li>
-				<li class="add_some"> <a href=" <?= $html->url(array('controller'=>'contacts', 'action'=>'add')) ?>">Add contact</a></li>
-				<li class="home"><a  href="<?= $html->url(array('controller'=>'contacts', 'action'=>'letter')) ?>">Letter</a></li>
+				<li><a class="home" href="<?= $html->url(array()) ?>">Home</a> </li>				
+				<li><a class="home" href=" <?= $html->url(array('controller'=>'users', 'action'=>'logout')) ?>">Logout</a> </li>
+				<li><a class="home" href=" <?= $html->url(array('controller'=>'contacts', 'action'=>'add')) ?>">Add contact</a></li>
+				<li><a class="home" href="<?= $html->url(array('controller'=>'contacts', 'action'=>'letter')) ?>">Letter</a></li>
 			</ul>
 		</div>
+		<div class="clear"></div>
 	</div>
 	<div class="content">
 		<div class="contact">
@@ -35,36 +36,36 @@
 				<th></th>
 				
 					<th class="first_name">First Name
-						<input <?= ( empty($argument['sortparam']) && empty($argument['sort']) || 
+						<a <?= ( empty($argument['sortparam']) && empty($argument['sort']) || 
 													$argument['sortparam']==='FirstName' && $argument['sort']==='asc' ) ? 'class="active_sort"' : '' ;?> 
-								class="sort" type="submit" value="&#8593" formaction="
+								class="sort" href="
 								
 							<?=  ( $page > 1 ) ? $html->url(array('sort'=>'FirstName', 'sortparam'=>'asc', 'page'=>$page )) 
 									 : $html->url(array('sort'=>'FirstName', 'sortparam'=>'asc')) ; 							
 															
-									?>">
+									?>">&#8593</a>
 						
-						<input <?= ( $argument['sortparam']==='FirstName' && $argument['sort']==='desc' ) ? 'class="active_sort"' : '' ;?>
-							class="sort" type="submit" value="&#8595" formaction="
+						<a <?= ( $argument['sortparam']==='FirstName' && $argument['sort']==='desc' ) ? 'class="active_sort"' : '' ;?>
+							class="sort" href="
 							<?= ( $page > 1 ) ? $html->url(array('sort'=>'FirstName', 'sortparam'=>'desc', 'page'=>$page )) 
 									: $html->url(array('sort'=>'FirstName', 'sortparam'=>'desc')) ;
 							
-									?>">
+									?>">&#8595</a>
 					</th>
 					<th class="last_name">Last Name
-						<input <?= ( $argument['sortparam']==='LastName' && $argument['sort']==='asc' ) ? 'class="active_sort"' : '' ;?>
-								class="sort" type="submit" value="&#8593" formaction="
+						<a <?= ( $argument['sortparam']==='LastName' && $argument['sort']==='asc' ) ? 'class="active_sort"' : '' ;?>
+								class="sort" href="
 							<?= ( $page > 1 ) ? $html->url(array('sort'=>'LastName', 'sortparam'=>'asc', 'page'=>$page ))
 									: $html->url(array('sort'=>'LastName', 'sortparam'=>'asc' )) ;
 							
-									?>"> 
+									?>">&#8593</a>
 				 
-						<input <?= ( $argument['sortparam']==='LastName' && $argument['sort']==='desc' ) ? 'class="active_sort"' : '' ;?>
-								class="sort" type="submit" value="&#8595" formaction="
+						<a <?= ( $argument['sortparam']==='LastName' && $argument['sort']==='desc' ) ? 'class="active_sort"' : '' ;?>
+								class="sort" href="
 							<?= ( $page > 1 ) ? $html->url(array('sort'=>'LastName', 'sortparam'=>'desc', 'page'=>$page )) 
 									: $html->url(array('sort'=>'LastName', 'sortparam'=>'desc' )) ; 
 							
-									?>">
+									?>">&#8595</a>
 						
 					</th>
 					<th class="email">E-mail</th>
@@ -110,17 +111,9 @@
 						
 							<?php  if ($page != 1) : ?>
 							
-									<input class="back" type="submit" name="sort" value="" formaction="
-										<?php
-											
-											if ($page == 1) {
-												echo '1';
-											} else {
-												echo ($page - 1);
-											}
-											?>">
-									
-								<?php endif; ?>	
+									<a href="<?= ($page == 1) ? '1' : $page - 1 ;?>"><img src="/img/prew.png"></a>
+																	
+							<?php endif; ?>	
 																	
 						</li>
 					
@@ -130,11 +123,11 @@
 						
 							<?php if ($i == $page) { ?>
 							
-										<input class="page_active" type="submit" value="<?= $i ?>" formaction="<?= $i	?>">
+								<a class="page_active" href="<?= $i ?>" ><?= $i ?></a>
 										
 							<?php } else { ?>
 							
-								<input class="page" type="submit" value="<?= $i ?>" formaction="<?= $i	?>">
+								<a class="page" href="<?= $i ?>" ><?= $i ?></a>
 								
 							<?php } ?>
 							
@@ -145,7 +138,7 @@
 										 
 						<?php if ($page != $count_pages) : ?>
 						
-						<input class="next" type="submit" value="" formaction="<?= ( $page + 1 ) ?>">
+						<a href="<?= ( $page + 1 ) ?>"><img src="/img/next.png"></a>
 						
 																
 						<?php endif; ?>	
@@ -154,7 +147,6 @@
 				</ul>
 			</div>	
 			<?php } ?>
-			</form>
 		</div>
 	</div>
 	<div class="footer">

@@ -26,20 +26,22 @@ body{
 	height: 100px;
 }
 .header .header_menu{
-	width: 650px;
+	width: 700px;
 	float: right;
 	padding-top: 35px;
+	max-height: 99px;
+	overflow: hidden;
 }
 .header img  {
 	float: left;
 }
 .header ul>li{
 	display: inline-block;
-	width: 100px;
 }
 .header .header_menu ul>li{
 	font: 11pt Arial regular;
 	line-height: 20px;
+	margin-left: 50px;
 }
 .header .autorization{
 	background: url(/img/autorization.png) no-repeat;
@@ -57,10 +59,27 @@ body{
 	height: 23px;
 }
 .header .home{
-	background: url(/img/Home.png) no-repeat;
-	padding-left: 40px;
+	background: url(/img/button_grad.png) repeat-x;
 	height: 23px;
-	width: 70px;
+	padding-left: 10px;
+	display: inline-block;
+	position: relative;
+}
+.header .home:before{
+	background: url(/img/home_left.png) no-repeat;
+	height: 23px;
+	width: 25px;
+	content: '';
+	position: absolute;
+	left: -25px;
+}
+.header .home:after{
+	background: url(/img/home_right.png) no-repeat;
+	height: 23px;
+	width: 11px;
+	content: '';
+	position: absolute;
+	right: -11px;
 }
 .header .add{
 	background: url(/img/Home.png) no-repeat;
@@ -304,6 +323,10 @@ body{
 	border: 0;
 	cursor: pointer;
 	padding: 0;
+	color: gray;
+}
+.content  .contact  .pagination .page_plase a{
+	padding-left: 10px;
 }
 .content .contact .page_active{
 	background: none;
@@ -366,6 +389,13 @@ body{
 }
 .content  .contact .back{
 	background: url(/img/prew.png) no-repeat;
+	width: 80px;
+	height: 15px;
+	outline: none;
+	border: 0;
+	cursor: pointer;
+}
+.content  .contact  .pagination .back_plase a{
 	width: 80px;
 	height: 15px;
 	outline: none;
@@ -503,6 +533,7 @@ body{
 	position: absolute;
 	bottom: -10px;
 	height: 30px;
+	color: white;
 }
 .footer span{
 	display: block;

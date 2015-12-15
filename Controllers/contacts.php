@@ -121,8 +121,8 @@ class Contacts extends Controller
 															'State',
 															'Zip',
 															'Country',
-															'BirthDate'
-													
+															'BirthDate',
+															'Telephone'													
 												),
 													
 												'conditions' => array(
@@ -229,7 +229,7 @@ class Contacts extends Controller
 		
 		$user = $this->Login->user();
 		
-		$count_pages = ceil ( $this->count_contacts () / 5 );
+		$count_pages = ceil ( $this->count_contacts () / ROWLIMIT );
 		
 		if(! empty($_COOKIE['mails']) || ! empty($_COOKIE['new_mail']) )
 		{
@@ -645,7 +645,7 @@ class Contacts extends Controller
 	function count_pages ( $page )
 	{
 		
-		$count_pages = ceil ( $this->count_contacts () / 5 );		
+		$count_pages = ceil ( $this->count_contacts () / ROWLIMIT );		
 		$count_show_pages = SHOWPAGES;
 		$start = 1;
 		$end = 1;
@@ -691,8 +691,8 @@ class Contacts extends Controller
 	{
 		if( empty ($sortparam))
 		{
-			$sorting = 'asc';
-			$sortparam = 'FirstName';
+			$sorting = SORT;
+			$sortparam = SORTPARAM;
 		}
 		
 		$sort = '';
