@@ -28,123 +28,116 @@
 		<div class="clear"></div>
 	</div>
 	<div class="content">
-		<div class="contact">
-			<?php if ( ! empty ( $contacts ) ){ ?>
-			
-				<table class="table">
-			<tr class="top">
-				<th></th>
-				
-					<th class="first_name">First Name
-						<a <?= ( empty($argument['sortparam']) && empty($argument['sort']) || 
-													$argument['sortparam']==='FirstName' && $argument['sort']==='asc' ) ? 'class="active_sort"' : '' ;?> 
-								class="sort" href="
-								
-							<?=  ( $page > 1 ) ? $html->url(array('sort'=>'FirstName', 'sortparam'=>'asc', 'page'=>$page )) 
+		<div class="cont">
+				<?php if ( ! empty ( $contacts ) ){ ?>
+			<div class="cont_top">
+							<span>First Name</span>
+							<a <?= ( empty($argument['sortparam']) && empty($argument['sort']) || 
+														$argument['sortparam']==='FirstName' && $argument['sort']==='asc' ) ? 'class="active_sort"' : '' ;?> 
+									class="sort" href="
+									
+								<?=  ( $page > 1 ) ? $html->url(array('sort'=>'FirstName', 'sortparam'=>'asc', 'page'=>$page )) 
 									 : $html->url(array('sort'=>'FirstName', 'sortparam'=>'asc')) ; 							
 															
 									?>">&#8593</a>
-						
-						<a <?= ( $argument['sortparam']==='FirstName' && $argument['sort']==='desc' ) ? 'class="active_sort"' : '' ;?>
-							class="sort" href="
-							<?= ( $page > 1 ) ? $html->url(array('sort'=>'FirstName', 'sortparam'=>'desc', 'page'=>$page )) 
+							
+							<a <?= ( $argument['sortparam']==='FirstName' && $argument['sort']==='desc' ) ? 'class="active_sort"' : '' ;?>
+								class="sort" href="
+								<?= ( $page > 1 ) ? $html->url(array('sort'=>'FirstName', 'sortparam'=>'desc', 'page'=>$page )) 
 									: $html->url(array('sort'=>'FirstName', 'sortparam'=>'desc')) ;
 							
 									?>">&#8595</a>
-					</th>
-					<th class="last_name">Last Name
-						<a <?= ( $argument['sortparam']==='LastName' && $argument['sort']==='asc' ) ? 'class="active_sort"' : '' ;?>
-								class="sort" href="
-							<?= ( $page > 1 ) ? $html->url(array('sort'=>'LastName', 'sortparam'=>'asc', 'page'=>$page ))
+							<span>Last Name</span>
+							<a <?= ( $argument['sortparam']==='LastName' && $argument['sort']==='asc' ) ? 'class="active_sort"' : '' ;?>
+									class="sort" href="
+								<?= ( $page > 1 ) ? $html->url(array('sort'=>'LastName', 'sortparam'=>'asc', 'page'=>$page ))
 									: $html->url(array('sort'=>'LastName', 'sortparam'=>'asc' )) ;
 							
 									?>">&#8593</a>
-				 
-						<a <?= ( $argument['sortparam']==='LastName' && $argument['sort']==='desc' ) ? 'class="active_sort"' : '' ;?>
-								class="sort" href="
-							<?= ( $page > 1 ) ? $html->url(array('sort'=>'LastName', 'sortparam'=>'desc', 'page'=>$page )) 
+					 
+							<a <?= ( $argument['sortparam']==='LastName' && $argument['sort']==='desc' ) ? 'class="active_sort"' : '' ;?>
+									class="sort" href="
+								<?= ( $page > 1 ) ? $html->url(array('sort'=>'LastName', 'sortparam'=>'desc', 'page'=>$page )) 
 									: $html->url(array('sort'=>'LastName', 'sortparam'=>'desc' )) ; 
 							
 									?>">&#8595</a>
-						
-					</th>
-					<th class="email">E-mail</th>
-					<th class="cell">Cellular</th>
-					<th class="action_plase">Action</th>
+							
+						<span>E-mail</span>
+						<span>Cellular</span>
+						<span>Action</span>
+				</div>													
+				<?php foreach ( $contacts as $contact ) : ?>
+				<div <?= ($contact_class === $i) ? 'class="last-child"' : 'class="string"' ;?> >
+						<ul>	
+							<li><?= $i . '.'; ?></td></li>
+							<li><?= $contact['FirstName']; ?></li>
+							<li><?= $contact['LastName']; ?></li>
+							<li><?= $contact['Email']; ?></li>
+							<li><?= $contact['Telephone']; ?></li>
+							<li>
+								<a href="<?= $html->url(array('controller'=>'contacts', 'action'=>'edit', 'id'=>$contact['id'])) ?>">edit</a> 
+								<a href="<?= $html->url(array('controller'=>'contacts', 'action'=>'view', 'id'=>$contact['id'])) ?>">view</a>
+								<a href="<?= $html->url(array('controller'=>'contacts', 'action'=>'delete', 'id'=>$contact['id'])) ?>"></a>
+							</li>
+						</ul>
+				</div>
+				
+					<?php $i++;?>	
 					
-			</tr>
-																
-			<?php foreach ( $contacts as $contact ) : ?>			
-				<tr class="line">
-					<td class="number"><?= $i . '.'; ?></td>
-					<td class="name"><?= $contact['FirstName']; ?></td>
-					<td class="name"><?= $contact['LastName']; ?></td>
-					<td class="emails"><?= $contact['Email']; ?></td>
-					<td class="telephone"><?= $contact['Telephone']; ?></td>
-					<td class="action">
-						<a class="edit" href="<?= $html->url(array('controller'=>'contacts', 'action'=>'edit', 'id'=>$contact['id'])) ?>">edit</a> 
-						<a class="view" href="<?= $html->url(array('controller'=>'contacts', 'action'=>'view', 'id'=>$contact['id'])) ?>">view</a>
-						<a class="delete" href="<?= $html->url(array('controller'=>'contacts', 'action'=>'delete', 'id'=>$contact['id'])) ?>"></a>
-					</td>
-				</tr>
-				<?php $i++;?>	
+					<?php endforeach;?>	
+				<div class="cont_bottom_grad"></div>	
+				<div class="pagination">
 				
-				<?php endforeach;?>	
+					<?php } else { ?>
+					
+						<span>Your contact book is empty. Please add some contacts.</span>
 				
+				
+					<?php } ;?>
+					
+					<?php if($count_contacts == 0) { ?>
+						
+				<?php } else {?>
+				
+					<ul>
+							<li class="back_plase">
+							
+								<?php  if ($page != 1) : ?>
+								
+										<a href="<?= ($page == 1) ? '1' : $page - 1 ;?>"><img src="/img/prew.png"></a>
+																		
+								<?php endif; ?>	
+																		
+							</li>
+						
+						<li class="page_plase">
+						
+							<?php for ($i = $count_for_pagin[0]; $i <= $count_for_pagin[1]; $i++) { ?>
+							
+								<?php if ($i == $page) { ?>
+								
+									<a class="page_active" href="<?= $i ?>" ><?= $i ?></a>
+											
+								<?php } else { ?>
+								
+									<a class="page" href="<?= $i ?>" ><?= $i ?></a>
 									
-					</table>
-			<div class="pagination">
-			
-				<?php } else { ?>
-				
-					<span>Your contact book is empty. Please add some contacts.</span>
-			
-			
-				<?php } ;?>
-				
-				<?php if($count_contacts == 0) { ?>
-					
-			<?php } else {?>
-			
-				<ul>
-						<li class="back_plase">
-						
-							<?php  if ($page != 1) : ?>
-							
-									<a href="<?= ($page == 1) ? '1' : $page - 1 ;?>"><img src="/img/prew.png"></a>
-																	
-							<?php endif; ?>	
-																	
-						</li>
-					
-					<li class="page_plase">
-					
-						<?php for ($i = $count_for_pagin[0]; $i <= $count_for_pagin[1]; $i++) { ?>
-						
-							<?php if ($i == $page) { ?>
-							
-								<a class="page_active" href="<?= $i ?>" ><?= $i ?></a>
-										
-							<?php } else { ?>
-							
-								<a class="page" href="<?= $i ?>" ><?= $i ?></a>
+								<?php } ?>
 								
 							<?php } ?>
+						
+						</li>				
+						<li class="next_plase">	
+											 
+							<?php if ($page != $count_pages) : ?>
 							
-						<?php } ?>
-					
-					</li>				
-					<li class="next_plase">	
-										 
-						<?php if ($page != $count_pages) : ?>
-						
-						<a href="<?= ( $page + 1 ) ?>"><img src="/img/next.png"></a>
-						
-																
-						<?php endif; ?>	
-														
-					</li>
-				</ul>
+							<a href="<?= ( $page + 1 ) ?>"><img src="/img/next.png"></a>
+							
+																	
+							<?php endif; ?>	
+															
+						</li>
+					</ul>
 			</div>	
 			<?php } ?>
 		</div>

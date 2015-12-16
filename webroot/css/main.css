@@ -116,7 +116,6 @@ body{
 	position: absolute;
 	right: -11px;
 }
-.header
 .header .add_some{
 	background: url(/img/registration.png) no-repeat;
 	padding-left: 36px;
@@ -147,6 +146,71 @@ body{
 }
 .content{	
 	padding: 10px 0 30px 0;
+}
+.content .cont{
+	width: 720px;
+	margin: 0 auto;
+}
+.content .cont ul>li{
+	display: inline-block;
+}
+.content .cont .cont_top{
+	background: url(/img/contact_top_grad.png) repeat-x;
+	width: 680px;
+	height: 33px;
+	margin: 0 auto;
+	position: relative;
+}
+.content .cont .cont_top:before{
+	background: url(/img/contact_left_top.png) no-repeat;
+	content: '';
+	width: 20px;
+	height: 33px;
+	position: absolute;
+	top: 0;
+	left: -20px;
+}
+.content .cont .cont_top:after{
+	background: url(/img/contact_right_top.png) no-repeat;
+	content: '';
+	width: 20px;
+	height: 33px;
+	position: absolute;
+	top: 0;
+	right: -20px;
+}
+.content .cont .string{
+	background: url(/img/contact_cont_grad.png) repeat-x;
+	height: 42px;
+}
+.content .cont .last-child{
+	background: url(/img/contact_last_child.png) repeat-x;
+	height: 48px;
+}
+.content .cont .cont_bottom_grad{
+	background: url(/img/cont_bottom_grad.png) repeat-x;
+	width: 680px;
+	height: 52px;
+	margin: 0 auto;
+	position: relative;
+}
+.content .cont .cont_bottom_grad:before{
+	background: url(/img/contact_left_bottom.png) no-repeat;
+	content: '';
+	width: 20px;
+	height: 52px;
+	position: absolute;
+	top: 0;
+	left: -20px;
+}
+.content .cont .cont_bottom_grad:after{
+	background: url(/img/contact_right_bottom.png) no-repeat;
+	content: '';
+	width: 20px;
+	height: 52px;
+	position: absolute;
+	top: 0;
+	right: -20px;
 }
 .content .active_sort{
 	color: red;

@@ -293,13 +293,16 @@ class Contacts extends Controller
 		
 		$i = 1;
 		($page > 1) ? $i = $page * ROWLIMIT - ROWLIMIT + 1 : '';  // to number of contacts
-		
+
+		$contact_class = $i + count($contacts) - 1;
+
 		$this->view->set ( 'count_contacts', $count_contacts );
 		$this->view->set ( 'count_for_pagin', $count_for_pagin );
 		$this->view->set ( 'page', $page );
 		$this->view->set ( 'count_pages', $count_pages );
 		$this->view->set ( 'contacts', $contacts );
 		$this->view->set ( 'i', $i);
+		$this->view->set ( 'contact_class', $contact_class);
 		$this->view->set ( 'user', $user);
 		$this->view->set ( 'html', $this->view);
 		$this->view->set ( 'argument', $argument);
