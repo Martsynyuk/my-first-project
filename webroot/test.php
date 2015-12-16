@@ -2,35 +2,37 @@
 date_default_timezone_set ( 'Europe/Kiev' );
 error_reporting ( E_ALL );
 
-	$argument = array(
+$array = array(
 		
-		//'controller' => 'contacts',
-		//'action' => 'index',
-		//'page' => '1',
-		//'sort' => 'first',
-		//'sortparam' => 'asc',
-		//'id' => '2',
-		//'all' => 'all'
-	);
-		
-		$controller = NULL;
-		$action = NULL;
-		$page = NULL;
-		$sort = NULL;
-		$sortparam = NULL;
-		$id = NULL;
-		$all = NULL;
-		
-		extract($argument) ;
-		
-		if($sort !== NULL && $sortparam === NULL)
-		{
-			$sortparam = '/asc';
-		}
-		
-		$url = '/' . $controller . '/' . $action . '/' . $sort . '/' . $sortparam . '/' . $page . '/' . $id . '/' . $all;
-		
-		$url =str_replace('//', '/', str_replace('//', '/', str_replace('//', '/', $url)));
+		'a'=>array(
+				'1',
+				'2',
+				'3'
+				),
+		'b'=>array(
+				'4',
+				'5',
+				'6',
+				'8'
+				),
+		'c'=>array(
+				'7',
+				'8',
+				'9'
+				)
+);
 	
-		var_dump($url);
+foreach ($array as $key=>$val)
+{
+	
+	foreach ($val as $a)
+	{
 		
+		if ($a=='8')
+		{
+			
+			echo $key . ', ';
+			break ;
+		}
+	}
+}
