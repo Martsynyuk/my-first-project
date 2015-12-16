@@ -31,23 +31,25 @@
 		<div class="cont">
 				<?php if ( ! empty ( $contacts ) ){ ?>
 			<div class="cont_top">
-							<span>First Name</span>
-							<a <?= ( empty($argument['sortparam']) && empty($argument['sort']) || 
-														$argument['sortparam']==='FirstName' && $argument['sort']==='asc' ) ? 'class="active_sort"' : '' ;?> 
-									class="sort" href="
-									
-								<?=  ( $page > 1 ) ? $html->url(array('sort'=>'FirstName', 'sortparam'=>'asc', 'page'=>$page )) 
+					<ul>
+							<li>First Name
+								<a <?= ( empty($argument['sortparam']) && empty($argument['sort']) || 
+															$argument['sortparam']==='FirstName' && $argument['sort']==='asc' ) ? 'class="active_sort"' : '' ;?> 
+										class="sort" href="
+										
+									<?=  ( $page > 1 ) ? $html->url(array('sort'=>'FirstName', 'sortparam'=>'asc', 'page'=>$page )) 
 									 : $html->url(array('sort'=>'FirstName', 'sortparam'=>'asc')) ; 							
 															
 									?>">&#8593</a>
-							
-							<a <?= ( $argument['sortparam']==='FirstName' && $argument['sort']==='desc' ) ? 'class="active_sort"' : '' ;?>
-								class="sort" href="
-								<?= ( $page > 1 ) ? $html->url(array('sort'=>'FirstName', 'sortparam'=>'desc', 'page'=>$page )) 
+								
+								<a <?= ( $argument['sortparam']==='FirstName' && $argument['sort']==='desc' ) ? 'class="active_sort"' : '' ;?>
+									class="sort" href="
+									<?= ( $page > 1 ) ? $html->url(array('sort'=>'FirstName', 'sortparam'=>'desc', 'page'=>$page )) 
 									: $html->url(array('sort'=>'FirstName', 'sortparam'=>'desc')) ;
 							
 									?>">&#8595</a>
-							<span>Last Name</span>
+							</li>
+							<li>Last Name
 							<a <?= ( $argument['sortparam']==='LastName' && $argument['sort']==='asc' ) ? 'class="active_sort"' : '' ;?>
 									class="sort" href="
 								<?= ( $page > 1 ) ? $html->url(array('sort'=>'LastName', 'sortparam'=>'asc', 'page'=>$page ))
@@ -61,10 +63,11 @@
 									: $html->url(array('sort'=>'LastName', 'sortparam'=>'desc' )) ; 
 							
 									?>">&#8595</a>
-							
-						<span>E-mail</span>
-						<span>Cellular</span>
-						<span>Action</span>
+						</li>	
+						<li>E-mail</li>
+						<li>Cellular</li>
+						<li>Action</li>
+					</ul>
 				</div>													
 				<?php foreach ( $contacts as $contact ) : ?>
 				<div <?= ($contact_class === $i) ? 'class="last-child"' : 'class="string"' ;?> >
@@ -75,9 +78,9 @@
 							<li><?= $contact['Email']; ?></li>
 							<li><?= $contact['Telephone']; ?></li>
 							<li>
-								<a href="<?= $html->url(array('controller'=>'contacts', 'action'=>'edit', 'id'=>$contact['id'])) ?>">edit</a> 
-								<a href="<?= $html->url(array('controller'=>'contacts', 'action'=>'view', 'id'=>$contact['id'])) ?>">view</a>
-								<a href="<?= $html->url(array('controller'=>'contacts', 'action'=>'delete', 'id'=>$contact['id'])) ?>"></a>
+								<a class="edit" href="<?= $html->url(array('controller'=>'contacts', 'action'=>'edit', 'id'=>$contact['id'])) ?>">edit</a> 
+								<a class="view" href="<?= $html->url(array('controller'=>'contacts', 'action'=>'view', 'id'=>$contact['id'])) ?>">view</a>
+								<a class="delete" href="<?= $html->url(array('controller'=>'contacts', 'action'=>'delete', 'id'=>$contact['id'])) ?>"></a>
 							</li>
 						</ul>
 				</div>

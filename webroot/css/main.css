@@ -161,6 +161,25 @@ body{
 	margin: 0 auto;
 	position: relative;
 }
+.content .cont .cont_top ul{
+	padding: 10px 0 0 30px;
+}
+.content .cont .cont_top ul>li{
+	width: 134px;
+}
+.content .cont .cont_top ul>li:last-child{
+	width: 70px;
+	padding-left: 20px;
+	text-align: center;
+}
+.content .cont .cont_top ul>li, .content .cont .cont_top ul>li a{
+	font: 12px Arial regular;
+	height: 18px;
+}
+.content .cont .cont_top ul>li a:hover{
+	color: red;
+	font-weight: 1000;
+}
 .content .cont .cont_top:before{
 	background: url(/img/contact_left_top.png) no-repeat;
 	content: '';
@@ -183,9 +202,30 @@ body{
 	background: url(/img/contact_cont_grad.png) repeat-x;
 	height: 42px;
 }
+.content .cont .string ul, .last-child ul{
+	font: 12pt Arial bold;
+	color: white;
+	padding: 20px 0 0 15px;
+}
+.content .cont .string ul>li:first-child, .last-child ul>li:first-child{
+	width: 20px;
+}
+.content .cont .string ul>li:last-child, .last-child ul>li:last-child{
+	width: 90px;
+	padding-left: 30px;
+}
+.content .cont .string ul>li, .last-child ul>li{
+	width: 130px;
+	height: 18px;
+	padding-left: 5px;
+	overflow: hidden;
+}
 .content .cont .last-child{
 	background: url(/img/contact_last_child.png) repeat-x;
 	height: 48px;
+}
+.content .cont .string:hover .delete, .last-child:hover .delete{
+	background: url(/img/delete.png) no-repeat;
 }
 .content .cont .cont_bottom_grad{
 	background: url(/img/cont_bottom_grad.png) repeat-x;
@@ -211,6 +251,34 @@ body{
 	position: absolute;
 	top: 0;
 	right: -20px;
+}
+.content .cont ul{
+	position: relative;
+}
+.content .cont .delete{	
+	width: 30px;
+	height: 18px;
+	text-align: center;
+	color: 	#363636;
+	position: absolute;
+	right: -30px;
+	top: 20px;
+}
+.content .cont .edit{
+	background: url(/img/edit.png) no-repeat;
+	width: 35px;
+	height: 18px;
+	float: left;
+}
+.content .cont .view{
+	background: url(/img/view.png) no-repeat;
+	width: 43px;
+	height: 18px;
+	float: right; 
+}
+.content .cont .view, .edit{
+	text-align: center;
+	font: 10pt Arial regular;
 }
 .content .active_sort{
 	color: red;
@@ -455,7 +523,7 @@ body{
 .content .contact .view_contact{
 	background: linear-gradient(to top, #000, #fff);
 }
-.content .contact .page{
+.content .contact .page, .content .cont .page{
 	width: 20px;
 	background: none;
 	outline: none;
@@ -464,16 +532,22 @@ body{
 	padding: 0;
 	color: gray;
 }
+.content .cont .page{
+	padding-left: 10px;
+}
 .content  .contact  .pagination .page_plase a{
 	padding-left: 10px;
 }
-.content .contact .page_active{
+.content .contact .page_active, .content .cont .page_active{
 	background: none;
 	width: 20px;
 	color: white;
 	outline: none;
 	cursor: pointer;
 	border: 0;
+}
+.content .cont .page_active{
+	padding-left: 10px;
 }
 .contact .action{
 	width: 110px;
@@ -502,16 +576,6 @@ body{
 	text-align: center;
 	margin-bottom: 3px;
 	margin-left: 28px;
-}
-.contact .view{
-	background: url(/img/view.png) no-repeat;
-	right: -5px;
-	width: 40px;
-	height: 18px;
-	text-align: center;
-	margin-bottom: 3px;
-	position: absolute;
-	z-index: 500;
 }
 .contact .number{
 	width: 25px;
@@ -739,6 +803,14 @@ body{
 	left: 165px;
 	text-align: center;
 	top: 6px;
+}
+.content .cont .pagination .page_plase{
+	height: 20px;
+	width: 180px;
+	position: absolute;
+	left: 165px;
+	text-align: center;
+	top: 10px;
 }
 .footer{
 	width: 100%;
