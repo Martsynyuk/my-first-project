@@ -2,6 +2,7 @@
 
 body{
 	background-color: rgba(0, 0, 0, 0.8);
+	height: 100%;
 }
 .main{
 	width: 980px;
@@ -11,6 +12,7 @@ body{
 	position: relative;
 	font-weight: 500;
 	font: 16px Arial regular;
+	min-height: 100%;
 }
 .main input{
 	font: 11pt Arial regular;
@@ -206,7 +208,7 @@ body{
 .content .cont .string ul, .last-child ul{
 	font: 12pt Arial bold;
 	color: white;
-	padding: 20px 0 0 15px;
+	padding: 15px 0 0 15px;
 }
 .content .cont .string ul>li:first-child, .last-child ul>li:first-child{
 	width: 30px;
@@ -263,7 +265,7 @@ body{
 	color: 	#363636;
 	position: absolute;
 	right: -30px;
-	top: 20px;
+	top: 15px;
 }
 .content .cont .edit{
 	background: url(/img/edit.png) no-repeat;
