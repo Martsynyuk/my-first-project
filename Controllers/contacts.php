@@ -317,11 +317,6 @@ class Contacts extends Controller
 	public function select ( $argument )
 	{
 		
-		if (!empty($_POST)) {
-			header("Location: ".$_SERVER["REQUEST_URI"]);
-			exit;
-		}
-		
 		$post = $this->post_controller ();	
 		
 		$user = $this->Login->user();
@@ -434,6 +429,11 @@ class Contacts extends Controller
 			{
 				$this->set_cookie('select',  $id . ', ' . $_COOKIE['select']);
 			}
+		}
+		
+		if (!empty($_POST)) {
+			header("Location: ".$_SERVER["REQUEST_URI"]);
+			exit;
 		}
 		
 		$count_for_pagin = $this->count_pages ( $page );

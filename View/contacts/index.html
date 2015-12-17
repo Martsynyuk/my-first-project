@@ -107,7 +107,23 @@
 							
 								<?php  if ($page != 1) : ?>
 								
-										<a href="<?= ($page == 1) ? '1' : $page - 1 ;?>"><img src="/img/prew.png"></a>
+										<a href="<?php
+						
+										echo '/';
+										
+										if( ! empty ($argument['sort']) && ! empty ($argument['sortparam']) )
+										{
+											echo $argument['sortparam'] . '/' . $argument['sort'] . '/' ;
+										}
+										
+										if ($page == 1) {
+											echo '1/';
+										} else {
+											echo ($page - 1) . '/';
+										}
+										?>
+										
+										"><img src="/img/prew.png"></a>
 																		
 								<?php endif; ?>	
 																		
@@ -119,11 +135,39 @@
 							
 								<?php if ($i == $page) { ?>
 								
-									<a class="page_active" href="<?= $i ?>" ><?= $i ?></a>
+									<a class="page_active" href="
+									<?php
+											
+													echo '/';
+														
+													if( ! empty ($argument['sort']) && ! empty ($argument['sortparam']) )
+													{
+														echo $argument['sortparam'] . '/' . $argument['sort'] . '/' ;
+													}
+													echo $i . '/';
+													
+													?>
+									
+									" ><?= $i ?></a>
 											
 								<?php } else { ?>
 								
-									<a class="page" href="<?= $i ?>" ><?= $i ?></a>
+									<a class="page" href="
+									
+									<?php
+											
+													echo '/';
+														
+													if( ! empty ($argument['sort']) && ! empty ($argument['sortparam']) )
+													{
+														echo $argument['sortparam'] . '/' . $argument['sort'] . '/' ;
+													}
+													echo $i . '/';
+													
+													?>
+									
+									
+									" ><?= $i ?></a>
 									
 								<?php } ?>
 								
@@ -134,7 +178,18 @@
 											 
 							<?php if ($page != $count_pages) : ?>
 							
-							<a href="<?= ( $page + 1 ) ?>"><img src="/img/next.png"></a>
+							<a href="<?php
+								
+										echo '/';
+											
+										if( ! empty ($argument['sort']) && ! empty ($argument['sortparam']) )
+										{
+												echo $argument['sortparam'] . '/' . $argument['sort'] . '/' ;
+										}
+									  echo ( $page + 1 ) . '/' ;
+									  
+									 ?>
+							"><img src="/img/next.png"></a>
 							
 																	
 							<?php endif; ?>	

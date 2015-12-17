@@ -1,7 +1,8 @@
 <?php
 date_default_timezone_set ( 'Europe/Kiev' );
 error_reporting ( E_ALL );
-
+$f=array();
+$x = '1';
 $array = array(
 		
 		'a'=>array(
@@ -18,7 +19,8 @@ $array = array(
 		'c'=>array(
 				'7',
 				'8',
-				'9'
+				'9',
+				'1'
 				)
 );
 	
@@ -28,11 +30,11 @@ foreach ($array as $key=>$val)
 	foreach ($val as $a)
 	{
 		
-		if ($a=='8')
+		if ($a==$x)
 		{
-			
-			echo $key . ', ';
+			$f[] = $key; 
 			break ;
 		}
 	}
 }
+var_dump($f);
