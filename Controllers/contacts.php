@@ -309,8 +309,8 @@ class Contacts extends Controller
 		$this->view->setLayout('argument', $argument);
 		$this->view->setLayout ( 'block', $this->view);
 		
-		//$this->view->renderLayout ('layout');
-		$this->view->render ( $argument );	
+		$this->view->renderLayout ('layout');
+		//$this->view->render ( $argument );	
 	}
 		
 	public function select ( $argument )
