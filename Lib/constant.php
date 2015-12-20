@@ -12,8 +12,8 @@ const PASSWORD = '';
 
 // defolt sorting
 
-const SORTPARAM = 'FirstName'; // field for sorting
-const SORT = 'asc'; //sorting direction
+const SORTFIRST = 'FirstNameUp'; // field for sorting
+const SORTSECOND = 'LastNAmeUp'; //sorting direction
 
 //debug mode
 

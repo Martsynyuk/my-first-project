@@ -70,19 +70,14 @@ Class View
 		$controller = NULL;
 		$action = NULL;
 		$page = NULL;
-		$sort = NULL;
-		$sortparam = NULL;
+		$sortFirst = NULL;
+		$sortSecond = NULL;
 		$id = NULL;
 		$all = NULL;
 		
 		extract($argument) ;
 		
-		if($sort !== NULL && $sortparam === NULL)
-		{
-			$sortparam = '/asc';
-		}
-		
-		$url = '/' . $controller . '/' . $action . '/' . $sort . '/' . $sortparam . '/' . $page . '/' . $id . '/' . $all;
+		$url = '/' . $controller . '/' . $action . '/' . $sortFirst . '/' . $sortSecond . '/' . $page . '/' . $id . '/' . $all;
 		
 		$url = str_replace('//', '/', str_replace('//', '/', str_replace('//', '/', $url)));
 		

@@ -239,15 +239,15 @@ class Contacts extends Controller
 		
 		foreach ( $argument as $val )
 		{
-			if( $val === 'FirstName' || $val === 'LastName' )
+			if( $val === 'FirstNameUp' || $val === 'FirstNameDown' )
 			{
 				
-				$argument['sortparam'] = $val;
+				$argument['sortFirst'] = $val;
 			}
-			if( $val === 'asc' || $val === 'desc' )
+			if( $val === 'LastNameUp' || $val === 'LastNameDown' )
 			{
 				
-				$argument['sort'] = $val;
+				$argument['sortSecond'] = $val;
 			}
 			if( (int)($val) > 0 && $val <= $count_pages)
 			{
@@ -273,21 +273,20 @@ class Contacts extends Controller
 			$page = $argument['page'];
 		}
 			
-		if ( empty( $argument['sort'] ) )
-		{
-				
-			$argument['sort'] = 0;		
+		if ( empty( $argument['sortFirst'] ) )
+		{			
+			$argument['sortFirst'] = 0;		
 		}
-		if( empty( $argument['sortparam'] ))
+		if( empty( $argument['sortSecond'] ))
 		{
-			$argument['sortparam'] = 0;
+			$argument['sortSecond'] = 0;
 		}
 			
 		$contacts = array ();
 		
 		$count_contacts = $this->count_contacts($user['id']);
 		
-		$contacts = $this->return_contact ( $user['id'], $page, $argument['sort'], $argument['sortparam'] );
+		$contacts = $this->return_contact ( $user['id'], $page, $argument['sortFirst'], $argument['sortSecond'] );
 			
 		$count_for_pagin = $this->count_pages ( $page );
 		
@@ -295,7 +294,7 @@ class Contacts extends Controller
 		($page > 1) ? $i = $page * ROWLIMIT - ROWLIMIT + 1 : '';  // to number of contacts
 
 		$contact_class = $i + count($contacts) - 1;
-
+		
 		$this->view->set ( 'count_contacts', $count_contacts );
 		$this->view->set ( 'count_for_pagin', $count_for_pagin );
 		$this->view->set ( 'page', $page );
@@ -331,17 +330,17 @@ class Contacts extends Controller
 		
 		foreach ( $argument as $val )
 		{
-			if( $val === 'FirstName' || $val === 'LastName' )
+			if( $val === 'FirstNameUp' || $val === 'FirstNameDown' )
 			{
-		
-				$argument['sortparam'] = $val;
+				
+				$argument['sortFirst'] = $val;
 			}
 			
-			if( $val === 'asc' || $val === 'desc' )
+			if( $val === 'LastNameUp' || $val === 'LastNameDown' )
 			{
-		
-				$argument['sort'] = $val;
-			}
+				
+				$argument['sortSecond'] = $val;
+			}	
 			
 			if( $val === 'all' )
 			{
@@ -366,23 +365,21 @@ class Contacts extends Controller
 			$page = $argument['page'];
 		}
 				
-		if ( empty ( $argument['sort'] ))
-		{				
-			$argument['sort'] = 0;		
+		if ( empty( $argument['sortFirst'] ) )
+		{			
+			$argument['sortFirst'] = 0;		
 		}
-		
-		if (empty ( $argument['sortparam'] ))
+		if( empty( $argument['sortSecond'] ))
 		{
-			$argument['sortparam'] = 0;
-		}	
-		
+			$argument['sortSecond'] = 0;
+		}		
 		$i = 1;
 		
 		($page > 1) ? $i = $page * ROWLIMIT - ROWLIMIT + 1 : '';  // to number of contacts
 		
 		$contacts = array ();
 		
-		$contacts = $this->return_contact ( $user['id'], $page, $argument['sort'], $argument['sortparam'] );
+		$contacts = $this->return_contact ( $user['id'], $page, $argument['sortFirst'], $argument['sortSecond'] );
 		
 		if ( ! empty ($_COOKIE['select']) )
 		{
@@ -695,44 +692,36 @@ class Contacts extends Controller
 			);
 	}
 		
-	function return_contact ( $user_id, $page, $sorting, $sortparam ) 
+	function return_contact ( $user_id, $page, $sortFirst, $sortSecond ) 
 	{
-		if( empty ($sortparam))
+		if( empty ($sortFirst))
 		{
-			$sorting = SORT;
-			$sortparam = SORTPARAM;
+			$sortFirst = SORTFIRST;			
+		}
+		if ( empty($sortSecond) )
+		{
+			$sortSecond = SORTSECOND;
 		}
 		
 		$sort = '';
 		$deck = '';
-
-		if ( $sorting === 'asc' && $sortparam === 'FirstName' || $sorting === 'asc' && $sortparam === 'LastName' )
-		{	
-			
-			if ( $sortparam === 'FirstName' )
-			{
-				
-				$sort = $sortparam . ', LastName';
-			}
-			else{
-				
-				$sort = $sortparam . ', FirstName';
-			}
-		}
-		elseif ( $sorting === 'desc' && $sortparam === 'FirstName' || $sorting === 'desc' && $sortparam === 'LastName' )
+		
+		if( $sortFirst === 'FirstNameUp')
 		{
-				
-			if ( $sortparam === 'FirstName' )
-			{
-				
-				$deck = 'DESC , LastName' ;
-			}
-			else{
-				
-				$deck = 'DESC , FirstName' ;
-			}
-					
-			$sort = $sortparam;
+			
+			$sort = 'FirstName';
+		}
+		if( $sortFirst === 'FirstNameDown'){
+			
+			$sort = 'FirstName DESC';
+		}
+		if( $sortSecond === 'LastNameUp')
+		{
+			$deck = ', LastName';
+		}
+		if( $sortSecond === 'LastNameDown')
+		{
+			$deck = ', LastName DESC';
 		}
 
 		$result = $this->Information->select (

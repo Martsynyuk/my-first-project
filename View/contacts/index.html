@@ -33,36 +33,59 @@
 			<div class="cont_top">
 					<ul>
 							<li>First Name
-								<a <?= ( empty($argument['sortparam']) && empty($argument['sort']) || 
-															$argument['sortparam']==='FirstName' && $argument['sort']==='asc' ) ? 'class="active_sort"' : '' ;?> 
+								<a <?= ( empty($argument['sortFirst']) || $argument['sortFirst']==='FirstNameUp') ? 'class="active_sort"' : '' ;?> 
 										class="sort" href="
 										
-									<?=  ( $page > 1 ) ? $html->url(array('sort'=>'FirstName', 'sortparam'=>'asc', 'page'=>$page )) 
-									 : $html->url(array('sort'=>'FirstName', 'sortparam'=>'asc')) ; 							
-															
-									?>">&#8593</a>
+									<?php if(!empty($argument['sortSecond']))
+												{
+													echo $html->url(array('sortFirst'=>'FirstNameUp', 'sortSecond'=>$argument['sortSecond'] , 'page'=>$page )); 
+												}
+												else{
+													echo $html->url(array('sortFirst'=>'FirstNameUp', 'page'=>$page ));
+												}					
+									?>
+									">&#8593</a>
 								
-								<a <?= ( $argument['sortparam']==='FirstName' && $argument['sort']==='desc' ) ? 'class="active_sort"' : '' ;?>
+								<a <?= ( $argument['sortFirst']==='FirstNameDown' ) ? 'class="active_sort"' : '' ;?>
 									class="sort" href="
-									<?= ( $page > 1 ) ? $html->url(array('sort'=>'FirstName', 'sortparam'=>'desc', 'page'=>$page )) 
-									: $html->url(array('sort'=>'FirstName', 'sortparam'=>'desc')) ;
-							
-									?>">&#8595</a>
+									
+									<?php if(!empty($argument['sortSecond']))
+												{
+													echo $html->url(array('sortFirst'=>'FirstNameDown', 'sortSecond'=>$argument['sortSecond'] , 'page'=>$page )); 
+												}
+												else{
+													echo $html->url(array('sortFirst'=>'FirstNameDown', 'page'=>$page ));
+												}					
+									?>
+									">&#8595</a>
 							</li>
+							
 							<li>Last Name
-							<a <?= ( $argument['sortparam']==='LastName' && $argument['sort']==='asc' ) ? 'class="active_sort"' : '' ;?>
+							<a <?= ( empty($argument['sortSecond']) || $argument['sortSecond']==='LastNameUp' ) ? 'class="active_sort"' : '' ;?>
 									class="sort" href="
-								<?= ( $page > 1 ) ? $html->url(array('sort'=>'LastName', 'sortparam'=>'asc', 'page'=>$page ))
-									: $html->url(array('sort'=>'LastName', 'sortparam'=>'asc' )) ;
-							
-									?>">&#8593</a>
+									
+								<?php if(!empty($argument['sortFirst']))
+												{
+													echo $html->url(array('sortFirst'=>$argument['sortFirst'], 'sortSecond'=>'LastNameUp' , 'page'=>$page )); 
+												}
+												else{
+													echo $html->url(array('sortSecond'=>'LastNameUp', 'page'=>$page ));
+												}					
+									?>
+								">&#8593</a>
 					 
-							<a <?= ( $argument['sortparam']==='LastName' && $argument['sort']==='desc' ) ? 'class="active_sort"' : '' ;?>
+							<a <?= ( $argument['sortSecond']==='LastNameDown' ) ? 'class="active_sort"' : '' ;?>
 									class="sort" href="
-								<?= ( $page > 1 ) ? $html->url(array('sort'=>'LastName', 'sortparam'=>'desc', 'page'=>$page )) 
-									: $html->url(array('sort'=>'LastName', 'sortparam'=>'desc' )) ; 
-							
-									?>">&#8595</a>
+									
+								<?php if(!empty($argument['sortFirst']))
+												{
+													echo $html->url(array('sortFirst'=>$argument['sortFirst'], 'sortSecond'=>'LastNameDown' , 'page'=>$page )); 
+												}
+												else{
+													echo $html->url(array('sortSecond'=>'LastNameDown', 'page'=>$page ));
+												}					
+									?>
+								">&#8595</a>
 						</li>	
 						<li>E-mail</li>
 						<li>Cellular</li>
@@ -111,9 +134,13 @@
 						
 										echo '/';
 										
-										if( ! empty ($argument['sort']) && ! empty ($argument['sortparam']) )
+										if( ! empty ($argument['sortFirst']) )
 										{
-											echo $argument['sortparam'] . '/' . $argument['sort'] . '/' ;
+											echo $argument['sortFirst'] . '/' ;
+										}
+										if( !empty($argument['sortSecond']))
+										{
+											echo $argument['sortSecond'] . '/';
 										}
 										
 										if ($page == 1) {
@@ -140,9 +167,13 @@
 											
 													echo '/';
 														
-													if( ! empty ($argument['sort']) && ! empty ($argument['sortparam']) )
+													if( ! empty ($argument['sortFirst']) )
 													{
-														echo $argument['sortparam'] . '/' . $argument['sort'] . '/' ;
+														echo $argument['sortFirst'] . '/' ;
+													}
+													if( !empty($argument['sortSecond']))
+													{
+														echo $argument['sortSecond'] . '/';
 													}
 													echo $i . '/';
 													
@@ -158,9 +189,13 @@
 											
 													echo '/';
 														
-													if( ! empty ($argument['sort']) && ! empty ($argument['sortparam']) )
+													if( ! empty ($argument['sortFirst']) )
 													{
-														echo $argument['sortparam'] . '/' . $argument['sort'] . '/' ;
+														echo $argument['sortFirst'] . '/' ;
+													}
+													if( !empty($argument['sortSecond']))
+													{
+														echo $argument['sortSecond'] . '/';
 													}
 													echo $i . '/';
 													
@@ -182,9 +217,13 @@
 								
 										echo '/';
 											
-										if( ! empty ($argument['sort']) && ! empty ($argument['sortparam']) )
+										if( ! empty ($argument['sortFirst']) )
 										{
-												echo $argument['sortparam'] . '/' . $argument['sort'] . '/' ;
+											echo $argument['sortFirst'] . '/' ;
+										}
+										if( !empty($argument['sortSecond']))
+										{
+											echo $argument['sortSecond'] . '/';
 										}
 									  echo ( $page + 1 ) . '/' ;
 									  

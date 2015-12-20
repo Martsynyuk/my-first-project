@@ -36,10 +36,14 @@
 										else{
 												echo '<a href="/contacts/select/';
 												
-												if( ! empty ($argument['sort']) && ! empty ($argument['sortparam']) )
+												if( ! empty ($argument['sortFirst']) )
 												{
-													echo $argument['sortparam'] . '/' . $argument['sort'] . '/' ;
+													echo $argument['sortFirst'] . '/' ;
 												}
+												if( !empty($argument['sortSecond']))
+												{
+													echo $argument['sortSecond'] . '/';
+												}												
 												echo $page . '/';
 											
 												echo '"\>Off</a>';
@@ -49,52 +53,63 @@
 					
 					<th class="table_menu">First Name
 					
-						<input  <?= ( empty($argument['sortparam']) && empty($argument['sort']) || 
-													$argument['sortparam']==='FirstName' && $argument['sort']==='asc' ) ? 'class="active_sort"' : '' ;?> 
-							class="sort" type="submit" name="sort" value="&#8593" formaction=" 
-							<?=  ( $page > 1 ) ?  $html->url(array('controller'=>'contacts', 'action'=>'select', 
-																										'sort'=>'FirstName', 'sortparam'=>'asc', 'page'=>$page)) 
-																										
-															: $html->url(array('controller'=>'contacts', 'action'=>'select', 
-																										'sort'=>'FirstName', 'sortparam'=>'asc')); 							
-															
-									?>" >
+						<input  <?= ( empty($argument['sortFirst']) || $argument['sortFirst']==='FirstNameUp') ? 'class="active_sort"' : '' ;?> 
+							class="sort" type="submit" name="sort" value="&#8593" formaction="
+								
+									<?php if(!empty($argument['sortSecond']))
+												{
+													echo $html->url(array('controller'=>'contacts', 'action'=>'select', 'sortFirst'=>'FirstNameUp', 'sortSecond'=>$argument['sortSecond'] , 'page'=>$page )); 
+												}
+												else{
+													echo $html->url(array('controller'=>'contacts', 'action'=>'select', 'sortFirst'=>'FirstNameUp', 'page'=>$page ));
+												}					
+									?>
+							" >
 						
 						
-						<input <?= ( $argument['sortparam']==='FirstName' && $argument['sort']==='desc' ) ? 'class="active_sort"' : '' ;?>
-							class="sort" type="submit" name="sort" value="&#8595" formaction=" 
-							<?= ( $page > 1 ) ? $html->url(array('controller'=>'contacts', 'action'=>'select', 
-																										'sort'=>'FirstName', 'sortparam'=>'desc', 'page'=>$page)) 
-																										
-															: $html->url(array('controller'=>'contacts', 'action'=>'select', 
-																										'sort'=>'FirstName', 'sortparam'=>'desc'));
-							
-									?>">
+						<input <?= ( $argument['sortFirst']==='FirstNameDown' ) ? 'class="active_sort"' : '' ;?>
+							class="sort" type="submit" name="sort" value="&#8595" formaction="
+
+								<?php if(!empty($argument['sortSecond']))
+											{
+												echo $html->url(array('controller'=>'contacts', 'action'=>'select', 'sortFirst'=>'FirstNameDown', 'sortSecond'=>$argument['sortSecond'] , 'page'=>$page )); 
+											}
+											else{
+												echo $html->url(array('controller'=>'contacts', 'action'=>'select', 'sortFirst'=>'FirstNameDown', 'page'=>$page ));
+											}					
+								?>
+							">
 						
 						
 					</th>
 					<th class="table_menu">Last Name
 					
-						<input <?= ( $argument['sortparam']==='LastName' && $argument['sort']==='asc' ) ? 'class="active_sort"' : '' ;?>
-							class="sort" type="submit" name="sort" value="&#8593" formaction="  
-							<?= ( $page > 1 ) ?  $html->url(array('controller'=>'contacts', 'action'=>'select', 
-																										'sort'=>'LastName', 'sortparam'=>'asc', 'page'=>$page)) 
-																										
-															: $html->url(array('controller'=>'contacts', 'action'=>'select', 
-																										'sort'=>'LastName', 'sortparam'=>'asc')); 
-							
-									?>" >
+						<input <?= ( empty($argument['sortSecond']) || $argument['sortSecond']==='LastNameUp' ) ? 'class="active_sort"' : '' ;?>
+							class="sort" type="submit" name="sort" value="&#8593" formaction=" 
+									
+									<?php if(!empty($argument['sortFirst']))
+												{
+													echo $html->url(array('controller'=>'contacts', 'action'=>'select', 'sortFirst'=>$argument['sortFirst'], 'sortSecond'=>'LastNameUp' , 'page'=>$page )); 
+												}
+												else{
+													echo $html->url(array('controller'=>'contacts', 'action'=>'select', 'sortSecond'=>'LastNameUp', 'page'=>$page ));
+												}					
+									?>
+							" >
 					 
 						
-						<input <?= ( $argument['sortparam']==='LastName' && $argument['sort']==='desc' ) ? 'class="active_sort"' : '' ;?>
-							class="sort" type="submit" name="sort" value="&#8595" formaction=" 
-							<?= ( $page > 1 ) ? $html->url(array('controller'=>'contacts', 'action'=>'select', 
-																										'sort'=>'LastName', 'sortparam'=>'desc', 'page'=>$page)) 
-																										
-															: $html->url(array('controller'=>'contacts', 'action'=>'select', 
-																										'sort'=>'LastName', 'sortparam'=>'desc')); 
-															
-									?>">
+						<input <?= ( $argument['sortSecond']==='LastNameDown' ) ? 'class="active_sort"' : '' ;?>
+							class="sort" type="submit" name="sort" value="&#8595" formaction=" 							
+							
+							<?php if(!empty($argument['sortFirst']))
+												{
+													echo $html->url(array('controller'=>'contacts', 'action'=>'select', 'sortFirst'=>$argument['sortFirst'], 'sortSecond'=>'LastNameDown' , 'page'=>$page )); 
+												}
+												else{
+													echo $html->url(array('controller'=>'contacts', 'action'=>'select', 'sortSecond'=>'LastNameDown', 'page'=>$page ));
+												}					
+									?>
+							">
 					
 					</th>
 					<th class="table_menu">E-mail</th>
@@ -144,9 +159,13 @@
 						
 										echo '/contacts/select/';
 										
-										if( ! empty ($argument['sort']) && ! empty ($argument['sortparam']) )
+										if( ! empty ($argument['sortFirst']) )
 										{
-											echo $argument['sortparam'] . '/' . $argument['sort'] . '/' ;
+											echo $argument['sortFirst'] . '/' ;
+										}
+										if( !empty($argument['sortSecond']))
+										{
+											echo $argument['sortSecond'] . '/';
 										}
 										
 										if ($page == 1) {
@@ -171,9 +190,13 @@
 											
 													echo '/contacts/select/';
 														
-													if( ! empty ($argument['sort']) && ! empty ($argument['sortparam']) )
+													if( ! empty ($argument['sortFirst']) )
 													{
-														echo $argument['sortparam'] . '/' . $argument['sort'] . '/' ;
+														echo $argument['sortFirst'] . '/' ;
+													}
+													if( !empty($argument['sortSecond']))
+													{
+														echo $argument['sortSecond'] . '/';
 													}
 													echo $i . '/';
 													
@@ -185,9 +208,13 @@
 											
 													echo '/contacts/select/';
 														
-													if( ! empty ($argument['sort']) && ! empty ($argument['sortparam']) )
+													if( ! empty ($argument['sortFirst']) )
 													{
-														echo $argument['sortparam'] . '/' . $argument['sort'] . '/' ;
+														echo $argument['sortFirst'] . '/' ;
+													}
+													if( !empty($argument['sortSecond']))
+													{
+														echo $argument['sortSecond'] . '/';
 													}
 													echo $i . '/';
 													
@@ -205,9 +232,13 @@
 								
 										echo '/contacts/select/';
 											
-										if( ! empty ($argument['sort']) && ! empty ($argument['sortparam']) )
+										if( ! empty ($argument['sortFirst']) )
 										{
-												echo $argument['sortparam'] . '/' . $argument['sort'] . '/' ;
+											echo $argument['sortFirst'] . '/' ;
+										}
+										if( !empty($argument['sortSecond']))
+										{
+											echo $argument['sortSecond'] . '/';
 										}
 									  echo ( $page + 1 ) . '/' ;
 									  
