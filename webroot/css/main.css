@@ -1,7 +1,7 @@
 @CHARSET "UTF-8";
 
 body{
-	background-color: rgba(0, 0, 0, 0.8);
+	background-color: rgba(0, 0, 0, 1);
 	height: 100%;
 }
 .main{
@@ -40,9 +40,6 @@ body{
 	padding-top: 35px;
 	max-height: 99px;
 	overflow: hidden;
-}
-.header img  {
-	float: left;
 }
 .header ul>li{
 	display: inline-block;
@@ -844,7 +841,7 @@ body{
 .footer{
 	width: 100%;
 	position: absolute;
-	bottom: -10px;
+	bottom: 0px;
 	height: 30px;
 	color: white;
 }

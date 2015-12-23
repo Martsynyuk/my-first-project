@@ -72,6 +72,7 @@ class Contacts extends Controller
 						
 						);
 				
+			header ( 'Location: /' );
 		}
 		
 		if( ! empty ( $phone ) )
@@ -286,8 +287,12 @@ class Contacts extends Controller
 		
 		$count_contacts = $this->count_contacts($user['id']);
 		
-		$contacts = $this->return_contact ( $user['id'], $page, $argument['sortFirst'], $argument['sortSecond'] );
-			
+		$contacts = $this->return_contact ( $user['id'], $page, $argument['sortFirst'], $argument['sortSecond'] );	
+		
+		$sql = $contacts[1];
+		
+		$contacts = $this->contacts($contacts);
+		
 		$count_for_pagin = $this->count_pages ( $page );
 		
 		$i = 1;
@@ -308,6 +313,7 @@ class Contacts extends Controller
 		
 		$this->view->setLayout('argument', $argument);
 		$this->view->setLayout ( 'block', $this->view);
+		$this->view->setLayout ( 'sql', $sql);
 		
 		$this->view->renderLayout ('layout');
 		//$this->view->render ( $argument );	
@@ -380,7 +386,7 @@ class Contacts extends Controller
 		$contacts = array ();
 		
 		$contacts = $this->return_contact ( $user['id'], $page, $argument['sortFirst'], $argument['sortSecond'] );
-		
+		$contacts = $this->contacts($contacts);
 		if ( ! empty ($_COOKIE['select']) )
 		{
 			$checked = $this->get_cookie($_COOKIE['select']);
@@ -637,7 +643,7 @@ class Contacts extends Controller
 									)
 																	
 							);
-		
+		$res = $this->contacts($res);
 		foreach ( $res as $key => $val ) 
 		{
 			

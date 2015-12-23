@@ -54,4 +54,17 @@ class Controller
 		
 		return $array;
 	}
+	
+	function contacts($contact)
+	{
+		unset($contact[1]);
+		foreach ($contact as $contacts)
+		{
+			foreach ($contacts as $val)
+			{
+				$result[] = $val;
+			}
+		}
+		return $result;
+	}
 }

@@ -131,7 +131,7 @@
 							<select size="1" name="year">
 							<option value="<?= $backdate ['year']; ?>"><?= $backdate ['year']; ?></option>;
 												
-					<?php for ( $i = idate ( "Y" )-100; $i <= idate ( "Y" ); $i++) : ?>
+					<?php for ( $i = idate ( "Y" )-100; $i <= idate ( "Y" )-18; $i++) : ?>
 					
 								<option value="<?= $i; ?>"><?= $i; ?></option>;
 								
@@ -162,7 +162,7 @@
 							</select> 
 							<select size="1" name="year">
 											
-					<?php for($i = idate("Y")-100; $i <= idate("Y"); $i++) : ?>
+					<?php for($i = idate("Y")-100; $i <= idate("Y")-18; $i++) : ?>
 					
 								<option value="<?= $i; ?>"><?= $i; ?></option>;
 								

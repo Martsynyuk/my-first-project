@@ -160,7 +160,7 @@ Class Model implements For_model
 			}
 						
 			$sql = $sql . ' ;' ;
-						
+			
 			$res = $this->query ( $sql );
 						
 			if ( ! empty ( $res) )
@@ -169,7 +169,7 @@ Class Model implements For_model
 				$result = mysqli_fetch_all ( $res,MYSQLI_ASSOC );			
 			}
 			//var_dump($sql);
-		return $result;
+		return array($result, $sql);
 	}
 		
 	/**
@@ -259,7 +259,6 @@ Class Model implements For_model
 						
 		$this->query ( $sql );
 											
-		return $result;
 	}
 		
 	/**
@@ -277,7 +276,6 @@ Class Model implements For_model
 							
 		$this->mysqli->query ( $sql );
 										
-		return;
 	}
 		
 	/**
@@ -295,8 +293,7 @@ Class Model implements For_model
 			
 		$result = $this->mysqli->query( $sql );
 						
-		return $result;
-			
+		return $result;		
 	}
 		
 	function contacts_defender ( $id, $user_id )

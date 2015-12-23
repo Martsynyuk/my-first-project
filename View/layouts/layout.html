@@ -5,27 +5,25 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="keywords" content="">
 <meta name="description" content="">
-
 <title>project</title>
-
 <link rel="stylesheet" type="text/css" href="/css/main.css">
 <link rel="stylesheet" type="text/css" href="/css/reset.css">
 <?= (DEBUG === 1) ? '<link rel="stylesheet" type="text/css" href="/css/debug.css">' : '' ;?>
-
 </head>
 <body>
-<div class="main">
-	<div class="header">
-		<a href="/"><img src="/img/logotip.png" alt="logotip"></a>		
-	</div>
-	<div class="content">
-	
-		<?= $block->render($argument) ?>
+	<div class="main">
+		<div class="header">
+			<a href="/"><img src="/img/logotip.png" alt="logotip"></a>		
+		</div>
+		<div class="content">
 		
+			<?= $block->render($argument) ?>
+			
+		</div>
+		<div class="footer">
+			<span>&#169 2007 Wise Engineering</span>
+		</div>
+		<?= (DEBUG === 1) ? '<div class="debug"><span>' . $sql . '</span></div>' : '' ; ?>
 	</div>
-	<div class="footer">
-		<span>&#169 2007 Wise Engineering</span>
-	</div>
-</div>
 </body>
 </html>

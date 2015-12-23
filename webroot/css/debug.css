@@ -1,4 +1,16 @@
 @CHARSET "UTF-8";
 body{
-	background-color: rgba(0, 0, 0, 1) !important;
+	background-color: rgba(0, 0, 0, 0.8) !important;
+}
+.debug{
+	width: 110%;
+	height: 60px;
+	background: white;
+	position: absolute;
+	left: -40px;
+	bottom:-70px;
+	color: black;
+}
+.debug span{
+	padding: 5px 0 0 5px;
 }
