@@ -767,7 +767,7 @@ class Contacts extends Controller
 									)
 												
 							);
-
+		
 		$contacts = $result;
 
 		if ( empty ( $contacts ) )

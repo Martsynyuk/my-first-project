@@ -39,9 +39,13 @@ class Login{
 		);
 		
 		$login = new User();
+		$contact = new Controller();
 		
 		$user = $login->select ( $what );
 		
+		unset($user[1]);		
+		$user = $contact->contacts($user);
+
 		if ( !empty ( $user ) )
 		{
 			foreach ($user as $user => $val )
@@ -49,7 +53,7 @@ class Login{
 		
 				$user = $val;
 			}
-		
+			
 			$_SESSION['id'] = $user['id'];
 			$_SESSION['login'] = $user['login'];
 		

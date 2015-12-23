@@ -11,7 +11,7 @@ Class Users extends Controller
 	
 	public function autorization ( $argument )
 	{
-			
+		
 		$post = $this->post_controller ();	
 		
 		if ( ! empty ( $post['login'] ) && ! empty ( $post['password'] ) )
@@ -45,10 +45,10 @@ Class Users extends Controller
 	{
 				
 		$post = $this->post_controller ();
-
+		
 		if( ! empty ( $post['login'] ) && ! empty ( $post['password1'] ) && ! empty ( $post['password2'] ) )
 		{	
-
+			
 			if ( $post['password1'] === $post['password2'] ) 
 			{
 									

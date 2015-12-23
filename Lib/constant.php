@@ -17,4 +17,4 @@ const SORTSECOND = 'LastNAmeUp'; //sorting direction
 
 //debug mode
 
-const DEBUG = 0; // if = 1 mode is enabled
+const DEBUG = 1; // if = 1 mode is enabled
