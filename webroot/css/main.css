@@ -366,6 +366,7 @@ body{
 	font: 11pt Arial regular;
 	padding-top: 14px;
 	height: 21px;
+	position: relative;
 }
 .content .form ul>li span{
 	float: left;
@@ -377,6 +378,14 @@ body{
 	width: 220px;
 	color: black;
 }
+.content .form ul>li .input_text{
+	position: absolute;
+	height: 14px;
+	padding: 5px 0 0 5px;
+	top: 12px;
+	left: 335px;
+	width: 150px;
+ }
 .content .form ul>li .input{
 	height: 14px;
 	width: 210px;

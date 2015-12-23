@@ -22,85 +22,94 @@
 	</div>
 	<div class="content">
 		<div class="form">
-			<form name="addcontact" method="POST" action="add">
+			<form name="addcontact" method="POST" action="/contacts/add/">
 				<span class="information">Information</span>
 				<ul>				
 					<li><span>First Name:</span> <input type="text" name="FirstName"
 					
-						value="<?= ( ! empty ( $res['FirstName'] ) ) ?  $res['FirstName'] : '';?>"
+						value="<?= ( ! empty ( $post['FirstName'] ) ) ?  $post['FirstName'] : '' ;?>"
 						size="25">
+						<?= ( empty ( $post['FirstName'] ) && $val == 1 ) ? '<div class="input_text">input some name</div>' : '' ;?>
 					</li>
 						
 					<li><span>Last Name:</span> <input type="text" name="LastName"
 					
-						value="<?= ( ! empty ( $res['LastName'] ) ) ? $res['LastName'] : '';?>"
+						value="<?= ( ! empty ( $post['LastName'] ) ) ? $post['LastName'] : '';?>"
 						size="25">
+						<?= ( empty ( $post['LastName'] ) && $val == 1 ) ? '<div class="input_text">input some name</div>' : '' ;?>
 					</li>
 						
 					<li><span>E-mail:</span> <input type="email" name="Email"
 					
-						value="<?= ( ! empty ( $res['Email'] ) ) ? $res['Email'] : '';?>"
+						value="<?= ( ! empty ( $post['Email'] ) ) ? $post['Email'] : '';?>"
 						size="25">
+						<?= ( empty ( $post['Email'] ) && $val == 1 ) ? '<div class="input_text">input some email</div>' : '' ;?>
 					</li>
 						
-					<li><span class="telephone">Home:</span> <input class="radio" type="radio" name="radio" value="Home">
+					<li><span class="telephone">Home:</span> <input class="radio" type="radio" name="radio" value="Home" 
+						<?= ($check == 'Home') ? 'checked' : '' ?>>
 					
 						<input type="text" name="Home"
-						value="<?= ( ! empty ( $res['Home'] ) ) ? $res['Home'] : '';?>"
+						value="<?= ( ! empty ( $post['Home'] ) ) ? $post['Home'] : '';?>"
 						size="25">
+						<?= ( empty ( $post['Home'] ) && $check == 'Home' ) ? '<div class="input_text">input some telephone</div>' : '' ;?>
 					</li>
 					
-					<li><span class="telephone">Work:</span> <input class="radio" type="radio" name="radio" value="Work">
+					<li><span class="telephone">Work:</span> <input class="radio" type="radio" name="radio" value="Work" 
+						<?= ($check == 'Work') ? 'checked' : '' ?>>
 					
 						<input type="text" name="Work"
-						value="<?= ( ! empty ( $res['Work'] ) ) ? $res['Work'] : '';?>"
+						value="<?= ( ! empty ( $post['Work'] ) ) ? $post['Work'] : '';?>"
 						size="25">
+						<?= ( empty ( $post['Work'] ) && $check == 'Work' && $val == 1 ) ? '<div class="input_text">input some telephone</div>' : '' ;?>
 					</li>
 						
-					<li><span class="telephone">Cell:</span> <input class="radio" type="radio" name="radio" value="Cell">
+					<li><span class="telephone">Cell:</span> <input class="radio" type="radio" name="radio" value="Cell"
+						<?= ($check == 'Cell') ? 'checked' : '' ?>>
 					
 						<input type="text" name="Cell"
-						value="<?= ( ! empty ( $res['Cell'] ) ) ? $res['Cell'] : '';?>"
+						value="<?= ( ! empty ( $post['Cell'] ) ) ? $post['Cell'] : '';?>"
 						size="25">
+						<?= ( empty ( $post['Cell'] ) && $check == 'Cell' ) ? '<div class="input_text">input some telephone</div>' : '' ;?>
 					</li>
 					
 					<li><span>Adress 1:</span> 
 					
 						<input type="text" name="Adress1"
-							value="<?= ( ! empty ( $res['Adress1'] ) ) ? $res['Adress1'] : '';?>"
+							value="<?= ( ! empty ( $post['Adress1'] ) ) ? $post['Adress1'] : '';?>"
 							size="25">
 					</li>
 						
 					<li><span>Adress 2:</span> 
 					
 						<input type="text" name="Adress2"
-							value="<?= ( ! empty ( $res['Adress2'] ) ) ? $res['Adress2'] : '';?>"
+							value="<?= ( ! empty ( $post['Adress2'] ) ) ? $post['Adress2'] : '';?>"
 							size="25">
 					</li>
 					
 					<li><span>City:</span> 
 					
 						<input type="text" name="City"
-							value="<?= ( ! empty ( $res['City'] ) ) ? $res['City'] : '';?>"
+							value="<?= ( ! empty ( $post['City'] ) ) ? $post['City'] : '';?>"
 							size="25">
 					</li>
 							
 					<li><span>State:</span> 
 					
 						<input type="text" name="State"
-							value="<?= ( ! empty ( $res['State'] ) ) ? $res['State'] : '';?>"
+							value="<?= ( ! empty ( $post['State'] ) ) ? $post['State'] : '';?>"
 							size="25">
 					</li>
 					
 					<li><span>Zip:</span> 
 					
 						<input type="text" name="Zip"
-							value="<?= ( ! empty ( $res['Zip'] ) ) ? $res['Zip'] : '';?>" size="25">
+							value="<?= ( ! empty ( $post['Zip'] ) ) ? $post['Zip'] : '';?>" size="25">
 					</li>
 					
 					<li><span>Country:</span> 
 						<input type="text" name="Country"
-							value="<?= ( ! empty ( $res['Country'] ) ) ? $res['Country'] : '';?>"
+							value="<?= ( ! empty ( $post['Country'] ) ) ? $post['Country'] : '';?>"
 							size="25">
 					</li>
 					

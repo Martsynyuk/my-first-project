@@ -15,74 +15,78 @@ class Contacts extends Controller
 	
 	public function  add ($argument)
 	{
-			
+		
 		$post = $this->post_controller();
 		
 		$user = $this->Login->user();
-			
-		if ( ! empty ( $post['FirstName'] ) ) 
+		
+		$check = 'Work';
+		
+		if ( $post['radio'] === 'Home' )
 		{
+			$phone = $post['Home'];
+			$check = 'Home';
+		}
+				
+		if ( $post['radio'] === 'Work' )
+		{
+			$phone = $post['Work'];
+			$check = 'Work';
+		}
+				
+		if ( $post['radio'] === 'Cell' )
+		{
+			$phone = $post['Cell'];
+			$check = 'Cell';
+		}
 			
-			if ( isset ( $post['radio'] ) ) 
-			{
-				
-				if ( $post['radio'] === 'Home' )
-				{
-					$phone = $post['Home'];
-				}
-				
-				if ( $post['radio'] === 'Work' )
-				{
-					$phone = $post['Work'];
-				}
-				
-				if ( $post['radio'] === 'Cell' )
-				{
-					$phone = $post['Cell'];
-				}
-			} 
-			else{
-				
-				$phone = $post['Cell'];
-			}
-				
+		if(!empty($post['FirstName']) && !empty($post['LastName']) && !empty($post['Email']) && !empty($post['radio']))
+		{
 			$new_contact = $this->Information->insert (
-				
-										$what = array(
+					
+											$what = array(
+														
+														'users_id' => $user['id'], // mast be int its important
+														'Firstname' => $post['FirstName'],
+														'LastName' => $post['LastName'],
+														'Email' => $post['Email'],
+														'Home' => $post['Home'],
+														'Work' => $post['Work'],
+														'Cell' => $post['Cell'],
+														'Adress1' => $post['Adress1'],
+														'Adress2' => $post['Adress2'],
+														'City' => $post['City'],
+														'State' => $post['State'],
+														'Zip' => $post['Zip'],
+														'Country' => $post['Zip'],
+														'BirthDate' => $post['year'] . '-' 
+																		. $post['month'] . '-' 
+																		. $post['day'],
+														'Telephone' => $phone  
 													
-													'users_id' => $user['id'], // mast be int its important
-													'Firstname' => $post['FirstName'],
-													'LastName' => $post['LastName'],
-													'Email' => $post['Email'],
-													'Home' => $post['Home'],
-													'Work' => $post['Work'],
-													'Cell' => $post['Cell'],
-													'Adress1' => $post['Adress1'],
-													'Adress2' => $post['Adress2'],
-													'City' => $post['City'],
-													'State' => $post['State'],
-													'Zip' => $post['Zip'],
-													'Country' => $post['Zip'],
-													'BirthDate' => $post['year'] . '-' 
-																	. $post['month'] . '-' 
-																	. $post['day'],
-													'Telephone' => $phone  
-												
-											)
-						
-						);
-				
+												)
+							
+							);
+					
 			header ( 'Location: /' );
 		}
+		
 		
 		if( ! empty ( $phone ) )
 		{
 			$this->view->set ( 'phone', $phone );
 		}
+			$val = NULL;
+			if(!empty($post))
+			{
+				$val = 1;
+			}
 			
 			$this->view->set ( 'user', $user );
 			$this->view->set ( 'html', $this->view);
 			$this->view->set ( 'post', $post);
+			$this->view->set ( 'val', $val);
+			$this->view->set ( 'check', $check);
 		
 			$this->view->render ( $argument );			
 	}
