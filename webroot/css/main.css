@@ -382,9 +382,11 @@ body{
 	position: absolute;
 	height: 14px;
 	padding: 5px 0 0 5px;
-	top: 12px;
-	left: 335px;
+	top: 30px;
+	left: 160px;
 	width: 150px;
+	color: red;
+	background: rgba(255, 255, 255, 0.2);
  }
 .content .form ul>li .input{
 	height: 14px;
@@ -648,9 +650,24 @@ body{
 	background: url(/img/login_grad.png) repeat-x;
 	position: relative;
 }
+.content .content_autorization .new_contact{
+	height: 20px;
+	width: 300px;
+}
+.content .content_autorization  .new_mail{
+	padding: 0px;
+	float: left;
+	margin-top: 4px;
+}
+.content .content_autorization span{
+	height: 20px;
+	width: 200px;
+	display: block;
+	padding-left: 25px;
+}
 .content .content_autorization .text{
 	width: 360px;
-	height: 200px;
+	height: 30px;
 	display: block;
 }
 .content .content_autorization button{
@@ -664,6 +681,7 @@ body{
 	margin-left: 45px;
 	padding: 1px 3px;
 	position: relative;
+	margin-top: 10px;
 }
 .content .content_autorization button:after{
 	background: url(/img/home_right.png) no-repeat;

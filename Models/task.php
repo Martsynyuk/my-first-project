@@ -3,7 +3,7 @@
 
 Class Test extends Model
 {
-	public $class = 'test';
+	public $class = 'task';
 	
 	function string($string, $count)
 	{
@@ -42,6 +42,38 @@ Class Test extends Model
 		}
 		
 		return $a;
+	}
+	
+	function autocomplete($count)
+	{
+		$skills = array(
+				'long',
+				'short',
+				'toll',
+				'stupid'
+		);
+		
+		$name = array(
+				'Anton',
+				'Oleg',
+				'etc :)'
+		);
+		
+		for($i=0; $i<$count; $i++)
+		{
+		
+			parent::insert ( $what = array(
+											'age'=>rand(18, 99),
+											'Fullname'=>$name[array_rand($name)],
+											'skills'=>$skills[array_rand($skills)],
+											'price'=>rand(0, 999) . '.' . rand(0, 9) . rand(0, 9),
+											'date_creation'=>date('Y') . '-'
+																			. date('m') . '-'
+																			. date('d')
+											)
+					);
+			echo $i;
+		}
 	}
 	
 }

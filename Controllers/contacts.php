@@ -10,7 +10,8 @@ class Contacts extends Controller
 	
 	public $model = array(
 			'Information',
-			'Login'
+			'Login',
+			'Test'
 	);
 	
 	public function  add ($argument)
@@ -153,6 +154,8 @@ class Contacts extends Controller
 											)
 				
 									);
+		
+		$contactUser = $this->contacts($contactUser);
 			
 		if ( ! empty ( $post['FirstName'] ) ) 
 		{
@@ -464,7 +467,7 @@ class Contacts extends Controller
 		
 		if ( ( int ) ($argument[2]) > 0 )
 		{
-				
+			
 			$contactUser = $this->Information->select (	
 					
 											$what = array(
@@ -511,6 +514,8 @@ class Contacts extends Controller
 											 	)
 					
 										);
+			
+			$contactUser = $this->contacts($contactUser);
 
 			if ( empty ( $contactUser ) )
 			{
@@ -916,13 +921,12 @@ class Contacts extends Controller
 		if ( ! empty ($post['Yes']) && $post['Yes'] === 'Yes' )
 		{	
 			
-			foreach ( $this->get_cookie($_COOKIE['new_mail']) as $mail)
+			foreach ( $post as $mail)
 			{
 				
 				$this->Information->insert (
 								$what = array(
 										'users_id' => $user['id'],
-										'FirstName' => 'somenew',
 										'Email' => $mail
 								)					
 						);
@@ -935,9 +939,9 @@ class Contacts extends Controller
 			
 			header ( 'Location: / ');
 		}
-		
+	
 		$this->set_cookie('select', '');
-		
+
 		$this->view->set ( 'user', $user );
 		$this->view->set ( 'html', $this->view );
 		$this->view->set ( 'mail', $mail );

@@ -209,10 +209,8 @@ Class Model implements For_model
 				$sql ='INSERT INTO ' . $this->class . ' (' . $key . ') VALUE (' . $val . ');';
 					
 			}
-			
-				$this->query( $sql );
-			
-			
+				//var_dump($sql);
+				$this->query( $sql );		
 		}
 		
 	/**
@@ -225,7 +223,7 @@ Class Model implements For_model
 	*
 	*								'firstname' => 'Terr',
 	*								'lastname' => 'Mops',
-	*								 'telephone' => '1254215'
+	*								'telephone' => '1254215'
 	*
 	*							),
 	*
