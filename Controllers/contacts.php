@@ -920,7 +920,7 @@ class Contacts extends Controller
 		
 		if ( ! empty ($post['Yes']) && $post['Yes'] === 'Yes' )
 		{	
-			
+			unset($post['del']);
 			foreach ( $post as $mail)
 			{
 				
