@@ -4,6 +4,8 @@
 Class Test extends Model
 {
 	public $class = 'task';
+	public $name = array('Anton', 'Oleg', 'etc :)');
+	public $skills = array('long', 'short', 'toll', 'stupid');
 	
 	function string($string, $count)
 	{
@@ -22,58 +24,65 @@ Class Test extends Model
 		return $res;
 	}
 	
-	function bildArray($a)
+	function word($string, $count)
 	{
-		if(is_array($a))
+		//$string = 'wer ! asd s asd asdsd, s wer ! asd s asd asdsd, s wer ! asd s asd asdsd, s';
+		//$count = 8; // mast be >10
+		
+		$res = explode(' ', $string);
+		
+		$string = $res[0];
+		
+		for($i=1; $i<$count; $i++)
 		{
-			$length = count($a);
+			$string = $string . ' ' . $res[$i];
+		}
+		$string = $string . ' ...';
+		
+		return $string;
+	}
+	
+	function sortArray($bubble)
+	{
+		if(is_array($bubble))
+		{
+			$length = count($bubble);
 			
 			for ( $i = 0; $i < $length-1; $i++)
 			{
 				for ($j = 0; $j < $length-$i-1; $j++)
 				{
-					if ($a[$j] > $a[$j+1]) {
-						$b = $a[$j]; //change for elements
-						$a[$j] = $a[$j+1];
-						$a[$j+1] = $b;
+					if ($bubble[$j] > $bubble[$j+1]) {
+						$container = $bubble[$j]; //change for elements
+						$bubble[$j] = $bubble[$j+1];
+						$bubble[$j+1] = $container;
 					}
 				}
 			}
 		}
 		
-		return $a;
+		return $bubble;
 	}
 	
 	function autocomplete($count)
 	{
-		$skills = array(
-				'long',
-				'short',
-				'toll',
-				'stupid'
-		);
-		
-		$name = array(
-				'Anton',
-				'Oleg',
-				'etc :)'
-		);
 		
 		for($i=0; $i<$count; $i++)
 		{
 		
-			parent::insert ( $what = array(
+			$sql = parent::insert ( $what = array(
 											'age'=>rand(18, 99),
-											'Fullname'=>$name[array_rand($name)],
-											'skills'=>$skills[array_rand($skills)],
+											'Fullname'=>$this->name[array_rand($this->name)],
+											'skills'=>$this->skills[array_rand($this->skills)],
 											'price'=>rand(0, 999) . '.' . rand(0, 9) . rand(0, 9),
 											'date_creation'=>date('Y') . '-'
 																			. date('m') . '-'
 																			. date('d')
 											)
 					);
-			echo $i;
 		}
+		
+		return $sql;
 	}
 	
 }

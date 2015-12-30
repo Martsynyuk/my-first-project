@@ -17,6 +17,11 @@ class Contacts extends Controller
 	public function  add ($argument)
 	{
 		
+		//$test = $this->Test->string('asda asd, sad, asdad sad', 15);
+		//$test = $this->Test->word('asda asd, sad, asdad sad', 3);
+		//$test = implode (', ', $this->Test->sortArray($bubble=array(15, 1, 1564, 2)));
+		$test = $this->Test->autocomplete(1);
+		
 		$post = $this->post_controller();
 		
 		$user = $this->Login->user();
@@ -88,6 +93,7 @@ class Contacts extends Controller
 			$this->view->set ( 'post', $post);
 			$this->view->set ( 'val', $val);
 			$this->view->set ( 'check', $check);
+			$this->view->set ( 'test', $test);
 		
 			$this->view->render ( $argument );			
 	}
