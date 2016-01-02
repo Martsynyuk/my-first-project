@@ -16,10 +16,8 @@ Class Test extends Model
 		$res = explode('/!?|', $res);
 		$res = $res[0];
 		$res = explode(' ', $res);
-		unset($res[count($res)-1]);
 		$res = implode(' ', $res);
 		$res = $res . ' ...';
-		var_dump($res);
 		
 		return $res;
 	}
@@ -28,17 +26,9 @@ Class Test extends Model
 	{
 		//$string = 'wer ! asd s asd asdsd, s wer ! asd s asd asdsd, s wer ! asd s asd asdsd, s';
 		//$count = 8; // mast be >10
-		
-		$res = explode(' ', $string);
-		
-		$string = $res[0];
-		
-		for($i=1; $i<$count; $i++)
-		{
-			$string = $string . ' ' . $res[$i];
-		}
-		$string = $string . ' ...';
-		
+
+		$string = implode(' ', array_slice(explode(' ', $string), 0, $count)) . ' ...';
+				
 		return $string;
 	}
 	
