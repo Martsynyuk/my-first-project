@@ -18,3 +18,7 @@ const SORTSECOND = 'LastNAmeUp'; //sorting direction
 //debug mode
 
 const DEBUG = 1; // if = 1 mode is enabled
+
+// for autocompliter
+
+const TABLE = 'task';

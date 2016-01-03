@@ -1,11 +1,10 @@
 <?php
 
 
-Class Test extends Model
+Class Test extends Autocompleter
 {
-	public $class = 'task';
 	public $name = array('Anton', 'Oleg', 'etc :)');
-	public $skills = array('long', 'short', 'toll', 'stupid');
+	public $skills = array(0, 1, 2, 3);
 	
 	function string($string, $count)
 	{
@@ -55,21 +54,43 @@ Class Test extends Model
 	}
 	
 	function autocomplete($count)
-	{
+	{	
+		$sql = $this->selectinfo();
+		$array = array();
+		
+		foreach ($sql as $val)
+		{
+			$array[$val['COLUMN_NAME']] = $val['DATA_TYPE'];
+		}
+		
+		$sql = $array; 
+		unset($sql['id']);
+		
+		foreach ($sql as $key=>$val)
+		{		
+			switch ($val)
+			{
+				case 'int': 
+					$sql[$key] = $this->int(18, 99);
+					break;
+				case 'varchar':
+					$sql[$key] = $this->varchar($this->name);
+					break;
+				case 'decimal':
+					$sql[$key] = $this->decimal(0, 999, 2);
+					break;
+				case 'enum':
+					$sql[$key] = $this->enum($this->skills);
+					break;
+				case 'date':
+					$sql[$key] = $this->date(array('Y', 'm', 'd'));
+					break;
+			}
+		}
 		
 		for($i=0; $i<$count; $i++)
-		{
-		
-			$sql = parent::insert ( $what = array(
-											'age'=>rand(18, 99),
-											'Fullname'=>$this->name[array_rand($this->name)],
-											'skills'=>$this->skills[array_rand($this->skills)],
-											'price'=>rand(0, 999) . '.' . rand(0, 9) . rand(0, 9),
-											'date_creation'=>date('Y') . '-'
-																			. date('m') . '-'
-																			. date('d')
-											)
-					);
+		{		
+			$sql = parent::insert ($sql);				
 		}
 		
 		return $sql;

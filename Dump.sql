@@ -57,11 +57,11 @@ CREATE TABLE `task` (
   `date_creation` date NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=64 DEFAULT CHARSET=latin1;
 
 /*Data for the table `task` */
 
-insert  into `task`(`id`,`age`,`Fullname`,`skills`,`price`,`date_creation`) values (59,86,'etc :)','long','76.35','2015-12-28');
+insert  into `task`(`id`,`age`,`Fullname`,`skills`,`price`,`date_creation`) values (62,85,'Anton','long','945.02','2016-01-03'),(63,72,'etc :)','short','992.93','2016-01-03');
 
 /*Table structure for table `users` */
 
