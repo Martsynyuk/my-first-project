@@ -7,8 +7,11 @@ class Dispatcher {
 		require_once APP . '/Controllers/controller.php';
 		require_once APP . '/Controllers/contacts.php';
 		require_once APP . '/Controllers/users.php';
+		require_once APP . '/Controllers/autocompleter.php';
+		require_once APP . '/Controllers/test.php';		
 		require_once APP . '/Lib/View.php';
 		require_once APP . '/Lib/login_user.php';
+		
 	}
 	
 	public function dispatch ( $path ) 

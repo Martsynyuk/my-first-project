@@ -8,7 +8,7 @@
 <title>project</title>
 <link rel="stylesheet" type="text/css" href="/css/main.css">
 <link rel="stylesheet" type="text/css" href="/css/reset.css">
-<?= (DEBUG === 1) ? '<link rel="stylesheet" type="text/css" href="/css/debug.css">' : '' ;?>
+<?= (DEBUG > 0) ? '<link rel="stylesheet" type="text/css" href="/css/debug.css">' : '' ;?>
 </head>
 <body>
 	<div class="main">
@@ -24,6 +24,13 @@
 			<span>&#169 2007 Wise Engineering</span>
 		</div>
 		<?= (DEBUG === 1) ? '<div class="debug"><span>' . $sql . '</span></div>' : '' ; ?>
+		<?= (DEBUG === 2) ? '<div class="debug">
+													<a href="/test/string">string</a>
+													<a href="/test/word">word</a>
+													<a href="/test/bubble">bubble</a>
+													<a href="/test/autocomplete">autocomplete</a>
+												</div>' : '' ; 
+		?>
 	</div>
 </body>
 </html>

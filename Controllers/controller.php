@@ -5,14 +5,10 @@ class Controller
 	
 	function __construct()
 	{
-		
 		require_once APP . '/Models/model.php';
 		require_once APP . '/Models/user.php';
 		require_once APP . '/Models/information.php';
-		require_once APP . '/Models/autocompleter.php';
-		require_once APP . '/Models/task.php'; 
-		
-		
+			
 		foreach ($this->model as $madel => $class)
 		{
 			$this->$class = new $class();

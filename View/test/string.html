@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>project</title>
+</head>
+<body>
+<?= (empty($res)) ? 
+	'<form method="POST" action="/test/string/">
+		<textarea name="some_text" cols="30" rows="10" placeholder="input some text"></textarea></br>
+		<p>Input some numder</p>
+		<input type="text" name="num" size="6"></br>
+		send data</br>
+		<input type="submit" value="submit">
+	</form>'
+	: '<p>' . $res . '</p></br><a href="/test/string">back</a>';
+?>
+<a href="/">Home</a>	
+</body>
+</html>

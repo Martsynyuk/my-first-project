@@ -2,21 +2,14 @@
 date_default_timezone_set ( 'Europe/Kiev' );
 error_reporting ( E_ALL );
 
-$integerMin = 0;
-$integerMax = 100;
-$decimal = 3;
+$key = '';
+$array = range('a','z');
 
-	$num = rand($integerMin, $integerMax);
-		
-		if($decimal>0)
-		{
-			$dec ='';
-			for($i = 1; $i <= $decimal; $i++)
-			{
-				$dec = $dec . rand(0, 9);
-			}
-			
-			$num = $num . '.' . $dec;
-		}
-		
-var_dump($num);
+$count = count($array)-1;
+
+for($i=0;$i<10;$i++)
+{
+$key = $key . $array[rand(0,$count)];
+}
+$key = ucfirst($key);
+var_dump($key);
