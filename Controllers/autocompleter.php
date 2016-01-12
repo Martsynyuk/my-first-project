@@ -19,12 +19,17 @@ Class Autocompleter extends Controller
 		$num = rtrim(ltrim($num, 'int('), ')');
 		$max = 9;
 		
+		if($num > 11)
+		{
+			$num = 11;
+		}
+		
 		for($i = 1; $i < $num; $i++)
 		{
 			$max = $max . 9;
 		}
 		
-		$num = rand(0, $max);
+		$num = rand(0, (int)($max));
 		
 		return $num;
 	}
@@ -52,7 +57,7 @@ Class Autocompleter extends Controller
 		$skills = rtrim(ltrim($skills, 'enum('), ')');
 		$skills = count(explode(',', $skills));
 		
-		$enum = rand(0, $skills);
+		$enum = rand(1, $skills);
 		
 		return $enum;
 	}

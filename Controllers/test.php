@@ -148,7 +148,7 @@ Class Test extends Autocompleter
 				$this->task->insert ($sql);				
 			}
 			
-			header ( 'Location: /test/autocomplete/' );
+			$this->view->set ('num', $post['num']);
 		}
 		
 		$this->view->render ($argument);
