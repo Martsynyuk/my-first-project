@@ -45,13 +45,31 @@ Class Test extends Autocompleter
 	
 	function word($argument)
 	{
-		$string = 'wer ! asd s asd asdsd, s wer ! asd s asd asdsd, s wer ! asd s asd asdsd, s';
-		$count = 8; // mast be >10
-
-		$string = explode(' ', $string);
-		
-		$string = implode(' ', array_slice($string, 0, $count)) . ' ...';
-		var_dump($string);	
+		if(!empty($_POST['some_text']))
+		{
+			$post = $this->post_controller();
+			
+			if((int)($post['num'])<1)
+			{
+				$post['num'] = 1;
+			}
+			
+			$string = explode(' ', $post['some_text']);
+			$string[$post['num']-1] = preg_replace('/[^a-zA-Z0-9]/', '', $string[$post['num'] -1]);
+			
+			for($i = 1; $i < 2; $i++)
+			{
+				if($post['num'] != 0 && iconv_strlen( $string[$post['num']-1]) < 3 )
+				{
+					$post['num'] -= 1;
+					$i -= 1;
+				}
+			}
+			
+			$string = implode(' ', array_slice($string, 0, $post['num'])) . ' ...';
+			
+			$this->view->set('res', $string);
+		}
 		
 		$this->view->render ($argument);	
 	}

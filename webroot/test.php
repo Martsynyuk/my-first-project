@@ -2,14 +2,21 @@
 date_default_timezone_set ( 'Europe/Kiev' );
 error_reporting ( E_ALL );
 
-$key = '';
-$array = range('a','z');
+		$string = 'Ww !44 as s asd asdsd, s wer ! asd s asd asdsd, s wer ! asd s asd asdsd, s';
+		$count = 4; // mast be >10
 
-$count = count($array)-1;
+		$string = explode(' ', $string);
+		$string[$count-1] = preg_replace('/[^a-zA-Z0-9]/', '', $string[$count -1]);
 
-for($i=0;$i<10;$i++)
-{
-$key = $key . $array[rand(0,$count)];
-}
-$key = ucfirst($key);
-var_dump($key);
+		for($i = 1; $i < 2; $i++)
+		{
+			if($count != 0 && iconv_strlen( $string[$count-1]) < 3 )
+			{				
+				$count -= 1;
+				$i -= 1;
+			}
+		}
+		
+		$string = implode(' ', array_slice($string, 0, $count)) . ' ...';
+		var_dump($string);	
+		
