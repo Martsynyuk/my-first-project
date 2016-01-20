@@ -55,10 +55,11 @@ Class Test extends Autocompleter
 			}
 			
 			$string = explode(' ', $post['some_text']);
-			$string[$post['num']-1] = preg_replace('/[^a-zA-Z0-9]/', '', $string[$post['num'] -1]);
 			
 			for($i = 1; $i < 2; $i++)
 			{
+				$string[$post['num']-1] = preg_replace('/[^a-zA-Z0-9]/', '', $string[$post['num'] -1]);
+				
 				if($post['num'] != 0 && iconv_strlen( $string[$post['num']-1]) < 3 )
 				{
 					$post['num'] -= 1;
