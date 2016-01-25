@@ -58,7 +58,7 @@ Class Test extends Autocompleter
 			
 			for($i = 1; $i < 2; $i++)
 			{
-				$string[$post['num']-1] = preg_replace('/[^a-zA-Z0-9]/', '', $string[$post['num'] -1]);
+				$string[$post['num']-1] = preg_replace('/[^а-яА-Яa-zA-Z0-9]/', '', $string[$post['num'] -1]);
 				
 				if($post['num'] != 0 && iconv_strlen( $string[$post['num']-1]) < 3 )
 				{
