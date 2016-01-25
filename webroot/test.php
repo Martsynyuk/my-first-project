@@ -1,11 +1,11 @@
 <?php
 date_default_timezone_set ( 'Europe/Kiev' );
 error_reporting ( E_ALL );
-
+		
 		$string = 'Ww !44 ads., s, asd asdsd, s wer ! asd s asd asdsd, s wer ! asd s asd asdsd, s';
 		$count = 4; // mast be >10
 
-
+	$start = microtime(TRUE);
 			
 			$string = explode(' ', $string);		
 			
@@ -23,3 +23,6 @@ error_reporting ( E_ALL );
 			$string = implode(' ', array_slice($string, 0, $count)) . ' ...';
 		var_dump($string);	
 		
+ $end = microtime(TRUE);
+ $finish = $end - $start;
+ var_dump($finish);
