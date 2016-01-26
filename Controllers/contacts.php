@@ -235,7 +235,7 @@ class Contacts extends Controller
 	public function index ( $argument )
 	{	
 		
-		/*if(isset($_POST['z'])) {
+		if(isset($_POST['z'])) {
 		
 			header("Content-type: text/txt; charset=UTF-8");
 		
@@ -244,7 +244,7 @@ class Contacts extends Controller
 				echo $i;
 				die;
 			}
-		}*/
+		}
 		
 		$user = $this->Login->user();
 		
