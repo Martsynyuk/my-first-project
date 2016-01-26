@@ -89,7 +89,7 @@ class Contacts extends Controller
 			$this->view->set ( 'val', $val);
 			$this->view->set ( 'check', $check);
 		
-			$this->view->render ( $argument );			
+			$this->view->render ( $argument );		
 	}
 		
 	public function edit ( $argument )
@@ -235,6 +235,17 @@ class Contacts extends Controller
 	public function index ( $argument )
 	{	
 		
+		/*if(isset($_POST['z'])) {
+		
+			header("Content-type: text/txt; charset=UTF-8");
+		
+			if($_POST['z']=='1') {
+				$i = 'прувет';
+				echo $i;
+				die;
+			}
+		}*/
+		
 		$user = $this->Login->user();
 		
 		$count_pages = ceil ( $this->count_contacts () / ROWLIMIT );
@@ -323,7 +334,7 @@ class Contacts extends Controller
 		$this->view->setLayout ( 'sql', $sql);
 		
 		$this->view->renderLayout ('layout');
-		//$this->view->render ( $argument );	
+		//$this->view->render ( $argument );
 	}
 		
 	public function select ( $argument )
