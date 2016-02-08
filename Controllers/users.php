@@ -83,7 +83,7 @@ Class Users extends Controller
 												)
 										)
 							);
-				
+				$user = $this->contacts($user);
 				if (empty ( $user ) )
 				{
 						
