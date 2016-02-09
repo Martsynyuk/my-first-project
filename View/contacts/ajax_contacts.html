@@ -59,7 +59,27 @@
 							
 								<?php  if ($page != 1) : ?>
 								
-										<a href=""><img src="/img/prew.png"></a>
+										<a onClick='$(this).attr("id", "click"); num1()' title="<?= $page - 1?>" href="
+											<?php
+						
+										echo '/';
+										
+										if( ! empty ($argument['sortFirst']) )
+										{
+											echo $argument['sortFirst'] . '/' ;
+										}
+										if( !empty($argument['sortSecond']))
+										{
+											echo $argument['sortSecond'] . '/';
+										}
+										
+										if ($page == 1) {
+											echo '1/';
+										} else {
+											echo ($page - 1) . '/';
+										}
+										?>
+										"><img src="/img/prew.png"></a>
 																		
 								<?php endif; ?>	
 																		
@@ -90,7 +110,23 @@
 											 
 							<?php if ($page != $count_pages) : ?>
 							
-							<a href=""><img src="/img/next.png"></a>
+							<a onClick='$(this).attr("id", "click"); num1()' title="<?= $page + 1?>" href="
+								<?php
+								
+										echo '/';
+											
+										if( ! empty ($argument['sortFirst']) )
+										{
+											echo $argument['sortFirst'] . '/' ;
+										}
+										if( !empty($argument['sortSecond']))
+										{
+											echo $argument['sortSecond'] . '/';
+										}
+									  echo ( $page + 1 ) . '/' ;
+									  
+									 ?>
+							"><img src="/img/next.png"></a>
 							
 																	
 							<?php endif; ?>	
@@ -101,11 +137,8 @@
 			<?php } ?>
 		</div>
 <script>
-$('.page_active').on('click', function(e) {
+$('div.pagination a').on('click', function(e) {
 	e.preventDefault();
 });
-			
-$('.page').on('click', function(e) {
-		e.preventDefault();
-});
+
 </script>

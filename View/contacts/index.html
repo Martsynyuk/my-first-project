@@ -110,7 +110,7 @@
 							
 								<?php  if ($page != 1) : ?>
 								
-										<a href="<?php
+										<a onClick='$(this).attr("id", "click"); num1()' title="<?= $page - 1?>" href="<?php
 						
 										echo '/';
 										
@@ -193,7 +193,7 @@
 											 
 							<?php if ($page != $count_pages) : ?>
 							
-							<a href="<?php
+							<a onClick='$(this).attr("id", "click"); num1()' title="<?= $page + 1?>" href="<?php
 								
 										echo '/';
 											
@@ -219,27 +219,22 @@
 			<?php } ?>
 		</div>
 <script>
-$('.page_active').on('click', function(e) {
+$('div.pagination a').on('click', function(e) {
 	e.preventDefault();
 });
 			
-$('.page').on('click', function(e) {
-		e.preventDefault();
-});
-			
 function num()
-{							
+{		
+	$('.page_active').removeClass('page_active').addClass('page');				
+	$(this).addClass('page_active');
+	
+	var page = document.getElementById('click').innerHTML;
+	
 	var sortFirst = $('.active_sortFirst').attr('title');
 	var sortSecond = $('.active_sortSecond').attr('title');
-			
-	$('.page_active').removeClass('page_active').addClass('page');
-				
-	$('#click').addClass('page_active');
-				
-	var page = document.getElementById('click').innerHTML;
-				
+					
 	history.pushState(null, null, '/' + page + '/');
-				
+					
 	$.ajax({
 		type: 'post',
 		url: '/contacts/ajax_contacts',
@@ -253,5 +248,29 @@ function num()
 			alert('error')
 		}			  
 	});
-}			
+}		
+
+function num1()
+{
+	var page = $('#click').attr('title');
+	
+	var sortFirst = $('.active_sortFirst').attr('title');
+	var sortSecond = $('.active_sortSecond').attr('title');
+					
+	history.pushState(null, null, '/' + page + '/');
+					
+	$.ajax({
+		type: 'post',
+		url: '/contacts/ajax_contacts',
+		data:{'page': page, 'first': sortFirst, 'second': sortSecond},
+		response:'html',
+		success: function(data){
+			$('.cont').empty();
+			$('.cont').append(data);	
+		},
+		error: function(data){
+			alert('error')
+		}			  
+	});
+}
 </script> 
