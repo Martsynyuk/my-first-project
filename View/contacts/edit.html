@@ -9,6 +9,8 @@
 <link rel="stylesheet" type="text/css" href="/css/main.css">
 <link rel="stylesheet" type="text/css" href="/css/reset.css">
 
+<script src="/js/jquery-2.2.0.js"></script>
+
 <body>
 <div class="main">
 	<div class="header">
@@ -36,87 +38,99 @@
 				<ul>				
 					<li><span>First Name:</span> 
 					
-						<input class="input" type="text" name="FirstName"			
+						<input class="input" type="text" name="FirstName"	onChange="num(obj=$(this))"		
 							value="<?= ( ! empty ( $res['Firstname'])) ? $res['Firstname'] : '';?>"
 							size="25">
+							<div class="valid"></div>
 					</li>
 						
 					<li><span>Last Name:</span> 
 					
-						<input class="input" type="text" name="LastName"
+						<input class="input" type="text" name="LastName" onChange="num(obj=$(this))"
 							value="<?= ( ! empty ( $res['Lastname'])) ? $res['Lastname'] : '';?>"
 							size="25">
+							<div class="valid"></div>
 					</li>
 					
 					<li><span>E-mail:</span>
 					
-						 <input class="input" type="email" name="Email"
+						 <input class="input" type="email" name="Email" onChange="num(obj=$(this))"
 							value="<?= ( ! empty ( $res['Email'])) ? $res['Email'] : '';?>"
 							size="25">
+							<div class="valid"></div>
 					</li>
 					
 					<li><span class="telephone">Home:</span> 
 					
 						<input class="radio" type="radio" name="radio" value="Home" 
 							<?= ($res['Home'] === $res['Telephone']) ? 'checked' : '' ; ?> >
-						<input class="input" type="text" name="Home"
+						<input class="input" type="text" name="Home" onChange="num(obj=$(this))"
 							value="<?= ( ! empty ( $res['Home'])) ? $res['Home'] : '';?>" size="25">
+							<div class="valid"></div>
 					</li>
 					
 					<li><span class="telephone">Work:</span> 
 					
 						<input class="radio" type="radio" name="radio" value="Work"
 							<?= ($res['Work'] === $res['Telephone']) ? 'checked' : '' ; ?>>
-						<input class="input" type="text" name="Work"
+						<input class="input" type="text" name="Work" onChange="num(obj=$(this))"
 						value="<?= ( ! empty ( $res['Work'])) ? $res['Work'] : '';?>" size="25">
+						<div class="valid"></div>
 					</li>
 					
 					<li><span class="telephone">Cell:</span>
 					
 						<input class="radio" type="radio" name="radio" value="Cell"
 							<?= ($res['Cell'] === $res['Telephone']) ? 'checked' : '' ; ?>>
-						<input class="input" type="text" name="Cell"
+						<input class="input" type="text" name="Cell" onChange="num(obj=$(this))"
 						value="<?= ( ! empty ( $res['Cell'])) ? $res['Cell'] : '';?>" size="25">
+						<div class="valid"></div>
 					</li>
 					
 					<li><span>Adress 1:</span>
 					
-						<input class="input" type="text" name="Adress1"
+						<input class="input" type="text" name="Adress1" onChange="num(obj=$(this))"
 							value="<?= ( ! empty ( $res['Adress1'])) ? $res['Adress1'] : '';?>"
 							size="25">
+							<div class="valid"></div>
 					</li>
 					
 					<li><span>Adress 2:</span>
 					
-						<input class="input" type="text" name="Adress2"
+						<input class="input" type="text" name="Adress2" onChange="num(obj=$(this))"
 							value="<?= ( ! empty ( $res['Adress2'])) ? $res['Adress2'] : '';?>"
 							size="25">
+							<div class="valid"></div>
 					</li>
 					
 					<li><span>City:</span> 
 					
-						<input class="input" type="text" name="City"
+						<input class="input" type="text" name="City" onChange="num(obj=$(this))"
 							value="<?= ( ! empty ( $res['City'])) ? $res['City'] : '';?>" size="25">
+							<div class="valid"></div>
 					</li>
 					
 					<li><span>State:</span>
 					 
-						<input class="input" type="text" name="State"
+						<input class="input" type="text" name="State" onChange="num(obj=$(this))"
 							value="<?= ( ! empty ( $res['State'])) ? $res['State'] : '';?>"
 							size="25">
+							<div class="valid"></div>
 					</li>
 					
 					<li><span>Zip:</span> 
 					
-						<input class="input" type="text" name="Zip"
+						<input class="input" type="text" name="Zip" onChange="num(obj=$(this))"
 							value="<?= ( ! empty ( $res['Zip'] ) ) ? $res['Zip'] : '' ; ?>" size="25">
+							<div class="valid"></div>
 					</li>
 					
 					<li><span>Country:</span> 
 					
-						<input class="input" type="text" name="Country"
+						<input class="input" type="text" name="Country" onChange="num(obj=$(this))"
 							value="<?= ( ! empty ( $res['Country'] ) ) ? $res['Country'] : '' ; ?>"
 							size="25">
+							<div class="valid"></div>
 					</li>
 					
 					<li>
@@ -202,5 +216,26 @@
 		<span>&#169 2007 Wise Engineering</span>
 	</div>
 </div>
+<script>
+	
+function num(obj)
+{	
+	
+	var valid = obj.val();
+	
+	$.ajax({
+		type: 'post',
+		url: '/contacts/ajax_valid',
+		data:{'text': valid},
+		response:'html',
+		success: function(data){				
+			obj.next('div').removeClass('yes').removeClass('no').addClass(data);	
+		},
+		error: function(data){
+			
+		}			  
+	});
+}
+</script>
 </body>
 </html>
