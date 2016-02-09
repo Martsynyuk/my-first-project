@@ -110,7 +110,7 @@
 							
 								<?php  if ($page != 1) : ?>
 								
-										<a onClick='$(this).attr("id", "click"); pagination_1()' title="<?= $page - 1?>" href="<?php
+										<a onClick='pagination_1(<?= $page + 1 ;?>)' href="<?php
 						
 										echo '/';
 										
@@ -142,7 +142,7 @@
 							
 								<?php if ($i == $page) { ?>
 								
-									<a onClick='$(this).attr("id", "click"); pagination()' class="page_active" href="
+									<a onClick='pagination()' class="page_active" href="
 									<?php
 											
 													echo '/';
@@ -163,7 +163,7 @@
 											
 								<?php } else { ?>
 								
-									<a onClick='$(this).attr("id", "click"); pagination()' class="page" href="
+									<a onClick='pagination(<?= $i ;?>)' class="page" href="
 									
 									<?php
 											
@@ -193,7 +193,7 @@
 											 
 							<?php if ($page != $count_pages) : ?>
 							
-							<a onClick='$(this).attr("id", "click"); pagination_1()' title="<?= $page + 1?>" href="<?php
+							<a onClick='pagination_1(<?= $page + 1 ;?>)' href="<?php
 								
 										echo '/';
 											
@@ -227,12 +227,8 @@ $('div.cont_top a').on('click', function(e) {
 	e.preventDefault();
 });
 
-function pagination()
+function pagination(page)
 {		
-	$(this).removeClass('page_active').addClass('page');				
-	$(this).addClass('page_active');
-	
-	var page = document.getElementById('click').innerHTML;
 	
 	var sortFirst = $('.active_sortFirst').attr('title');
 	var sortSecond = $('.active_sortSecond').attr('title');
@@ -254,10 +250,9 @@ function pagination()
 	});
 }		
 
-function pagination_1()
+function pagination_1(page)
 {
-	var page = $('#click').attr('title');
-	
+
 	var sortFirst = $('.active_sortFirst').attr('title');
 	var sortSecond = $('.active_sortSecond').attr('title');
 					

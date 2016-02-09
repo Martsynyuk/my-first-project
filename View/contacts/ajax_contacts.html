@@ -59,7 +59,7 @@
 							
 								<?php  if ($page != 1) : ?>
 								
-										<a onClick='$(this).attr("id", "click"); pagination_1()' title="<?= $page - 1?>" href="
+										<a onClick='pagination_1(<?= $page - 1 ;?>)' href="
 											<?php
 						
 										echo '/';
@@ -91,7 +91,7 @@
 								
 								<?php if ($i == $page) { ?>
 								
-									<a onClick='$(this).attr("id", "click"); pagination()' class="page_active" href="
+									<a onClick='pagination(<?= $i ;?>)' class="page_active" href="
 											<?php
 											
 													echo '/';
@@ -111,7 +111,7 @@
 											
 								<?php } else { ?>
 									
-									<a onClick='$(this).attr("id", "click"); pagination()' class="page" href="
+									<a onClick='pagination(<?= $i ;?>)' class="page" href="
 												<?php
 											
 													echo '/';
@@ -138,7 +138,7 @@
 											 
 							<?php if ($page != $count_pages) : ?>
 							
-							<a onClick='$(this).attr("id", "click"); pagination_1()' title="<?= $page + 1?>" href="
+							<a onClick='pagination_1(<?= $page + 1 ;?>)' href="
 								<?php
 								
 										echo '/';
