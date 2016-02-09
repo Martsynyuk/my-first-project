@@ -112,5 +112,54 @@ Class Users extends Controller
 			
 		$this->view->render ( $argument );
 	}
-		
+	
+	function ajax_login()
+	{
+	
+		if(!empty($_POST['login']))
+		{
+			$post = $this->post_controller();
+				
+			$user = $this->User->select(
+					$what = array(
+								
+							'fields' => array(
+										
+									'id'
+			
+							),
+								
+							'conditions' => array(
+										
+									'login' => $post['login']
+										
+							),
+								
+							'order' => array(
+	
+									'by' => '',
+									'direction' => ''
+			
+							),
+								
+							'limit' => array(
+										
+									'start' => '',
+									'end'=> ''
+			
+							)
+					)
+			);
+				
+			$user = $this->contacts($user);
+				
+			if(empty ($user) )
+			{
+				echo '<span class="no_user">No user ! </span>';
+			}
+			else{
+				echo '<span class="user_exist">Ok !</span>';
+			}
+		}
+	}
 }

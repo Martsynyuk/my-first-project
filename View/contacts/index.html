@@ -13,7 +13,7 @@
 			<div class="cont_top">
 					<ul>
 							<li>First Name
-								<a <?= ( empty($argument['sortFirst']) || $argument['sortFirst']==='FirstNameUp') ? 'class="active_sort"' : '' ;?> 
+								<a title="FirstNameUp" <?= ( empty($argument['sortFirst']) || $argument['sortFirst']==='FirstNameUp') ? 'class="active_sortFirst"' : '' ;?> 
 										class="sort" href="
 										
 									<?php if(!empty($argument['sortSecond']))
@@ -26,7 +26,7 @@
 									?>
 									">&#8593</a>
 								
-								<a <?= ( $argument['sortFirst']==='FirstNameDown' ) ? 'class="active_sort"' : '' ;?>
+								<a title="FirstNameDown" <?= ( $argument['sortFirst']==='FirstNameDown' ) ? 'class="active_sortFirst"' : '' ;?>
 									class="sort" href="
 									
 									<?php if(!empty($argument['sortSecond']))
@@ -41,7 +41,7 @@
 							</li>
 							
 							<li>Last Name
-							<a <?= ( empty($argument['sortSecond']) || $argument['sortSecond']==='LastNameUp' ) ? 'class="active_sort"' : '' ;?>
+							<a title="LastNameUp" <?= ( empty($argument['sortSecond']) || $argument['sortSecond']==='LastNameUp' ) ? 'class="active_sortSecond"' : '' ;?>
 									class="sort" href="
 									
 								<?php if(!empty($argument['sortFirst']))
@@ -54,7 +54,7 @@
 									?>
 								">&#8593</a>
 					 
-							<a <?= ( $argument['sortSecond']==='LastNameDown' ) ? 'class="active_sort"' : '' ;?>
+							<a title="LastNameDown" <?= ( $argument['sortSecond']==='LastNameDown' ) ? 'class="active_sortSecond"' : '' ;?>
 									class="sort" href="
 									
 								<?php if(!empty($argument['sortFirst']))
@@ -142,7 +142,7 @@
 							
 								<?php if ($i == $page) { ?>
 								
-									<a class="page_active" href="
+									<a onClick='$(this).attr("id", "click"); num()' class="page_active" href="
 									<?php
 											
 													echo '/';
@@ -163,7 +163,7 @@
 											
 								<?php } else { ?>
 								
-									<a class="page" href="
+									<a onClick='$(this).attr("id", "click"); num()' class="page" href="
 									
 									<?php
 											
@@ -219,14 +219,39 @@
 			<?php } ?>
 		</div>
 <script>
-			$.ajax({
-				type: 'post',
-			  url: '/',
-			  data:{'z':'1'},
-			  response:'text',
-			  success: function(data){
-			  	alert(data);
-			  	alert(location.href);
-			  }
-			});
+$('.page_active').on('click', function(e) {
+	e.preventDefault();
+});
+			
+$('.page').on('click', function(e) {
+		e.preventDefault();
+});
+			
+function num()
+{							
+	var sortFirst = $('.active_sortFirst').attr('title');
+	var sortSecond = $('.active_sortSecond').attr('title');
+			
+	$('.page_active').removeClass('page_active').addClass('page');
+				
+	$('#click').addClass('page_active');
+				
+	var page = document.getElementById('click').innerHTML;
+				
+	history.pushState(null, null, '/' + page + '/');
+				
+	$.ajax({
+		type: 'post',
+		url: '/contacts/ajax_contacts',
+		data:{'page': page, 'first': sortFirst, 'second': sortSecond},
+		response:'html',
+		success: function(data){
+			$('.cont').empty();
+			$('.cont').append(data);	
+		},
+		error: function(data){
+			alert('error')
+		}			  
+	});
+}			
 </script> 

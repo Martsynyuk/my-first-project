@@ -318,6 +318,18 @@ body{
 	cursor: pointer;
 	padding: 0;
 }
+.content .active_sortFirst, .content .active_sortSecond{
+	color: red;
+	width: 16px;
+	height: 25px;
+	font-size: 15px;
+	font-weight: 1000;
+	background: none;
+	outline: none;
+	border: 0;
+	cursor: pointer;
+	padding: 0;
+}
 .content .form{
 	background: url(/img/add_contact_grad.png) repeat-x;
 	width: 386px;
@@ -955,4 +967,26 @@ body{
 }
 .clear{
 	clear: both;
+}
+.user_exist{
+	position: absolute;
+	background: rgba(50, 205, 50, 1);
+	height: 18px !important;
+	width: 30px !important;
+	border-radius: 15px;
+	left: 360px;
+	top: 75px;
+	z-index: 100;
+	padding: 3px 5px !important;
+}
+.no_user{
+	position: absolute;
+	background: rgba(255, 69, 0, 1);
+	height: 18px !important;
+	width: 65px !important;
+	border-radius: 15px;
+	left: 360px;
+	top: 75px;
+	z-index: 100;
+	padding: 3px 5px !important;
 }

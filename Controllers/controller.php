@@ -56,6 +56,8 @@ class Controller
 	
 	function contacts($contact)
 	{
+		$result = NULL;
+		
 		unset($contact[1]);
 		foreach ($contact as $contacts)
 		{

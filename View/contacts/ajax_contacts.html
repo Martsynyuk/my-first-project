@@ -1,0 +1,111 @@
+<?php if ( ! empty ( $contacts ) ){ ?>
+			<div class="cont_top">
+					<ul>
+							<li>First Name
+								<a title="FirstNameUp" <?= ( empty($argument['sortFirst']) || $argument['sortFirst']==='FirstNameUp') ? 'class="active_sortFirst"' : '' ;?> 
+										class="sort" href="">&#8593</a>
+								
+								<a title="FirstNameDown" <?= ( $argument['sortFirst']==='FirstNameDown' ) ? 'class="active_sortFirst"' : '' ;?>
+									class="sort" href="">&#8595</a>
+							</li>
+							
+							<li>Last Name
+							<a title="LastNameUp" <?= ( empty($argument['sortSecond']) || $argument['sortSecond']==='LastNameUp' ) ? 'class="active_sortSecond"' : '' ;?>
+									class="sort" href="">&#8593</a>
+					 
+							<a title="LastNameDown" <?= ( $argument['sortSecond']==='LastNameDown' ) ? 'class="active_sortSecond"' : '' ;?>
+									class="sort" href="">&#8595</a>
+						</li>	
+						<li>E-mail</li>
+						<li>Cellular</li>
+						<li>Action</li>
+					</ul>
+				</div>										
+					<?php foreach ( $contacts as $contact ) : ?>
+					<div <?= ($contact_class === $i) ? 'class="last-child"' : 'class="string"' ;?> >
+							<ul>	
+								<li><?= $i . '.'; ?></td></li>
+								<li><?= $contact['FirstName']; ?></li>
+								<li><?= $contact['LastName']; ?></li>
+								<li><?= $contact['Email']; ?></li>
+								<li><?= $contact['Telephone']; ?></li>
+								<li>
+									<a class="edit" href="<?= $html->url(array('controller'=>'contacts', 'action'=>'edit', 'id'=>$contact['id'])) ?>">edit</a> 
+									<a class="view" href="<?= $html->url(array('controller'=>'contacts', 'action'=>'view', 'id'=>$contact['id'])) ?>">view</a>
+									<a class="delete" href="<?= $html->url(array('controller'=>'contacts', 'action'=>'delete', 'id'=>$contact['id'])) ?>"></a>
+								</li>
+							</ul>
+					</div>
+					
+						<?php $i++;?>	
+				
+						<?php endforeach;?>	
+				<div class="cont_bottom_grad"></div>	
+				<div class="pagination">
+				
+					<?php } else { ?>
+					
+						<span>Your contact book is empty. Please add some contacts.</span>
+				
+				
+					<?php } ;?>
+					
+					<?php if($count_contacts == 0) { ?>
+						
+				<?php } else {?>
+				
+					<ul>
+							<li class="back_plase">
+							
+								<?php  if ($page != 1) : ?>
+								
+										<a href=""><img src="/img/prew.png"></a>
+																		
+								<?php endif; ?>	
+																		
+							</li>
+						
+						<li class="page_plase">
+						
+							<?php for ($i = $count_for_pagin[0]; $i <= $count_for_pagin[1]; $i++) { ?>
+								
+								<?php if ($i == $page) { ?>
+								
+									<a onClick='$(this).attr("id", "click"); num()' class="page_active" href="
+												
+									" ><?= $i ?></a>
+											
+								<?php } else { ?>
+									
+									<a onClick='$(this).attr("id", "click"); num()' class="page" href="
+												
+									" ><?= $i ?></a>
+									
+								<?php } ?>
+								
+							<?php } ?>
+						
+						</li>				
+						<li class="next_plase">	
+											 
+							<?php if ($page != $count_pages) : ?>
+							
+							<a href=""><img src="/img/next.png"></a>
+							
+																	
+							<?php endif; ?>	
+															
+						</li>
+					</ul>
+			</div>	
+			<?php } ?>
+		</div>
+<script>
+$('.page_active').on('click', function(e) {
+	e.preventDefault();
+});
+			
+$('.page').on('click', function(e) {
+		e.preventDefault();
+});
+</script>
