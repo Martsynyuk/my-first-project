@@ -59,7 +59,7 @@
 							
 								<?php  if ($page != 1) : ?>
 								
-										<a onClick='$(this).attr("id", "click"); num1()' title="<?= $page - 1?>" href="
+										<a onClick='$(this).attr("id", "click"); pagination_1()' title="<?= $page - 1?>" href="
 											<?php
 						
 										echo '/';
@@ -91,14 +91,42 @@
 								
 								<?php if ($i == $page) { ?>
 								
-									<a onClick='$(this).attr("id", "click"); num()' class="page_active" href="
-												
+									<a onClick='$(this).attr("id", "click"); pagination()' class="page_active" href="
+											<?php
+											
+													echo '/';
+														
+													if( ! empty ($argument['sortFirst']) )
+													{
+														echo $argument['sortFirst'] . '/' ;
+													}
+													if( !empty($argument['sortSecond']))
+													{
+														echo $argument['sortSecond'] . '/';
+													}
+													echo $i . '/';
+													
+													?>	
 									" ><?= $i ?></a>
 											
 								<?php } else { ?>
 									
-									<a onClick='$(this).attr("id", "click"); num()' class="page" href="
-												
+									<a onClick='$(this).attr("id", "click"); pagination()' class="page" href="
+												<?php
+											
+													echo '/';
+														
+													if( ! empty ($argument['sortFirst']) )
+													{
+														echo $argument['sortFirst'] . '/' ;
+													}
+													if( !empty($argument['sortSecond']))
+													{
+														echo $argument['sortSecond'] . '/';
+													}
+													echo $i . '/';
+													
+													?>	
 									" ><?= $i ?></a>
 									
 								<?php } ?>
@@ -110,7 +138,7 @@
 											 
 							<?php if ($page != $count_pages) : ?>
 							
-							<a onClick='$(this).attr("id", "click"); num1()' title="<?= $page + 1?>" href="
+							<a onClick='$(this).attr("id", "click"); pagination_1()' title="<?= $page + 1?>" href="
 								<?php
 								
 										echo '/';
@@ -141,4 +169,7 @@ $('div.pagination a').on('click', function(e) {
 	e.preventDefault();
 });
 
+$('div.cont_top a').on('click', function(e) {
+	e.preventDefault();
+});
 </script>
