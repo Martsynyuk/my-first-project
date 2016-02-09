@@ -1007,5 +1007,24 @@ class Contacts extends Controller
 			$this->view->render ( $argument );
 		}
 	}
+	
+	function ajax_valid()
+	{
+	
+		if(!empty($_POST['text']))
+		{
+			$post = $this->post_controller();
+	
+			$post['text'] = preg_replace('/[a-zA-Z0-9,@,+,.]/', '', $post['text']);
+				
+			if(!empty ($post['text']) )
+			{
+				echo 'no';
+			}
+			else{
+				echo 'yes';
+			}
+		}
+	}
 }
 	

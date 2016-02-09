@@ -9,6 +9,8 @@
 <link rel="stylesheet" type="text/css" href="/css/main.css">
 <link rel="stylesheet" type="text/css" href="/css/reset.css">
 
+<script src="/js/jquery-2.2.0.js"></script>
+
 </head>
 <body>
 <div class="main">
@@ -25,9 +27,9 @@
 		<div class="content_autorization">
 			<p class="name_menu">Registration</p>
 			<form name="login" method="POST" action="registration">
-			<div class="input_text">
+			<div id="user_login" class="input_text">
 				<p>Login:</p>			
-				<input type="text" name="login"		
+				<input id="login" onChange='num()' type="text" name="login"		
 					value="<?= ( ! empty ( $post['login'] ) ) ? $post['login'] : ''; ?>"
 					size="35">
 			</div>
@@ -52,5 +54,28 @@
 		<span>&#169 2007 Wise Engineering</span>
 	</div>
 </div>
+<script>
+	
+function num()
+{	
+	$('.user_exist').remove();
+	$('.no_user').remove();
+	
+	var login = $('#login').val();
+	
+	$.ajax({
+		type: 'post',
+		url: '/users/ajax_login',
+		data:{'text': login},
+		response:'html',
+		success: function(data){		
+			$('#user_login').append(data);	
+		},
+		error: function(data){
+			
+		}			  
+	});
+}
+</script>
 </body>
 </html>

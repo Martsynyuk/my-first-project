@@ -7,6 +7,7 @@
 
 <link rel="stylesheet" type="text/css" href="/css/main.css">
 <link rel="stylesheet" type="text/css" href="/css/reset.css">
+<script src="/js/jquery-2.2.0.js"></script>
 <?= (DEBUG === 1) ? '<link rel="stylesheet" type="text/css" href="/css/debug.css">' : '' ;?>
 
 </head>
@@ -26,92 +27,104 @@
 			<form name="addcontact" method="POST" action="/contacts/add/">
 				<span class="information">Information</span>
 				<ul>				
-					<li><span>First Name:</span> <input type="text" name="FirstName"
+					<li><span>First Name:</span> <input type="text" name="FirstName" onChange="num(obj=$(this))"
 					
 						value="<?= ( ! empty ( $post['FirstName'] ) ) ?  $post['FirstName'] : '' ;?>"
 						size="25">
 						<?= ( empty ( $post['FirstName'] ) && $val == 1 ) ? '<div class="input_text">input some name</div>' : '' ;?>
+						<div class="valid"></div>
 					</li>
 						
-					<li><span>Last Name:</span> <input type="text" name="LastName"
+					<li><span>Last Name:</span> <input type="text" name="LastName" onChange="num(obj=$(this))"
 					
 						value="<?= ( ! empty ( $post['LastName'] ) ) ? $post['LastName'] : '';?>"
 						size="25">
 						<?= ( empty ( $post['LastName'] ) && $val == 1 ) ? '<div class="input_text">input some name</div>' : '' ;?>
+						<div class="valid"></div>
 					</li>
 						
-					<li><span>E-mail:</span> <input type="email" name="Email"
+					<li><span>E-mail:</span> <input type="email" name="Email" onChange="num(obj=$(this))"
 					
 						value="<?= ( ! empty ( $post['Email'] ) ) ? $post['Email'] : '';?>"
 						size="25">
 						<?= ( empty ( $post['Email'] ) && $val == 1 ) ? '<div class="input_text">input some email</div>' : '' ;?>
+						<div class="valid"></div>
 					</li>
 						
 					<li><span class="telephone">Home:</span> <input class="radio" type="radio" name="radio" value="Home" 
 						<?= ($check == 'Home') ? 'checked' : '' ?>>
 					
-						<input type="text" name="Home"
+						<input type="text" name="Home" onChange="num(obj=$(this))"
 						value="<?= ( ! empty ( $post['Home'] ) ) ? $post['Home'] : '';?>"
 						size="25">
 						<?= ( empty ( $post['Home'] ) && $check == 'Home' ) ? '<div class="input_text">input some telephone</div>' : '' ;?>
+						<div class="valid"></div>
 					</li>
 					
 					<li><span class="telephone">Work:</span> <input class="radio" type="radio" name="radio" value="Work" 
 						<?= ($check == 'Work') ? 'checked' : '' ?>>
 					
-						<input type="text" name="Work"
+						<input type="text" name="Work" onChange="num(obj=$(this))"
 						value="<?= ( ! empty ( $post['Work'] ) ) ? $post['Work'] : '';?>"
 						size="25">
 						<?= ( empty ( $post['Work'] ) && $check == 'Work' && $val == 1 ) ? '<div class="input_text">input some telephone</div>' : '' ;?>
+						<div class="valid"></div>
 					</li>
 						
 					<li><span class="telephone">Cell:</span> <input class="radio" type="radio" name="radio" value="Cell"
 						<?= ($check == 'Cell') ? 'checked' : '' ?>>
 					
-						<input type="text" name="Cell"
+						<input type="text" name="Cell" onChange="num(obj=$(this))"
 						value="<?= ( ! empty ( $post['Cell'] ) ) ? $post['Cell'] : '';?>"
 						size="25">
 						<?= ( empty ( $post['Cell'] ) && $check == 'Cell' ) ? '<div class="input_text">input some telephone</div>' : '' ;?>
+						<div class="valid"></div>
 					</li>
 					
 					<li><span>Adress 1:</span> 
 					
-						<input type="text" name="Adress1"
+						<input type="text" name="Adress1" onChange="num(obj=$(this))"
 							value="<?= ( ! empty ( $post['Adress1'] ) ) ? $post['Adress1'] : '';?>"
 							size="25">
+							<div class="valid"></div>
 					</li>
 						
 					<li><span>Adress 2:</span> 
 					
-						<input type="text" name="Adress2"
+						<input type="text" name="Adress2" onChange="num(obj=$(this))"
 							value="<?= ( ! empty ( $post['Adress2'] ) ) ? $post['Adress2'] : '';?>"
 							size="25">
+							<div class="valid"></div>
 					</li>
 					
 					<li><span>City:</span> 
 					
-						<input type="text" name="City"
+						<input type="text" name="City" onChange="num(obj=$(this))"
 							value="<?= ( ! empty ( $post['City'] ) ) ? $post['City'] : '';?>"
 							size="25">
+							<div class="valid"></div>
 					</li>
 							
 					<li><span>State:</span> 
 					
-						<input type="text" name="State"
+						<input type="text" name="State" onChange="num(obj=$(this))"
 							value="<?= ( ! empty ( $post['State'] ) ) ? $post['State'] : '';?>"
 							size="25">
+							<div class="valid"></div>
 					</li>
 					
 					<li><span>Zip:</span> 
 					
-						<input type="text" name="Zip"
+						<input type="text" name="Zip" onChange="num(obj=$(this))"
 							value="<?= ( ! empty ( $post['Zip'] ) ) ? $post['Zip'] : '';?>" size="25">
+							<div class="valid"></div>
 					</li>
 					
 					<li><span>Country:</span> 
-						<input type="text" name="Country"
+						<input type="text" name="Country" onChange="num(obj=$(this))"
 							value="<?= ( ! empty ( $post['Country'] ) ) ? $post['Country'] : '';?>"
 							size="25">
+							<div class="valid"></div>
 					</li>
 					
 					<li>
@@ -195,5 +208,26 @@
 	</div>
 	<?= (DEBUG === 1) ? '<div class="debug"><span>' . $test . '</span></div>' : '' ; ?>
 </div>
+<script>
+	
+function num(obj)
+{	
+	
+	var valid = obj.val();
+	
+	$.ajax({
+		type: 'post',
+		url: '/contacts/ajax_valid',
+		data:{'text': valid},
+		response:'html',
+		success: function(data){				
+			obj.next('div').removeClass('yes').removeClass('no').addClass(data);	
+		},
+		error: function(data){
+			
+		}			  
+	});
+}
+</script>
 </body>
 </html>
