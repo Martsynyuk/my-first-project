@@ -116,46 +116,15 @@ Class Users extends Controller
 	function ajax_login()
 	{
 	
-		if(!empty($_POST['login']))
+		if(!empty($_POST['text']))
 		{
 			$post = $this->post_controller();
 				
-			$user = $this->User->select(
-					$what = array(
-								
-							'fields' => array(
-										
-									'id'
+			$post['text'] = preg_replace('/[a-zA-Z0-9]/', '', $post['text']);
 			
-							),
-								
-							'conditions' => array(
-										
-									'login' => $post['login']
-										
-							),
-								
-							'order' => array(
-	
-									'by' => '',
-									'direction' => ''
-			
-							),
-								
-							'limit' => array(
-										
-									'start' => '',
-									'end'=> ''
-			
-							)
-					)
-			);
-				
-			$user = $this->contacts($user);
-				
-			if(empty ($user) )
+			if(!empty ($post['text']) )
 			{
-				echo '<span class="no_user">No user ! </span>';
+				echo '<span class="no_user">No ! </span>';
 			}
 			else{
 				echo '<span class="user_exist">Ok !</span>';

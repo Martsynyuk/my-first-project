@@ -54,8 +54,8 @@ Class Autocompleter extends Controller
 	
 	function enum($skills)
 	{	
-		$skills = rtrim(ltrim($skills, 'enum('), ')');
-		$skills = count(explode(',', $skills));
+		$skills = rtrim( ltrim($skills, 'enum('), ')' );
+		$skills = count( explode(',', $skills) );
 		
 		$enum = rand(1, $skills);
 		

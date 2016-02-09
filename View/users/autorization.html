@@ -62,18 +62,19 @@ function num()
 {	
 	$('.user_exist').remove();
 	$('.no_user').remove();
+	
 	var login = $('#login').val();
 	
 	$.ajax({
 		type: 'post',
 		url: '/users/ajax_login',
-		data:{'login': login},
+		data:{'text': login},
 		response:'html',
-		success: function(data){
+		success: function(data){		
 			$('#user_login').append(data);	
 		},
 		error: function(data){
-			alert('error')
+			
 		}			  
 	});
 }
