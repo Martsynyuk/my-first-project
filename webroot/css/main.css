@@ -308,7 +308,7 @@ body{
 }
 .content .active_sort{
 	color: red;
-	width: 16px;
+	width: 8px;
 	height: 25px;
 	font-size: 15px;
 	font-weight: 1000;
@@ -320,7 +320,7 @@ body{
 }
 .content .active_sortFirst, .content .active_sortSecond{
 	color: red;
-	width: 16px;
+	width: 8px;
 	height: 25px;
 	font-size: 15px;
 	font-weight: 1000;
@@ -556,7 +556,7 @@ body{
 	margin: 0 5px;
 }
 .content .contact .sort{
-	width: 16px;
+	width: 8px;
 	height: 25px;
 	font-size: 15px;
 	font-weight: 800;

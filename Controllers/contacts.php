@@ -1006,6 +1006,55 @@ class Contacts extends Controller
 				
 			$this->view->render ( $argument );
 		}
+		
+	}
+	
+	function ajax_select()
+	{
+		
+		if(isset($_POST['page'])) {
+	
+			$post = $this->post_controller();
+	
+			$user = $this->Login->user();
+	
+			$count_pages = ceil ( $this->count_contacts () / ROWLIMIT );
+	
+			$argument['sortFirst'] = $post['first']; // sort
+			$argument['sortSecond'] = $post['second'];
+	
+			$page = $post['page']; // active page
+	
+			$count_contacts = $this->count_contacts($user['id']);
+	
+			$contacts = $this->return_contact ( $user['id'], $page, $argument['sortFirst'], $argument['sortSecond'] );
+	
+			$contacts = $this->contacts($contacts); // users contacts
+	
+			$count_for_pagin = $this->count_pages ( $page );
+	
+			$i = 1;
+			($page > 1) ? $i = $page * ROWLIMIT - ROWLIMIT + 1 : '';  // to number of contacts
+	
+			$contact_class = $i + count($contacts) - 1; // last contact on page
+	
+			$argument[0] = 'contacts';
+			$argument[1] = 'ajax_select';
+	
+			$this->view->set ( 'count_contacts', $count_contacts );
+			$this->view->set ( 'count_for_pagin', $count_for_pagin );
+			$this->view->set ( 'page', $page );
+			$this->view->set ( 'count_pages', $count_pages );
+			$this->view->set ( 'contacts', $contacts );
+			$this->view->set ( 'i', $i);
+			$this->view->set ( 'contact_class', $contact_class);
+			$this->view->set ( 'user', $user);
+			$this->view->set ( 'html', $this->view);
+			$this->view->set ( 'argument', $argument); // ?
+	
+			$this->view->render ( $argument );
+		}
+	
 	}
 	
 	function ajax_valid()
@@ -1015,7 +1064,7 @@ class Contacts extends Controller
 		{
 			$post = $this->post_controller();
 	
-			$post['text'] = preg_replace('/[a-zA-Z0-9,@,+,., ]/', '', $post['text']);
+			$post['text'] = preg_replace('/[a-zA-Z0-9,@,+,., ,-]/', '', $post['text']);
 				
 			if(!empty ($post['text']) )
 			{

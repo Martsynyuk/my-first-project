@@ -1,33 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="keywords" content="">
-<meta name="description" content="">
-<title>project</title>
-
-<link rel="stylesheet" type="text/css" href="/css/main.css">
-<link rel="stylesheet" type="text/css" href="/css/reset.css">
-<script src="/js/jquery-2.2.0.js"></script>
-
-</head>
-<body>
-<div class="main">
-	<div class="header">
-	<form name="selectcontact" method="POST">
-		<a href="/"><img src="/img/logotip.png" alt="logotip"></a>
-		<div class="header_menu">
-			<ul>	 
-				<li><a class="home" href="<?= $html->url(array()) ?>">Home</a> </li>
-				<li> <a class="home" href=" <?= $html->url(array('controller'=>'users', 'action'=>'logout')) ?>">Logout</a> </li>
-				<li><a class="home" class="letter" href="/">Cancel</a></li>	
-				<li class="accept"><input type="submit" name="Select" value="Accept" formaction="/contacts/letter/"></li>			
-			</ul>
-		</div>
-	</div>
-	<div class="content">
-		<div class="contact">		
-			<table class="table" border="0">
+<table class="table" border="0">
 				<tr class="top">
 					<th class="all">
 						 <?php if( empty ( $argument['all'] ) ) 
@@ -102,7 +73,7 @@
 							" >
 					 
 						
-						<input onClick="sort($('.active_sortFirst').attr('name'), 'LastNameDown')"
+						<input  onClick="sort($('.active_sortFirst').attr('name'), 'LastNameDown')"
 							<?= ( $argument['sortSecond']==='LastNameDown' ) ? 'class="active_sortSecond"' : '' ;?>
 							class="sort" type="submit" name="LastNameDown" value="&#8595" formaction=" 							
 							
@@ -256,69 +227,3 @@
 					</li>
 				</ul>
 			</div
-		</div>
-	</div>
-	
-	</div>
-	
-	<div class="footer">
-		<span>&#169 2015 Wise Engineering</span>
-	</div>
-</div>
-<script>
-$('tr.top input').on('click', function(e) {
-	e.preventDefault();
-});
-
-$('div.pagination input').on('click',function(e){
-	$('div.pagination a'), $(this).prop( 'disabled', true );
-	  e.preventDefault();
-	});
-
-function pagination(page)
-{		
-	var sortFirst = $('.active_sortFirst').attr('name');
-	var sortSecond = $('.active_sortSecond').attr('name');
-			
-	history.pushState(null, null, '/contacts/select/' + page + '/');
-					
-	$.ajax({
-		type: 'post',
-		url: '/contacts/ajax_select',
-		data:{'page': page, 'first': sortFirst, 'second': sortSecond},
-		response:'html',
-		success: function(data){
-		  $('.contact').empty();
-			$('.contact').append(data);
-		},
-		error: function(data){
-			alert('error')
-		}			  
-	});
-}		
-
-function sort(sortFirst, sortSecond)
-{
-	
-	var page = $('.page_active').val();
-	
-	history.pushState(null, null, '/contacts/select/' + page + '/');
-					
-	$.ajax({
-		type: 'post',
-		url: '/contacts/ajax_select',
-		data:{'page': page, 'first': sortFirst, 'second': sortSecond},
-		response:'html',
-		success: function(data){
-			
-			$('.contact').empty();
-			$('.contact').append(data);	
-		},
-		error: function(data){
-			alert('error')
-		}			  
-	});
-}
-</script> 
-</body>
-</html>
