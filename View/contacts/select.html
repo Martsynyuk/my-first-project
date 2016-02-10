@@ -32,7 +32,7 @@
 					<th class="all">
 						 <?php if( empty ( $argument['all'] ) ) 
 										{
-											 echo	'<a href="' . $_SERVER ['REQUEST_URI'] . 'all">All </a>' ;
+											 echo	'<a onClick="check_all(obj=$(this))" href="' . $_SERVER ['REQUEST_URI'] . 'all">All</a>' ;
 										}	
 										else{
 												echo '<a href="/contacts/select/';
@@ -124,7 +124,7 @@
 			<?php foreach ( $contacts as $contact ) : ?>		
 					<tr class="line">
 					<td> 
-						<input class="check" type="checkbox" name="<?= $contact['id']; ?>" value="<?= $contact['Email']; ?>" 
+						<input onClick="check(obj=$(this))" class="check" type="checkbox" name="<?= $contact['id']; ?>" value="<?= $contact['Email']; ?>" 
 										
 										<?php if( ! empty ($argument['all']) )
 												{	
@@ -266,7 +266,14 @@
 	</div>
 </div>
 <script>
+
+// pagination
+
 $('tr.top input').on('click', function(e) {
+	e.preventDefault();
+});
+
+$('tr.top a').on('click', function(e) {
 	e.preventDefault();
 });
 
@@ -319,6 +326,39 @@ function sort(sortFirst, sortSecond)
 		}			  
 	});
 }
+
+// checkbox
+
+function check_all(obj)
+{
+	var lop = $(obj).text()
+	console.log(lop);
+	if(lop == 'All')
+	{		
+		
+		$("input:checkbox").prop("checked", true);
+		$(obj).text('Off');
+	}
+	else
+	{
+		$("input:checkbox").prop("checked", false);
+		$(obj).text('All');
+	}
+}
+
+function check(obj)
+{
+	if($(obj).is(':checked'))
+	{
+		var check = $(obj).attr('name');
+		
+		
+	}
+	else{
+		
+	}
+}
+
 </script> 
 </body>
 </html>

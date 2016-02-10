@@ -3,7 +3,7 @@
 					<th class="all">
 						 <?php if( empty ( $argument['all'] ) ) 
 										{
-											 echo	'<a href="' . $_SERVER ['REQUEST_URI'] . 'all">All </a>' ;
+											 echo	'<a onClick="check_all(obj=$(this))" href="' . $_SERVER ['REQUEST_URI'] . '/all">All</a>' ;
 										}	
 										else{
 												echo '<a href="/contacts/select/';
@@ -226,4 +226,18 @@
 					</form>									
 					</li>
 				</ul>
-			</div
+			</div>
+<script>
+			$('tr.top input').on('click', function(e) {
+				e.preventDefault();
+			});
+
+			$('tr.top a').on('click', function(e) {
+				e.preventDefault();
+			});
+
+			$('div.pagination input').on('click',function(e){
+				$('div.pagination a'), $(this).prop( 'disabled', true );
+				  e.preventDefault();
+				});			
+</script>
