@@ -212,4 +212,15 @@ $('div.pagination a').on('click', function(e) {
 $('div.cont_top a').on('click', function(e) {
 	e.preventDefault();
 });
+
+$('div.pagination a').on('click',function(e){
+	$('div.pagination a'), $(this).prop( 'disabled', true );
+	  e.preventDefault();
+	});
+
+$('div.cont_top a').on('click',function(e){
+	$('div.cont_top a'), $(this).prop( 'disabled', true );
+	  e.preventDefault();
+	});
+
 </script>

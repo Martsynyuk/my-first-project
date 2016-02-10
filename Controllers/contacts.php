@@ -1015,7 +1015,7 @@ class Contacts extends Controller
 		{
 			$post = $this->post_controller();
 	
-			$post['text'] = preg_replace('/[a-zA-Z0-9,@,+,.]/', '', $post['text']);
+			$post['text'] = preg_replace('/[a-zA-Z0-9,@,+,., ]/', '', $post['text']);
 				
 			if(!empty ($post['text']) )
 			{

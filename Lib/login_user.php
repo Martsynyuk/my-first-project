@@ -6,6 +6,7 @@ class Login{
 	
 	function login_user ( $post )
 	{
+
 		$what = array(
 					
 				'fields' => array(
@@ -39,25 +40,29 @@ class Login{
 		);
 		
 		$login = new User();
-		$contact = new Controller();
 		
 		$user = $login->select ( $what );
 		
-		unset($user[1]);		
-		$user = $contact->contacts($user);
-
+		unset($user[1]);	
+		
 		if ( !empty ( $user ) )
 		{
-			foreach ($user as $user => $val )
-			{
-		
-				$user = $val;
-			}
 			
+			foreach ($user as $num => $value )
+			{
+				foreach ($value as $key => $val)
+				{
+					$user = $val;
+				}
+			
+			}
 			$_SESSION['id'] = $user['id'];
 			$_SESSION['login'] = $user['login'];
-		
+			
 			header ( 'Location: /' );
+		}
+		else{
+			header ( 'Location: /users/autorization' );
 		}
 	}
 	

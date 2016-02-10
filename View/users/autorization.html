@@ -47,7 +47,7 @@
 					<li><a href="<?= $html->url(array('controller'=>'users', 'action'=>'registration')) ?>">Register Now</a></li>
 				</ul>
 				<div class="submit_autorization">
-					<input type="submit" name="enter" value="Login">
+					<input onClick="return sub()" type="submit" name="enter" value="Login">
 				</div>
 				</form>
 			</div>
@@ -57,6 +57,15 @@
 	</div>
 </div>
 <script>
+function sub()
+{
+	if($('span').is('.no_user'))
+		{
+			return false;
+		}
+	
+	return true;
+}
 	
 function num()
 {	

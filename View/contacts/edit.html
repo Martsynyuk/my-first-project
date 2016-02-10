@@ -207,7 +207,7 @@
 					</li>
 				</ul>
 				<div class="done" >
-					<input type="submit" name="information" value="Done">
+					<input onClick="return sub()" type="submit" name="information" value="Done">
 				</div>
 			</form>
 		</div>
@@ -217,6 +217,15 @@
 	</div>
 </div>
 <script>
+
+function sub()
+{	
+	if($('div').is('.no'))
+	{
+		return false;
+	}
+	return true;
+}
 	
 function num(obj)
 {	

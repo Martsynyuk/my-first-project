@@ -45,7 +45,7 @@
 			</div>
 			<div class="clear"></div>
 			<div class="submit_registration">
-				<input type="submit" name="enter" value="Registration">
+				<input onClick="return sub()" type="submit" name="enter" value="Registration">
 		  </div>
 			</form>
 		</div>
@@ -55,6 +55,16 @@
 	</div>
 </div>
 <script>
+
+function sub()
+{
+	if($('span').is('.no_user'))
+		{
+			return false;
+		}
+	
+	return true;
+}
 	
 function num()
 {	

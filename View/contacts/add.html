@@ -199,7 +199,7 @@
 					
 				</ul>
 				<div class="done">	
-					<input type="submit" name="information" value="Done">
+					<input onClick="return sub()" type="submit" name="information" value="Done">
 				</div>
 			</form>
 		</div>
@@ -210,6 +210,16 @@
 	<?= (DEBUG === 1) ? '<div class="debug"><span>' . $test . '</span></div>' : '' ; ?>
 </div>
 <script>
+
+function sub()
+{
+	if($('div').is('.no'))
+		{
+			return false;
+		}
+	
+	return true;
+}
 	
 function num(obj)
 {	
