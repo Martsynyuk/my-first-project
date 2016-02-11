@@ -578,6 +578,8 @@ class Contacts extends Controller
 										)
 					);
 			
+			$select = $this->contacts($select);
+			
 			if ( empty ($select) )
 			{
 				header('Location: /');

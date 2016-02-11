@@ -47,20 +47,26 @@
 					<li><a href="<?= $html->url(array('controller'=>'users', 'action'=>'registration')) ?>">Register Now</a></li>
 				</ul>
 				<div class="submit_autorization">
-					<input onClick="return sub()" type="submit" name="enter" value="Login">
+					<input onClick="return sub(obj=$(this))" type="submit" name="enter" value="Login">
 				</div>
 				</form>
 			</div>
 	</div>
 	<div class="footer">
-		<span>&#169 2007 Wise Engineering</span>
+		<span>&#169 2015 Wise Engineering</span>
 	</div>
 </div>
 <script>
-function sub()
+function sub(obj)
 {
 	if($('span').is('.no_user'))
 		{
+			$(obj).css('color', 'red')
+			
+			setTimeout(function() {
+				$(obj).css('color', 'white')
+			}, 800);
+			
 			return false;
 		}
 	

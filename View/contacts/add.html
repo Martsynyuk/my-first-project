@@ -199,13 +199,13 @@
 					
 				</ul>
 				<div class="done">	
-					<input onClick="return sub()" type="submit" name="information" value="Done">
+					<input onClick="return sub(obj=$(this))" type="submit" name="information" value="Done">
 				</div>
 			</form>
 		</div>
 	</div>
 	<div class="footer">
-		<span>&#169 2007 Wise Engineering</span>
+		<span>&#169 2015 Wise Engineering</span>
 	</div>
 	<?= (DEBUG === 1) ? '<div class="debug"><span>' . $test . '</span></div>' : '' ; ?>
 </div>
@@ -215,6 +215,12 @@ function sub()
 {
 	if($('div').is('.no'))
 		{
+			$(obj).css('color', 'red')
+			
+			setTimeout(function() {
+				$(obj).css('color', 'white')
+			}, 800);
+			
 			return false;
 		}
 	

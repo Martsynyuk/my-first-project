@@ -207,7 +207,7 @@
 					</li>
 				</ul>
 				<div class="done" >
-					<input onClick="return sub()" type="submit" name="information" value="Done">
+					<input onClick="return sub(obj=$(this))" type="submit" name="information" value="Done">
 				</div>
 			</form>
 		</div>
@@ -222,6 +222,12 @@ function sub()
 {	
 	if($('div').is('.no'))
 	{
+		$(obj).css('color', 'red')
+		
+		setTimeout(function() {
+			$(obj).css('color', 'white')
+		}, 800);
+		
 		return false;
 	}
 	return true;

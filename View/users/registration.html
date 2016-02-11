@@ -45,21 +45,27 @@
 			</div>
 			<div class="clear"></div>
 			<div class="submit_registration">
-				<input onClick="return sub()" type="submit" name="enter" value="Registration">
+				<input onClick="return sub(obj=$(this))" type="submit" name="enter" value="Registration">
 		  </div>
 			</form>
 		</div>
 	</div>
 	<div class="footer">
-		<span>&#169 2007 Wise Engineering</span>
+		<span>&#169 2015 Wise Engineering</span>
 	</div>
 </div>
 <script>
 
-function sub()
+function sub(obj)
 {
 	if($('span').is('.no_user'))
 		{
+			$(obj).css('color', 'red')
+			
+			setTimeout(function() {
+				$(obj).css('color', 'white')
+			}, 800);
+			
 			return false;
 		}
 	
