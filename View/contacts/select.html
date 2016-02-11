@@ -350,9 +350,9 @@ function check(obj)
 {
 	if($(obj).is(':checked'))
 	{
-		var check = $(obj).attr('name');
-		
-		
+		var val = $('input:checked').val();
+		var check = $(obj).attr('name');	
+		console.log(val);
 	}
 	else{
 		
