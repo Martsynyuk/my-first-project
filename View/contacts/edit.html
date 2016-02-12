@@ -38,7 +38,7 @@
 				<ul>				
 					<li><span>First Name:</span> 
 					
-						<input class="input" type="text" name="FirstName"	onChange="num(obj=$(this))"		
+						<input data="text" class="input" type="text" name="FirstName"	onChange="validation(obj=$(this))"		
 							value="<?= ( ! empty ( $res['Firstname'])) ? $res['Firstname'] : '';?>"
 							size="25">
 							<div class="valid"></div>
@@ -46,7 +46,7 @@
 						
 					<li><span>Last Name:</span> 
 					
-						<input class="input" type="text" name="LastName" onChange="num(obj=$(this))"
+						<input data="text" class="input" type="text" name="LastName" onChange="validation(obj=$(this))"
 							value="<?= ( ! empty ( $res['Lastname'])) ? $res['Lastname'] : '';?>"
 							size="25">
 							<div class="valid"></div>
@@ -54,7 +54,7 @@
 					
 					<li><span>E-mail:</span>
 					
-						 <input class="input" type="email" name="Email" onChange="num(obj=$(this))"
+						 <input data="mail" class="input" type="email" name="Email" onChange="validation(obj=$(this))"
 							value="<?= ( ! empty ( $res['Email'])) ? $res['Email'] : '';?>"
 							size="25">
 							<div class="valid"></div>
@@ -62,34 +62,34 @@
 					
 					<li><span class="telephone">Home:</span> 
 					
-						<input class="radio" type="radio" name="radio" value="Home" 
+						<input onClick="rad(obj=$(this))" class="radio" type="radio" name="radio" value="Home" 
 							<?= ($res['Home'] === $res['Telephone']) ? 'checked' : '' ; ?> >
-						<input class="input" type="text" name="Home" onChange="num(obj=$(this))"
+						<input data="number" class="input" type="text" name="Home" 
 							value="<?= ( ! empty ( $res['Home'])) ? $res['Home'] : '';?>" size="25">
 							<div class="valid"></div>
 					</li>
 					
 					<li><span class="telephone">Work:</span> 
 					
-						<input class="radio" type="radio" name="radio" value="Work"
+						<input onClick="rad(obj=$(this))" class="radio" type="radio" name="radio" value="Work"
 							<?= ($res['Work'] === $res['Telephone']) ? 'checked' : '' ; ?>>
-						<input class="input" type="text" name="Work" onChange="num(obj=$(this))"
+						<input data="number" class="input" type="text" name="Work" 
 						value="<?= ( ! empty ( $res['Work'])) ? $res['Work'] : '';?>" size="25">
 						<div class="valid"></div>
 					</li>
 					
 					<li><span class="telephone">Cell:</span>
 					
-						<input class="radio" type="radio" name="radio" value="Cell"
+						<input onClick="rad(obj=$(this))" class="radio" type="radio" name="radio" value="Cell"
 							<?= ($res['Cell'] === $res['Telephone']) ? 'checked' : '' ; ?>>
-						<input class="input" type="text" name="Cell" onChange="num(obj=$(this))"
+						<input data="number" class="input" type="text" name="Cell" 
 						value="<?= ( ! empty ( $res['Cell'])) ? $res['Cell'] : '';?>" size="25">
 						<div class="valid"></div>
 					</li>
 					
 					<li><span>Adress 1:</span>
 					
-						<input class="input" type="text" name="Adress1" onChange="num(obj=$(this))"
+						<input data="text" class="input" type="text" name="Adress1" onChange="validation(obj=$(this))"
 							value="<?= ( ! empty ( $res['Adress1'])) ? $res['Adress1'] : '';?>"
 							size="25">
 							<div class="valid"></div>
@@ -97,7 +97,7 @@
 					
 					<li><span>Adress 2:</span>
 					
-						<input class="input" type="text" name="Adress2" onChange="num(obj=$(this))"
+						<input data="text" class="input" type="text" name="Adress2" onChange="validation(obj=$(this))"
 							value="<?= ( ! empty ( $res['Adress2'])) ? $res['Adress2'] : '';?>"
 							size="25">
 							<div class="valid"></div>
@@ -105,14 +105,14 @@
 					
 					<li><span>City:</span> 
 					
-						<input class="input" type="text" name="City" onChange="num(obj=$(this))"
+						<input data="text" class="input" type="text" name="City" onChange="validation(obj=$(this))"
 							value="<?= ( ! empty ( $res['City'])) ? $res['City'] : '';?>" size="25">
 							<div class="valid"></div>
 					</li>
 					
 					<li><span>State:</span>
 					 
-						<input class="input" type="text" name="State" onChange="num(obj=$(this))"
+						<input data="text" class="input" type="text" name="State" onChange="validation(obj=$(this))"
 							value="<?= ( ! empty ( $res['State'])) ? $res['State'] : '';?>"
 							size="25">
 							<div class="valid"></div>
@@ -120,14 +120,14 @@
 					
 					<li><span>Zip:</span> 
 					
-						<input class="input" type="text" name="Zip" onChange="num(obj=$(this))"
+						<input data="number" class="input" type="text" name="Zip" onChange="validation(obj=$(this))"
 							value="<?= ( ! empty ( $res['Zip'] ) ) ? $res['Zip'] : '' ; ?>" size="25">
 							<div class="valid"></div>
 					</li>
 					
 					<li><span>Country:</span> 
 					
-						<input class="input" type="text" name="Country" onChange="num(obj=$(this))"
+						<input data="text" class="input" type="text" name="Country" onChange="validation(obj=$(this))"
 							value="<?= ( ! empty ( $res['Country'] ) ) ? $res['Country'] : '' ; ?>"
 							size="25">
 							<div class="valid"></div>
@@ -213,44 +213,121 @@
 		</div>
 	</div>
 	<div class="footer">
-		<span>&#169 2007 Wise Engineering</span>
+		<span>&#169 2015 Wise Engineering</span>
 	</div>
 </div>
 <script>
 
-function sub()
-{	
-	if($('div').is('.no'))
-	{
-		$(obj).css('color', 'red')
-		
-		setTimeout(function() {
-			$(obj).css('color', 'white')
-		}, 800);
-		
-		return false;
-	}
-	return true;
+//validation
+
+$("input:radio:checked").next('input').attr("onChange", "validation(obj=$(this))");
+
+function rad(obj)
+{
+	$('input:radio').next('input').removeAttr("onChange");
+	$('input:radio').next('input').next('div').removeClass('yes').removeClass('no');
+	$(obj).next('input').attr("onChange", "validation(obj=$(this))");
 }
+
+function sub(obj)
+{
+	$('input[onChange]').each(function(index, value){
+		
+		if($(value).val() == '')
+		{
+			$(value).next('div').addClass('no')
+		}
+	});
 	
-function num(obj)
-{	
+	if($('div').is('.no'))
+		{
+			$(obj).css('color', 'red')
+			
+			setTimeout(function() {
+				$(obj).css('color', 'white')
+			}, 800);
+			
+			return false;
+		}
 	
+	return false;
+	
+}
+
+function validation(obj)
+{
+	var val = obj.attr('data').split(', ');
 	var valid = obj.val();
 	
-	$.ajax({
-		type: 'post',
-		url: '/contacts/ajax_valid',
-		data:{'text': valid},
-		response:'html',
-		success: function(data){				
-			obj.next('div').removeClass('yes').removeClass('no').addClass(data);	
-		},
-		error: function(data){
+	$.each(val, function(index, value){
+		
+		if($.isNumeric(value))
+			{
+				if( valid.length < value && value < 30)
+				{
+					someclass = 'yes';
+				}	
+				else{
+					someclass = 'no';
+					return false;
+				}	
+			}
+		
+		switch(value)
+		{
+			case 'text':				
+				result =	valid.replace(/[a-zA-Z]/g, '');
+
+				if(result == '')
+				{
+					someclass = 'yes';
+				}
+				else{
+					someclass = 'no';
+				}
+				break;
+				
+			case 'mail':
+				result =	valid.replace(/[a-zA-Z@.]/g, '');
+				simbol = valid.search('@');
+				
+				if(result == '' && simbol != '-1')
+				{
+					someclass = 'yes';
+				}
+				else{
+					someclass = 'no';
+				}
+				break;
 			
-		}			  
+			case 'number':
+				result =	valid.replace(/[-0-9 ]/g, '');
+				
+				if(result == '')
+				{
+					someclass = 'yes';
+				}
+				else{
+					someclass = 'no';
+				}
+				break;
+				
+		}
+		
+		if( someclass == 'no')
+			{
+				return false;
+			}
+		else if(valid == '')
+			{
+				someclass = 'no';
+				return false;
+			}
 	});
+	
+	obj.next('div').removeClass('yes').removeClass('no').addClass(someclass);
 }
+
 </script>
 </body>
 </html>
