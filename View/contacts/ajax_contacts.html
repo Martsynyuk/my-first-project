@@ -1,3 +1,9 @@
+			<div id=delete_contact>
+				<span id="close" onClick="close_delete()">X</span> 
+				<span id="text"></span>
+				<span id="yes" onClick="delete_contact($(this).attr('data'))">Yes</span>
+				<span id="no" onClick="close_delete()">No</span>
+			</div>
 <?php if ( ! empty ( $contacts ) ){ ?>
 			<div class="cont_top">
 					<ul>
@@ -72,7 +78,7 @@
 								<li>
 									<a class="edit" href="<?= $html->url(array('controller'=>'contacts', 'action'=>'edit', 'id'=>$contact['id'])) ?>">edit</a> 
 									<a class="view" href="<?= $html->url(array('controller'=>'contacts', 'action'=>'view', 'id'=>$contact['id'])) ?>">view</a>
-									<a class="delete" href="<?= $html->url(array('controller'=>'contacts', 'action'=>'delete', 'id'=>$contact['id'])) ?>"></a>
+									<a onClick="del($(this).attr('data'), obj=$(this))" data="<?= $contact['id'] . ', ' .  $contact['FirstName']?>" class="delete" href="<?= $html->url(array('controller'=>'contacts', 'action'=>'delete', 'id'=>$contact['id'])) ?>"></a>
 								</li>
 							</ul>
 					</div>
@@ -206,6 +212,10 @@
 		</div>
 <script>
 $('div.pagination a').on('click', function(e) {
+	e.preventDefault();
+});
+
+$('a.delete').on('click', function(e) {
 	e.preventDefault();
 });
 

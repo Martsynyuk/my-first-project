@@ -17,7 +17,7 @@ const SORTSECOND = 'LastNAmeUp'; //sorting direction
 
 //debug mode
 
-const DEBUG = 2; // if = 1 mode is enabled, if = 2 test open
+const DEBUG = 0; // if = 1 mode is enabled, if = 2 test open
 
 // for autocompliter
 

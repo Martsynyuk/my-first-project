@@ -9,6 +9,12 @@
 		</div>
 		</div>
 		<div class="cont">
+			<div id=delete_contact>
+				<span id="close" onClick="close_delete()">X</span> 
+				<span id="text"></span>
+				<span id="yes" onClick="delete_contact($(this).attr('data'))">Yes</span>
+				<span id="no" onClick="close_delete()">No</span>
+			</div>
 				<?php if ( ! empty ( $contacts ) ){ ?>
 			<div class="cont_top">
 					<ul>
@@ -87,7 +93,7 @@
 							<li>
 								<a class="edit" href="<?= $html->url(array('controller'=>'contacts', 'action'=>'edit', 'id'=>$contact['id'])) ?>">edit</a> 
 								<a class="view" href="<?= $html->url(array('controller'=>'contacts', 'action'=>'view', 'id'=>$contact['id'])) ?>">view</a>
-								<a class="delete" href="<?= $html->url(array('controller'=>'contacts', 'action'=>'delete', 'id'=>$contact['id'])) ?>"></a>
+								<a onClick="del($(this).attr('data'), obj=$(this))" data="<?= $contact['id'] . ', ' .  $contact['FirstName']?>" class="delete" href="<?= $html->url(array('controller'=>'contacts', 'action'=>'delete', 'id'=>$contact['id'])) ?>"></a>
 							</li>
 						</ul>
 				</div>
@@ -230,6 +236,10 @@ $('div.pagination a').on('click', function(e) {
 	e.preventDefault();
 });
 
+$('a.delete').on('click', function(e) {
+	e.preventDefault();
+});
+
 $('div.cont_top a').on('click', function(e) {
 	e.preventDefault();
 });
@@ -290,5 +300,42 @@ function sort(sortFirst, sortSecond)
 
 // end pagination
 
+// delete 
+
+function del(user, obj)
+{
+	$('#delete_contact').css('display', 'block');
+	user = user.split(', ');
+	$('#text').text('You really want to delete contact - ' + user[1] + ' ?');
+	$('#yes').attr('data', user)
+}
+
+function close_delete()
+{
+	$('#delete_contact').css('display', 'none');	
+}
+
+function delete_contact(user)
+{
+	user = user.split(',');
+	
+	$.ajax({
+		type: 'post',
+		url: '/contacts/ajax_contact_delete',
+		data:{'user': user[0]},
+		response:'html',
+		success: function(){
+			$('#yes').css('display', 'none');
+			$('#no').css('display', 'none');
+			$('#text').text('Contact ' + user[1] + ' deleted');
+			setTimeout(function() {
+				$('#delete_contact').css('display', 'none');
+			}, 2000);
+			
+		},
+				  
+	});
+		
+}
 
 </script> 

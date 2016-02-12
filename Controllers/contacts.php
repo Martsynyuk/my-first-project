@@ -1077,5 +1077,21 @@ class Contacts extends Controller
 			}
 		}
 	}
+	
+	function ajax_contact_delete()
+	{
+		if(!empty($_POST['user']))
+		{
+			$post = $this->post_controller ();
+			$user = $this->Login->user();
+			
+			if ( ! $this->Information->contacts_defender ( $post['user'], $user['id'] ))
+			{					
+				header('Location: /');
+			}
+			
+			$this->Information->delete ( $post['user'] );
+		}
+	}
 }
 	
