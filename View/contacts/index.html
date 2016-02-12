@@ -330,6 +330,7 @@ function delete_contact(user)
 			$('#text').text('Contact ' + user[1] + ' deleted');
 			setTimeout(function() {
 				$('#delete_contact').css('display', 'none');
+				window.location.reload()
 			}, 2000);
 			
 		},
