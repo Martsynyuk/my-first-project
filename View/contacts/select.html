@@ -9,6 +9,7 @@
 <link rel="stylesheet" type="text/css" href="/css/main.css">
 <link rel="stylesheet" type="text/css" href="/css/reset.css">
 <script src="/js/jquery-2.2.0.js"></script>
+<script src="/js/jquery.cookie.js"></script>
 
 </head>
 <body>
@@ -124,7 +125,7 @@
 			<?php foreach ( $contacts as $contact ) : ?>		
 					<tr class="line">
 					<td> 
-						<input onClick="check(obj=$(this))" class="check" type="checkbox" name="<?= $contact['id']; ?>" value="<?= $contact['Email']; ?>" 
+						<input data="<?= $contact['id']; ?>" onClick="check(obj=$(this))" class="check" type="checkbox" name="<?= $contact['id']; ?>" value="<?= $contact['Email']; ?>" 
 										
 										<?php if( ! empty ($argument['all']) )
 												{	
@@ -348,11 +349,11 @@ function check_all(obj)
 
 function check(obj)
 {
+	//$.cookie('test', 'some text', {expires: 1, path: '/'});
+
 	if($(obj).is(':checked'))
 	{
-		var val = $('input:checked').val();
-		var check = $(obj).attr('name');	
-		console.log(val);
+		var check = $(obj).attr('data');	
 	}
 	else{
 		
