@@ -303,6 +303,7 @@ function pagination(page)
 			alert('error')
 		}			  
 	});
+	
 }		
 
 function sort(sortFirst, sortSecond)
@@ -335,29 +336,69 @@ function check_all(obj)
 	var lop = $(obj).text()
 	
 	if(lop == 'All')
-	{		
-		
+	{			
 		$("input:checkbox").prop("checked", true);
 		$(obj).text('Off');
+		$("input:checkbox").each(function(key, val){
+			check(val);
+		});
 	}
 	else
 	{
 		$("input:checkbox").prop("checked", false);
 		$(obj).text('All');
+		$("input:checkbox").each(function(key, val){
+			check(val);
+		});
 	}
 }
 
 function check(obj)
 {
-	//$.cookie('test', 'some text', {expires: 1, path: '/'});
-
+	var check = $(obj).attr('data');
+	
 	if($(obj).is(':checked'))
 	{
-		var check = $(obj).attr('data');	
+		
+		if($.cookie('select') == null || $.cookie('select') == '')
+		{
+			$.cookie('select', check, {expires: 1, path: '/'});
+		}
+		else{
+			check = check + ', ' + $.cookie('select');
+			$.cookie('select', check, {expires: 1, path: '/'});
+		}
 	}
 	else{
 		
+		if($.cookie('select') == null || $.cookie('select') == '')
+		{
+			
+		}
+		else{
+			array = $.cookie('select').split(', ');
+			jQuery.each(array, function(key, val){
+			
+				if(val == check)
+					{
+						array.splice($.inArray(val, array), 1);
+					}
+			});
+			
+			check = array.join(', ');
+			
+			$.cookie('select', check, {expires: 1, path: '/'});
+		}
+	 
 	}
+	
+	array = $.cookie('select').split(', ');
+	array = jQuery.unique(array)	
+	check = array.join(', ');
+			
+	$.cookie('select', check, {expires: 1, path: '/'});
+	
+	console.log($.cookie('select'));
 }
 
 </script> 
