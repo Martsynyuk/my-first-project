@@ -300,10 +300,13 @@ function pagination(page)
 			$('.contact').append(data);
 		},
 		error: function(data){
-			alert('error')
 		}			  
 	});
 	
+	setTimeout(function() {
+		checked_checkbox();
+	}, 100);
+		
 }		
 
 function sort(sortFirst, sortSecond)
@@ -397,10 +400,29 @@ function check(obj)
 	check = array.join(', ');
 			
 	$.cookie('select', check, {expires: 1, path: '/'});
-	
-	console.log($.cookie('select'));
 }
 
+function checked_checkbox()
+{
+	
+	if($.cookie('select') != null)
+	{
+		
+		array = $.cookie('select').split(', ');
+		
+		$("input:checkbox").each(function(key, val){
+			
+			jQuery.each(array, function(key, value){
+				
+				if($(val).attr('data') == value )
+					{
+						$(val).prop("checked", true);
+					}
+			});
+		});
+
+	}
+}
 </script> 
 </body>
 </html>

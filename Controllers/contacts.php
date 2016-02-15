@@ -155,7 +155,7 @@ class Contacts extends Controller
 				
 									);
 		
-		$contactUser = $this->contacts($contactUser);
+		//$contactUser = $this->contacts($contactUser);
 			
 		if ( ! empty ( $post['FirstName'] ) ) 
 		{
@@ -235,17 +235,6 @@ class Contacts extends Controller
 	public function index ( $argument )
 	{	
 		
-		if(isset($_POST['z'])) {
-		
-			header("Content-type: text/txt; charset=UTF-8");
-		
-			if($_POST['z']=='1') {
-				$i = 'прувет';
-				echo $i;
-				die;
-			}
-		}
-		
 		$user = $this->Login->user();
 		
 		$count_pages = ceil ( $this->count_contacts () / ROWLIMIT );
@@ -307,9 +296,9 @@ class Contacts extends Controller
 		
 		$contacts = $this->return_contact ( $user['id'], $page, $argument['sortFirst'], $argument['sortSecond'] );	
 		
-		$sql = $contacts[1];
+		//$sql = $contacts[1];
 		
-		$contacts = $this->contacts($contacts);
+		//$contacts = $this->contacts($contacts);
 		
 		$count_for_pagin = $this->count_pages ( $page );
 		
@@ -331,7 +320,7 @@ class Contacts extends Controller
 		
 		$this->view->setLayout('argument', $argument);
 		$this->view->setLayout ( 'block', $this->view);
-		$this->view->setLayout ( 'sql', $sql);
+		//$this->view->setLayout ( 'sql', $sql);
 		
 		$this->view->renderLayout ('layout');
 		//$this->view->render ( $argument );
@@ -404,7 +393,7 @@ class Contacts extends Controller
 		$contacts = array ();
 		
 		$contacts = $this->return_contact ( $user['id'], $page, $argument['sortFirst'], $argument['sortSecond'] );
-		$contacts = $this->contacts($contacts);
+		//$contacts = $this->contacts($contacts);
 		if ( ! empty ($_COOKIE['select']) )
 		{
 			$checked = $this->get_cookie($_COOKIE['select']);
@@ -526,7 +515,7 @@ class Contacts extends Controller
 					
 										);
 			
-			$contactUser = $this->contacts($contactUser);
+			//$contactUser = $this->contacts($contactUser);
 
 			if ( empty ( $contactUser ) )
 			{
@@ -578,7 +567,7 @@ class Contacts extends Controller
 										)
 					);
 			
-			$select = $this->contacts($select);
+			//$select = $this->contacts($select);
 			
 			if ( empty ($select) )
 			{
@@ -665,7 +654,7 @@ class Contacts extends Controller
 									)
 																	
 							);
-		$res = $this->contacts($res);
+		//$res = $this->contacts($res);
 		foreach ( $res as $key => $val ) 
 		{
 			
@@ -830,7 +819,7 @@ class Contacts extends Controller
 			header ( 'Location: /' );
 		}
 		
-		if ( isset($_COOKIE['select']) && ! empty ($post['Select']) && $post['Select'] == 'Accept' )
+		if ( isset($_COOKIE['select']) && $_COOKIE['select'] != '' && ! empty ($post['Select']) && $post['Select'] == 'Accept' )
 		{	
 			
 			$mails = array_unique ( $this->get_cookie($_COOKIE['select']));
@@ -865,7 +854,6 @@ class Contacts extends Controller
 										)
 								)
 						);
-				
 			}
 			
 			if( isset($email))
@@ -890,6 +878,7 @@ class Contacts extends Controller
 						$post_mail[] = $val; 
 					}
 				}
+				
 				if( $post_mail !== '')
 				{
 					$post_mail = implode(', ', $post_mail);
@@ -897,7 +886,7 @@ class Contacts extends Controller
 					
 					$mail = implode(', ', $mail);
 					
-					$mail = $mail . ', ' . $post_mail;
+					//$mail = $mail . ', ' . $post_mail;
 	
 			}
 			
@@ -952,9 +941,9 @@ class Contacts extends Controller
 			
 			header ( 'Location: / ');
 		}
-	
+		
 		$this->set_cookie('select', '');
-
+		
 		$this->view->set ( 'user', $user );
 		$this->view->set ( 'html', $this->view );
 		$this->view->set ( 'mail', $mail );
@@ -983,7 +972,7 @@ class Contacts extends Controller
 				
 			$contacts = $this->return_contact ( $user['id'], $page, $argument['sortFirst'], $argument['sortSecond'] );
 				
-			$contacts = $this->contacts($contacts); // users contacts
+			//$contacts = $this->contacts($contacts); // users contacts
 				
 			$count_for_pagin = $this->count_pages ( $page );
 				
@@ -1031,7 +1020,7 @@ class Contacts extends Controller
 	
 			$contacts = $this->return_contact ( $user['id'], $page, $argument['sortFirst'], $argument['sortSecond'] );
 	
-			$contacts = $this->contacts($contacts); // users contacts
+			//$contacts = $this->contacts($contacts); // users contacts
 	
 			$count_for_pagin = $this->count_pages ( $page );
 	

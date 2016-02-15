@@ -6,7 +6,7 @@ class Login{
 	
 	function login_user ( $post )
 	{
-
+		
 		$what = array(
 					
 				'fields' => array(
@@ -43,8 +43,6 @@ class Login{
 		
 		$user = $login->select ( $what );
 		
-		unset($user[1]);	
-		
 		if ( !empty ( $user ) )
 		{
 			
@@ -52,13 +50,12 @@ class Login{
 			{
 				foreach ($value as $key => $val)
 				{
-					$user = $val;
+					$user[$key] = $val;
 				}
-			
 			}
+			
 			$_SESSION['id'] = $user['id'];
 			$_SESSION['login'] = $user['login'];
-			
 			header ( 'Location: /' );
 		}
 		else{
