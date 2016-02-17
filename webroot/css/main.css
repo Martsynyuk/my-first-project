@@ -968,9 +968,8 @@ body{
 .clear{
 	clear: both;
 }
-.user_exist{
+.user_exist, .no_user{
 	position: absolute;
-	background: rgba(50, 205, 50, 1);
 	height: 18px !important;
 	width: 30px !important;
 	border-radius: 15px;
@@ -980,35 +979,25 @@ body{
 	margin-left: 78%;
 }
 .no_user{
-	position: absolute;
 	background: rgba(255, 69, 0, 1);
-	height: 18px !important;
-	width: 30px !important;
-	border-radius: 15px;
-	top: 75px;
-	z-index: 100;
-	padding: 3px 5px !important;
-	margin-left: 78%;
 }
-.yes{
+.user_exist{
+	background: rgba(50, 205, 50, 1);
+}
+.yes, .no{
 	width: 10px;
 	height: 10px;
 	border-radius: 5px;
-	background:rgba(50, 205, 50, 1);
 	position: absolute;
 	left: 320px;
 	top: 20px;
 	z-index: 100;
 }
 .no{
-	width: 10px;
-	height: 10px;
-	border-radius: 5px;
 	background: rgba(255, 69, 0, 1);
-	position: absolute;
-	left: 320px;
-	top: 20px;
-	z-index: 100;
+}
+.yes{
+	background:rgba(50, 205, 50, 1);
 }
 .valid{
 	position: absolute;
@@ -1045,9 +1034,8 @@ body{
 	top: 50px;
 	position: absolute;
 }
-#delete_contact #yes{
+#delete_contact  #yes, #no{
 	bottom: 25px;
-	left: 30%;
 	position: absolute;
 	font: 15px/20px Arial regular;
 	font-weight: 500;
@@ -1059,17 +1047,9 @@ body{
 	color: white;
 	cursor: pointer;
 }
+#delete_contact  #yes{
+	left: 30%;
+}
 #delete_contact #no{
-	bottom: 25px;
 	left: 50%;
-	position: absolute;
-	font: 15px/20px Arial regular;
-	font-weight: 500;
-	width: 50px;
-	border-radius: 3px 7px;
-	height: 20px;
-	text-align: center;
-	background: gray;
-	color: white;
-	cursor: pointer;
 }

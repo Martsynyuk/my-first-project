@@ -300,13 +300,12 @@ function pagination(page)
 			$('.contact').append(data);
 		},
 		error: function(data){
-		}			  
+		},	
+		complete: function(){
+			checked_checkbox();
+		}
 	});
 	
-	setTimeout(function() {
-		checked_checkbox();
-	}, 100);
-		
 }		
 
 function sort(sortFirst, sortSecond)
@@ -327,18 +326,22 @@ function sort(sortFirst, sortSecond)
 			$('.contact').append(data);	
 		},
 		error: function(data){
-			alert('error')
-		}			  
+			
+		},	
+		complete: function(){
+			checked_checkbox();
+		}
 	});
+
 }
 
 // checkbox
 
 function check_all(obj)
 {
-	var lop = $(obj).text()
+	var checking_all = $(obj).text()
 	
-	if(lop == 'All')
+	if(checking_all == 'All')
 	{			
 		$("input:checkbox").prop("checked", true);
 		$(obj).text('Off');
@@ -408,20 +411,15 @@ function checked_checkbox()
 	if($.cookie('select') != null)
 	{
 		
-		array = $.cookie('select').split(', ');
-		
-		$("input:checkbox").each(function(key, val){
-			
-			jQuery.each(array, function(key, value){
-				
-				if($(val).attr('data') == value )
-					{
-						$(val).prop("checked", true);
-					}
-			});
-		});
+		contacts_id = $.cookie('select').split(', ');
 
+		jQuery.each(contacts_id, function(key, value){
+			
+			$("input:checkbox[data='" + value + "']").prop("checked", true);
+			
+		});
 	}
+
 }
 </script> 
 </body>
