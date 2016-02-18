@@ -107,13 +107,24 @@ function delete_contact(user)
 			$('#yes').css('display', 'none');
 			$('#no').css('display', 'none');
 			$('#text').text('Contact ' + user[1] + ' deleted');
-			setTimeout(function() {
-				$('#delete_contact').css('display', 'none');
-				
-				pagination($('.page_active').text());
-			}, 2000);
 			
-		},
+			time = 3
+			startFrom = time;
+			$('#countdown span').text(startFrom).parent('p').show();
+			timer = setInterval(function(){
+				$('#countdown span').text(--startFrom);
+		    if(startFrom <= 0) {
+		        clearInterval($('#countdown span'));
+		        $('#countdown span').text('');
+		        $('#delete_contact').css('display', 'none');
+				
+		    }
+		},1000);
+			
+			setTimeout(function() {
+				pagination($('.page_active').text());
+			}, time + '000');
+		}
 				  
 	});
 		

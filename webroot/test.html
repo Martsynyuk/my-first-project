@@ -7,16 +7,30 @@
 
 <script src="js/jquery-2.2.0.js"></script>
 
-<script>
-			$.ajax({
-			  url: 'test.html',
-			  success: function(){
-				alert('Load was performed.');
-			  }
-			});
-</script>
 
 </head>
 <body>
+<p id="countdown">finish - <span></span></p>
+<button>Поехали!</button>
+
+<script>
+
+function startCountdown(){
+	
+	startFrom = 2;
+	$('#countdown span').text(startFrom).parent('p').show();
+	$('button').hide();
+	timer = setInterval(function(){
+		$('#countdown span').text(--startFrom);
+    if(startFrom <= 0) {
+        clearInterval($('#countdown span'));
+        $('#countdown span').text('');
+        $('button').show();
+    }
+},1000);
+}
+$('button').click(startCountdown);
+</script>
+
 </body>
 </html>
