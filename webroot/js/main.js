@@ -14,7 +14,7 @@ $( document ).ready(function() {
 		e.preventDefault();
 	});
 	
-	$('div.pagination a').on('click', function(e) {
+	$('div.pagination a').on('click', function(e) {	
 		e.preventDefault();
 	});
 	

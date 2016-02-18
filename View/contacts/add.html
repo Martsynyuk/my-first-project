@@ -8,6 +8,7 @@
 <link rel="stylesheet" type="text/css" href="/css/main.css">
 <link rel="stylesheet" type="text/css" href="/css/reset.css">
 <script src="/js/jquery-2.2.0.js"></script>
+<script src="/js/validation.js"></script>
 
 <?= (DEBUG === 1) ? '<link rel="stylesheet" type="text/css" href="/css/debug.css">' : '' ;?>
 
@@ -52,7 +53,7 @@
 						<div class="valid"></div>
 					</li>
 						
-					<li><span class="telephone">Home:</span> <input <input onClick="rad(obj=$(this))" class="radio" type="radio" name="radio" value="Home" 
+					<li><span class="telephone">Home:</span> <input <input onClick="select_telephone_validation(obj=$(this))" class="radio" type="radio" name="radio" value="Home" 
 						<?= ($check == 'Home') ? 'checked' : '' ?>>
 					
 						<input data="number" type="text" name="Home" 
@@ -62,7 +63,7 @@
 						<div class="valid"></div>
 					</li>
 					
-					<li><span class="telephone">Work:</span> <input <input onClick="rad(obj=$(this))" class="radio" type="radio" name="radio" value="Work" 
+					<li><span class="telephone">Work:</span> <input <input onClick="select_telephone_validation(obj=$(this))" class="radio" type="radio" name="radio" value="Work" 
 						<?= ($check == 'Work') ? 'checked' : '' ?>>
 					
 						<input data="number" type="text" name="Work" 
@@ -72,7 +73,7 @@
 						<div class="valid"></div>
 					</li>
 						
-					<li><span class="telephone">Cell:</span> <input onClick="rad(obj=$(this))" class="radio" type="radio" name="radio" value="Cell"
+					<li><span class="telephone">Cell:</span> <input onClick="select_telephone_validation(obj=$(this))" class="radio" type="radio" name="radio" value="Cell"
 						<?= ($check == 'Cell') ? 'checked' : '' ?>>
 					
 						<input data="number" type="text" name="Cell" 
@@ -137,7 +138,7 @@
 												
 					<?php for($i = 1; $i <= 31; $i++) : ?>
 					
-								<option value="<?= $i; ?>"><?= $i; ?></option>;	
+								<option> value="<?= $i; ?>"><?= $i; ?></option>;	
 										
 					<?php endfor; ?>
 												
@@ -162,7 +163,7 @@
 					<?php endfor; ?>
 												
 							</select>
-							
+						<div class="valid"></div>	
 				<?php } else { ?>
 				
 							<span class="date">Birth Date:</span>
@@ -179,7 +180,7 @@
 											
 					<?php for($i = 1; $i <= 12; $i++) : ?>
 					
-								<option value="<?= $i; ?>"><?= $i; ?></option>;
+								<option data="date" data-month="<?= $i; ?>" value="<?= $i; ?>"><?= $i; ?></option>;
 								
 					<?php endfor; ?>
 												
@@ -194,12 +195,12 @@
 												
 							</select>
 				<?php }?>
-				
+						<div class="valid"></div>
 					</li>
 					
 				</ul>
 				<div class="done">	
-					<input onClick="return sub(obj=$(this))" type="submit" name="information" value="Done">
+					<input type="submit" name="information" value="Done">
 				</div>
 			</form>
 		</div>
@@ -209,119 +210,6 @@
 	</div>
 	<?= (DEBUG === 1) ? '<div class="debug"><span>' . $test . '</span></div>' : '' ; ?>
 </div>
-<script>
 
-
-//validation
-
-$("input:radio:checked").next('input').attr("onChange", "validation(obj=$(this))");
-
-function rad(obj)
-{
-	$('input:radio').next('input').removeAttr("onChange");
-	$('input:radio').next('input').next('div').removeClass('yes').removeClass('no');
-	$(obj).next('input').attr("onChange", "validation(obj=$(this))");
-}
-
-function sub(obj)
-{
-	$('input[onChange]').each(function(index, value){
-		
-		if($(value).val() == '')
-		{
-			$(value).next('div').addClass('no')
-		}
-	});
-	
-	if($('div').is('.no'))
-		{
-			$(obj).css('color', 'red')
-			
-			setTimeout(function() {
-				$(obj).css('color', 'white')
-			}, 800);
-			
-			return false;
-		}
-	
-	return true;
-	
-}
-
-function validation(obj)
-{
-	var val = obj.attr('data').split(', ');
-	var valid = obj.val();
-	
-	$.each(val, function(index, value){
-		
-		if($.isNumeric(value))
-			{
-				if( valid.length < value && value < 30)
-				{
-					someclass = 'yes';
-				}	
-				else{
-					someclass = 'no';
-					return false;
-				}	
-			}
-		
-		switch(value)
-		{
-			case 'text':				
-				result =	valid.replace(/[a-zA-Z]/g, '');
-
-				if(result == '')
-				{
-					someclass = 'yes';
-				}
-				else{
-					someclass = 'no';
-				}
-				break;
-				
-			case 'mail':
-				result =	valid.replace(/[a-zA-Z@.]/g, '');
-				simbol = valid.search('@');
-				
-				if(result == '' && simbol != '-1')
-				{
-					someclass = 'yes';
-				}
-				else{
-					someclass = 'no';
-				}
-				break;
-			
-			case 'number':
-				result =	valid.replace(/[-0-9 ]/g, '');
-				
-				if(result == '')
-				{
-					someclass = 'yes';
-				}
-				else{
-					someclass = 'no';
-				}
-				break;
-				
-		}
-		
-		if( someclass == 'no')
-			{
-				return false;
-			}
-		else if(valid == '')
-			{
-				someclass = 'no';
-				return false;
-			}
-	});
-	
-	obj.next('div').removeClass('yes').removeClass('no').addClass(someclass);
-}
-
-</script>
 </body>
 </html>

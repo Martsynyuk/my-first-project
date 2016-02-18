@@ -17,30 +17,30 @@ class Contacts extends Controller
 	public function  add ($argument)
 	{
 		
-		$ğost = $this->post_controller();
+		$post = $this->post_controller();
 		
 		$user = $this->Login->user();
 		
 		$check = 'Work';
-		
+
 		if ( $post['radio'] === 'Home' )
 		{
 			$phone = $post['Home'];
 			$check = 'Home';
 		}
-				
+					
 		if ( $post['radio'] === 'Work' )
 		{
 			$phone = $post['Work'];
 			$check = 'Work';
 		}
-				
+					
 		if ( $post['radio'] === 'Cell' )
 		{
 			$phone = $post['Cell'];
 			$check = 'Cell';
 		}
-			
+		
 		if(!empty($post['FirstName']) && !empty($post['LastName']) && !empty($post['Email']) && !empty($post['radio']))
 		{
 			$new_contact = $this->Information->insert (
@@ -85,11 +85,9 @@ class Contacts extends Controller
 			
 			$this->view->set ( 'user', $user );
 			$this->view->set ( 'html', $this->view);
-			$this->view->set ( 'post', $post);
 			$this->view->set ( 'val', $val);
 			$this->view->set ( 'check', $check);
-			
-			var_dump($argument);
+			$this->view->set ( 'post', $post);
 			
 			$this->view->render ( $argument );		
 	}

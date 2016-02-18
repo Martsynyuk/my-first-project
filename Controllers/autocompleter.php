@@ -93,7 +93,7 @@ Class Autocompleter extends Controller
 	function date()
 	{
 
-		$date = date('Y-m-j', mt_rand(strtotime(1900-01-01), strtotime(2000-01-01)));;
+		$date = date('Y-m-j', mt_rand(strtotime(1900-01-01), strtotime(2000-01-01)));
 		
 		return $date;
 	}
