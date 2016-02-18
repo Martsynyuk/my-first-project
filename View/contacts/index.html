@@ -173,7 +173,7 @@
 											
 								<?php } else { ?>
 								
-									<a onClick='pagination(<?= $i ;?>)' class="page" href="
+									<a onClick=' pagination(<?= $i ;?>)' class="page" href="
 									
 									<?php
 											
@@ -228,106 +228,3 @@
 			</div>	
 			<?php } ?>
 		</div>
-<script>
-
-// pagination 
-
-$('div.pagination a').on('click', function(e) {
-	e.preventDefault();
-});
-
-$('a.delete').on('click', function(e) {
-	e.preventDefault();
-});
-
-$('div.cont_top a').on('click', function(e) {
-	e.preventDefault();
-});
-
-function pagination(page)
-{		
-	
-	var sortFirst = $('.active_sortFirst').attr('title');
-	var sortSecond = $('.active_sortSecond').attr('title');
-					
-	history.pushState(null, null, '/' + page + '/');
-					
-	$.ajax({
-		type: 'post',
-		url: '/contacts/ajax_contacts',
-		data:{'page': page, 'first': sortFirst, 'second': sortSecond},
-		response:'html',
-		success: function(data){
-			$('.cont').empty();
-			$('.cont').append(data);	
-		},
-		error: function(data){
-			alert('error')
-		}			  
-	});
-}		
-
-function sort(sortFirst, sortSecond)
-{
-	var page = $('.page_active').text();
-	
-	history.pushState(null, null, '/' + page + '/');
-					
-	$.ajax({
-		type: 'post',
-		url: '/contacts/ajax_contacts',
-		data:{'page': page, 'first': sortFirst, 'second': sortSecond},
-		response:'html',
-		success: function(data){
-			$('.cont').empty();
-			$('.cont').append(data);	
-		},
-		error: function(data){
-			alert('error')
-		}			  
-	});
-}
-
-// end pagination
-
-// delete 
-
-function window_for_delete(user, obj)
-{
-	$('#delete_contact').css('display', 'block');
-	user = user.split(', ');
-	$('#text').text('You really want to delete contact - ' + user[1] + ' ?');
-	$('#yes').attr('data', user)
-}
-
-function close_window_for_delete()
-{
-	$('#delete_contact').css('display', 'none');	
-}
-
-function delete_contact(user)
-{
-	user = user.split(',');
-	
-	$.ajax({
-		type: 'post',
-		url: '/contacts/ajax_contact_delete',
-		data:{'user': user[0]},
-		response:'html',
-		success: function(){
-			$('#yes').css('display', 'none');
-			$('#no').css('display', 'none');
-			$('#text').text('Contact ' + user[1] + ' deleted');
-			setTimeout(function() {
-				$('#delete_contact').css('display', 'none');
-				
-				pagination($('.page_active').text());
-			}, 2000);
-			
-		},
-				  
-	});
-		
-}
-
-</script> 

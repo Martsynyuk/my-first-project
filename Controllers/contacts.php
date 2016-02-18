@@ -17,7 +17,7 @@ class Contacts extends Controller
 	public function  add ($argument)
 	{
 		
-		$post = $this->post_controller();
+		$ðost = $this->post_controller();
 		
 		$user = $this->Login->user();
 		
@@ -88,7 +88,9 @@ class Contacts extends Controller
 			$this->view->set ( 'post', $post);
 			$this->view->set ( 'val', $val);
 			$this->view->set ( 'check', $check);
-		
+			
+			var_dump($argument);
+			
 			$this->view->render ( $argument );		
 	}
 		
@@ -952,7 +954,7 @@ class Contacts extends Controller
 		$this->view->render ( $argument );
 	}	
   
-	function ajax_contacts()
+	function ajax_index()
 	{
 		
 		if(isset($_POST['page'])) {
@@ -982,7 +984,7 @@ class Contacts extends Controller
 			$contact_class = $i + count($contacts) - 1; // last contact on page
 				
 			$argument[0] = 'contacts';
-			$argument[1] = 'ajax_contacts';
+			$argument[1] = 'ajax_index';
 				
 			$this->view->set ( 'count_contacts', $count_contacts );
 			$this->view->set ( 'count_for_pagin', $count_for_pagin );
