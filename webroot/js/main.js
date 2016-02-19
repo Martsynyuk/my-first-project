@@ -1,7 +1,8 @@
 
 // pagination 
+
 $( document ).ready(function() {
-	
+		
 	$('tr.top input').on('click', function(e) {
 		e.preventDefault();
 	});
@@ -13,25 +14,28 @@ $( document ).ready(function() {
 	$('div.pagination input').on('click', function(e) {
 		e.preventDefault();
 	});
-	
-	$('div.pagination a').on('click', function(e) {	
-		e.preventDefault();
-	});
-	
+
 	$('a.delete').on('click', function(e) {
 		e.preventDefault();
 	});
 	
+	
+	$('div.pagination a').on('click', function(e) {		
+		pagination(e);		
+	});
+	
+	
 	$('div.cont_top a').on('click', function(e) {
-		e.preventDefault();
+		sort(e);
 	});
 });
 
-function pagination(page)
-{		
-	
-	var sortFirst = $('.active_sortFirst').attr('title');
-	var sortSecond = $('.active_sortSecond').attr('title');
+function pagination(e)
+{	
+	e.preventDefault();
+	var page = $(e.currentTarget).attr('data');
+	var sortFirst = $('.active_sortFirst').attr('data');
+	var sortSecond = $('.active_sortSecond').attr('data');
 					
 	history.pushState(null, null, '/' + page + '/');
 					
@@ -53,9 +57,24 @@ function pagination(page)
 	});
 }		
 
-function sort(sortFirst, sortSecond)
+function sort(e)
 {
-	var page = $('.page_active').text();
+	var sorting = $(e.currentTarget).attr('data');
+	
+	if(sorting == 'FirstNameUp' || sorting == 'FirstNameDown')
+	{
+		var sortFirst = sorting;
+		var sortSecond = $('.active_sortSecond').attr('data');
+	}
+	else if(sorting == 'LastNameUp' || sorting == 'LastNameDown')
+	{
+		var sortFirst = $('.active_sortFirst').attr('data');
+		var sortSecond = sorting;
+	}
+	
+	e.preventDefault();
+	
+	var page = $('.page_active').attr('data');
 	
 	history.pushState(null, null, '/' + page + '/');
 					
@@ -107,7 +126,7 @@ function delete_contact(user)
 			$('#yes').css('display', 'none');
 			$('#no').css('display', 'none');
 			$('#text').text('Contact ' + user[1] + ' deleted');
-			
+
 			time = 3
 			startFrom = time;
 			$('#countdown span').text(startFrom).parent('p').show();

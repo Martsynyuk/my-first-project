@@ -20,7 +20,7 @@
 			<div class="cont_top">
 					<ul>
 							<li>First Name
-								<a title="FirstNameUp" onClick="sort('FirstNameUp', $('.active_sortSecond').attr('title'))" 
+								<a data="FirstNameUp" onClick="sort('FirstNameUp', $('.active_sortSecond').attr('data'))" 
 									<?= ( empty($argument['sortFirst']) || $argument['sortFirst']==='FirstNameUp') ? 'class="active_sortFirst"' : '' ;?> 
 										class="sort" href="
 										
@@ -34,7 +34,7 @@
 									?>
 									">&#8593</a>
 								
-								<a title="FirstNameDown" onClick="sort('FirstNameDown', $('.active_sortSecond').attr('title'))"
+								<a data="FirstNameDown" onClick="sort('FirstNameDown', $('.active_sortSecond').attr('data'))"
 								<?= ( $argument['sortFirst']==='FirstNameDown' ) ? 'class="active_sortFirst"' : '' ;?>
 									class="sort" href="
 									
@@ -50,7 +50,7 @@
 							</li>
 							
 							<li>Last Name
-							<a title="LastNameUp" onClick="sort($('.active_sortFirst').attr('title'), 'LastNameUp' )"
+							<a data="LastNameUp" onClick="sort($('.active_sortFirst').attr('data'), 'LastNameUp' )"
 							<?= ( empty($argument['sortSecond']) || $argument['sortSecond']==='LastNameUp' ) ? 'class="active_sortSecond"' : '' ;?>
 									class="sort" href="
 									
@@ -64,7 +64,7 @@
 									?>
 								">&#8593</a>
 					 
-							<a title="LastNameDown" onClick="sort($('.active_sortFirst').attr('title'), 'LastNameDown')"
+							<a data="LastNameDown" onClick="sort($('.active_sortFirst').attr('data'), 'LastNameDown')"
 							<?= ( $argument['sortSecond']==='LastNameDown' ) ? 'class="active_sortSecond"' : '' ;?>
 									class="sort" href="
 									
@@ -121,7 +121,7 @@
 							
 								<?php  if ($page != 1) : ?>
 								
-										<a onClick='pagination(<?= $page - 1 ;?>)' href="<?php
+										<a data="<?= $page - 1 ;?>" href="<?php
 						
 										echo '/';
 										
@@ -153,7 +153,7 @@
 							
 								<?php if ($i == $page) { ?>
 								
-									<a data="<?= $i ;?>" onClick='pagination(<?= $i ;?>)' class="page_active" href="
+									<a data="<?= $i ;?>" class="page_active" href="
 									<?php
 											
 													echo '/';
@@ -174,7 +174,7 @@
 											
 								<?php } else { ?>
 								
-									<a onClick=' pagination(<?= $i ;?>)' class="page" href="
+									<a data="<?= $i ;?>" class="page" href="
 									
 									<?php
 											
@@ -204,7 +204,7 @@
 											 
 							<?php if ($page != $count_pages) : ?>
 							
-							<a onClick='pagination(<?= $page + 1 ;?>)' href="<?php
+							<a data="<?= $page + 1 ;?>" href="<?php
 								
 										echo '/';
 											

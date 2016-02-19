@@ -8,7 +8,7 @@
 			<div class="cont_top">
 					<ul>
 							<li>First Name
-								<a title="FirstNameUp" onClick="sort('FirstNameUp', $('.active_sortSecond').attr('title'))"
+								<a data="FirstNameUp" onClick="sort('FirstNameUp', $('.active_sortSecond').attr('data'))"
 								<?= ( empty($argument['sortFirst']) || $argument['sortFirst']==='FirstNameUp') ? 'class="active_sortFirst"' : '' ;?> 
 										class="sort" href="
 												<?php if(!empty($argument['sortSecond']))
@@ -21,7 +21,7 @@
 									?>
 										">&#8593</a>
 								
-								<a title="FirstNameDown" onClick="sort('FirstNameDown', $('.active_sortSecond').attr('title'))"
+								<a data="FirstNameDown" onClick="sort('FirstNameDown', $('.active_sortSecond').attr('data'))"
 								<?= ( $argument['sortFirst']==='FirstNameDown' ) ? 'class="active_sortFirst"' : '' ;?>
 									class="sort" href="
 										<?php if(!empty($argument['sortSecond']))
@@ -36,7 +36,7 @@
 							</li>
 							
 							<li>Last Name
-							<a title="LastNameUp" onClick="sort($('.active_sortFirst').attr('title'), 'LastNameUp' )"
+							<a data="LastNameUp" onClick="sort($('.active_sortFirst').attr('data'), 'LastNameUp' )"
 							<?= ( empty($argument['sortSecond']) || $argument['sortSecond']==='LastNameUp' ) ? 'class="active_sortSecond"' : '' ;?>
 									class="sort" href="
 										<?php if(!empty($argument['sortFirst']))
@@ -49,7 +49,7 @@
 									?>
 									">&#8593</a>
 					 
-							<a title="LastNameDown" onClick="sort($('.active_sortFirst').attr('title'), 'LastNameDown')"
+							<a data="LastNameDown" onClick="sort($('.active_sortFirst').attr('data'), 'LastNameDown')"
 							<?= ( $argument['sortSecond']==='LastNameDown' ) ? 'class="active_sortSecond"' : '' ;?>
 									class="sort" href="
 										<?php if(!empty($argument['sortFirst']))
@@ -105,7 +105,7 @@
 							
 								<?php  if ($page != 1) : ?>
 								
-										<a onClick='pagination(<?= $page - 1 ;?>)' href="
+										<a data="<?= $page - 1 ;?>" href="
 											<?php
 						
 										echo '/';
@@ -137,7 +137,7 @@
 								
 								<?php if ($i == $page) { ?>
 								
-									<a onClick='pagination(<?= $i ;?>)' class="page_active" href="
+									<a data="<?= $i ;?>" class="page_active" href="
 											<?php
 											
 													echo '/';
@@ -157,7 +157,7 @@
 											
 								<?php } else { ?>
 									
-									<a onClick='pagination(<?= $i ;?>)' class="page" href="
+									<a data="<?= $i ;?>" class="page" href="
 												<?php
 											
 													echo '/';
@@ -184,7 +184,7 @@
 											 
 							<?php if ($page != $count_pages) : ?>
 							
-							<a onClick='pagination(<?= $page + 1 ;?>)' href="
+							<a data="<?= $page + 1 ;?>" href="
 								<?php
 								
 										echo '/';
@@ -212,7 +212,7 @@
 		</div>
 <script>
 $('div.pagination a').on('click', function(e) {
-	e.preventDefault();
+	pagination(e);
 });
 
 $('a.delete').on('click', function(e) {
