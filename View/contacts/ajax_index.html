@@ -8,7 +8,7 @@
 			<div class="cont_top">
 					<ul>
 							<li>First Name
-								<a data="FirstNameUp" onClick="sort('FirstNameUp', $('.active_sortSecond').attr('data'))"
+								<a data="FirstNameUp" 
 								<?= ( empty($argument['sortFirst']) || $argument['sortFirst']==='FirstNameUp') ? 'class="active_sortFirst"' : '' ;?> 
 										class="sort" href="
 												<?php if(!empty($argument['sortSecond']))
@@ -21,7 +21,7 @@
 									?>
 										">&#8593</a>
 								
-								<a data="FirstNameDown" onClick="sort('FirstNameDown', $('.active_sortSecond').attr('data'))"
+								<a data="FirstNameDown" 
 								<?= ( $argument['sortFirst']==='FirstNameDown' ) ? 'class="active_sortFirst"' : '' ;?>
 									class="sort" href="
 										<?php if(!empty($argument['sortSecond']))
@@ -36,7 +36,7 @@
 							</li>
 							
 							<li>Last Name
-							<a data="LastNameUp" onClick="sort($('.active_sortFirst').attr('data'), 'LastNameUp' )"
+							<a data="LastNameUp" 
 							<?= ( empty($argument['sortSecond']) || $argument['sortSecond']==='LastNameUp' ) ? 'class="active_sortSecond"' : '' ;?>
 									class="sort" href="
 										<?php if(!empty($argument['sortFirst']))
@@ -49,7 +49,7 @@
 									?>
 									">&#8593</a>
 					 
-							<a data="LastNameDown" onClick="sort($('.active_sortFirst').attr('data'), 'LastNameDown')"
+							<a data="LastNameDown" 
 							<?= ( $argument['sortSecond']==='LastNameDown' ) ? 'class="active_sortSecond"' : '' ;?>
 									class="sort" href="
 										<?php if(!empty($argument['sortFirst']))
@@ -220,7 +220,7 @@ $('a.delete').on('click', function(e) {
 });
 
 $('div.cont_top a').on('click', function(e) {
-	e.preventDefault();
+	sort(e)
 });
 
 </script>

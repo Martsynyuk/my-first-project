@@ -20,7 +20,7 @@
 			<div class="cont_top">
 					<ul>
 							<li>First Name
-								<a data="FirstNameUp" onClick="sort('FirstNameUp', $('.active_sortSecond').attr('data'))" 
+								<a data="FirstNameUp"  
 									<?= ( empty($argument['sortFirst']) || $argument['sortFirst']==='FirstNameUp') ? 'class="active_sortFirst"' : '' ;?> 
 										class="sort" href="
 										
@@ -34,7 +34,7 @@
 									?>
 									">&#8593</a>
 								
-								<a data="FirstNameDown" onClick="sort('FirstNameDown', $('.active_sortSecond').attr('data'))"
+								<a data="FirstNameDown" 
 								<?= ( $argument['sortFirst']==='FirstNameDown' ) ? 'class="active_sortFirst"' : '' ;?>
 									class="sort" href="
 									
@@ -50,7 +50,7 @@
 							</li>
 							
 							<li>Last Name
-							<a data="LastNameUp" onClick="sort($('.active_sortFirst').attr('data'), 'LastNameUp' )"
+							<a data="LastNameUp" 
 							<?= ( empty($argument['sortSecond']) || $argument['sortSecond']==='LastNameUp' ) ? 'class="active_sortSecond"' : '' ;?>
 									class="sort" href="
 									
@@ -64,7 +64,7 @@
 									?>
 								">&#8593</a>
 					 
-							<a data="LastNameDown" onClick="sort($('.active_sortFirst').attr('data'), 'LastNameDown')"
+							<a data="LastNameDown" 
 							<?= ( $argument['sortSecond']==='LastNameDown' ) ? 'class="active_sortSecond"' : '' ;?>
 									class="sort" href="
 									
