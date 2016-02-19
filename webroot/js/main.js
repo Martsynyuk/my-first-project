@@ -254,16 +254,7 @@ function checked_checkbox()
 		});
 	}
 	
-	var index = 0;
-	$("input:checkbox").each(function(key, val)
-	{
-		if($(val).is(':checked'))
-		{
-			
-			index++;
-		}
-	});
-	if(index == 5)
+	if($( "input:checked" ).length == 5)
 	{
 		$('th.all a').text('Off');
 	}
