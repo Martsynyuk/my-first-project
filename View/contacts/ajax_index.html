@@ -78,7 +78,7 @@
 								<li>
 									<a class="edit" href="<?= $html->url(array('controller'=>'contacts', 'action'=>'edit', 'id'=>$contact['id'])) ?>">edit</a> 
 									<a class="view" href="<?= $html->url(array('controller'=>'contacts', 'action'=>'view', 'id'=>$contact['id'])) ?>">view</a>
-									<a onClick="window_for_delete($(this).attr('data'), obj=$(this))" data="<?= $contact['id'] . ', ' .  $contact['FirstName']?>" class="delete" href="<?= $html->url(array('controller'=>'contacts', 'action'=>'delete', 'id'=>$contact['id'])) ?>"></a>
+									<a data="<?= $contact['id'] . ', ' .  $contact['FirstName']?>" class="delete" href="<?= $html->url(array('controller'=>'contacts', 'action'=>'delete', 'id'=>$contact['id'])) ?>"></a>
 								</li>
 							</ul>
 					</div>
@@ -212,11 +212,11 @@
 		</div>
 <script>
 $('div.pagination a').on('click', function(e) {
-	pagination(e);
+	pagination($(this).attr('data'), e);
 });
 
 $('a.delete').on('click', function(e) {
-	e.preventDefault();
+	window_for_delete(e);
 });
 
 $('div.cont_top a').on('click', function(e) {

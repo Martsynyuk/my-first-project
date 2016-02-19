@@ -16,12 +16,13 @@ $( document ).ready(function() {
 	});
 
 	$('a.delete').on('click', function(e) {
-		e.preventDefault();
+		window_for_delete(e);
+		
 	});
 	
 	
 	$('div.pagination a').on('click', function(e) {		
-		pagination(e);		
+		pagination($(this).attr('data'), e);		
 	});
 	
 	
@@ -30,10 +31,13 @@ $( document ).ready(function() {
 	});
 });
 
-function pagination(e)
+function pagination(page, e)
 {	
-	e.preventDefault();
-	var page = $(e.currentTarget).attr('data');
+
+	if(e != undefined )
+	{
+		e.preventDefault();
+	}
 	var sortFirst = $('.active_sortFirst').attr('data');
 	var sortSecond = $('.active_sortSecond').attr('data');
 					
@@ -100,10 +104,11 @@ function sort(e)
 
 // delete in index file 
 
-function window_for_delete(user, obj)
+function window_for_delete(e)
 {
+	e.preventDefault();
 	$('#delete_contact').css('display', 'block');
-	user = user.split(', ');
+	user = $(e.currentTarget).attr('data').split(', ');
 	$('#text').text('You really want to delete contact - ' + user[1] + ' ?');
 	$('#yes').attr('data', user)
 }
