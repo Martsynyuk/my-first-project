@@ -235,7 +235,7 @@ function check(obj)
 	}
 	
 	array = $.cookie('select').split(', ');
-	array = jQuery.unique(array)	
+	array = $.unique(array)	
 	check = array.join(', ');
 			
 	$.cookie('select', check, {expires: 1, path: '/'});
@@ -247,11 +247,25 @@ function checked_checkbox()
 	{
 		contacts_id = $.cookie('select').split(', ');
 
-		jQuery.each(contacts_id, function(key, value){
+		$.each(contacts_id, function(key, value){
 			
 			$("input:checkbox[data='" + value + "']").prop("checked", true);
 			
 		});
 	}
-
+	
+	var index = 0;
+	$("input:checkbox").each(function(key, val)
+	{
+		if($(val).is(':checked'))
+		{
+			
+			index++;
+		}
+	});
+	if(index == 5)
+	{
+		$('th.all a').text('Off');
+	}
+	
 }
