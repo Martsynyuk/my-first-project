@@ -34,7 +34,17 @@
 					<th class="all">
 						 <?php if( empty ( $argument['all'] ) ) 
 										{
-											 echo	'<a onClick="check_all(obj=$(this))" href="' . $_SERVER ['REQUEST_URI'] . 'all">All</a>' ;
+											 echo	'<a href="/contacts/select/';
+												
+												if( ! empty ($argument['sortFirst']) )
+												{
+													echo $argument['sortFirst'] . '/' ;
+												}
+												if( !empty($argument['sortSecond']))
+												{
+													echo $argument['sortSecond'] . '/';
+												}												
+												echo $page . '/all">All</a>' ;
 										}	
 										else{
 												echo '<a href="/contacts/select/';
@@ -56,7 +66,7 @@
 					
 					<th class="table_menu">First Name
 					
-						<input onClick="sort('FirstNameUp', $('.active_sortSecond').attr('name'))"  
+						<input data="FirstNameUp"   
 							<?= ( empty($argument['sortFirst']) || $argument['sortFirst']==='FirstNameUp') ? 'class="active_sortFirst"' : '' ;?> 
 							class="sort" type="submit" name="FirstNameUp" value="&#8593" formaction="
 								
@@ -71,7 +81,7 @@
 							" >
 						
 						
-						<input onClick="sort('FirstNameDown', $('.active_sortSecond').attr('name'))"
+						<input data="FirstNameDown"
 							<?= ( $argument['sortFirst']==='FirstNameDown' ) ? 'class="active_sortFirst"' : '' ;?>
 							class="sort" type="submit" name="FirstNameDown" value="&#8595" formaction="
 
@@ -89,7 +99,7 @@
 					</th>
 					<th class="table_menu">Last Name
 					
-						<input onClick="sort($('.active_sortFirst').attr('name'), 'LastNameUp')"
+						<input data="LastNameUp"
 						 <?= ( empty($argument['sortSecond']) || $argument['sortSecond']==='LastNameUp' ) ? 'class="active_sortSecond"' : '' ;?>
 							class="sort" type="submit" name="LastNameUp" value="&#8593" formaction=" 
 									
@@ -104,7 +114,7 @@
 							" >
 					 
 						
-						<input onClick="sort($('.active_sortFirst').attr('name'), 'LastNameDown')"
+						<input data="LastNameDown"
 							<?= ( $argument['sortSecond']==='LastNameDown' ) ? 'class="active_sortSecond"' : '' ;?>
 							class="sort" type="submit" name="LastNameDown" value="&#8595" formaction=" 							
 							
@@ -162,7 +172,7 @@
 					<li class="back_plase">
 						<?php  if ($page != 1) : ?>
 								
-						<input onClick="pagination(<?= $page - 1?>)" class="back" type="submit" name="page" value="" formaction="<?php
+						<input data="<?= $page - 1?>" class="back" type="submit" name="page" value="" formaction="<?php
 						
 										echo '/contacts/select/';
 										
@@ -193,7 +203,7 @@
 							<?php for ($i = $count_for_pagin[0]; $i <= $count_for_pagin[1]; $i++) { ?>
 									<?php if ($i == $page) { ?>
 							
-										<input onClick="pagination(<?= $i ?>)" class="page_active" type="submit" name="page" value="<?=$i?>" formaction="<?php
+										<input data="<?= $i?>" class="page_active" type="submit" name="page" value="<?=$i?>" formaction="<?php
 											
 													echo '/contacts/select/';
 														
@@ -211,7 +221,7 @@
 											>
 										
 									<?php } else { ?>
-											<input onClick="pagination(<?= $i?>)" class="page" type="submit" name="page" value="<?=$i?>" formaction="<?php
+											<input data="<?= $i?>" class="page" type="submit" name="page" value="<?=$i?>" formaction="<?php
 											
 													echo '/contacts/select/';
 														
@@ -235,7 +245,7 @@
 					<li class="next_plase">								 
 						<?php if ($page != $count_pages) : ?>
 						
-								<input onClick="pagination(<?= $page + 1?>)" class="next" type="submit" name="page" value="" formaction="<?php
+								<input data="<?= $page + 1?>" class="next" type="submit" name="page" value="" formaction="<?php
 								
 										echo '/contacts/select/';
 											
@@ -266,12 +276,13 @@
 	<div class="footer">
 		<span>&#169 2015 Wise Engineering</span>
 	</div>
+	<?php  $argument = json_encode($argument) ?>
 </div>
 <script>
-
+url = <?= $argument?>;
 // pagination
 
-$('tr.top input').on('click', function(e) {
+/*$('tr.top input').on('click', function(e) {
 	e.preventDefault();
 });
 
@@ -335,10 +346,10 @@ function sort(sortFirst, sortSecond)
 	});
 
 }
-
+*/
 // checkbox
 
-function check_all(obj)
+/*function check_all(obj)
 {
 	var checking_all = $(obj).text()
 	
@@ -422,6 +433,7 @@ function checked_checkbox()
 	}
 
 }
+*/
 </script> 
 </body>
 </html>

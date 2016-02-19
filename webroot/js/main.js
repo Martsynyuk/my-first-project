@@ -2,25 +2,24 @@
 // pagination 
 
 $( document ).ready(function() {
-		
+	
 	$('tr.top input').on('click', function(e) {
-		e.preventDefault();
+		sort(e);
 	});
 
 	$('tr.top a').on('click', function(e) {
-		e.preventDefault();
+		check_all(e);
 	});
 	
 	$('div.pagination input').on('click', function(e) {
-		e.preventDefault();
+		pagination($(this).attr('data'), e);
 	});
 
 	$('a.delete').on('click', function(e) {
 		window_for_delete(e);
 		
 	});
-	
-	
+		
 	$('div.pagination a').on('click', function(e) {		
 		pagination($(this).attr('data'), e);		
 	});
@@ -33,24 +32,31 @@ $( document ).ready(function() {
 
 function pagination(page, e)
 {	
-
 	if(e != undefined )
 	{
 		e.preventDefault();
 	}
 	var sortFirst = $('.active_sortFirst').attr('data');
 	var sortSecond = $('.active_sortSecond').attr('data');
-					
-	history.pushState(null, null, '/' + page + '/');
-					
+	
+	if(url[1] == 'index')
+	{
+		history.pushState(null, null, '/' + page + '/');
+	}
+	else{
+		history.pushState(null, null, '/'+ url[0] + '/' + url[1] + '/' + page + '/');
+	}
+						
 	$.ajax({
 		type: 'post',
-		url: '/contacts/ajax_index',
+		url: '/' + url[0] + '/ajax_' + url[1],
 		data:{'page': page, 'first': sortFirst, 'second': sortSecond},
 		response:'html',
 		success: function(data){
 			$('.cont').empty();
-			$('.cont').append(data);	
+			$('.cont').append(data);
+			$('.contact').empty();
+			$('.contact').append(data);
 		},
 		error: function(data){
 			alert('error')
@@ -63,8 +69,9 @@ function pagination(page, e)
 
 function sort(e)
 {
-	var sorting = $(e.currentTarget).attr('data');
 	
+	var sorting = $(e.currentTarget).attr('data');
+
 	if(sorting == 'FirstNameUp' || sorting == 'FirstNameDown')
 	{
 		var sortFirst = sorting;
@@ -75,21 +82,29 @@ function sort(e)
 		var sortFirst = $('.active_sortFirst').attr('data');
 		var sortSecond = sorting;
 	}
-	
+
 	e.preventDefault();
 	
 	var page = $('.page_active').attr('data');
-	
-	history.pushState(null, null, '/' + page + '/');
+	console.log(page);
+	if(url[1] == 'index')
+	{
+		history.pushState(null, null, '/' + page + '/');
+	}
+	else{
+		history.pushState(null, null, '/'+ url[0] + '/' + url[1] + '/' + page + '/');
+	}
 					
 	$.ajax({
 		type: 'post',
-		url: '/contacts/ajax_index',
+		url: '/' + url[0] + '/ajax_' + url[1],
 		data:{'page': page, 'first': sortFirst, 'second': sortSecond},
 		response:'html',
 		success: function(data){
 			$('.cont').empty();
-			$('.cont').append(data);	
+			$('.cont').append(data);
+			$('.contact').empty();
+			$('.contact').append(data);
 		},
 		error: function(data){
 			alert('error')
@@ -156,22 +171,24 @@ function delete_contact(user)
 
 //checkbox
 
-function check_all(obj)
+function check_all(e)
 {
-	var checking_all = $(obj).text()
-	
+	e.preventDefault();	
+	var checking_all = $(e.currentTarget).text()
+
 	if(checking_all == 'All')
 	{			
 		$("input:checkbox").prop("checked", true);
-		$(obj).text('Off');
+		$(e.currentTarget).text('Off');
 		$("input:checkbox").each(function(key, val){
 			check(val);
+			
 		});
 	}
 	else
 	{
 		$("input:checkbox").prop("checked", false);
-		$(obj).text('All');
+		$(e.currentTarget).text('All');
 		$("input:checkbox").each(function(key, val){
 			check(val);
 		});
@@ -226,10 +243,8 @@ function check(obj)
 
 function checked_checkbox()
 {
-	
 	if($.cookie('select') != null)
 	{
-		
 		contacts_id = $.cookie('select').split(', ');
 
 		jQuery.each(contacts_id, function(key, value){
