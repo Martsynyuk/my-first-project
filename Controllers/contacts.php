@@ -154,8 +154,6 @@ class Contacts extends Controller
 											)
 				
 									);
-		
-		//$contactUser = $this->contacts($contactUser);
 			
 		if ( ! empty ( $post['FirstName'] ) ) 
 		{
@@ -393,7 +391,7 @@ class Contacts extends Controller
 		$contacts = array ();
 		
 		$contacts = $this->return_contact ( $user['id'], $page, $argument['sortFirst'], $argument['sortSecond'] );
-		//$contacts = $this->contacts($contacts);
+		
 		if ( ! empty ($_COOKIE['select']) )
 		{
 			$checked = $this->get_cookie($_COOKIE['select']);
@@ -1002,7 +1000,6 @@ class Contacts extends Controller
 	
 	function ajax_select()
 	{
-		
 		if(isset($_POST['page'])) {
 	
 			$post = $this->post_controller();
@@ -1019,9 +1016,26 @@ class Contacts extends Controller
 			$count_contacts = $this->count_contacts($user['id']);
 	
 			$contacts = $this->return_contact ( $user['id'], $page, $argument['sortFirst'], $argument['sortSecond'] );
-	
-			//$contacts = $this->contacts($contacts); // users contacts
-	
+			
+			if(!empty($_COOKIE['select']))
+			{
+				$count = NULL;
+				
+				foreach ($contacts as $key=>$contact)
+				{
+					$num =  preg_match('/' . $contact['id'] . '/', $_COOKIE['select']);
+					
+					if($num == 1)
+					{
+						$count++;
+					}
+				}
+				if($count == ROWLIMIT)
+				{
+					$argument['all']  = 'all';
+				}
+			}
+			
 			$count_for_pagin = $this->count_pages ( $page );
 	
 			$i = 1;
@@ -1031,7 +1045,7 @@ class Contacts extends Controller
 	
 			$argument[0] = 'contacts';
 			$argument[1] = 'ajax_select';
-	
+			
 			$this->view->set ( 'count_contacts', $count_contacts );
 			$this->view->set ( 'count_for_pagin', $count_for_pagin );
 			$this->view->set ( 'page', $page );
@@ -1069,12 +1083,12 @@ class Contacts extends Controller
 	
 	function ajax_contact_delete()
 	{
-		if(!empty($_POST['user']))
+		if(!empty($_POST['contact']))
 		{
 			$post = $this->post_controller ();
 			$user = $this->Login->user();
 			
-			if ( ! $this->Information->contacts_defender ( $post['user'], $user['id'] ))
+			if ( ! $this->Information->contacts_defender ( $post['contact'], $user['id'] ))
 			{					
 				header('Location: /');
 			}

@@ -968,7 +968,7 @@ body{
 .clear{
 	clear: both;
 }
-.user_exist, .no_user{
+.input_text .user_exist, .input_text .no_user{
 	position: absolute;
 	height: 18px !important;
 	width: 30px !important;
@@ -978,13 +978,13 @@ body{
 	padding: 3px 5px !important;
 	margin-left: 78%;
 }
-.no_user{
+.input_text .no_user{
 	background: rgba(255, 69, 0, 1);
 }
-.user_exist{
+.input_text .user_exist{
 	background: rgba(50, 205, 50, 1);
 }
-.yes, .no{
+ul>li  .yes, ul>li .no{
 	width: 10px;
 	height: 10px;
 	border-radius: 5px;
@@ -993,13 +993,13 @@ body{
 	top: 20px;
 	z-index: 100;
 }
-.no{
+ul>li .no{
 	background: rgba(255, 69, 0, 1);
 }
-.yes{
+ul>li .yes{
 	background:rgba(50, 205, 50, 1);
 }
-.valid{
+ul>li .valid{
 	position: absolute;
 	left: 320px;
 	top: 20px;
@@ -1034,7 +1034,7 @@ body{
 	top: 50px;
 	position: absolute;
 }
-#delete_contact  #yes, #no{
+#delete_contact  #yes, #delete_contact #no{
 	bottom: 25px;
 	position: absolute;
 	font: 15px/20px Arial regular;
