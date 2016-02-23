@@ -3,23 +3,22 @@
 
 $( document ).ready(function() {
 	
-	$('tr.top input, div.cont_top a').on('click', function(e) {
+	$('.cont, .content').on('click', 'tr.top input, div.cont_top a',  function(e) {
 		sort(e);
 	});
-
-	$('tr.top a').on('click', function(e) {
+	
+	$('.cont, .content').on('click', 'tr.top a',  function(e) {
 		check_all(e);
 	});
-	
-	$('div.pagination input, div.pagination a').on('click', function(e) {
+		
+	$('.cont, .content').on('click', 'div.pagination input, div.pagination a', function(e) {
 		pagination($(this).attr('data'), e);
 	});
-
-	$('a.delete').on('click', function(e) {
-		window_for_delete(e);
-		
-	});
 	
+	$('.cont, .content').on('click', 'a.delete', function(e) {
+		window_for_delete(e);		
+	});
+
 });
 
 function pagination(page, e)
@@ -78,7 +77,7 @@ function sort(e)
 	e.preventDefault();
 	
 	var page = $('.page_active').attr('data');
-	console.log(page);
+	
 	if(url[1] == 'index')
 	{
 		history.pushState(null, null, '/' + page + '/');
