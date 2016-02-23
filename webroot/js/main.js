@@ -23,6 +23,8 @@ $( document ).ready(function() {
 
 function pagination(page, e)
 {	
+	var url = [$('.main').data('class'), $('.main').data('method')];
+
 	if(e != undefined )
 	{
 		e.preventDefault();
@@ -60,6 +62,7 @@ function pagination(page, e)
 
 function sort(e)
 {
+	var url = [$('.main').data('class'), $('.main').data('method')];
 	
 	var sorting = $(e.currentTarget).attr('data');
 

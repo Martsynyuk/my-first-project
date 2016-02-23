@@ -14,7 +14,7 @@
 
 </head>
 <body>
-<div class="main">
+<div data-class="<?= $argument['0']?>" data-method="<?= $argument['1']?>" class="main">
 	<div class="header">
 	<form name="selectcontact" method="POST">
 		<a href="/"><img src="/img/logotip.png" alt="logotip"></a>
@@ -276,10 +276,6 @@
 	<div class="footer">
 		<span>&#169 2015 Wise Engineering</span>
 	</div>
-	<?php  $argument = json_encode($argument) ?>
 </div>
-<script>
-url = <?= $argument?>;
-</script> 
 </body>
 </html>
