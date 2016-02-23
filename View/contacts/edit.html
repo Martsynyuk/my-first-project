@@ -141,7 +141,7 @@
 				<?php if(!empty($_GET['id'])) { ?>
 									
 						<span class="date">Birth Date:</span> 
-						<select size="1" name="day">
+						<select id="valid-day" onChange="validation(obj=$(this))" data="date" size="1" name="day">
 							<option value="<?= $backdate['day']; ?>"><?= $backdate['day']; ?></option>;
 												
 					<?php for($i = 1; $i <= 31; $i++) : ?>
@@ -151,7 +151,7 @@
 					<?php endfor; ?>
 												
 						</select>
-						<select size="1" name="month">
+						<select id="valid-month" onChange="validation(obj=$(this))" data="date" size="1" name="month">
 							<option value="<?= $backdate['month']; ?>"><?= $backdate['month']; ?></option>;
 												
 					<?php for($i = 1; $i <= 12; $i++) : ?>
@@ -161,7 +161,7 @@
 					<?php endfor; ?>	
 												
 						</select> 
-						<select size="1" name="year">
+						<select id="valid-year" onChange="validation(obj=$(this))" data="date" size="1" name="year">
 							<option value="<?= $backdate['year']; ?>"><?php echo $backdate['year']; ?></option>;
 												
 					<?php for($i = idate("Y")-100; $i <= idate("Y")-18; $i++) : ?>
@@ -171,11 +171,11 @@
 					<?php endfor; ?>	
 												
 						</select>
-											
+							<div class="valid"></div>				
 				<?php } else { ?>
 									
 						<span class="date">Birth Date:</span> 
-						<select size="1" name="day">	
+						<select id="valid-day" onChange="validation(obj=$(this))" data="date" size="1" name="day">	
 											
 					<?php for($i = 1; $i <= 31; $i++) : ?>
 					
@@ -184,7 +184,7 @@
 					<?php endfor; ?>	
 												
 						</select> 
-						<select size="1" name="month">	
+						<select id="valid-month" onChange="validation(obj=$(this))" data="date" size="1" name="month">	
 											
 					<?php for($i = 1; $i <= 12; $i++) : ?>
 					
@@ -193,7 +193,7 @@
 					<?php endfor; ?>	
 												
 						</select> 
-						<select size="1" name="year">
+						<select id="valid-year" onChange="validation(obj=$(this))" data="date" size="1" name="year">
 											
 					<?php for($i = idate("Y")-100; $i <= idate("Y")-18; $i++) : ?>
 					
@@ -204,7 +204,7 @@
 						</select>
 											
 				<?php }?>
-									
+					<div class="valid"></div>					
 					</li>
 				</ul>
 				<div class="done" >

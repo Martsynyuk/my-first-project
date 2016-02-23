@@ -10,26 +10,49 @@
 
 </head>
 <body>
-<p id="countdown">finish - <span></span></p>
-<button>Поехали!</button>
+
 
 <script>
 
-function startCountdown(){
+str = '1999-1-29'; // y-m-d
+
+var regular = /^[0-9]{4}\-[0-9]{1,2}\-[0-9]{1,2}$/i;
 	
-	startFrom = 2;
-	$('#countdown span').text(startFrom).parent('p').show();
-	$('button').hide();
-	timer = setInterval(function(){
-		$('#countdown span').text(--startFrom);
-    if(startFrom <= 0) {
-        clearInterval($('#countdown span'));
-        $('#countdown span').text('');
-        $('button').show();
+    if (!regular.test(str))
+    {
+    	console.log('bad date');
     }
-},1000);
-}
-$('button').click(startCountdown);
+    else{
+			var result = str.split('-');
+			
+	    var y = parseInt(result[0]);
+	    var m = parseInt(result[1]);
+	    var d = parseInt(result[2]);
+
+	    if (m < 1 || m > 12 || y < 1900 || y > 2000)
+	    {
+	    	console.log('bad year or month');
+	    }
+	    else{
+		    if (m == 2){
+		    	var days = ((y % 4) == 0) ? 29 : 28;
+		    } 
+		    else if(m == 4 || m == 6 || m == 9 || m == 11){
+		    	var days = 30;
+		    } 
+		    else{
+		    	var days = 31;
+		    }
+		    
+		    if(d >= 1 && d <= days)
+		    {
+		    		
+		    }
+		    else{
+		    	console.log('bad day');
+		    }
+	    }
+    }
 </script>
 
 </body>
