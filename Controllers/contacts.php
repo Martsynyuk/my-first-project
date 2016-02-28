@@ -21,6 +21,11 @@ class Contacts extends Controller
 		
 		$user = $this->Login->user();
 		
+		if ( empty ( $user['id'] ) )
+		{
+			header ( 'Location: /users/autorization' );
+		}
+		
 		$check = 'Work';
 
 		if ( $post['radio'] === 'Home' )
@@ -98,6 +103,11 @@ class Contacts extends Controller
 		$post = $this->post_controller ();
 		
 		$user = $this->Login->user();
+		
+		if ( empty ( $user['id'] ) )
+		{
+			header ( 'Location: /users/autorization' );
+		}
 		
 		if ( (int)($argument[2]) === 0 )
 		{
@@ -235,6 +245,11 @@ class Contacts extends Controller
 		
 		$user = $this->Login->user();
 		
+	  if ( empty ( $user['id'] ) )
+		{
+			header ( 'Location: /users/autorization' );
+		}
+		
 		$count_pages = ceil ( $this->count_contacts () / ROWLIMIT );
 		
 		if(! empty($_COOKIE['mails']) || ! empty($_COOKIE['new_mail']) )
@@ -261,12 +276,6 @@ class Contacts extends Controller
 				$argument['page'] = $val;
 			}
 			
-		}
-
-		if ( empty ( $user['id'] ) )
-		{
-			
-			header ( 'Location: /users/autorization' );
 		}
 
 		if ( empty ( $argument['page'] ) )
@@ -330,6 +339,11 @@ class Contacts extends Controller
 		$post = $this->post_controller ();	
 		
 		$user = $this->Login->user();
+		
+		if ( empty ( $user['id'] ) )
+		{
+			header ( 'Location: /users/autorization' );
+		}
 		
 		$count_pages = ceil ( $this->count_contacts ( $user['id'] ) / 5 );
 		
@@ -463,6 +477,13 @@ class Contacts extends Controller
 	public function view ( $argument )
 	{	
 		
+		$user = $this->Login->user();
+		
+		if ( empty ( $user['id'] ) )
+		{
+			header ( 'Location: /users/autorization' );
+		}
+		
 		if ( ( int ) ($argument[2]) > 0 )
 		{
 			
@@ -539,6 +560,11 @@ class Contacts extends Controller
 		
 		$post = $this->post_controller ();
 		$user = $this->Login->user();
+		
+		if ( empty ( $user['id'] ) )
+		{
+			header ( 'Location: /users/autorization' );
+		}
 		
 		$select = NULL;
 		

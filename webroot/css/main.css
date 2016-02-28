@@ -465,8 +465,7 @@ body{
 }
 .content .contact {
 	width: 720px;
-	margin: 0 100px 0 170px;
-	padding-top: 55px;
+	margin: 0 100px 0 150px;
 }
 .content .contact .table{
 	background: url(/img/contact_grad.png) repeat-x;

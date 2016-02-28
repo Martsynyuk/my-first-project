@@ -4,31 +4,39 @@
 $( document ).ready(function() {
 	
 	$('.cont, .content').on('click', 'tr.top input, div.cont_top a',  function(e) {
-		sort(e);
+		sort(obj=$(this));
+		e.preventDefault();
 	});
 	
 	$('.cont, .content').on('click', 'tr.top a',  function(e) {
-		check_all(e);
+		check_all(obj=$(this));
+		e.preventDefault();
 	});
 		
 	$('.cont, .content').on('click', 'div.pagination input, div.pagination a', function(e) {
-		pagination($(this).attr('data'), e);
+		pagination($(this).attr('data'));
+		e.preventDefault();
 	});
 	
 	$('.cont, .content').on('click', 'a.delete', function(e) {
-		window_for_delete(e);		
+		window_for_delete(obj=$(this));	
+		e.preventDefault();
 	});
 
 });
 
-function pagination(page, e)
+function main()
+{
+	this.ajax = ajax;
+	this.checked = checked_checkbox;
+}
+
+function pagination(page)
 {	
+	main.call();
+	
 	var url = [$('.main').data('class'), $('.main').data('method')];
 
-	if(e != undefined )
-	{
-		e.preventDefault();
-	}
 	var sortFirst = $('.active_sortFirst').attr('data');
 	var sortSecond = $('.active_sortSecond').attr('data');
 	
@@ -39,32 +47,17 @@ function pagination(page, e)
 	else{
 		history.pushState(null, null, '/'+ url[0] + '/' + url[1] + '/' + page + '/');
 	}
-						
-	$.ajax({
-		type: 'post',
-		url: '/' + url[0] + '/ajax_' + url[1],
-		data:{'page': page, 'first': sortFirst, 'second': sortSecond},
-		response:'html',
-		success: function(data){
-			$('.cont').empty();
-			$('.cont').append(data);
-			$('.contact').empty();
-			$('.contact').append(data);
-		},
-		error: function(data){
-			alert('error')
-		},
-		complete: function(){
-			checked_checkbox();
-		}
-	});
+	
+	var request = new main(); 
+	
+	this.ajax(url, page, sortFirst, sortSecond);
 }		
 
-function sort(e)
+function sort(obj)
 {
 	var url = [$('.main').data('class'), $('.main').data('method')];
 	
-	var sorting = $(e.currentTarget).attr('data');
+	var sorting = $(obj).attr('data');
 
 	if(sorting == 'FirstNameUp' || sorting == 'FirstNameDown')
 	{
@@ -77,8 +70,6 @@ function sort(e)
 		var sortSecond = sorting;
 	}
 
-	e.preventDefault();
-	
 	var page = $('.page_active').attr('data');
 	
 	if(url[1] == 'index')
@@ -88,7 +79,13 @@ function sort(e)
 	else{
 		history.pushState(null, null, '/'+ url[0] + '/' + url[1] + '/' + page + '/');
 	}
-					
+	
+	var request = new main(); 
+	
+	request.ajax(url, page, sortFirst, sortSecond);}
+
+function ajax(url, page, sortFirst, sortSecond)
+{
 	$.ajax({
 		type: 'post',
 		url: '/' + url[0] + '/ajax_' + url[1],
@@ -104,7 +101,8 @@ function sort(e)
 			alert('error')
 		},
 		complete: function(){
-			checked_checkbox();
+			var check = new main();
+			check.checked();
 		}
 	});
 }
@@ -113,11 +111,10 @@ function sort(e)
 
 // delete in index file 
 
-function window_for_delete(e)
+function window_for_delete(obj)
 {
-	e.preventDefault();
 	$('#delete_contact').css('display', 'block');
-	user = $(e.currentTarget).attr('data').split(', ');
+	user = $(obj).attr('data').split(', ');
 	$('#text').text('You really want to delete contact - ' + user[1] + ' ?');
 	$('#yes').attr('data', user)
 }
@@ -160,24 +157,22 @@ function delete_contact(contact)
 
 //checkbox
 
-function check_all(e)
+function check_all(obj)
 {
-	e.preventDefault();	
-	var checking_all = $(e.currentTarget).text()
+	var checking_all = $(obj).text()
 
 	if(checking_all == 'All')
 	{			
 		$("input:checkbox").prop("checked", true);
-		$(e.currentTarget).text('Off');
+		$(obj).text('Off');
 		$("input:checkbox").each(function(key, val){
-			check(val);
-			
+			check(val);		
 		});
 	}
 	else
 	{
 		$("input:checkbox").prop("checked", false);
-		$(e.currentTarget).text('All');
+		$(obj).text('All');
 		$("input:checkbox").each(function(key, val){
 			check(val);
 		});
@@ -207,8 +202,8 @@ function check(obj)
 			
 		}
 		else{
-			array = $.cookie('select').split(', ');
-			$.each(array, function(key, val){
+			var id = $.cookie('select').split(', ');
+			$.each(id, function(key, val){
 			
 				if(val == check)
 					{
@@ -242,5 +237,4 @@ function checked_checkbox()
 			
 		});
 	}
-	
 }

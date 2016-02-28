@@ -4,14 +4,13 @@ class Dispatcher {
 	
 	function __construct()
 	{
+		require_once APP . '/Lib/login_user.php';
+		require_once APP . '/Lib/View.php';
 		require_once APP . '/Controllers/controller.php';
 		require_once APP . '/Controllers/contacts.php';
 		require_once APP . '/Controllers/users.php';
 		require_once APP . '/Controllers/autocompleter.php';
-		require_once APP . '/Controllers/test.php';		
-		require_once APP . '/Lib/View.php';
-		require_once APP . '/Lib/login_user.php';
-		
+		require_once APP . '/Controllers/test.php';			
 	}
 	
 	public function dispatch ( $path ) 
@@ -50,7 +49,7 @@ class Dispatcher {
 		
 		$class = ucfirst ( $arguments[0] );
 
-		$object = new $class;	
+		$object = new $class;
 		
 		$object->$arguments[1]( $arguments );
 	

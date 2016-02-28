@@ -11,11 +11,17 @@ Class Users extends Controller
 	
 	public function autorization ( $argument )
 	{
-		
 		$post = $this->post_controller ();	
 		
-		if ( ! empty ( $post['login'] ) && ! empty ( $post['password'] ) )
+		$user = $this->Login->user();
+		
+		if (!empty($user))
 		{
+			header ( 'Location: /' );
+		}
+		
+		if ( ! empty ( $post['login'] ) && ! empty ( $post['password'] ) )
+		{		
 			$this->Login->login_user($post);
 		}
 					

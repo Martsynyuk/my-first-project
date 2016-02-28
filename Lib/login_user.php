@@ -2,7 +2,7 @@
 
 session_start ();
 
-class Login{
+Class Login{
 	
 	function login_user ( $post )
 	{
@@ -64,8 +64,7 @@ class Login{
 	}
 	
 	function user()
-	{
-		
+	{	
 		if ( ! empty ( $_SESSION['id'] ) && ! empty ( $_SESSION['login'] ))
 		{
 			
@@ -75,4 +74,5 @@ class Login{
 			return $user;
 		}
 	}
+	
 }

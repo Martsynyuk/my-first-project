@@ -2,26 +2,47 @@
  * 
  */
 	$("input:radio:checked").next('input').attr("onChange", "validation(obj=$(this))");
+	
+	/*function valid()
+	{
+		this.valid = validation;
+		this.valid_date = date_validation;
+	}*/
+	
+	function validations()
+	{
+		this.validate = validation;
+		this.date_validate = date_validation;
+		this.telephone_validate = select_telephone_validation;
+	}
 
 	function select_telephone_validation(obj)
 	{
+		validations.call();
+		
 		$('input:radio').next('input').removeAttr("onChange");
 		$('input:radio').next('input').next('div').removeClass('yes').removeClass('no');
 		$(obj).next('input').attr("onChange", "validation(obj=$(this))");
-		validation($(obj).next('input'));
+		
+		this.validate($(obj).next('input'));
 	}
 
 	function submit_stop(obj)
 	{
+		validations.call();
+		
 		$('input[onChange]').each(function(index, value){
 			
 			if($(value).val() == '')
 			{
 				$(value).next('div').addClass('no')
 			}
+			validation(object=$(value));
 		});
 		
-		if(date_validation())
+		this.telephone_validate(object = $($("input:radio:checked")));
+		
+		if(this.date_validate())
 		{
 			$('#valid-year').next('div').removeClass('no').addClass('yes');
 		}
@@ -45,7 +66,9 @@
 	}
 	
 	function validation(obj)
-	{
+	{	
+		validations.call();
+		
 		var val = obj.attr('data').split(', ');
 		var valid = obj.val();
 		
@@ -102,7 +125,7 @@
 					}
 					break;
 				case 'date':
-					if(date_validation())
+					if(this.date_validate())
 					{
 						someclass = 'yes';
 					}
@@ -131,8 +154,6 @@
 		str = $('#valid-year option').val() + '-'
 				+ $('#valid-month option').val() + '-'
 				+ $('#valid-day option').val();
-		
-		console.log(str);
 		
 		var regular = /^[0-9]{4}\-[0-9]{1,2}\-[0-9]{1,2}$/i;
 		
