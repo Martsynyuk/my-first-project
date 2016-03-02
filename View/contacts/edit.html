@@ -13,6 +13,9 @@
 <script src="/js/validation.js"></script>
 
 <body>
+<script>
+var valid = new Valid();
+</script>
 <div class="main">
 	<div class="header">
 		<a href="/"><img src="/img/logotip.png" alt="logotip"></a>
@@ -39,7 +42,7 @@
 				<ul>				
 					<li><span>First Name:</span> 
 					
-						<input data="text" class="input" type="text" name="FirstName"	onChange="validation(obj=$(this))"		
+						<input data="text" class="input" type="text" name="FirstName"	onChange="valid.validation($(this))"		
 							value="<?= ( ! empty ( $res['Firstname'])) ? $res['Firstname'] : '';?>"
 							size="25">
 							<div class="valid"></div>
@@ -47,7 +50,7 @@
 						
 					<li><span>Last Name:</span> 
 					
-						<input data="text" class="input" type="text" name="LastName" onChange="validation(obj=$(this))"
+						<input data="text" class="input" type="text" name="LastName" onChange="valid.validation($(this))"
 							value="<?= ( ! empty ( $res['Lastname'])) ? $res['Lastname'] : '';?>"
 							size="25">
 							<div class="valid"></div>
@@ -55,7 +58,7 @@
 					
 					<li><span>E-mail:</span>
 					
-						 <input data="mail" class="input" type="email" name="Email" onChange="validation(obj=$(this))"
+						 <input data="mail" class="input" type="email" name="Email" onChange="valid.validation($(this))"
 							value="<?= ( ! empty ( $res['Email'])) ? $res['Email'] : '';?>"
 							size="25">
 							<div class="valid"></div>
@@ -63,7 +66,7 @@
 					
 					<li><span class="telephone">Home:</span> 
 					
-						<input onClick="select_telephone_validation(obj=$(this))" class="radio" type="radio" name="radio" value="Home" 
+						<input onClick="valid.select_telephone_validation($(this))" class="radio" type="radio" name="radio" value="Home" 
 							<?= ($res['Home'] === $res['Telephone']) ? 'checked' : '' ; ?> >
 						<input data="number" class="input" type="text" name="Home" 
 							value="<?= ( ! empty ( $res['Home'])) ? $res['Home'] : '';?>" size="25">
@@ -72,7 +75,7 @@
 					
 					<li><span class="telephone">Work:</span> 
 					
-						<input onClick="select_telephone_validation(obj=$(this))" class="radio" type="radio" name="radio" value="Work"
+						<input onClick="valid.select_telephone_validation($(this))" class="radio" type="radio" name="radio" value="Work"
 							<?= ($res['Work'] === $res['Telephone']) ? 'checked' : '' ; ?>>
 						<input data="number" class="input" type="text" name="Work" 
 						value="<?= ( ! empty ( $res['Work'])) ? $res['Work'] : '';?>" size="25">
@@ -81,7 +84,7 @@
 					
 					<li><span class="telephone">Cell:</span>
 					
-						<input onClick="select_telephone_validation(obj=$(this))" class="radio" type="radio" name="radio" value="Cell"
+						<input onClick="valid.select_telephone_validation($(this))" class="radio" type="radio" name="radio" value="Cell"
 							<?= ($res['Cell'] === $res['Telephone']) ? 'checked' : '' ; ?>>
 						<input data="number" class="input" type="text" name="Cell" 
 						value="<?= ( ! empty ( $res['Cell'])) ? $res['Cell'] : '';?>" size="25">
@@ -90,7 +93,7 @@
 					
 					<li><span>Adress 1:</span>
 					
-						<input data="text" class="input" type="text" name="Adress1" onChange="validation(obj=$(this))"
+						<input data="text" class="input" type="text" name="Adress1" onChange="valid.validation($(this))"
 							value="<?= ( ! empty ( $res['Adress1'])) ? $res['Adress1'] : '';?>"
 							size="25">
 							<div class="valid"></div>
@@ -98,7 +101,7 @@
 					
 					<li><span>Adress 2:</span>
 					
-						<input data="text" class="input" type="text" name="Adress2" onChange="validation(obj=$(this))"
+						<input data="text" class="input" type="text" name="Adress2" onChange="valid.validation($(this))"
 							value="<?= ( ! empty ( $res['Adress2'])) ? $res['Adress2'] : '';?>"
 							size="25">
 							<div class="valid"></div>
@@ -106,14 +109,14 @@
 					
 					<li><span>City:</span> 
 					
-						<input data="text" class="input" type="text" name="City" onChange="validation(obj=$(this))"
+						<input data="text" class="input" type="text" name="City" onChange="valid.validation($(this))"
 							value="<?= ( ! empty ( $res['City'])) ? $res['City'] : '';?>" size="25">
 							<div class="valid"></div>
 					</li>
 					
 					<li><span>State:</span>
 					 
-						<input data="text" class="input" type="text" name="State" onChange="validation(obj=$(this))"
+						<input data="text" class="input" type="text" name="State" onChange="valid.validation($(this))"
 							value="<?= ( ! empty ( $res['State'])) ? $res['State'] : '';?>"
 							size="25">
 							<div class="valid"></div>
@@ -121,14 +124,14 @@
 					
 					<li><span>Zip:</span> 
 					
-						<input data="number" class="input" type="text" name="Zip" onChange="validation(obj=$(this))"
+						<input data="number" class="input" type="text" name="Zip" onChange="valid.validation($(this))"
 							value="<?= ( ! empty ( $res['Zip'] ) ) ? $res['Zip'] : '' ; ?>" size="25">
 							<div class="valid"></div>
 					</li>
 					
 					<li><span>Country:</span> 
 					
-						<input data="text" class="input" type="text" name="Country" onChange="validation(obj=$(this))"
+						<input data="text" class="input" type="text" name="Country" onChange="valid.validation($(this))"
 							value="<?= ( ! empty ( $res['Country'] ) ) ? $res['Country'] : '' ; ?>"
 							size="25">
 							<div class="valid"></div>
@@ -141,7 +144,7 @@
 				<?php if(!empty($_GET['id'])) { ?>
 									
 						<span class="date">Birth Date:</span> 
-						<select id="valid-day" onChange="validation(obj=$(this))" data="date" size="1" name="day">
+						<select id="valid-day" onChange="valid.validation($(this))" data="date" size="1" name="day">
 							<option value="<?= $backdate['day']; ?>"><?= $backdate['day']; ?></option>;
 												
 					<?php for($i = 1; $i <= 31; $i++) : ?>
@@ -151,7 +154,7 @@
 					<?php endfor; ?>
 												
 						</select>
-						<select id="valid-month" onChange="validation(obj=$(this))" data="date" size="1" name="month">
+						<select id="valid-month" onChange="valid.validation($(this))" data="date" size="1" name="month">
 							<option value="<?= $backdate['month']; ?>"><?= $backdate['month']; ?></option>;
 												
 					<?php for($i = 1; $i <= 12; $i++) : ?>
@@ -161,7 +164,7 @@
 					<?php endfor; ?>	
 												
 						</select> 
-						<select id="valid-year" onChange="validation(obj=$(this))" data="date" size="1" name="year">
+						<select id="valid-year" onChange="valid.validation($(this))" data="date" size="1" name="year">
 							<option value="<?= $backdate['year']; ?>"><?php echo $backdate['year']; ?></option>;
 												
 					<?php for($i = idate("Y")-100; $i <= idate("Y")-18; $i++) : ?>
@@ -175,7 +178,7 @@
 				<?php } else { ?>
 									
 						<span class="date">Birth Date:</span> 
-						<select id="valid-day" onChange="validation(obj=$(this))" data="date" size="1" name="day">	
+						<select id="valid-day" onChange="valid.validation($(this))" data="date" size="1" name="day">	
 											
 					<?php for($i = 1; $i <= 31; $i++) : ?>
 					
@@ -184,7 +187,7 @@
 					<?php endfor; ?>	
 												
 						</select> 
-						<select id="valid-month" onChange="validation(obj=$(this))" data="date" size="1" name="month">	
+						<select id="valid-month" onChange="valid.validation($(this))" data="date" size="1" name="month">	
 											
 					<?php for($i = 1; $i <= 12; $i++) : ?>
 					
@@ -193,7 +196,7 @@
 					<?php endfor; ?>	
 												
 						</select> 
-						<select id="valid-year" onChange="validation(obj=$(this))" data="date" size="1" name="year">
+						<select id="valid-year" onChange="valid.validation($(this))" data="date" size="1" name="year">
 											
 					<?php for($i = idate("Y")-100; $i <= idate("Y")-18; $i++) : ?>
 					
@@ -208,7 +211,7 @@
 					</li>
 				</ul>
 				<div class="done" >
-					<input onClick="return submit_stop(obj=$(this))" type="submit" name="information" value="Done">
+					<input onClick="return valid.submit_stop($(this))" type="submit" name="information" value="Done">
 				</div>
 			</form>
 		</div>

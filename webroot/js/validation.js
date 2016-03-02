@@ -1,19 +1,23 @@
 /**
  * 
  */
-	$("input:radio:checked").next('input').attr("onChange", "validation(obj=$(this))");
+"use strict";
+
+$("input:radio:checked").next('input').attr("onChange", "valid.validation($(this))");
 	
-	function select_telephone_validation(obj)
+class Valid
+{	
+	select_telephone_validation(obj)
 	{
 		
 		$('input:radio').next('input').removeAttr("onChange");
 		$('input:radio').next('input').next('div').removeClass('yes').removeClass('no');
-		$(obj).next('input').attr("onChange", "validation(obj=$(this))");
+		$(obj).next('input').attr("onChange", "valid.validation($(this))");
 		
-		validation($(obj).next('input'));
+		this.validation($(obj).next('input'));
 	}
 
-	function submit_stop(obj)
+	submit_stop(obj)
 	{
 		
 		$('input[onChange]').each(function(index, value){
@@ -22,12 +26,13 @@
 			{
 				$(value).next('div').addClass('no')
 			}
-			validation(object=$(value));
+			parent:valid.validation($(value));
+			
 		});
 		
-		select_telephone_validation(object = $($("input:radio:checked")));
+		this.select_telephone_validation($($("input:radio:checked")));
 		
-		if(date_validation())
+		if(this.date_validation())
 		{
 			$('#valid-year').next('div').removeClass('no').addClass('yes');
 		}
@@ -50,22 +55,22 @@
 		
 	}
 	
-	function validation(obj)
+	validation(obj)
 	{	
 		
 		var val = obj.attr('data').split(', ');
 		var valid = obj.val();
-		
+		console.log(valid);
 		$.each(val, function(index, value){
 			
 			if($.isNumeric(value))
 				{
 					if( valid.length < value && value < 30)
 					{
-						someclass = 'yes';
+						var someclass = 'yes';
 					}	
 					else{
-						someclass = 'no';
+						var someclass = 'no';
 						return false;
 					}	
 				}
@@ -73,48 +78,49 @@
 			switch(value)
 			{
 				case 'text':				
-					result = valid.replace(/[a-zA-Z]/g, '');
+					var result = valid.replace(/[a-zA-Z]/g, '');
 	
 					if(result == '')
 					{
-						someclass = 'yes';
+						var someclass = 'yes';
 					}
 					else{
-						someclass = 'no';
+						var someclass = 'no';
 					}
 					break;
 					
 				case 'mail':
-					result = valid.replace(/[a-zA-Z@.]/g, '');
-					simbol = valid.search('@');
+					var result = valid.replace(/[a-zA-Z@.]/g, '');
+					var simbol = valid.search('@');
 					
 					if(result == '' && simbol != '-1')
 					{
-						someclass = 'yes';
+						var someclass = 'yes';
 					}
 					else{
-						someclass = 'no';
+						var someclass = 'no';
 					}
 					break;
 				
 				case 'number':
-					result = valid.replace(/[-0-9 ]/g, '');
+					
+					var result = valid.replace(/[-0-9 ]/g, '');
 					
 					if(result == '')
 					{
-						someclass = 'yes';
+						var someclass = 'yes';
 					}
 					else{
-						someclass = 'no';
+						var someclass = 'no';
 					}
 					break;
 				case 'date':
 					if(date_validation())
 					{
-						someclass = 'yes';
+						var someclass = 'yes';
 					}
 					else{
-						someclass = 'no';
+						var someclass = 'no';
 					}
 					break;
 			}
@@ -125,17 +131,18 @@
 				}
 			else if(valid == '')
 				{
-					someclass = 'no';
+					var someclass = 'no';
 					return false;
 				}
+			
+			obj.next('div').removeClass('yes').removeClass('no').addClass(someclass);
 		});
 		
-		obj.next('div').removeClass('yes').removeClass('no').addClass(someclass);
 	}
 	
-	function date_validation()
+	date_validation()
 	{
-		str = $('#valid-year option').val() + '-'
+		var str = $('#valid-year option').val() + '-'
 				+ $('#valid-month option').val() + '-'
 				+ $('#valid-day option').val();
 		
@@ -179,3 +186,5 @@
 	    
 	    return true;
 	}
+}
+

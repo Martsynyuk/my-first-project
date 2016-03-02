@@ -105,7 +105,7 @@
 			<?php foreach ( $contacts as $contact ) : ?>		
 					<tr class="line">
 					<td> 
-						<input data="<?= $contact['id']; ?>" onClick="check(obj=$(this))" class="check" type="checkbox" name="<?= $contact['id']; ?>" value="<?= $contact['Email']; ?>" 
+						<input data="<?= $contact['id']; ?>" onClick="main.check($(this))" class="check" type="checkbox" name="<?= $contact['id']; ?>" value="<?= $contact['Email']; ?>" 
 										
 										<?php if( ! empty ($argument['all']) )
 												{	
