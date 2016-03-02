@@ -6,7 +6,7 @@
 $( document ).ready(function() {
 	
 	$('.cont, .content').on('click', 'tr.top input, div.cont_top a',  function(e) {
-		sort($(this).attr('data'));
+		sort($(this));
 		e.preventDefault();
 	});
 	
@@ -50,7 +50,7 @@ function sort(obj)
 {
 	var url = [$('.main').data('class'), $('.main').data('method')];
 	
-	var sorting = obj;
+	var sorting = $(obj).attr('data');
 
 	if(sorting == 'FirstNameUp' || sorting == 'FirstNameDown')
 	{
