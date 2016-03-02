@@ -1,15 +1,17 @@
 
+"use strict";
+
 // pagination 
 
 $( document ).ready(function() {
 	
 	$('.cont, .content').on('click', 'tr.top input, div.cont_top a',  function(e) {
-		sort(obj=$(this));
+		sort($(this).attr('data'));
 		e.preventDefault();
 	});
 	
 	$('.cont, .content').on('click', 'tr.top a',  function(e) {
-		check_all(obj=$(this));
+		check_all($(this));
 		e.preventDefault();
 	});
 		
@@ -19,21 +21,14 @@ $( document ).ready(function() {
 	});
 	
 	$('.cont, .content').on('click', 'a.delete', function(e) {
-		window_for_delete(obj=$(this));	
+		window_for_delete($(this));	
 		e.preventDefault();
 	});
-
+	
 });
-
-function main()
-{
-	this.ajax = ajax;
-	this.checked = checked_checkbox;
-}
 
 function pagination(page)
 {	
-	main.call();
 	
 	var url = [$('.main').data('class'), $('.main').data('method')];
 
@@ -48,16 +43,14 @@ function pagination(page)
 		history.pushState(null, null, '/'+ url[0] + '/' + url[1] + '/' + page + '/');
 	}
 	
-	var request = new main(); 
-	
-	this.ajax(url, page, sortFirst, sortSecond);
+	ajax(url, page, sortFirst, sortSecond);
 }		
 
 function sort(obj)
 {
 	var url = [$('.main').data('class'), $('.main').data('method')];
 	
-	var sorting = $(obj).attr('data');
+	var sorting = obj;
 
 	if(sorting == 'FirstNameUp' || sorting == 'FirstNameDown')
 	{
@@ -80,9 +73,9 @@ function sort(obj)
 		history.pushState(null, null, '/'+ url[0] + '/' + url[1] + '/' + page + '/');
 	}
 	
-	var request = new main(); 
-	
-	request.ajax(url, page, sortFirst, sortSecond);}
+	ajax(url, page, sortFirst, sortSecond);
+}
+
 
 function ajax(url, page, sortFirst, sortSecond)
 {
@@ -101,8 +94,8 @@ function ajax(url, page, sortFirst, sortSecond)
 			alert('error')
 		},
 		complete: function(){
-			var check = new main();
-			check.checked();
+		
+			checked_checkbox();
 		}
 	});
 }
@@ -114,7 +107,7 @@ function ajax(url, page, sortFirst, sortSecond)
 function window_for_delete(obj)
 {
 	$('#delete_contact').css('display', 'block');
-	user = $(obj).attr('data').split(', ');
+	var user = obj.attr('data').split(', ');	
 	$('#text').text('You really want to delete contact - ' + user[1] + ' ?');
 	$('#yes').attr('data', user)
 }
@@ -126,21 +119,22 @@ function close_window_for_delete()
 
 function delete_contact(contact)
 {
-	contact = contact.split(',');
-	
+	var contact = contact.split(',');
+	console.log(contact[0]);
 	$.ajax({
 		type: 'post',
 		url: '/contacts/ajax_contact_delete',
 		data:{'contact': contact[0]},
 		response:'html',
-		success: function(){
+		success: function(data){
+			console.log(data);
 			$('#yes').css('display', 'none');
 			$('#no').css('display', 'none');
 			$('#text').text('Contact ' + contact[1] + ' deleted');
 
-			startFrom = 3;
+			var startFrom = 3;
 			$('#countdown span').text(startFrom).parent('p').show();
-			timer = setInterval(function(){
+			var timer = setInterval(function(){
 				$('#countdown span').text(--startFrom);
 			    if(startFrom <= 0) {
 			        clearInterval(timer);
@@ -159,12 +153,12 @@ function delete_contact(contact)
 
 function check_all(obj)
 {
-	var checking_all = $(obj).text()
+	var checking_all = obj.text()
 
 	if(checking_all == 'All')
 	{			
 		$("input:checkbox").prop("checked", true);
-		$(obj).text('Off');
+		obj.text('Off');
 		$("input:checkbox").each(function(key, val){
 			check(val);		
 		});
@@ -172,7 +166,7 @@ function check_all(obj)
 	else
 	{
 		$("input:checkbox").prop("checked", false);
-		$(obj).text('All');
+		obj.text('All');
 		$("input:checkbox").each(function(key, val){
 			check(val);
 		});
@@ -206,19 +200,19 @@ function check(obj)
 			$.each(id, function(key, val){
 			
 				if(val == check)
-					{
-						array.splice($.inArray(val, array), 1);
+					{					
+						id.splice($.inArray(val, id), 1);
 					}
 			});
 			
-			check = array.join(', ');
+			var check = id.join(', ');
 			
 			$.cookie('select', check, {expires: 1, path: '/'});
 		}
 	 
 	}
 	
-	contact_id = $.cookie('select').split(', ');
+	var contact_id = $.cookie('select').split(', ');
 	contact_id = $.unique(contact_id)	
 	check = contact_id.join(', ');
 			
@@ -229,7 +223,7 @@ function checked_checkbox()
 {
 	if($.cookie('select') != null)
 	{
-		contacts_id = $.cookie('select').split(', ');
+		var contacts_id = $.cookie('select').split(', ');
 
 		$.each(contacts_id, function(key, value){
 			

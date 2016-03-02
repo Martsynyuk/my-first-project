@@ -1109,6 +1109,7 @@ class Contacts extends Controller
 	
 	function ajax_contact_delete()
 	{
+	
 		if(!empty($_POST['contact']))
 		{
 			$post = $this->post_controller ();
@@ -1119,7 +1120,7 @@ class Contacts extends Controller
 				header('Location: /');
 			}
 			
-			$this->Information->delete ( $post['user'] );
+			$this->Information->delete ( $post['contact'] );
 		}
 	}
 }
