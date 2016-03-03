@@ -30,7 +30,7 @@ class Valid
 			
 		});
 		
-		this.select_telephone_validation($($("input:radio:checked")));
+		this.select_telephone_validation($("input:radio:checked"));
 		
 		if(this.date_validation())
 		{
@@ -60,17 +60,18 @@ class Valid
 		
 		var val = obj.attr('data').split(', ');
 		var valid = obj.val();
-		console.log(valid);
+		var someclass = '';
+		
 		$.each(val, function(index, value){
 			
 			if($.isNumeric(value))
 				{
 					if( valid.length < value && value < 30)
 					{
-						var someclass = 'yes';
+						someclass = 'yes';
 					}	
 					else{
-						var someclass = 'no';
+						someclass = 'no';
 						return false;
 					}	
 				}
@@ -82,10 +83,10 @@ class Valid
 	
 					if(result == '')
 					{
-						var someclass = 'yes';
+						someclass = 'yes';
 					}
 					else{
-						var someclass = 'no';
+						someclass = 'no';
 					}
 					break;
 					
@@ -95,10 +96,10 @@ class Valid
 					
 					if(result == '' && simbol != '-1')
 					{
-						var someclass = 'yes';
+						someclass = 'yes';
 					}
 					else{
-						var someclass = 'no';
+						someclass = 'no';
 					}
 					break;
 				
@@ -108,19 +109,19 @@ class Valid
 					
 					if(result == '')
 					{
-						var someclass = 'yes';
+						someclass = 'yes';
 					}
 					else{
-						var someclass = 'no';
+						someclass = 'no';
 					}
 					break;
 				case 'date':
 					if(date_validation())
 					{
-						var someclass = 'yes';
+						someclass = 'yes';
 					}
 					else{
-						var someclass = 'no';
+						someclass = 'no';
 					}
 					break;
 			}
@@ -131,13 +132,14 @@ class Valid
 				}
 			else if(valid == '')
 				{
-					var someclass = 'no';
+					someclass = 'no';
 					return false;
 				}
 			
-			obj.next('div').removeClass('yes').removeClass('no').addClass(someclass);
+			
 		});
 		
+		obj.next('div').removeClass('yes').removeClass('no').addClass(someclass);
 	}
 	
 	date_validation()
