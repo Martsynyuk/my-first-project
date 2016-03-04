@@ -57,7 +57,6 @@ class Valid
 	
 	validation(obj)
 	{	
-		
 		var val = obj.attr('data').split(', ');
 		var valid = obj.val();
 		var someclass = '';
@@ -138,12 +137,13 @@ class Valid
 			
 			
 		});
-		
+		//console.log(someclass);
 		obj.next('div').removeClass('yes').removeClass('no').addClass(someclass);
 	}
 	
 	date_validation()
 	{
+		
 		var str = $('#valid-year option').val() + '-'
 				+ $('#valid-month option').val() + '-'
 				+ $('#valid-day option').val();
@@ -190,3 +190,4 @@ class Valid
 	}
 }
 
+var valid = new Valid();

@@ -15,22 +15,22 @@ $( document ).ready(function() {
 		main.delete_contact($(this).attr('data'));
 	});
 	
-	$('.cont, .content').on('click', 'tr.top input, div.cont_top a',  function(e) {
+	$('.cont, .content .cont_top a').on('click', '.top input, .cont_top a',  function(e) {
 		main.sort($(this));
 		e.preventDefault();
 	});
 	
-	$('.cont, .content').on('click', 'tr.top a',  function(e) {
+	$('.cont, .content').on('click', '.top a',  function(e) {
 		main.check_all($(this));
 		e.preventDefault();
 	});
 		
-	$('.cont, .content').on('click', 'div.pagination input, div.pagination a', function(e) {	
+	$('.cont .pagination a, .content').on('click', '.pagination input, .pagination a', function(e) {	
 		main.pagination($(this).attr('data'));
 		e.preventDefault();
 	});
 	
-	$('.cont, .content').on('click', 'a.delete', function(e) {
+	$('.cont, .content a.delete').on('click', 'a.delete', function(e) {
 		main.window_for_delete($(this));	
 		e.preventDefault();
 	});
@@ -61,6 +61,7 @@ class Main {
 	
 	sort(obj)
 	{
+		
 		var url = [$('.main').data('class'), $('.main').data('method')];
 		
 		var sorting = $(obj).attr('data');
@@ -119,6 +120,7 @@ class Main {
 	
 	window_for_delete(obj)
 	{
+		console.log('fusck');
 		$('#delete_contact').css('display', 'block');
 		var user = obj.attr('data').split(', ');	
 		$('#text').text('You really want to delete contact - ' + user[1] + ' ?');
