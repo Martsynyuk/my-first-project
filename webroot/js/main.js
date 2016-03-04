@@ -7,6 +7,14 @@ $( document ).ready(function() {
 	
 	var main = new Main();
 	
+	$('#delete_contact').on('click', '#close, #no', function(){
+		main.close_window_for_delete();
+	});
+	
+	$('#delete_contact').on('click', '#yes', function(){
+		main.delete_contact($(this).attr('data'));
+	});
+	
 	$('.cont, .content').on('click', 'tr.top input, div.cont_top a',  function(e) {
 		main.sort($(this));
 		e.preventDefault();
@@ -31,7 +39,7 @@ $( document ).ready(function() {
 
 
 class Main {
-
+	
 	pagination(page)
 	{	
 		
@@ -240,3 +248,5 @@ class Main {
 	}
 	
 }
+
+var main = new Main();
