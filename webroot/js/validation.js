@@ -4,6 +4,16 @@
 "use strict";
 
 $("input:radio:checked").next('input').attr("onChange", "valid.validation($(this))");
+
+$( document ).ready(function() {
+	
+	var valid = new Valid();
+	
+	$('#delete_contact').on('click', '#yes', function(){
+		main.delete_contact($(this).attr('data'));
+	});
+	
+});
 	
 class Valid
 {	
@@ -74,9 +84,10 @@ class Valid
 						return false;
 					}	
 				}
-			
+
 			switch(value)
 			{
+				
 				case 'text':				
 					var result = valid.replace(/[a-zA-Z]/g, '');
 	
@@ -115,7 +126,8 @@ class Valid
 					}
 					break;
 				case 'date':
-					if(date_validation())
+					
+					if(parent.valid.date_validation())
 					{
 						someclass = 'yes';
 					}
@@ -137,7 +149,7 @@ class Valid
 			
 			
 		});
-		//console.log(someclass);
+		
 		obj.next('div').removeClass('yes').removeClass('no').addClass(someclass);
 	}
 	
@@ -189,5 +201,3 @@ class Valid
 	    return true;
 	}
 }
-
-var valid = new Valid();
