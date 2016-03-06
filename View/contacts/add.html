@@ -14,9 +14,6 @@
 
 </head>
 <body>
-<script>
-//var valid = new Valid();
-</script>
 <div class="main">
 	<div class="header">
 		<a href="/"><img src="/img/logotip.png" alt="logotip"></a>
@@ -32,7 +29,7 @@
 			<form name="addcontact" method="POST" action="/contacts/add/">
 				<span class="information">Information</span>
 				<ul>				
-					<li><span>First Name:</span> <input data="text, 10" type="text" name="FirstName" onChange="valid.validation($(this))"
+					<li><span>First Name:</span><input class="validation" data="text, 10" type="text" name="FirstName"
 					
 						value="<?= ( ! empty ( $post['FirstName'] ) ) ?  $post['FirstName'] : '' ;?>"
 						size="25">
@@ -40,7 +37,7 @@
 						<div class="valid"></div>
 					</li>
 						
-					<li><span>Last Name:</span> <input data="text" type="text" name="LastName" onChange="valid.validation($(this))"
+					<li><span>Last Name:</span> <input class="validation" data="text" type="text" name="LastName"
 					
 						value="<?= ( ! empty ( $post['LastName'] ) ) ? $post['LastName'] : '';?>"
 						size="25">
@@ -48,7 +45,7 @@
 						<div class="valid"></div>
 					</li>
 						
-					<li><span>E-mail:</span> <input data="mail" onChange="valid.validation($(this))" type="email" name="Email" onChange="num(obj=$(this))"
+					<li><span>E-mail:</span> <input class="validation" data="mail" type="email" name="Email" 
 					
 						value="<?= ( ! empty ( $post['Email'] ) ) ? $post['Email'] : '';?>"
 						size="25">
@@ -57,30 +54,30 @@
 					</li>
 						
 					<li><span class="telephone">Home:</span>
-					<input onClick="valid.select_telephone_validation($(this))" class="radio" type="radio" name="radio" value="Home" 
+					<input class="radio" type="radio" name="radio" value="Home" 
 						<?= ($check == 'Home') ? 'checked' : '' ?>>
 					
-						<input data="number" type="text" name="Home" 
+						<input class="validation_tel" data="number" type="text" name="Home" 
 						value="<?= ( ! empty ( $post['Home'] ) ) ? $post['Home'] : '';?>"
 						size="25">
 						<?= ( empty ( $post['Home'] ) && $check == 'Home' ) ? '<div class="input_text">input some telephone</div>' : '' ;?>
 						<div class="valid"></div>
 					</li>
 					
-					<li><span class="telephone">Work:</span> <input <input onClick="valid.select_telephone_validation($(this))" class="radio" type="radio" name="radio" value="Work" 
+					<li><span class="telephone">Work:</span><input class="radio" type="radio" name="radio" value="Work" 
 						<?= ($check == 'Work') ? 'checked' : '' ?>>
 					
-						<input data="number" type="text" name="Work" 
+						<input class="validation_tel" data="number" type="text" name="Work" 
 						value="<?= ( ! empty ( $post['Work'] ) ) ? $post['Work'] : '';?>"
 						size="25">
 						<?= ( empty ( $post['Work'] ) && $check == 'Work' && $val == 1 ) ? '<div class="input_text">input some telephone</div>' : '' ;?>
 						<div class="valid"></div>
 					</li>
 						
-					<li><span class="telephone">Cell:</span> <input onClick="valid.select_telephone_validation($(this))" class="radio" type="radio" name="radio" value="Cell"
+					<li><span class="telephone">Cell:</span> <input class="radio" type="radio" name="radio" value="Cell"
 						<?= ($check == 'Cell') ? 'checked' : '' ?>>
 					
-						<input data="number" type="text" name="Cell" 
+						<input class="validation_tel" data="number" type="text" name="Cell" 
 						value="<?= ( ! empty ( $post['Cell'] ) ) ? $post['Cell'] : '';?>"
 						size="25">
 						<?= ( empty ( $post['Cell'] ) && $check == 'Cell' ) ? '<div class="input_text">input some telephone</div>' : '' ;?>
@@ -89,7 +86,7 @@
 					
 					<li><span>Adress 1:</span> 
 					
-						<input data="text" type="text" name="Adress1" onChange="valid.validation($(this))"
+						<input class="validation" data="text" type="text" name="Adress1"
 							value="<?= ( ! empty ( $post['Adress1'] ) ) ? $post['Adress1'] : '';?>"
 							size="25">
 							<div class="valid"></div>
@@ -97,7 +94,7 @@
 						
 					<li><span>Adress 2:</span> 
 					
-						<input data="text" type="text" name="Adress2" onChange="valid.validation($(this))"
+						<input class="validation" data="text" type="text" name="Adress2"
 							value="<?= ( ! empty ( $post['Adress2'] ) ) ? $post['Adress2'] : '';?>"
 							size="25">
 							<div class="valid"></div>
@@ -105,7 +102,7 @@
 					
 					<li><span>City:</span> 
 					
-						<input data="text" type="text" name="City" onChange="valid.validation($(this))"
+						<input class="validation" data="text" type="text" name="City"
 							value="<?= ( ! empty ( $post['City'] ) ) ? $post['City'] : '';?>"
 							size="25">
 							<div class="valid"></div>
@@ -113,7 +110,7 @@
 							
 					<li><span>State:</span> 
 					
-						<input data="text" type="text" name="State" onChange="valid.validation($(this))"
+						<input class="validation" data="text" type="text" name="State"
 							value="<?= ( ! empty ( $post['State'] ) ) ? $post['State'] : '';?>"
 							size="25">
 							<div class="valid"></div>
@@ -121,13 +118,13 @@
 					
 					<li><span>Zip:</span> 
 					
-						<input data="number" type="text" name="Zip" onChange="valid.validation($(this))"
+						<input class="validation" data="number" type="text" name="Zip"
 							value="<?= ( ! empty ( $post['Zip'] ) ) ? $post['Zip'] : '';?>" size="25">
 							<div class="valid"></div>
 					</li>
 					
 					<li><span>Country:</span> 
-						<input data="text" type="text" name="Country" onChange="valid.validation($(this))"
+						<input class="validation" data="text" type="text" name="Country"
 							value="<?= ( ! empty ( $post['Country'] ) ) ? $post['Country'] : '';?>"
 							size="25">
 							<div class="valid"></div>
@@ -137,7 +134,7 @@
 				<?php if(!empty($_GET['id'])) { ?>
 				
 							<span class="date">Birth Date:</span> 
-							<select id="valid-day" onChange="valid.validation($(this))" data="date" size="1" name="day">
+							<select id="valid-day" data="date" size="1" name="day">
 							<option value="<?= $backdate ['day']; ?>"><?= $backdate ['day']; ?></option>;
 												
 					<?php for($i = 1; $i <= 31; $i++) : ?>
@@ -147,7 +144,7 @@
 					<?php endfor; ?>
 												
 							</select> 
-							<select id="valid-month" data="date" onChange="valid.validation($(this))" size="1" name="month">
+							<select id="valid-month" data="date" size="1" name="month">
 							<option value="<?= $backdate ['month']; ?>"><?= $backdate ['month']; ?></option>;
 												
 					<?php for($i = 1; $i <= 12; $i++) : ?>
@@ -157,7 +154,7 @@
 					<?php endfor; ?>
 												
 							</select> 
-							<select id='valid-year' data="date" onChange="valid.validation($(this))" size="1" name="year">
+							<select id='valid-year' data="date" size="1" name="year">
 							<option value="<?= $backdate ['year']; ?>"><?= $backdate ['year']; ?></option>;
 												
 					<?php for ( $i = idate ( "Y" )-100; $i <= idate ( "Y" )-18; $i++) : ?>
@@ -171,7 +168,7 @@
 				<?php } else { ?>
 				
 							<span class="date">Birth Date:</span>
-							<select id="valid-day" onChange="valid.validation($(this))" data="date" size="1" name="day">	
+							<select id="valid-day" data="date" size="1" name="day">	
 											
 					<?php for($i = 1; $i <= 31; $i++) : ?>
 					
@@ -180,7 +177,7 @@
 					<?php endfor; ?>
 												
 							</select>
-							<select id="valid-month" onChange="valid.validation($(this))" data="date" size="1" name="month">	
+							<select id="valid-month" data="date" size="1" name="month">	
 											
 					<?php for($i = 1; $i <= 12; $i++) : ?>
 					
@@ -189,7 +186,7 @@
 					<?php endfor; ?>
 												
 							</select> 
-							<select id="valid-year" onChange="valid.validation($(this))" data="date" size="1" name="year">
+							<select id="valid-year" data="date" size="1" name="year">
 											
 					<?php for($i = idate("Y")-100; $i <= idate("Y")-18; $i++) : ?>
 					
@@ -204,7 +201,7 @@
 					
 				</ul>
 				<div class="done">	
-					<input onClick="return valid.submit_stop($(this))" type="submit" name="information" value="Done">
+					<input id="input" type="submit" name="information" value="Done">
 				</div>
 			</form>
 		</div>

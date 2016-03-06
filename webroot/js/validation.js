@@ -3,14 +3,18 @@
  */
 "use strict";
 
-$("input:radio:checked").next('input').attr("onChange", "valid.validation($(this))");
-
 $( document ).ready(function() {
 	
-	var valid = new Valid();
+	$('.done input').on('click', function(){
+		return valid.submit_stop($(this));
+	});
 	
-	$('#delete_contact').on('click', '#yes', function(){
-		main.delete_contact($(this).attr('data'));
+	$('.form form ul>li .validation, .form form ul>li .validation_tel').on('change', function(){
+		valid.validation($(this));
+	});
+	
+	$('.radio input').on('сhange', function(){
+		valid.select_telephone_validation($(this))
 	});
 	
 });
@@ -19,8 +23,6 @@ class Valid
 {	
 	select_telephone_validation(obj)
 	{
-		
-		$('input:radio').next('input').removeAttr("onChange");
 		$('input:radio').next('input').next('div').removeClass('yes').removeClass('no');
 		$(obj).next('input').attr("onChange", "valid.validation($(this))");
 		
@@ -30,17 +32,20 @@ class Valid
 	submit_stop(obj)
 	{
 		
-		$('input[onChange]').each(function(index, value){
+		$('.form form ul>li .validation').each(function(index, value){
 			
 			if($(value).val() == '')
 			{
 				$(value).next('div').addClass('no')
 			}
-			parent:valid.validation($(value));
-			
+			else{
+				parent:valid.validation($(value));
+			}
 		});
 		
-		this.select_telephone_validation($("input:radio:checked"));
+		$('.form form ul>li .validation_tel').each(function(index, value){
+			parent:valid.validation($(value));
+		});
 		
 		if(this.date_validation())
 		{
@@ -67,6 +72,7 @@ class Valid
 	
 	validation(obj)
 	{	
+		
 		var val = obj.attr('data').split(', ');
 		var valid = obj.val();
 		var someclass = '';
@@ -116,7 +122,7 @@ class Valid
 				case 'number':
 					
 					var result = valid.replace(/[-0-9 ]/g, '');
-					
+
 					if(result == '')
 					{
 						someclass = 'yes';
@@ -124,6 +130,7 @@ class Valid
 					else{
 						someclass = 'no';
 					}
+									
 					break;
 				case 'date':
 					
@@ -134,6 +141,7 @@ class Valid
 					else{
 						someclass = 'no';
 					}
+					
 					break;
 			}
 			
@@ -145,8 +153,7 @@ class Valid
 				{
 					someclass = 'no';
 					return false;
-				}
-			
+				}		
 			
 		});
 		
@@ -201,3 +208,5 @@ class Valid
 	    return true;
 	}
 }
+
+var valid = new Valid();

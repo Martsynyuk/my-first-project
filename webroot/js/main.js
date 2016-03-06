@@ -5,8 +5,6 @@
 
 $( document ).ready(function() {
 	
-	var main = new Main();
-	
 	$('#delete_contact').on('click', '#close, #no', function(){
 		main.close_window_for_delete();
 	});
