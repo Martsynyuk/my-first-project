@@ -137,8 +137,11 @@ body{
 	margin-right: 4px;
 }
 .content{	
+	margin-top: 20px;
 	padding: 10px 0 30px 0;
 	position: relative;
+	color: white;
+	font-weight: 500;
 }
 .content  .head{
 	position: absolute;
@@ -148,7 +151,7 @@ body{
 .head .header_menu{
 	width: 700px;
 	float: right;
-	padding-top: 35px;
+	padding-top: 15px;
 	max-height: 99px;
 	overflow: hidden;
 }
@@ -156,7 +159,7 @@ body{
 	display: inline-block;
 	font: 11pt Arial regular;
 	line-height: 20px;
-	margin-left: 50px;
+	margin-left: 30px;
 }
 .content .cont{
 	width: 720px;
@@ -211,8 +214,11 @@ body{
 	right: -20px;
 }
 .content .cont .string{
-	background: url(/img/contact_cont_grad.png) repeat-x;
+	#background: url(/img/contact_cont_grad.png) repeat-x;
 	height: 42px;
+}
+.table tr{
+	background: url(/img/contact_cont_grad.png) repeat-x;
 }
 .content .cont .string ul, .last-child ul{
 	font: 12pt Arial bold;
@@ -220,7 +226,7 @@ body{
 	padding: 15px 0 0 15px;
 }
 .content .cont .string ul>li:first-child, .last-child ul>li:first-child{
-	width: 30px;
+	#width: 30px;
 }
 .content .cont .string ul>li:last-child, .last-child ul>li:last-child{
 	width: 90px;
@@ -236,7 +242,7 @@ body{
 	background: url(/img/contact_last_child.png) repeat-x;
 	height: 48px;
 }
-.content .cont .string:hover .delete, .last-child:hover .delete{
+.content .cont tr:hover .delete, .last-child:hover .delete{
 	background: url(/img/delete.png) no-repeat;
 }
 .content .cont .cont_bottom_grad{
@@ -274,13 +280,29 @@ body{
 	color: 	#363636;
 	position: absolute;
 	right: -30px;
-	top: 15px;
+	top: 6px;
+}
+.table .action{
+	position: relative;
+	width: 90px;
+}
+
+.table .top{
+	background: url(/img/contact_top_grad.png) repeat-x;
+	border:15px;
 }
 .content .cont .edit{
 	background: url(/img/edit.png) no-repeat;
 	width: 35px;
 	height: 18px;
 	float: left;
+}
+.content .cont .edit:hover{
+	color: white;
+}
+.table tr>th .sort:hover {
+	color: red;
+	text-decoration: none;
 }
 .content .cont .view{
 	background: url(/img/view.png) no-repeat;
@@ -291,6 +313,7 @@ body{
 .content .cont .view, .edit{
 	text-align: center;
 	font: 10pt Arial regular;
+	color: white;
 }
 .content .active_sort{
 	color: red;
@@ -315,6 +338,9 @@ body{
 	border: 0;
 	cursor: pointer;
 	padding: 0;
+}
+.content .active_sortFirst:hover, .content .active_sortSecond:hover{
+	text-decoration: none;
 }
 .content .form{
 	background: url(/img/add_contact_grad.png) repeat-x;
@@ -551,6 +577,9 @@ body{
 	cursor: pointer;
 	padding: 0;
 }
+.table .sort{
+	color: white;
+}
 .content .contact .sort:hover{
 	color: red;
 }
@@ -579,6 +608,8 @@ body{
 	outline: none;
 	cursor: pointer;
 	border: 0;
+	padding: 0;
+	font-size: 16px;
 }
 .content .cont .page_active{
 	padding-left: 10px;
@@ -823,6 +854,7 @@ body{
 	margin-left: 90px;
 	position: relative;
 	padding-bottom: 50px;
+	margin-top: 0px;
 }
 .content .pagination ul{
 	padding: 10px 0;
@@ -836,15 +868,22 @@ body{
 	width: 100px;
 	padding-left: 20px;
 	position: absolute;
-	left: 30px;
-	top: 10px;
+	left: 5px;
+	top: 5px;
+}
+.content .pagination a, .content .pagination a:hover{
+	background: none;
+	border: none;
 }
 .content .pagination .next_plase{
 	height: 35px;
 	width: 50px;
 	position: absolute;
 	left: 395px;
-	top: 10px;
+	top: 5px;
+}
+.pagination .next_plase img{
+	max-width: none;
 }
 .content .pagination .page_plase{
 	height: 35px;
@@ -860,7 +899,7 @@ body{
 	position: absolute;
 	left: 165px;
 	text-align: center;
-	top: 10px;
+	top: 5px;
 }
 .footer{
 	width: 100%;
@@ -962,6 +1001,14 @@ body{
 	z-index: 100;
 	padding: 3px 5px !important;
 	margin-left: 78%;
+}
+.cont .table{
+	margin-bottom: 0;
+	border-collapse: inherit;
+}
+.cont .table th, .cont .table td{
+	border: 0;
+	padding: 6px 0 7px 8px;
 }
 .input_text .no_user{
 	background: rgba(255, 69, 0, 1);

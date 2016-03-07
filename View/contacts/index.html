@@ -25,9 +25,10 @@
 				<p id="countdown">windows close - <span></span></p>
 			</div>
 				<?php if ( ! empty ( $contacts ) ){ ?>
-			<div class="cont_top">
-					<ul>
-							<li>First Name
+				<table class="table">
+						<tr class="top">
+							<th></th>
+							<th>First Name
 								<a data="FirstNameUp"  
 									<?= ( empty($argument['sortFirst']) || $argument['sortFirst']==='FirstNameUp') ? 'class="active_sortFirst"' : '' ;?> 
 										class="sort" href="
@@ -55,9 +56,9 @@
 												}					
 									?>
 									">&#8595</a>
-							</li>
+							</th>
 							
-							<li>Last Name
+							<th>Last Name
 							<a data="LastNameUp" 
 							<?= ( empty($argument['sortSecond']) || $argument['sortSecond']==='LastNameUp' ) ? 'class="active_sortSecond"' : '' ;?>
 									class="sort" href="
@@ -85,31 +86,31 @@
 												}					
 									?>
 								">&#8595</a>
-						</li>	
-						<li>E-mail</li>
-						<li>Cellular</li>
-						<li>Action</li>
-					</ul>
-				</div>													
+							</th>	
+							<th>E-mail</th>
+							<th>Cellular</th>
+							<th>Action</th>
+						</tr>					
+					<tbody>												
 				<?php foreach ( $contacts as $contact ) : ?>
-				<div <?= ($contact_class === $i) ? 'class="last-child"' : 'class="string"' ;?> >
-						<ul>	
-							<li><?= $i . '.'; ?></td></li>
-							<li><?= $contact['FirstName']; ?></li>
-							<li><?= $contact['LastName']; ?></li>
-							<li><?= $contact['Email']; ?></li>
-							<li><?= $contact['Telephone']; ?></li>
-							<li>
+						<tr>	
+							<td><?= $i . '.'; ?></td>
+							<td><?= $contact['FirstName']; ?></td>
+							<td><?= $contact['LastName']; ?></td>
+							<td><?= $contact['Email']; ?></td>
+							<td><?= $contact['Telephone']; ?></td>
+							<td class="action">
 								<a class="edit" href="<?= $html->url(array('controller'=>'contacts', 'action'=>'edit', 'id'=>$contact['id'])) ?>">edit</a> 
 								<a class="view" href="<?= $html->url(array('controller'=>'contacts', 'action'=>'view', 'id'=>$contact['id'])) ?>">view</a>
 								<a data="<?= $contact['id'] . ', ' .  $contact['FirstName']?>" class="delete" href="<?= $html->url(array('controller'=>'contacts', 'action'=>'delete', 'id'=>$contact['id'])) ?>"></a>
-							</li>
-						</ul>
-				</div>
+							</td>
 				
 					<?php $i++;?>	
 					
 					<?php endforeach;?>	
+						</tr>
+						</tbody>
+					</table>
 				<div class="cont_bottom_grad"></div>	
 				<div class="pagination">
 				
