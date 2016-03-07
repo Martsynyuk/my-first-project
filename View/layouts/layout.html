@@ -6,8 +6,11 @@
 <meta name="keywords" content="">
 <meta name="description" content="">
 <title>project</title>
-<link rel="stylesheet" type="text/css" href="/css/main.css">
-<link rel="stylesheet" type="text/css" href="/css/reset.css">
+<!--<link rel="stylesheet" type="text/css" href="/css/main.css">
+<link rel="stylesheet" type="text/css" href="/css/reset.css">-->
+<link rel="stylesheet" type="text/css" href="/css/main_boot.css">
+<link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
+
 <script src="/js/jquery-2.2.0.js"></script>
 <script src="/js/jquery.cookie.js"></script>
 <script src="/js/main.js"></script>
@@ -15,16 +18,16 @@
 
 </head>
 <body>
-	<div data-class="<?= $argument['0']?>" data-method="<?= $argument['1']?>" class="main">
-		<div class="header">
+	<div data-class="<?= $argument['0']?>" data-method="<?= $argument['1']?>" class="container">
+		<div class="header span12">
 			<a href="/"><img src="/img/logotip.png" alt="logotip"></a>		
 		</div>
-		<div class="content">
+		<div class="content span12">
 		
 			<?= $block->render($argument) ?>
 			
 		</div>
-		<div class="footer">
+		<div class="footer span12">
 			<span>&#169 2015 Wise Engineering</span>
 		</div>
 		<?= (DEBUG === 1) ? '<div class="debug"><span>' . $sql . '</span></div>' : '' ; ?>

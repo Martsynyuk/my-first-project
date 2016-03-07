@@ -1,0 +1,1046 @@
+@CHARSET "UTF-8";
+
+body{
+	background-color: rgba(0, 0, 0, 1) !important;
+	height: 100%;
+}
+.main{
+	width: 980px;
+	margin: 0 auto;
+	background-color: rgba(0, 0, 0, 0.3);
+	color: white;
+	position: relative;
+	font-weight: 500;
+	font: 16px Arial regular;
+	min-height: 100%;
+}
+.main input{
+	font: 11pt Arial regular;
+}
+.main a {
+	text-decoration: none;
+	color: white;
+}
+.main a:hover{
+	color: rgba(211, 211, 211, 1);
+}
+.header{
+	height: 100px;
+}
+.header .header_menu{
+	width: 700px;
+	float: right;
+	padding-top: 35px;
+	max-height: 99px;
+	overflow: hidden;
+}
+.head .header_menu{
+	width: 700px;
+	float: right;
+	padding-top: 35px;
+	max-height: 99px;
+	overflow: hidden;
+}
+.header ul>li{
+	display: inline-block;
+}
+.header .header_menu ul>li{
+	font: 11pt Arial regular;
+	line-height: 20px;
+	margin-left: 50px;
+}
+.header .accept input{
+	background: none;
+	color: white;
+}
+.header .accept{
+	background: url(/img/button_grad.png) repeat-x;
+	height: 23px;
+	padding-left: 10px;
+	display: inline-block;
+	position: relative;
+}
+.header .accept:before{
+	background: url(/img/input_left.png) no-repeat;
+	height: 23px;
+	width: 24px;
+	content: '';
+	position: absolute;
+	left: -24px;
+}
+.header .accept:after{
+	background: url(/img/home_right.png) no-repeat;
+	height: 23px;
+	width: 11px;
+	content: '';
+	position: absolute;
+	right: -11px;
+}
+.header .autorization{
+	background: url(/img/button_grad.png) repeat-x;
+	height: 23px;
+	padding-left: 10px;
+	display: inline-block;
+	position: relative;
+}
+.header .autorization:before{
+	background: url(/img/autor_left.png) no-repeat;
+	height: 23px;
+	width: 31px;
+	content: '';
+	position: absolute;
+	left: -31px;
+}
+.header .autorization:after{
+	background: url(/img/home_right.png) no-repeat;
+	height: 23px;
+	width: 11px;
+	content: '';
+	position: absolute;
+	right: -11px;
+}
+.header .registration{
+	background: url(/img/button_grad.png) repeat-x;
+	height: 23px;
+	padding-left: 10px;
+	display: inline-block;
+	position: relative;
+}
+.header .registration:before{
+	background: url(/img/reg_left.png) no-repeat;
+	height: 23px;
+	width: 34px;
+	content: '';
+	position: absolute;
+	left: -34px;
+}
+.header .registration:after{
+	background: url(/img/home_right.png) no-repeat;
+	height: 23px;
+	width: 11px;
+	content: '';
+	position: absolute;
+	right: -11px;
+}
+.header .add_some{
+	background: url(/img/registration.png) no-repeat;
+	padding-left: 36px;
+	height: 23px;
+}
+.header .home, .content .header_menu  .home{
+	padding: 0px 14px;
+	border-radius: 10px;
+	font-size: 16px;
+	font-weight: 500;
+}
+.header_menu ul>li i{
+	margin-right: 4px;
+}
+.content{	
+	padding: 10px 0 30px 0;
+	position: relative;
+}
+.content  .head{
+	position: absolute;
+	top: -100px;
+	left: 270px;
+}
+.head .header_menu{
+	width: 700px;
+	float: right;
+	padding-top: 35px;
+	max-height: 99px;
+	overflow: hidden;
+}
+.content .header_menu ul>li{
+	display: inline-block;
+	font: 11pt Arial regular;
+	line-height: 20px;
+	margin-left: 50px;
+}
+.content .cont{
+	width: 720px;
+	margin: 0 auto;
+}
+.content .cont ul>li{
+	display: inline-block;
+}
+.content .cont .cont_top{
+	background: url(/img/contact_top_grad.png) repeat-x;
+	width: 680px;
+	height: 33px;
+	margin: 0 auto;
+	position: relative;
+}
+.content .cont .cont_top ul{
+	padding: 10px 0 0 30px;
+}
+.content .cont .cont_top ul>li{
+	width: 125px;
+	padding-left: 10px;
+}
+.content .cont .cont_top ul>li:last-child{
+	width: 70px;
+	padding-left: 20px;
+	text-align: center;
+}
+.content .cont .cont_top ul>li, .content .cont .cont_top ul>li a{
+	font: 12px Arial regular;
+	height: 18px;
+}
+.content .cont .cont_top ul>li a:hover{
+	color: red;
+	font-weight: 1000;
+}
+.content .cont .cont_top:before{
+	background: url(/img/contact_left_top.png) no-repeat;
+	content: '';
+	width: 20px;
+	height: 33px;
+	position: absolute;
+	top: 0;
+	left: -20px;
+}
+.content .cont .cont_top:after{
+	background: url(/img/contact_right_top.png) no-repeat;
+	content: '';
+	width: 20px;
+	height: 33px;
+	position: absolute;
+	top: 0;
+	right: -20px;
+}
+.content .cont .string{
+	background: url(/img/contact_cont_grad.png) repeat-x;
+	height: 42px;
+}
+.content .cont .string ul, .last-child ul{
+	font: 12pt Arial bold;
+	color: white;
+	padding: 15px 0 0 15px;
+}
+.content .cont .string ul>li:first-child, .last-child ul>li:first-child{
+	width: 30px;
+}
+.content .cont .string ul>li:last-child, .last-child ul>li:last-child{
+	width: 90px;
+	padding-left: 20px;
+}
+.content .cont .string ul>li, .last-child ul>li{
+	width: 130px;
+	height: 18px;
+	padding-left: 5px;
+	overflow: hidden;
+}
+.content .cont .last-child{
+	background: url(/img/contact_last_child.png) repeat-x;
+	height: 48px;
+}
+.content .cont .string:hover .delete, .last-child:hover .delete{
+	background: url(/img/delete.png) no-repeat;
+}
+.content .cont .cont_bottom_grad{
+	background: url(/img/cont_bottom_grad.png) repeat-x;
+	width: 680px;
+	height: 52px;
+	margin: 0 auto;
+	position: relative;
+}
+.content .cont .cont_bottom_grad:before{
+	background: url(/img/contact_left_bottom.png) no-repeat;
+	content: '';
+	width: 20px;
+	height: 52px;
+	position: absolute;
+	top: 0;
+	left: -20px;
+}
+.content .cont .cont_bottom_grad:after{
+	background: url(/img/contact_right_bottom.png) no-repeat;
+	content: '';
+	width: 20px;
+	height: 52px;
+	position: absolute;
+	top: 0;
+	right: -20px;
+}
+.content .cont ul{
+	position: relative;
+}
+.content .cont .delete{	
+	width: 30px;
+	height: 18px;
+	text-align: center;
+	color: 	#363636;
+	position: absolute;
+	right: -30px;
+	top: 15px;
+}
+.content .cont .edit{
+	background: url(/img/edit.png) no-repeat;
+	width: 35px;
+	height: 18px;
+	float: left;
+}
+.content .cont .view{
+	background: url(/img/view.png) no-repeat;
+	width: 43px;
+	height: 18px;
+	float: right; 
+}
+.content .cont .view, .edit{
+	text-align: center;
+	font: 10pt Arial regular;
+}
+.content .active_sort{
+	color: red;
+	width: 8px;
+	height: 25px;
+	font-size: 15px;
+	font-weight: 1000;
+	background: none;
+	outline: none;
+	border: 0;
+	cursor: pointer;
+	padding: 0;
+}
+.content .active_sortFirst, .content .active_sortSecond{
+	color: red;
+	width: 8px;
+	height: 25px;
+	font-size: 15px;
+	font-weight: 1000;
+	background: none;
+	outline: none;
+	border: 0;
+	cursor: pointer;
+	padding: 0;
+}
+.content .form{
+	background: url(/img/add_contact_grad.png) repeat-x;
+	width: 386px;
+	height: 631px;
+	margin: 0 auto;
+	position: relative;
+}
+.content .form  .view_plase{
+	width: 220px;
+}
+.content .form  .view_plase .info{
+	padding-left: 10px;
+	float: right;
+}
+.content .form:before{
+	background: url(/img/add_contact_left.png) no-repeat;
+	display: block;
+	width:20px;
+	height: 631px;
+	content: '';
+	left: -20px;
+	top: 0;
+	position: absolute;
+}
+.content .form:after{
+	background: url(/img/add_contact_right.png) no-repeat;
+	display: block;
+	width:22px;
+	height: 631px;
+	content: '';
+	right: -20px;
+	top: 0;
+	position: absolute;
+}
+.content .form .information{
+	display: block;
+	padding: 38px 0 14px 68px;
+	font: 16pt Arial regular;
+}
+.content .form ul{
+	padding: 0 0 0 68px;
+	width: 315px;
+	margin-bottom: 25px;
+}
+.content .form ul>li{
+	font: 11pt Arial regular;
+	padding-top: 14px;
+	height: 21px;
+	position: relative;
+}
+.content .form ul>li span{
+	float: left;
+	font: 11pt/21px Arial regular;
+}
+.content .form ul>li input{
+	float: right;
+	height: 21px;
+	width: 220px;
+	color: black;
+}
+.content .form ul>li .input_text{
+	position: absolute;
+	height: 14px;
+	padding: 5px 0 0 5px;
+	top: 30px;
+	left: 160px;
+	width: 150px;
+	color: red;
+	background: rgba(255, 255, 255, 0.2);
+ }
+.content .form ul>li .input{
+	height: 14px;
+	width: 210px;
+}
+.content .form ul>li .radio{
+	float: left;
+	width: 16px;
+	height: 16px;
+	margin-top: 4px;
+}
+.content .form ul>li .telephone{
+	width: 60px;
+}
+.content .form ul>li .date{
+	width: 95px;
+}
+.content .letter{
+	width: 600px;
+	margin: 100px auto 0;
+	height: 200px;
+}
+.content .letter .email{
+	width: 300px;
+	margin: 5px 5px 10px 5px;
+}
+.content .letter .text{
+	min-width: 309px;
+	margin: 5px 5px 10px 5px;
+	max-width: 480px;
+	min-height: 30px;
+	max-height: 100px
+}
+.content .letter .add input{
+	background: none;
+	width: 40px;
+	color: white;
+	overflow: hidden;
+}
+.content .letter .add{
+	background: url(/img/button_grad.png) repeat-x;
+	height: 23px;
+	width: 45px;
+	margin: 0 auto;
+	position: relative;
+}
+.content .letter .add:before{
+	background: url(/img/input_left.png) no-repeat;
+	height: 23px;
+	width: 24px;
+	content: '';
+	position: absolute;
+	left: -24px;
+	top: 0;
+}
+.content .letter .add:after{
+	background: url(/img/home_right.png) no-repeat;
+	height: 23px;
+	width: 11px;
+	content: '';
+	position: absolute;
+	right: -11px;
+	top: 0;
+}
+.content .contact {
+	width: 720px;
+	margin: 0 100px 0 150px;
+}
+.content .contact .table{
+	background: url(/img/contact_grad.png) repeat-x;
+	display: block;
+	width:660px;
+	height: 264px;
+	position: relative;
+}
+.content .contact .table .telephone{
+	width:100px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	padding-left: 20px;
+}
+.content .contact .table .emails{
+	overflow: hidden;
+	text-overflow: ellipsis;
+	width: 150px;
+}
+.content .contact .table:before{
+	background: url(/img/contact_left.png) no-repeat;
+	display: block;
+	width:20px;
+	height: 264px;
+	content: '';
+	left: -20px;
+	top: 0;
+	position: absolute;
+}
+.content .contact .table:after{
+	background: url(/img/contact_right.png) no-repeat;
+	display: block;
+	width:23px;
+	height: 264px;
+	content: '';
+	right: -20px;
+	top: 0;
+	position: absolute;
+}
+.content .contact .table .first_name{
+	width: 130px;
+	padding: 10px 0 3px 30px;
+}
+.content .contact .table .last_name{
+	width: 130px;
+	padding: 10px 0 3px 4px;
+}
+.content .contact .table .email{
+	width: 150px;
+	padding-top: 10px;
+}
+.content .contact .table .cell{
+	width: 118px;
+	padding: 10px 0 3px 20px;
+}
+.content .contact .table .name{
+	width: 130px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	padding-left: 5px;
+	padding-top: 17px;
+}
+.content .contact .table .action_plase{
+	width: 90px;
+	padding: 10px 0 3px 6px;
+	text-align: center;
+}
+.content .contact tr{
+	display: inline-block;
+	width: 712px;
+	height: 30px;
+	position: relative;
+	font: 13pt Arial bold;
+}
+.content .contact .top {
+	width: 700px;
+	height: 33px;
+	border-radius: 25px 25px 0 0;
+	font: 10pt Arial regular;
+}
+.content .contact tr>td {
+	padding-top: 20px;
+}
+.content .contact tr>td .check {
+	width: 16px;
+	height: 16px;
+	margin: 0 5px;
+}
+.content .contact .sort{
+	width: 8px;
+	height: 25px;
+	font-size: 15px;
+	font-weight: 800;
+	background: none;
+	outline: none;
+	border: 0;
+	cursor: pointer;
+	padding: 0;
+}
+.content .contact .sort:hover{
+	color: red;
+}
+.content .contact .view_contact{
+	background: linear-gradient(to top, #000, #fff);
+}
+.content .contact .page, .content .cont .page{
+	width: 20px;
+	background: none;
+	outline: none;
+	border: 0;
+	cursor: pointer;
+	padding: 0;
+	color: gray;
+}
+.content .cont .page{
+	padding-left: 10px;
+}
+.content  .contact  .pagination .page_plase a{
+	padding-left: 10px;
+}
+.content .contact .page_active, .content .cont .page_active{
+	background: none;
+	width: 20px;
+	color: white;
+	outline: none;
+	cursor: pointer;
+	border: 0;
+}
+.content .cont .page_active{
+	padding-left: 10px;
+}
+.contact .action{
+	width: 110px;
+	font: 13px Arial regular;
+	position: relative;
+}
+.contact .delete{		
+	width: 30px;
+	height: 18px;
+	text-align: center;
+	color: 	#363636;
+	position: absolute;
+	right: -35px;
+	top: 20px;
+	z-index: 500;
+}
+.contact .table tr:hover .delete{
+	background: url(/img/delete.png) no-repeat;
+}
+.contact .edit{
+	background: url(/img/edit.png) no-repeat;
+	border-radius: 7px;
+	width: 36px;
+	height: 18px;
+	float: left;
+	text-align: center;
+	margin-bottom: 3px;
+	margin-left: 28px;
+}
+.contact .number{
+	width: 25px;
+	height: 15px;
+	margin-top: 6px;
+}
+.content .next{
+	background: url(/img/next.png) no-repeat;
+	width: 80px;
+	height: 15px;
+	outline: none;
+	border: 0;
+	cursor: pointer;
+}
+.content  .contact .back{
+	background: url(/img/prew.png) no-repeat;
+	width: 80px;
+	height: 15px;
+	outline: none;
+	border: 0;
+	cursor: pointer;
+}
+.content  .contact  .pagination .back_plase a{
+	width: 80px;
+	height: 15px;
+	outline: none;
+	border: 0;
+	cursor: pointer;
+}
+.content .content_autorization{
+	margin: 0 auto;
+	padding: 20px 0 50px 0;
+	width: 368px;
+	height: 262px;
+	background: url(/img/login_grad.png) repeat-x;
+	position: relative;
+}
+.content .content_autorization .new_contact{
+	height: 20px;
+	width: 300px;
+}
+.content .content_autorization  .new_mail{
+	padding: 0px;
+	float: left;
+	margin-top: 4px;
+}
+.content .content_autorization span{
+	height: 20px;
+	width: 200px;
+	display: block;
+	padding-left: 25px;
+}
+.content .content_autorization .text{
+	width: 360px;
+	height: 30px;
+	display: block;
+}
+.content .content_autorization button{
+	background: url(/img/button_grad.png) repeat-x;
+	color: white;
+	border: 0;
+	height: 23px;
+	outline: none;
+	padding: 3px 0 0 0;
+	cursor: pointer;
+	margin-left: 45px;
+	padding: 1px 3px;
+	position: relative;
+	margin-top: 10px;
+}
+.content .content_autorization button:after{
+	background: url(/img/home_right.png) no-repeat;
+	height: 23px;
+	width: 11px;
+	content: '';
+	position: absolute;
+	right: -11px;
+	top: 0;
+}
+.content .content_autorization button:before{
+	background: url(/img/input_left.png) no-repeat;
+	height: 23px;
+	width: 24px;
+	content: '';
+	position: absolute;
+	left: -24px;
+	top: 0;
+}
+.content .content_autorization:before{
+	width: 30px;
+	height: 262px;
+	position: absolute;
+	content: '';
+	left: -30px;
+	top: 0;
+	background: url(/img/login_left.png) no-repeat;
+}
+.content .content_autorization:after{
+	width: 30px;
+	height: 262px;
+	position: absolute;
+	content: '';
+	right: -30px;
+	top: 0;
+	background: url(/img/login_right.png) no-repeat;
+}
+.content .content_autorization .name_menu{
+	padding: 5px 0 15px 70px;
+	font-size: 20px;
+	font: 16pt Arial regular; 
+}
+
+.content .content_autorization .input_text{
+	width: 300px;
+	padding: 10px 0 0 70px;
+}
+.content .content_autorization .input_text input{
+	width: 190px;
+} 
+.content .content_autorization .input_text p{
+	float: left;
+	width: 86px;
+	height: 20px;
+	line-height: 20px;
+	padding-top: 5px;
+	font: 11pt Arial regular;
+}
+.content .content_autorization ul{
+	padding-top: 15px;
+}
+.content .content_autorization li{
+	padding:5px 0 0 160px;
+	font: 11pt Arial regular;
+	text-decoration: underline;
+}
+.content .content_autorization .submit_autorization input{
+	background: none;
+	padding: 3px 5px 3px;
+	color: white;
+	width: 46px;
+	overflow: hidden;
+}
+.content .content_autorization .submit_autorization{
+	background: url(/img/button_grad.png) repeat-x;
+	width: 50px;
+	height: 23px;
+	outline: none;
+	border: 0;
+	color: white;
+	cursor: pointer;
+	margin: 30px 0 0 160px;
+	display: block;
+	position: relative;
+}
+.content .content_autorization .submit_autorization:after{
+	background: url(/img/home_right.png) no-repeat;
+	height: 23px;
+	width: 11px;
+	content: '';
+	position: absolute;
+	right: -11px;
+}
+.content .content_autorization .submit_autorization:before{
+	background: url(/img/input_left.png) no-repeat;
+	height: 23px;
+	width: 24px;
+	content: '';
+	position: absolute;
+	left: -24px;
+}
+.content .content_autorization .submit_registration input{
+	width: 90px;
+	background: none;
+	color: white;
+	overflow: hidden;
+}
+.content .content_autorization .submit_registration{
+	background: url(/img/button_grad.png) repeat-x;	
+	width: 95px;
+	height: 23px;
+	outline: none;
+	border: 0;
+	cursor: pointer;
+	margin: 30px 0 0 160px;
+	display: block;
+	position: relative;
+}
+.content .content_autorization .submit_registration:before{
+	background: url(/img/reg_left.png) no-repeat;
+	height: 23px;
+	width: 34px;
+	content: '';
+	position: absolute;
+	left: -34px;
+}
+.content .content_autorization .submit_registration:after{
+	background: url(/img/home_right.png) no-repeat;
+	height: 23px;
+	width: 11px;
+	content: '';
+	position: absolute;
+	right: -11px;
+}
+.content .content_autorization .submit:hover{
+	color: rgba(211, 211, 211, 0.2);
+}
+.content .pagination{
+	background: url(/img/bottom_menu.png) no-repeat;
+	width: 500px;
+	height: 45px;
+	margin-left: 90px;
+	position: relative;
+	padding-bottom: 50px;
+}
+.content .pagination ul{
+	padding: 10px 0;
+	height: 20px;
+}
+.content .pagination ul>li{
+	display: inline-block;
+}
+.content .pagination .back_plase{
+	height: 35px;
+	width: 100px;
+	padding-left: 20px;
+	position: absolute;
+	left: 30px;
+	top: 10px;
+}
+.content .pagination .next_plase{
+	height: 35px;
+	width: 50px;
+	position: absolute;
+	left: 395px;
+	top: 10px;
+}
+.content .pagination .page_plase{
+	height: 35px;
+	width: 180px;
+	position: absolute;
+	left: 165px;
+	text-align: center;
+	top: 6px;
+}
+.content .cont .pagination .page_plase{
+	height: 20px;
+	width: 180px;
+	position: absolute;
+	left: 165px;
+	text-align: center;
+	top: 10px;
+}
+.footer{
+	width: 100%;
+	position: absolute;
+	bottom: 0px;
+	height: 30px;
+	color: white;
+}
+.footer span{
+	display: block;
+	width: 200px;
+	margin: 0 auto;
+}
+.content .contact .all{
+	padding: 14px 4px 8px 3px;
+	width: 25px;
+}
+.content .contact .table_menu{
+	padding: 6px 0 1px 0;
+	width: 132px;
+	height: 15px;
+}
+.content .contact .cell_plase{
+	padding: 6px 0 1px 40px;
+	width: 132px;
+	height: 15px;
+}
+.content .done{
+	background: url(/img/button_grad.png) repeat-x;
+	margin: 34px 0 0 190px;
+	width: 50px;
+	position: relative;
+}
+.content .done:before{
+	background: url(/img/input_left.png) no-repeat;
+	height: 23px;
+	width: 24px;
+	content: '';
+	position: absolute;
+	left: -24px;
+	top: 0;
+}
+.content .done:after{
+	background: url(/img/home_right.png) no-repeat;
+	height: 23px;
+	width: 11px;
+	content: '';
+	position: absolute;
+	right: -11px;
+	top: 0;
+}
+.content .done input{
+	background: none;
+	color: white;
+	font: 11pt Arial regular;
+	width: 50px;
+	overflow: hidden;
+}
+.content .form .back{
+	background: url(/img/button_grad.png) repeat-x;
+	margin-left:140px;
+	margin-top: 50px;
+	padding: 3px 3px;
+	height: 23px;
+	position: relative;
+}
+.content .form .back:before{
+	background: url(/img/input_left.png) no-repeat;
+	height: 23px;
+	width: 24px;
+	content: '';
+	position: absolute;
+	left: -24px;
+	top: 0;
+}
+.content .form .back:after{
+	background: url(/img/home_right.png) no-repeat;
+	height: 23px;
+	width: 11px;
+	content: '';
+	position: absolute;
+	right: -11px;
+	top: 0;
+}
+.email{
+	width: 140px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.clear{
+	clear: both;
+}
+.input_text .user_exist, .input_text .no_user{
+	position: absolute;
+	height: 18px !important;
+	width: 30px !important;
+	border-radius: 15px;
+	top: 75px;
+	z-index: 100;
+	padding: 3px 5px !important;
+	margin-left: 78%;
+}
+.input_text .no_user{
+	background: rgba(255, 69, 0, 1);
+}
+.input_text .user_exist{
+	background: rgba(50, 205, 50, 1);
+}
+ul>li  .yes, ul>li .no{
+	width: 10px;
+	height: 10px;
+	border-radius: 5px;
+	position: absolute;
+	left: 320px;
+	top: 20px;
+	z-index: 100;
+}
+ul>li .no{
+	background: rgba(255, 69, 0, 1);
+}
+ul>li .yes{
+	background:rgba(50, 205, 50, 1);
+}
+ul>li .valid{
+	position: absolute;
+	left: 320px;
+	top: 20px;
+	z-index: 100;
+}
+#delete_contact{
+	width: 350px; 
+	height: 100px; 
+	border-radius: 5px;
+	border: 3px #000 solid;
+	background: #fff;
+	position: fixed; 
+	top: 45%; 
+	left: 50%; 
+	margin-top: -200px;
+	margin-left: -175px; 
+	display: none;  
+	z-index: 5; 
+	padding: 20px 10px;
+	color: black;
+}
+#delete_contact #close {
+	width: 14px;
+	height: 21px;
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	cursor: pointer;
+	display: block;
+}
+#delete_contact  #text{
+	top: 50px;
+	position: absolute;
+}
+#delete_contact  #yes, #delete_contact #no{
+	bottom: 25px;
+	position: absolute;
+	font: 15px/20px Arial regular;
+	font-weight: 500;
+	width: 50px;
+	border-radius: 3px 7px;
+	height: 20px;
+	text-align: center;
+	background: gray;
+	color: white;
+	cursor: pointer;
+}
+#delete_contact  #yes{
+	left: 30%;
+}
+#delete_contact #no{
+	left: 50%;
+}
+#countdown{
+	display: none;
+	bottom: 10px;
+	right:10px;
+	position: absolute;
+}

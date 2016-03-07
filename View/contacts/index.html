@@ -1,10 +1,18 @@
 		<div class="head">
 			<div class="header_menu">
 			<ul>	
-				<li><a class="home" href="<?= $html->url(array()) ?>">Home</a> </li>				
-				<li><a class="home" href=" <?= $html->url(array('controller'=>'users', 'action'=>'logout')) ?>">Logout</a> </li>
-				<li><a class="home" href=" <?= $html->url(array('controller'=>'contacts', 'action'=>'add')) ?>">Add contact</a></li>
-				<li><a class="home" href="<?= $html->url(array('controller'=>'contacts', 'action'=>'letter')) ?>">Letter</a></li>
+				<li><a class="home btn btn-inverse" href="<?= $html->url(array()) ?>">
+						<i class="icon-home icon-white"></i> Home</a>
+				</li>				
+				<li><a class="home btn btn-inverse" href=" <?= $html->url(array('controller'=>'users', 'action'=>'logout')) ?>">
+						<i class="icon-off icon-white"></i> Logout</a>
+				</li>
+				<li><a class="home btn btn-inverse" href=" <?= $html->url(array('controller'=>'contacts', 'action'=>'add')) ?>">
+						<i class="icon-plus icon-white"></i> Add contact</a>
+				</li>
+				<li><a class="home btn btn-inverse" href="<?= $html->url(array('controller'=>'contacts', 'action'=>'letter')) ?>">
+						<i class="icon-envelope icon-white"></i>	Letter</a>
+				</li>
 			</ul>
 		</div>
 		</div>
