@@ -4,6 +4,8 @@
 // pagination 
 
 $( document ).ready(function() {
+	
+	//main.method();
 
 	$('#delete_contact').on('click', '#close, #no', function(){
 		main.close_window_for_delete();
@@ -253,3 +255,8 @@ class Main {
 }
 
 var main = new Main();
+
+main.method = function(){
+	
+	console.log('some text');
+}

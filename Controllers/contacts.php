@@ -101,7 +101,7 @@ class Contacts extends Controller
 	{
 		
 		$post = $this->post_controller ();
-		
+		//var_dump($post);
 		$user = $this->Login->user();
 		
 		if ( empty ( $user['id'] ) )
@@ -118,7 +118,7 @@ class Contacts extends Controller
 		{
 			header ( 'Location: /' );
 		}
-				
+		
 		$contactUser = $this->Information->select(
 				
 											$what = array(
@@ -164,7 +164,7 @@ class Contacts extends Controller
 											)
 				
 									);
-			
+		
 		if ( ! empty ( $post['FirstName'] ) ) 
 		{
 			
@@ -190,7 +190,7 @@ class Contacts extends Controller
 					$phone = $post['Cell'];
 				}
 			}
-				
+			echo 'fuck';
 			$this->Information->update (
 					
 								$what = array(

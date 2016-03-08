@@ -26,7 +26,7 @@
 	<div class="content">
 		<div class="form">
 			<form name="editcontact" method="POST"
-							action="<?= 'cotacts/edit/' . $get['id'] ?>">
+							action="<?= '/contacts/edit/' . $get['id'] ?>">
 			
 			<?php 
 			
@@ -39,7 +39,7 @@
 				<ul>				
 					<li><span>First Name:</span> 
 					
-						<input data="text" class="input validation" type="text"		
+						<input data="text" class="input validation" name="FirstName" type="text"		
 							value="<?= ( ! empty ( $res['Firstname'])) ? $res['Firstname'] : '';?>"
 							size="25">
 							<div class="valid"></div>
