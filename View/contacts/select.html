@@ -14,9 +14,6 @@
 
 </head>
 <body>
-<script>
-var main = new Main();
-</script>
 <div data-class="<?= $argument['0']?>" data-method="<?= $argument['1']?>" class="container main">
 	<div class="header">
 	<form name="selectcontact" method="POST">
@@ -139,7 +136,7 @@ var main = new Main();
 			<?php foreach ( $contacts as $contact ) : ?>		
 					<tr class="line">
 					<td> 
-						<input data="<?= $contact['id']; ?>" onClick="main.check($(this))" class="check" type="checkbox" name="<?= $contact['id']; ?>" value="<?= $contact['Email']; ?>" 
+						<input data="<?= $contact['id']; ?>" class="check" type="checkbox" name="<?= $contact['id']; ?>" value="<?= $contact['Email']; ?>" 
 										
 										<?php if( ! empty ($argument['all']) )
 												{	

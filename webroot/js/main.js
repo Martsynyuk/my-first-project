@@ -13,7 +13,7 @@ $( document ).ready(function() {
 		main.delete_contact($(this).attr('data'));
 	});
 	
-	$('.cont, .contact').on('click', '.top input, .top a',  function(e) {
+	$('.cont, .contact').on('click', '.sort, active_sortFirst, active_sortSecond',  function(e) {
 		main.sort($(this));
 		e.preventDefault();
 	});
@@ -21,6 +21,10 @@ $( document ).ready(function() {
 	$('.contact').on('click', '.top a',  function(e) {
 		main.check_all($(this));
 		e.preventDefault();
+	});
+	
+	$('.contact').on('click', '.check', function(){
+		main.check($(this));
 	});
 		
 	$('.cont .pagination ul>li a, .content').on('click', '.pagination input, .pagination a', function(e) {	
