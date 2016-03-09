@@ -127,10 +127,24 @@
 				
 					<ul>
 							<li class="back_plase">
-							
+										<a class="arrow" data="1" href="<?php
+						
+										echo '/';
+										
+										if( ! empty ($argument['sortFirst']) )
+										{
+											echo $argument['sortFirst'] . '/' ;
+										}
+										if( !empty($argument['sortSecond']))
+										{
+											echo $argument['sortSecond'] . '/';
+										}
+											echo '1/';
+										?>"
+										>&#xf04a</a>
 								<?php  if ($page != 1) : ?>
 								
-										<a data="<?= $page - 1 ;?>" href="<?php
+										<a class="prew" data="<?= $page - 1 ;?>" href="<?php
 						
 										echo '/';
 										
@@ -213,7 +227,7 @@
 											 
 							<?php if ($page != $count_pages) : ?>
 							
-							<a data="<?= $page + 1 ;?>" href="<?php
+							<a class="next" data="<?= $page + 1 ;?>" href="<?php
 								
 										echo '/';
 											
@@ -232,7 +246,22 @@
 							
 																	
 							<?php endif; ?>	
-															
+							<a class="arrow" data="<?= $count_pages; ?>" href="<?php
+								
+										echo '/';
+											
+										if( ! empty ($argument['sortFirst']) )
+										{
+											echo $argument['sortFirst'] . '/' ;
+										}
+										if( !empty($argument['sortSecond']))
+										{
+											echo $argument['sortSecond'] . '/';
+										}
+									  echo $count_pages . '/' ;
+									  
+									 ?>"
+							>&#xf04e</a>							
 						</li>
 					</ul>
 			</div>	

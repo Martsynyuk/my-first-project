@@ -870,21 +870,37 @@ body{
 .content .pagination .back_plase{
 	height: 35px;
 	width: 100px;
-	padding-left: 20px;
 	position: absolute;
-	left: 5px;
-	top: 5px;
+	left: 30px;
+	top: 2px;
+}
+.content .pagination .back_plase .arrow, .content .pagination .next_plase .arrow{
+	padding: 5px 0;
+	font-family: FontAwesome;
+	color: white;
+	cursor: pointer;
+}
+.content .pagination .next_plase .arrow{
+	float: right;
+}
+.content .pagination .back_plase .prew, .content .pagination .next_plase .next{
+	padding: 5px 0;
+	margin-left: 30px;
+}
+.content .pagination .next_plase .next{
+	padding: 5px 0;
+	margin-right: 20px;
+	width: 30px;
 }
 .content .pagination a, .content .pagination a:hover{
 	background: none;
 	border: none;
 }
 .content .pagination .next_plase{
-	height: 35px;
-	width: 50px;
+	width: 95px;
 	position: absolute;
-	left: 395px;
-	top: 5px;
+	left: 365px;
+	top: 2px;
 }
 .pagination .next_plase img{
 	max-width: none;
