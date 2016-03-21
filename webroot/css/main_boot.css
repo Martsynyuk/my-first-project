@@ -932,7 +932,7 @@ body{
 	width: 190px;
 	height: 590px;
 	margin: 5px;
-	border-radius: 7px 15px 7px 15px;
+	border-radius: 10px 15px 10px 15px;
 	background-color: white;
 }
 .chat .chat_open{
@@ -945,6 +945,37 @@ body{
 	width: 75px;
 	height: 20px;
 	padding: 2px;
+}
+.chat .chat_place .chat .header_text{
+	text-align: center;
+	display: block;
+	padding: 10px 5px;
+	width: 180px;
+}
+.chat .chat_place .chat .for_message{
+	width:130px;
+	height:24px;
+	border-radius: 0;
+	padding: 0 0 0 4px;
+	margin: 0 0 0 6px;
+	float: left;
+}
+.chat .chat_place .chat .message_plase{
+	height:460px;
+	width:178px;
+	margin: 0 6px;
+	overflow: hidden;
+}
+.chat .chat_place .chat .message_plase .message{
+	width: 178px;
+	height: 100px;
+	border-top: 1px solid gray;
+}
+.chat .chat_place .chat .message_plase .load_more{
+	position: absolute;
+	bottom: 15px;
+	left: 60px;
+	cursor: pointer;
 }
 .footer{
 	width: 100%;
