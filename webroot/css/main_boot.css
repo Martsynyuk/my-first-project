@@ -919,7 +919,32 @@ body{
 	position: absolute;
 	left: 165px;
 	text-align: center;
-	top: 5px;
+	top: 8px;
+}
+.chat .chat_place{
+	position: absolute;
+	z-index: 50;
+	background-color: gray;
+	color: black;
+	border-radius: 15px 5px 15px 5px;
+}
+.chat .chat_place .chat{
+	width: 190px;
+	height: 590px;
+	margin: 5px;
+	border-radius: 7px 15px 7px 15px;
+	background-color: white;
+}
+.chat .chat_open{
+	width: 200px;
+	height: 600px;
+	top: 130px;
+	left: 5px;
+}
+.chat .chat_close{
+	width: 75px;
+	height: 20px;
+	padding: 2px;
 }
 .footer{
 	width: 100%;
