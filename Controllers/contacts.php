@@ -726,8 +726,7 @@ class Contacts extends Controller
 			}                              
 		}
 		
-		return array (
-				
+		return array (			
 				$start,
 				$end
 			);
