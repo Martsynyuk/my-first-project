@@ -1146,5 +1146,41 @@ class Contacts extends Controller
 				);
 
 	}
+	
+	function chat_ajax(){
+		
+		$messages = $this->chat->select(
+				$what = array(
+							
+						'fields' => array(
+								
+								'user_name',
+								'text',
+								'date'
+						),
+
+						'order' => array(
+									
+								'by' => '',
+								'direction' => ''
+								
+						),
+							
+						'limit' => array(
+									
+								'start' => 0,
+								'end'=> ''
+								
+						)
+					)
+			);
+		
+		$argument[0] = 'contacts';
+		$argument[1] = 'ajax_chat';
+		
+		$this->view->set ( 'messages', $messages);
+		
+		$this->view->render ( $argument );
+	}
 }
 	

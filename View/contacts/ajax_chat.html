@@ -1,0 +1,12 @@
+
+<?php foreach($messages as $val) : ?>
+<?php $date = date_parse($val['date'])?>
+
+	<div class="message">
+		<span class="name"><?= $val['user_name'] ?></span>
+		<span class="date"><?= 'on ' .  $date['day'] . '/' . $date['month'] . '/' . $date['year'] ?></span>
+		<div class="claer"></div>
+<?= $val['text'] ?>
+	</div>
+
+<?php endforeach; ?>
