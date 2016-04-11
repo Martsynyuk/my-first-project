@@ -1,43 +1,20 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Hello, JavaScript!</title>
-
-<link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
-<link rel="stylesheet" type="text/css" href="/css/font-awesome.css">
-<link rel="stylesheet" type="text/css" href="/css/test.css">
-
-<script src="/js/jquery-2.2.0.js"></script>
-
-</head>
-<body>
-<body>
-
-<div id="wrapper">
-
-    <div class="scrollbar" id="style">
-    	<p>asdddddd adsd asdsad sadsad asdsd</p>
-    	<p>asdddddd adsd asdsad sadsad asdsd</p>
-    	<p>asdddddd adsd asdsad sadsad asdsd</p>
-    	<p>asdddddd adsd asdsad sadsad asdsd</p>
-    	<p>asdddddd adsd asdsad sadsad asdsd</p>
-    	<p>asdddddd adsd asdsad sadsad asdsd</p>
-    	<p>asdddddd adsd asdsad sadsad asdsd</p>
-    	<p>asdddddd adsd asdsad sadsad asdsd</p>
-    	<p>asdddddd adsd asdsad sadsad asdsd</p>
-    	<p>asdddddd adsd asdsad sadsad asdsd</p>
-    	<p>asdddddd adsd asdsad sadsad asdsd</p>
-    	<p>asdddddd adsd asdsad sadsad asdsd</p>
-    	<p>asdddddd adsd asdsad sadsad asdsd</p>
-    	<p>asdddddd adsd asdsad sadsad asdsd</p>
-    	<p>asdddddd adsd asdsad sadsad asdsd</p>
-    	<p>asdddddd adsd asdsad sadsad asdsd</p>
-    	<p>asdddddd adsd asdsad sadsad asdsd</p>
-    </div>
-
-</div>
-</body>
-
-</body>
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Mustache.js Inline Method</title>
+    <script type="text/javascript" src="/js/mustache.js" ></script>
+    <script>
+      var view = {
+        name : "Joe",
+        occupation : "Web Developer"
+      };
+      function loadtemp(){
+        var output = Mustache.render("{{name}} is a  {{occupation}}", view);
+        document.getElementById('person').innerHTML = 'asdasd';
+      }
+    </script>
+  </head>
+  <body onload="loadtemp()" >
+    <p id="person"></p>
+  </body>
 </html>

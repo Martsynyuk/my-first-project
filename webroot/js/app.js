@@ -7,6 +7,7 @@
 );
 */
 
-require(['chat'], function() {
-
+require(['mustache'], function() {
+	require(['chat']);
 });
+
