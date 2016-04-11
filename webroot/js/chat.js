@@ -37,7 +37,7 @@ class Chat{
 		    xmlhttp.open("POST", "/contacts/chat_ajax", true);
 		    xmlhttp.send();
 		    
-		}, 3000);
+		}, 1000);
 	}
 }
 
