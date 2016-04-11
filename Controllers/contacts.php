@@ -1161,8 +1161,8 @@ class Contacts extends Controller
 
 						'order' => array(
 									
-								'by' => '',
-								'direction' => ''
+								'by' => 'date',
+								'direction' => 'DESC'
 								
 						),
 							
