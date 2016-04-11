@@ -1,7 +1,6 @@
 <?php
-date_default_timezone_set ( 'Europe/Kiev' );
-error_reporting ( E_ALL );
+$string = '12fgfg';
 
-$a =  preg_match('/50/', '50, 50, 1, 10, 12');
+$string = (int)($string);
 
-var_dump($a);
+var_dump($string);

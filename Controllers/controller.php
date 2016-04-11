@@ -8,6 +8,7 @@ class Controller
 		require_once APP . '/Models/model.php';
 		require_once APP . '/Models/user.php';
 		require_once APP . '/Models/information.php';
+		require_once APP . '/Models/chat.php';
 			
 		foreach ($this->model as $madel => $class)
 		{

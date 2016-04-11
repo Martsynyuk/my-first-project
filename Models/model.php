@@ -210,9 +210,37 @@ Class Model implements For_model
 				$sql ='INSERT INTO ' . $this->class . ' (' . $key . ') VALUE (' . $val . ');';
 					
 			}
-				//var_dump($sql);
+				
 				$this->query( $sql );	
 				return $sql;
+		}
+		
+		/**
+		 * for chat only
+		 * 
+		 * 
+		 */
+		
+		function insert_chat_message ( $what )
+		{
+			
+			$val = '';
+			$key = '';
+			
+			foreach ( $what as $index => $value )
+			{
+			
+				$key = $key . ', ' . $index;
+				$val = $val . ', \'' . $value . '\'';
+			}
+				
+			$key = ltrim ( $key, ', ' );
+			$val = ltrim ( $val, ', ' );
+				
+			$sql ='INSERT INTO ' . $this->class . ' (' . $key . ', date' . ') VALUE (' . $val . ', NOW());';
+
+			$this->query( $sql );
+			return $sql;
 		}
 		
 	/**

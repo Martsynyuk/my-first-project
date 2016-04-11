@@ -10,8 +10,8 @@ class Contacts extends Controller
 	
 	public $model = array(
 			'Information',
-			'Login'
-			
+			'Login',
+			'chat'			
 	);
 	
 	public function  add ($argument)
@@ -190,7 +190,7 @@ class Contacts extends Controller
 					$phone = $post['Cell'];
 				}
 			}
-			echo 'fuck';
+			
 			$this->Information->update (
 					
 								$what = array(
@@ -244,6 +244,13 @@ class Contacts extends Controller
 	{	
 		
 		$user = $this->Login->user();
+		
+		$post = $this->post_controller();
+		
+		if(!empty($post['message']))
+		{
+			$this->message_from_chat($post['message']);
+		}
 		
 	  if ( empty ( $user['id'] ) )
 		{
@@ -1121,6 +1128,23 @@ class Contacts extends Controller
 			
 			$this->Information->delete ( $post['contact'] );
 		}
+	}
+	
+	function message_from_chat($text)
+	{
+		
+		$user = $this->Login->user();
+		//var_dump($user['name']);
+		$this->chat->insert(
+				$what = array(
+				
+						'user_name' => $user['name'], 
+						'text' => $text
+			
+					)
+					
+				);
+
 	}
 }
 	

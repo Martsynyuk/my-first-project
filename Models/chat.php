@@ -15,7 +15,7 @@ Class Chat extends Model
 	function insert ( $what )
 	{
 			
-		$result = parent::insert ( $what );
+		$result = parent::insert_chat_message ( $what );
 			
 		return $result;
 	}
