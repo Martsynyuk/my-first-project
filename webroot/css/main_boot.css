@@ -998,7 +998,7 @@ body{
 	font-weight: 700;
 }
 
-.chat .chat_place .chat .message_plase .load_more{
+.chat .chat_place .chat .load_more{
 	position: absolute;
 	bottom: 15px;
 	left: 60px;

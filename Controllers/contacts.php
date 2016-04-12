@@ -247,11 +247,6 @@ class Contacts extends Controller
 		
 		$post = $this->post_controller();
 		
-		if(!empty($post['message']))
-		{
-			$this->message_from_chat($post['message']);
-		}
-		
 	  if ( empty ( $user['id'] ) )
 		{
 			header ( 'Location: /users/autorization' );
@@ -1133,22 +1128,11 @@ class Contacts extends Controller
 	function message_from_chat($text)
 	{
 		
-		$user = $this->Login->user();
-		//var_dump($user['name']);
-		$this->chat->insert(
-				$what = array(
-				
-						'user_name' => $user['name'], 
-						'text' => $text
-			
-					)
-					
-				);
 
 	}
 	
 	function chat_ajax(){
-		
+				
 		$messages = $this->chat->select(
 				$what = array(
 							
@@ -1181,6 +1165,22 @@ class Contacts extends Controller
 		$this->view->set ( 'messages', $messages);
 		
 		$this->view->render ( $argument );
+	}
+	
+	function ajax_write_message()
+	{
+		$user = $this->Login->user();
+		
+		$this->chat->insert(
+				$what = array(
+				
+						'user_name' => $user['name'], 
+						'text' => file_get_contents('php://input')
+			
+					)
+					
+				);
+		
 	}
 }
 	
