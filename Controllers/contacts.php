@@ -1125,14 +1125,8 @@ class Contacts extends Controller
 		}
 	}
 	
-	function message_from_chat($text)
-	{
-		
-
-	}
-	
 	function chat_ajax(){
-				
+			
 		$messages = $this->chat->select(
 				$what = array(
 							
@@ -1153,7 +1147,7 @@ class Contacts extends Controller
 						'limit' => array(
 									
 								'start' => 0,
-								'end'=> ''
+								'end'=> file_get_contents('php://input')
 								
 						)
 					)

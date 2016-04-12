@@ -38,10 +38,11 @@ Class Users extends Controller
 		unset ( $_SESSION['login'] );
 		unset ( $_SESSION['mail'] );
 		
-		if(! empty($_COOKIE['mails']) || ! empty($_COOKIE['new_mail']) )
+		if(! empty($_COOKIE['mails']) || ! empty($_COOKIE['new_mail']) || ! empty($_COOKIE['count']) )
 		{
 			setcookie('mails', '' , strtotime("12 hours"), '/');
 			setcookie('new_mail', '' , strtotime("12 hours"), '/');
+			setcookie('count', '' , strtotime("12 hours"), '/');
 		}
 			
 		header ( 'Location: /users/autorization' );

@@ -992,6 +992,7 @@ body{
 .chat .chat_place .chat .message_plase .message{
 	width: 160px;
 	border-top: 1px solid gray;
+	text-align: justify;
 }
 .chat .chat_place .chat .message_plase .message .name{
 	color: #FF4500;
