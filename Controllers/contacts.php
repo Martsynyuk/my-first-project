@@ -1126,7 +1126,7 @@ class Contacts extends Controller
 	}
 	
 	function chat_ajax(){
-			
+		
 		$messages = $this->chat->select(
 				$what = array(
 							

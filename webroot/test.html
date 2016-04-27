@@ -2,19 +2,21 @@
 <html lang="en">
   <head>
     <title>Mustache.js Inline Method</title>
-    <script type="text/javascript" src="/js/mustache.js" ></script>
-    <script>
-      var view = {
-        name : "Joe",
-        occupation : "Web Developer"
-      };
-      function loadtemp(){
-        var output = Mustache.render("{{name}} is a  {{occupation}}", view);
-        document.getElementById('person').innerHTML = 'asdasd';
-      }
-    </script>
+    <script type="text/javascript" src="/js/require.js" ></script>
+   
   </head>
-  <body onload="loadtemp()" >
-    <p id="person"></p>
+  <body>
+		<h1>{{newsCategory}}</h1>
+		<ul class="news">
+			{{#news}}
+			<li>
+				<h2>{{title}}</h2>
+				<p>{{preview}}</p>
+				<a class="readMore" href="/news/{{id}}">Подробнее...</a>
+				<div>{{date}}</div>
+			</li>
+			{{/news}}
+		</ul>
+		
   </body>
 </html>

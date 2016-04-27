@@ -117,4 +117,5 @@ var chat = new Chat();
 
 setInterval(function(){ 
 	chat.ajax_return()
+	
 }, 1000);
