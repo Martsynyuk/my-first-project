@@ -1,7 +1,9 @@
 /**
  * 
  */
-var data = {
+
+
+	var data = {
 			  "newsCategory": "IT",
 			  "news": [
 				  {

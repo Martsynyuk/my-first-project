@@ -2,8 +2,8 @@
 <html lang="en">
   <head>
     <title>Mustache.js Inline Method</title>
-    <script type="text/javascript" src="/js/require.js" ></script>
-   
+    <script type="text/javascript" src="/js/mustache.js" ></script>
+   	<script type="text/javascript" src="/js/jquery-2.2.0.js" ></script>
   </head>
   <body>
 		<h1>{{newsCategory}}</h1>
@@ -20,3 +20,27 @@
 		
   </body>
 </html>
+<script>
+
+var data = {
+		  "newsCategory": "IT",
+		  "news": [
+			  {
+				"id": 1,
+				"title": "Write once, render anywhere", 
+				"preview": "bla bla bla", 
+				"date": "01.01.2012"
+			  },
+			  {
+				"id": 2,
+				"title": "Mustache in action", 
+				"preview": "bla bla bla", 
+				"date": "02.02.2012"
+			  }
+		  ]
+		}
+		$(function(){
+			$("body").html(mustache.render($("body").html(), data));
+		});
+
+</script>

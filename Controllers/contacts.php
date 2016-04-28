@@ -1127,6 +1127,8 @@ class Contacts extends Controller
 	
 	function chat_ajax(){
 		
+		$post = $this->post_controller();
+		
 		$messages = $this->chat->select(
 				$what = array(
 							
@@ -1147,7 +1149,7 @@ class Contacts extends Controller
 						'limit' => array(
 									
 								'start' => 0,
-								'end'=> file_get_contents('php://input')
+								'end'=> $post['count']
 								
 						)
 					)
@@ -1164,12 +1166,13 @@ class Contacts extends Controller
 	function ajax_write_message()
 	{
 		$user = $this->Login->user();
+		$post = $this->post_controller();
 		
 		$this->chat->insert(
 				$what = array(
 				
 						'user_name' => $user['name'], 
-						'text' => file_get_contents('php://input')
+						'text' => $post['message']
 			
 					)
 					
