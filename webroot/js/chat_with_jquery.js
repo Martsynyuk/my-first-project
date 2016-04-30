@@ -48,6 +48,11 @@ chat.return_message = function () {
 		count = parseInt($.cookie('count'));
 	}
 	
+	if( ! chat.ajax('/contacts/chat_ajax', {'count': count}))
+	{
+		
+	}
+	
 	$.ajax({
 		type: 'post',
 		url: '/contacts/chat_ajax',
@@ -57,7 +62,7 @@ chat.return_message = function () {
 			$('.message_plase').empty();
 			$('.message_plase').append(data);
 		},
-		error: function(data){
+		error: function(){
 			console.log('some problem');
 		}
 		
@@ -72,21 +77,12 @@ chat.return_message = function () {
 
 chat.send_message = function () {
 	
-	if($('.for_message').val() != '' )
+	if($('.for_message').val() != '')
 	{
-		$.ajax({
-			type: 'post',
-			url: '/contacts/ajax_write_message',
-			data:{'message': $('.for_message').val()},
-			response:'html',
-			success: function(){
-				$('.for_message').val('');
-			},
-			error: function(){
-				console.log('some problem');
-			}
-			
-		});
+		if( ! chat.ajax('/contacts/ajax_write_message', {'message': $('.for_message').val()}))
+		{
+			$('.for_message').val('');
+		}
 	}
 };
 
@@ -110,4 +106,29 @@ chat.set_cookie = function () {
 	}
 	
 	$.cookie('count', count, {expires: 1, path: '/'});
+};
+
+/**
+ * ajax request
+ * 
+ * url - url to action for request
+ * data - request for data ( array or string )
+ */
+
+chat.ajax = function(url, data){
+	
+  $.ajax({
+		type: 'post',
+		url: url,
+		data: data,
+		response:'html',
+		success: function(data){
+			return data;
+		},
+		error: function(){
+			console.log('problem')
+			return false;
+		}
+		
+	});
 };
