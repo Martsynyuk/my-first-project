@@ -29,7 +29,10 @@ $( document ).ready(function() {
  */
 
 var chat = {step: 5};
-var response = {};
+/**
+ * set counter for chat.return_message method
+ * 
+ */
 
 chat.load_more = function(){
 	
@@ -98,8 +101,9 @@ chat.send_message = function () {
 
 /**
  * 
- * this method set cookie for count of message that returns
- * return_message method
+ * this method set cookie 
+ * 
+ * 
  * data - data for set cookie
  * time - time cookie live
  * url - url where cookie is available
@@ -132,3 +136,9 @@ chat.ajax = function(url, data){
 		
 	});
 };
+
+/**
+ * 
+ * object for return data fron ajax query
+ */
+var response = {};
