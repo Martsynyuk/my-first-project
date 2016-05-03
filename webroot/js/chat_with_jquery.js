@@ -29,6 +29,7 @@ $( document ).ready(function() {
  */
 
 var chat = {step: 5};
+var response = {};
 
 chat.load_more = function(){
 	
@@ -53,7 +54,7 @@ chat.load_more = function(){
  */
 
 chat.return_message = function () {
-	
+
 	var count;
 	
 	if($.cookie('count') == null)
@@ -64,24 +65,14 @@ chat.return_message = function () {
 		count = parseInt($.cookie('count'));
 	}
 	
-	if( chat.ajax('/contacts/chat_ajax', {'count': count}))
+	if( ! chat.ajax('/contacts/chat_ajax', {'count': count}))
 	{
-	
-	}
-	
-	$.ajax({
-		type: 'post',
-		url: '/contacts/chat_ajax',
-		data:{'count': count},
-		response:'html',
-		success: function(data){
+		if( response.data )
+		{
 			$('.message_plase').empty();
-			$('.message_plase').append(data);
-		},
-		error: function(){
-			console.log('some problem');
+			$('.message_plase').append(response.data);
 		}
-	});
+	}
 };
 
 /**
@@ -128,11 +119,11 @@ chat.ajax = function(url, data){
 		data: data,
 		response:'html',
 		success: function(data){
-			return true;
+			response.data = data;			
 		},
 		error: function(){
 			console.log('problem')
-			return false;
+			response.data = false;
 		}
 		
 	});
