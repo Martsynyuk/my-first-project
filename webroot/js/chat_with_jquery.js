@@ -87,7 +87,11 @@ chat.send_message = function () {
 	{
 		if( ! chat.ajax('/contacts/ajax_write_message', {'message': $('.for_message').val()}))
 		{
-			$('.for_message').val('');
+			if( response.data )
+			{
+				$('.for_message').val('');
+			}
+			
 		}
 	}
 };
