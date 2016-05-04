@@ -58,7 +58,17 @@ chat.load_more = function(){
 
 chat.return_message = function () {
 
-	var count;
+	var count = '';
+	
+	if($('.cont').data('max') != null && $('.cont').data('min') != null )
+	{
+		chat.date_max = $('.cont').data('max');
+		chat.date_min = $('.cont').data('min');
+	}
+	else{
+		chat.date_max = 0;
+		chat.date_min = 0;
+	}
 	
 	if($.cookie('count') == null)
 	{
@@ -68,12 +78,16 @@ chat.return_message = function () {
 		count = parseInt($.cookie('count'));
 	}
 	
-	if( ! chat.ajax('/contacts/chat_ajax', {'count': count}))
-	{
-		if( response.data )
-		{
-			$('.message_plase').empty();
-			$('.message_plase').append(response.data);
+	if( ! chat.ajax('/contacts/chat_ajax', {'count': count, 'date_max': chat.date_max, 'date_min': chat.date_min}))
+	{	
+		if($('.cont').data('marker') != 0)
+		{	
+			if( chat.data || chat.data != null )
+			{
+				$('.message_plase').empty();
+				$('.message_plase').append(chat.data);
+				chat.data = null;
+			}
 		}
 	}
 };
@@ -90,11 +104,10 @@ chat.send_message = function () {
 	{
 		if( ! chat.ajax('/contacts/ajax_write_message', {'message': $('.for_message').val()}))
 		{
-			if( response.data )
+			if( chat.data )
 			{
 				$('.for_message').val('');
 			}
-			
 		}
 	}
 };
@@ -125,20 +138,15 @@ chat.ajax = function(url, data){
 		type: 'post',
 		url: url,
 		data: data,
-		response:'html',
+		response:'json',
 		success: function(data){
-			response.data = data;			
+			
+			chat.data = data;			
 		},
 		error: function(){
 			console.log('problem')
-			response.data = false;
+			chat.data = false;
 		}
 		
 	});
 };
-
-/**
- * 
- * object for return data fron ajax query
- */
-var response = {};

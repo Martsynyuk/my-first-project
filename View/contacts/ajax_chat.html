@@ -1,7 +1,7 @@
-
+<div data-min="<?= $time['min']?>" data-max="<?= $time['max']?>" data-marker="<?= $time['marker']?>" class="cont"></div>
 <?php foreach($messages as $val) : ?>
 <?php $date = date_parse($val['date'])?>
-
+<?= json_encode($time['marker']) ?>
 	<div class="message">
 		<span class="name"><?= $val['user_name'] ?></span>
 		<span class="date"><?= 'on ' .  $date['day'] . '/' . $date['month'] . '/' . $date['year'] ?></span>
