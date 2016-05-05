@@ -18,20 +18,13 @@ var chat = {
 		});
 		
 		$(options.loadMore).on('click', function(){
-			
-			if(chat.options.count == 0)
-			{
-				chat.options.count = chat.options.step;
-			}
-			else{
-				chat.options.count = chat.options.count + chat.options.step; 
-			}
-			
-			chat.return_messages(chat.options.count, '< ' + chat.options.minId, chat.getOldMessage);
+			chat.options.flag = 2;
+			chat.options.count = chat.options.count + chat.options.step;
+			chat.return_messages(chat.options.count, '< ' + chat.options.minId, chat.getMessage);
 		});
 		
 		setInterval(function(){
-			chat.return_messages(chat.options.step, '> ' + chat.options.maxId, chat.getNewMessage);
+			chat.return_messages(chat.options.step, '> ' + chat.options.maxId, chat.getMessage);
 		}, 1000);
 	
 	},
@@ -48,30 +41,29 @@ var chat = {
 		chat.ajax('/contacts/chat_ajax', {'count': count, 'id': id}, method);
 	},
 	
-	getNewMessage: function(data) {
+	getMessage: function(data) {
 		
 		if( data.length > 2 )
 		{
 			var information = JSON.parse(data); 
-			
+							
 			if(chat.options.flag == 0)
-			{
-				chat.options.minId = information.min;
+			{	
 				chat.options.maxId = information.max;
+				chat.options.minId = information.min;
 				chat.options.flag = 1;
 				chat.loadMessage(information, 0);
 			}
-			else{
+			else if(chat.options.flag == 1)
+			{
 				chat.options.maxId = information.max;
 				chat.loadMessage(information, 1);
 			}
+			else{
+				chat.options.flag = 1;
+				chat.loadMessage(information, 0);
+			}
 		}
-	},
-	
-	getOldMessage: function(data)
-	{
-		var information = JSON.parse(data);
-		chat.loadMessage(information, 0);
 	},
 	
 	loadMessage: function(information, status){
