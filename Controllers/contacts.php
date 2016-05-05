@@ -1130,7 +1130,7 @@ class Contacts extends Controller
 		$post = $this->post_controller();
 		
 		$messages = $this->chat->select_chat(
-				$what = "SELECT id, user_name, text, date FROM  chat WHERE  id > '" . $post['id'] . "' ORDER BY id DESC LIMIT 0,5;"
+				$what = "SELECT id, user_name, text, date FROM  chat WHERE  id " . $_POST['id'] . " ORDER BY id DESC LIMIT 0,5;"
 			);
 		
 		$argument[0] = 'contacts';

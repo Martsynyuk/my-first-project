@@ -18,12 +18,20 @@ var chat = {
 		});
 		
 		$(options.loadMore).on('click', function(){
-			//load count for old message
-			//chat.return_message();
+			
+			if(chat.options.count == 0)
+			{
+				chat.options.count = chat.options.step;
+			}
+			else{
+				chat.options.count = chat.options.count + chat.options.step; 
+			}
+			
+			chat.return_messages(chat.options.count, '< ' + chat.options.minId, chat.getOldMessage);
 		});
 		
 		setInterval(function(){
-			chat.return_messages(chat.options.maxId);
+			chat.return_messages(chat.options.step, '> ' + chat.options.maxId, chat.getNewMessage);
 		}, 1000);
 	
 	},
@@ -36,17 +44,17 @@ var chat = {
 		$(chat.options.inputMessage).val('');
 	},
 	
-	return_messages: function(id){
-		chat.ajax('/contacts/chat_ajax', {'count': chat.options.step, 'id': id}, chat.getData);
+	return_messages: function(count, id, method){
+		chat.ajax('/contacts/chat_ajax', {'count': count, 'id': id}, method);
 	},
 	
-	getData: function(data) {
+	getNewMessage: function(data) {
 		
 		if( data.length > 2 )
 		{
 			var information = JSON.parse(data); 
 			
-			if(chat.options.flag != 1)
+			if(chat.options.flag == 0)
 			{
 				chat.options.minId = information.min;
 				chat.options.maxId = information.max;
@@ -81,6 +89,23 @@ var chat = {
 				}
 			}
 			
+		}
+	},
+	
+	getOldMessage: function(data)
+	{
+		var information = JSON.parse(data);
+		
+		for( var key in information ){
+			if(information[key] !== null && typeof information[key] === 'object')
+			{
+				var date = new Date(information[key].date);
+				
+				$(chat.options.loadMessage).append('<div class="message"><span class="name">' + information[key].user_name + 
+						'</span><span class="date">on ' + date.getDay() + '/' + date.getMonth() + '/' + date.getFullYear() +
+						'</span><div class="claer"></div>' + information[key].text +
+						'</div>')
+			}
 		}
 	},
 	
