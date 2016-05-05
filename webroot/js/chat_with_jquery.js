@@ -58,53 +58,49 @@ var chat = {
 			{
 				chat.options.minId = information.min;
 				chat.options.maxId = information.max;
-				
 				chat.options.flag = 1;
-				
-				for( var key in information ){
-					if(information[key] !== null && typeof information[key] === 'object')
-					{
-						var date = new Date(information[key].date);
-						
-						$(chat.options.loadMessage).append('<div class="message"><span class="name">' + information[key].user_name + 
-								'</span><span class="date">on ' + date.getDay() + '/' + date.getMonth() + '/' + date.getFullYear() +
-								'</span><div class="claer"></div>' + information[key].text +
-								'</div>')
-					}
-				}
+				chat.loadMessage(information, 0);
 			}
 			else{
 				chat.options.maxId = information.max;
-				
-				for( var key in information ){
-					if(information[key] !== null && typeof information[key] === 'object')
-					{
-						var date = new Date(information[key].date);
-						
-						$(chat.options.loadMessage).prepend('<div class="message"><span class="name">' + information[key].user_name + 
-								'</span><span class="date">on ' + date.getDay() + '/' + date.getMonth() + '/' + date.getFullYear() +
-								'</span><div class="claer"></div>' + information[key].text +
-								'</div>')
-					}
-				}
+				chat.loadMessage(information, 1);
 			}
-			
 		}
 	},
 	
 	getOldMessage: function(data)
 	{
 		var information = JSON.parse(data);
-		
-		for( var key in information ){
-			if(information[key] !== null && typeof information[key] === 'object')
-			{
-				var date = new Date(information[key].date);
-				
-				$(chat.options.loadMessage).append('<div class="message"><span class="name">' + information[key].user_name + 
-						'</span><span class="date">on ' + date.getDay() + '/' + date.getMonth() + '/' + date.getFullYear() +
-						'</span><div class="claer"></div>' + information[key].text +
-						'</div>')
+		chat.loadMessage(information, 0);
+	},
+	
+	loadMessage: function(information, status){
+		if(status == 0)
+		{
+			for( var key in information ){
+				if(information[key] !== null && typeof information[key] === 'object')
+				{
+					var date = new Date(information[key].date);
+					
+					$(chat.options.loadMessage).append('<div class="message"><span class="name">' + information[key].user_name + 
+							'</span><span class="date">on ' + date.getDay() + '/' + date.getMonth() + '/' + date.getFullYear() +
+							'</span><div class="claer"></div>' + information[key].text +
+							'</div>')
+				}
+			}
+		}
+		else if(status == 1)
+		{
+			for( var key in information ){
+				if(information[key] !== null && typeof information[key] === 'object')
+				{
+					var date = new Date(information[key].date);
+					
+					$(chat.options.loadMessage).prepend('<div class="message"><span class="name">' + information[key].user_name + 
+							'</span><span class="date">on ' + date.getDay() + '/' + date.getMonth() + '/' + date.getFullYear() +
+							'</span><div class="claer"></div>' + information[key].text +
+							'</div>')
+				}
 			}
 		}
 	},
