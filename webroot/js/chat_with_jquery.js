@@ -43,11 +43,15 @@ var chat = {
 	getData: function(data) {
 		var information = JSON.parse(data); 
 		
-		$.each(information, function(key, val){
-			$.each(information[key], function(index, value){
-				
-			});
-		});
+		for( var key in information ){
+			var date = new Date(information[key].date);
+			
+			$(chat.options.loadMessage).append('<div class="message"><span class="name">' + information[key].user_name + 
+					'</span><span class="date">on ' + date.getDay() + '/' + date.getMonth() + '/' + date.getFullYear() +
+					'</span><div class="claer"></div>' + information[key].text +
+					'</div>')
+		}			
+		
 	},
 	
 /**
