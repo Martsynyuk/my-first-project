@@ -10,7 +10,11 @@ $( document ).ready(function() {
 		inputMessage: 'input.for_message',
 		sendButton: 'input.submit',
 		loadMore: 'span.load_more',
-		loadMessage: 'div.message_plase'
+		loadMessage: 'div.message_plase',
+		minId: 0,
+		maxId: 0,
+		count: 0,
+		flag: 0
 	});
 	
 	$('#delete_contact').on('click', '#close, #no', function(){

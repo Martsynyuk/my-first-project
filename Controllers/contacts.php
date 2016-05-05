@@ -1130,34 +1130,7 @@ class Contacts extends Controller
 		$post = $this->post_controller();
 		
 		$messages = $this->chat->select_chat(
-				$what = array(
-							
-						'fields' => array(
-								
-								'user_name',
-								'text',
-								'date'
-						),
-						
-						/*'conditions' => array(
-							 'date' => $post['date_max'],
-								
-						),*/
-
-						'order' => array(
-									
-								'by' => 'date',
-								'direction' => 'DESC'
-								
-						),
-							
-						'limit' => array(
-									
-								'start' => 0,
-								'end'=> $post['count']
-								
-						)
-					)
+				$what = "SELECT id, user_name, text, date FROM  chat WHERE  id > '" . $post['id'] . "' ORDER BY id DESC LIMIT 0,5;"
 			);
 		
 		$argument[0] = 'contacts';
@@ -1165,17 +1138,12 @@ class Contacts extends Controller
 		
 		if( !empty($messages))
 		{
-			$time = $this->date_for_chat($messages, $post);
-			$this->view->set ('time', $time);
+			$id = $this->date_for_chat($messages, $post);
+			$messages['min'] = $id['min'];
+			$messages['max'] = $id['max'];
+			
+			$this->view->set ( 'messages', $messages);
 		}
-		else{
-			$time['max'] = $post['date_max'];
-			$time['min'] = $post['date_min'];
-			$time['marker'] = 0;
-			$this->view->set ('time', $time);
-		}
-		
-		$this->view->set ( 'messages', $messages);
 		
 		$this->view->render ( $argument );
 	}
@@ -1202,7 +1170,7 @@ class Contacts extends Controller
 				
 		foreach ($array as $val)
 		{
-			$date[] = $val['date'];
+			$date[] = $val['id'];
 		}
 		
 		if( !empty($data['data_min']) && $data['data_min'] != 0)

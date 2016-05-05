@@ -23,7 +23,7 @@ var chat = {
 		});
 		
 		setInterval(function(){
-			chat.return_messages();
+			chat.return_messages(chat.options.maxId);
 		}, 1000);
 	
 	},
@@ -36,22 +36,52 @@ var chat = {
 		$(chat.options.inputMessage).val('');
 	},
 	
-	return_messages: function(){
-		chat.ajax('/contacts/chat_ajax', {'count': 5}, chat.getData);
+	return_messages: function(id){
+		chat.ajax('/contacts/chat_ajax', {'count': chat.options.step, 'id': id}, chat.getData);
 	},
 	
 	getData: function(data) {
-		var information = JSON.parse(data); 
 		
-		for( var key in information ){
-			var date = new Date(information[key].date);
+		if( data.length > 2 )
+		{
+			var information = JSON.parse(data); 
 			
-			$(chat.options.loadMessage).append('<div class="message"><span class="name">' + information[key].user_name + 
-					'</span><span class="date">on ' + date.getDay() + '/' + date.getMonth() + '/' + date.getFullYear() +
-					'</span><div class="claer"></div>' + information[key].text +
-					'</div>')
-		}			
-		
+			if(chat.options.flag != 1)
+			{
+				chat.options.minId = information.min;
+				chat.options.maxId = information.max;
+				
+				chat.options.flag = 1;
+				
+				for( var key in information ){
+					if(information[key] !== null && typeof information[key] === 'object')
+					{
+						var date = new Date(information[key].date);
+						
+						$(chat.options.loadMessage).append('<div class="message"><span class="name">' + information[key].user_name + 
+								'</span><span class="date">on ' + date.getDay() + '/' + date.getMonth() + '/' + date.getFullYear() +
+								'</span><div class="claer"></div>' + information[key].text +
+								'</div>')
+					}
+				}
+			}
+			else{
+				chat.options.maxId = information.max;
+				
+				for( var key in information ){
+					if(information[key] !== null && typeof information[key] === 'object')
+					{
+						var date = new Date(information[key].date);
+						
+						$(chat.options.loadMessage).prepend('<div class="message"><span class="name">' + information[key].user_name + 
+								'</span><span class="date">on ' + date.getDay() + '/' + date.getMonth() + '/' + date.getFullYear() +
+								'</span><div class="claer"></div>' + information[key].text +
+								'</div>')
+					}
+				}
+			}
+			
+		}
 	},
 	
 /**

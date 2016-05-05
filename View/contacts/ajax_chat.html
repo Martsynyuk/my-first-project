@@ -1,2 +1,2 @@
-<?= json_encode($messages) ?>
+<?= (! empty($messages)) ? json_encode($messages) : '' ?>
 

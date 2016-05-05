@@ -175,63 +175,15 @@ Class Model implements For_model
 	
 	function select_chat ( $what )
 	{
-			
-		if( ! empty( $what['fields'] ) )
-		{
-				
-			$fields = implode ( ', ', $what['fields'] );
-		}
-		else{
-				
-			$fields = '*';
-		}
 	
-		$sql = 'SELECT ' . $fields . ' FROM  '. $this->class;
-	
-		if( ! empty ( $what['conditions'] ) )
-		{
-				
-			$where = '';
-	
-			foreach ( $what['conditions'] as $key => $value )
-			{
-					
-				$where = $where . ' AND ' . $key . ' > \''  . $value . '\'' ;
-			}
-				
-			$where = ltrim ( $where, ' AND' );
-	
-			$sql = $sql . ' WHERE  ' . $where ;
-				
-		}
-		
-		if ( ! empty( $what['order']['by'] ) && ! empty ( $what['order']['direction'] ) )
-		{
-	
-			$sql = $sql . ' ORDER BY ' . $what['order']['by'] . ' ' . $what['order']['direction'] ;
-		}
-		elseif( ! empty ( $what['order']['by'] ) )
-		{
-				
-			$sql = $sql . ' ORDER BY ' . $what['order']['by'] ;
-		}
-	
-		if( ! empty ( $what['limit']['start'] ) or $what['limit']['start'] == 0 && ! empty ( $what['limit']['end']) )
-		{
-	
-			$sql = $sql . ' LIMIT ' . $what['limit']['start'] . ',' . $what['limit']['end'];
-		}
-	
-		$sql = $sql . ' ;' ;
-			
-		$res = $this->query ( $sql );
+		$res = $this->query ( $what );
 	
 		if ( ! empty ( $res) )
 		{
 	
 			$result = mysqli_fetch_all ( $res,MYSQLI_ASSOC );
 		}
-		//var_dump($sql);
+		//var_dump($what);
 		//return array($result, $sql);
 		return $result;
 	}
