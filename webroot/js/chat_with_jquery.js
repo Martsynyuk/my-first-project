@@ -52,22 +52,22 @@ var chat = {
 				chat.options.maxId = information.max;
 				chat.options.minId = information.min;
 				chat.options.flag = 1;
-				chat.loadMessage(information, 0);
+				chat.loadMessage(information, 'down');
 			}
 			else if(chat.options.flag == 1)
 			{
 				chat.options.maxId = information.max;
-				chat.loadMessage(information, 1);
+				chat.loadMessage(information, 'up');
 			}
 			else{
 				chat.options.flag = 1;
-				chat.loadMessage(information, 0);
+				chat.loadMessage(information, 'down');
 			}
 		}
 	},
 	
 	loadMessage: function(information, status){
-		if(status == 0)
+		if(status == 'down')
 		{
 			for( var key in information ){
 				if(information[key] !== null && typeof information[key] === 'object')
@@ -81,7 +81,7 @@ var chat = {
 				}
 			}
 		}
-		else if(status == 1)
+		else if(status == 'up')
 		{
 			for( var key in information ){
 				if(information[key] !== null && typeof information[key] === 'object')
