@@ -1139,10 +1139,10 @@ class Contacts extends Controller
 								'date'
 						),
 						
-						'conditions' => array(
+						/*'conditions' => array(
 							 'date' => $post['date_max'],
 								
-						),
+						),*/
 
 						'order' => array(
 									
@@ -1162,19 +1162,6 @@ class Contacts extends Controller
 		
 		$argument[0] = 'contacts';
 		$argument[1] = 'ajax_chat';
-		
-		if( !empty($messages))
-		{
-			$time = $this->date_for_chat($messages, $post);
-			$time['marker'] = 1;
-			$this->view->set ('time', $time);
-		}
-		else{
-			$time['max'] = $post['date_max'];
-			$time['min'] = $post['date_min'];
-			$time['marker'] = 0;
-			$this->view->set ('time', $time);
-		}
 		
 		$this->view->set ( 'messages', $messages);
 		

@@ -7,7 +7,6 @@
  */
 
 var chat = {
-	step: 5,
 	options: {},
 	init: function(options){
 		chat.options = options;
@@ -16,6 +15,11 @@ var chat = {
 			if($(options.inputMessage).val() != ''){
 				chat.send_message($(options.inputMessage).val());
 			}
+		});
+		
+		$(options.loadMore).on('click', function(){
+			//load count for old message
+			//chat.return_message();
 		});
 		
 		setInterval(function(){
@@ -32,8 +36,18 @@ var chat = {
 		$(chat.options.inputMessage).val('');
 	},
 	
+	return_messages: function(){
+		chat.ajax('/contacts/chat_ajax', {'count': 5}, chat.getData);
+	},
+	
 	getData: function(data) {
+		var information = JSON.parse(data); 
 		
+		$.each(information, function(key, val){
+			$.each(information[key], function(index, value){
+				
+			});
+		});
 	},
 	
 /**
@@ -55,15 +69,9 @@ var chat = {
 			},
 			error: function(){
 				console.log('problem')
-				this.data = false;
 			}
 				
 		});
 	},
-	
-	return_messages: function(){
-		chat.ajax('/controllers/chat_ajax', {'count': 5}, chat.getData);
-
-	}
 	
 };

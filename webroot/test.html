@@ -1,46 +1,11 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <title>Mustache.js Inline Method</title>
-    <script type="text/javascript" src="/js/mustache.js" ></script>
-   	<script type="text/javascript" src="/js/jquery-2.2.0.js" ></script>
-  </head>
-  <body>
-		<h1>{{newsCategory}}</h1>
-		<ul class="news">
-			{{#news}}
-			<li>
-				<h2>{{title}}</h2>
-				<p>{{preview}}</p>
-				<a class="readMore" href="/news/{{id}}">Подробнее...</a>
-				<div>{{date}}</div>
-			</li>
-			{{/news}}
-		</ul>
-		
-  </body>
-</html>
-<script>
+<?php foreach($messages as $val) : ?>
+<?php $date = date_parse($val['date'])?>
 
-var data = {
-		  "newsCategory": "IT",
-		  "news": [
-			  {
-				"id": 1,
-				"title": "Write once, render anywhere", 
-				"preview": "bla bla bla", 
-				"date": "01.01.2012"
-			  },
-			  {
-				"id": 2,
-				"title": "Mustache in action", 
-				"preview": "bla bla bla", 
-				"date": "02.02.2012"
-			  }
-		  ]
-		}
-		$(function(){
-			$("body").html(mustache.render($("body").html(), data));
-		});
+<div class="message">
+		<span class="name"><?= $val['user_name'] ?></span>
+		<span class="date"><?= 'on ' .  $date['day'] . '/' . $date['month'] . '/' . $date['year'] ?></span>
+		<div class="claer"></div>
+<?= $val['text'] ?>
+	</div> 
 
-</script>
+<?php endforeach; ?>
