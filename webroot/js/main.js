@@ -5,8 +5,13 @@
 
 $( document ).ready(function() {
 	
-	//main.method();
-
+	chat.init({
+		inputMessage: 'input.for_message',
+		sendButton: '.submit',
+		loadMore: '.load_more',
+		loadMessage: 'div.message_plase'
+	});
+	
 	$('#delete_contact').on('click', '#close, #no', function(){
 		main.close_window_for_delete();
 	});
