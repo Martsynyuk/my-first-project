@@ -2,11 +2,10 @@
 /**
  * creat new object for chat
  * 
- * step - increasing the sampling step messages from data base
- * 
  */
 
 var chat = {
+	
 	options: {},
 	init: function(options){
 		chat.options = options;
