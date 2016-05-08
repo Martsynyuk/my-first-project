@@ -1127,10 +1127,40 @@ class Contacts extends Controller
 	
 	function chat_ajax(){
 		
-		$post = $this->post_controller();
-		
+		//var_dump($_POST);
 		$messages = $this->chat->select_chat(
-				$what = "SELECT id, user_name, text, date FROM  chat WHERE  id " . $_POST['id'] . " ORDER BY id DESC LIMIT 0,5;"
+				$what = array(
+	 
+							'fields' => array(
+	
+										'id',
+										'user_name',
+										'text',
+										'date'
+							 	
+										 ),
+	
+							 'conditions' => array(
+												'field' => array(
+														'id' => $_POST['id']
+													),
+												'delimeter' => $_POST['delimeter']
+											),
+	
+							 'order' => array(
+	
+											 'by' => 'id',
+											 'direction' => 'DESC'
+											 
+											),
+	
+							 'limit' => array(
+	
+											'start' => '0',
+											'end'=> $_POST['count']
+	
+										 )
+						 )
 			);
 		
 		$argument[0] = 'contacts';
@@ -1138,7 +1168,7 @@ class Contacts extends Controller
 		
 		if( !empty($messages))
 		{
-			$id = $this->date_for_chat($messages, $post);
+			$id = $this->date_for_chat($messages);
 			$messages['min'] = $id['min'];
 			$messages['max'] = $id['max'];
 			
@@ -1165,7 +1195,7 @@ class Contacts extends Controller
 		
 	}
 	
-	function date_for_chat($array, $data)
+	function date_for_chat($array)
 	{
 				
 		foreach ($array as $val)
@@ -1173,9 +1203,9 @@ class Contacts extends Controller
 			$date[] = $val['id'];
 		}
 		
-		if( !empty($data['data_min']) && $data['data_min'] != 0)
+		if( !empty($_POST['data_min']) && $_POST['data_min'] != 0)
 		{
-			$min = $data['data_min'];
+			$min = $_POST['data_min'];
 		}
 		else{
 			$min = min($date);

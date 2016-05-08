@@ -48,3 +48,5 @@ Temporary Items
 .buildpath
 *~
 .project
+*.log
+error.log
