@@ -1203,7 +1203,6 @@ class Contacts extends Controller
 		$this->view->set ( 'messages', $messages);
 		
 		$this->view->render ( $argument );
-		
 	}
 	
 	function date_for_chat($array)

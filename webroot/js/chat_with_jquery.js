@@ -13,11 +13,12 @@ var chat = {
 	minId: 0,
 	maxId: 0,
 	count: 0,
-	flag: 0,
 	
 	options: {},
 	init: function(options){
 		chat.options = options;
+		
+		chat.return_messages(chat.options.step, chat.maxId, '>', chat.getDefaultMessage);
 		
 		$(options.sendButton).on('click', function(){
 			if($(options.inputMessage).val() != ''){
@@ -26,13 +27,12 @@ var chat = {
 		});
 		
 		$(options.loadMore).on('click', function(){
-			chat.flag = 2;
 			chat.count = chat.count + chat.options.step;
-			chat.return_messages(chat.count, chat.minId, '<', chat.getMessage);
+			chat.return_messages(chat.count, chat.minId, '<', chat.getOldMessage);
 		});
 		
 		setInterval(function(){
-			chat.return_messages(chat.options.step, chat.maxId, '>', chat.getMessage);
+			chat.return_messages(chat.options.step, chat.maxId, '>', chat.getNewtMessage);
 		}, 1000);
 	
 	},
@@ -49,26 +49,27 @@ var chat = {
 		chat.ajax('/contacts/chat_ajax', {'count': count, 'id': id, 'delimeter': delimeter}, method);
 	},
 	
-	getMessage: function(information) {
+	getDefaultMessage: function(information){
+		if( information[0] != null ){
+			chat.maxId = information.max;
+			chat.minId = information.min;
+			chat.loadMessage(information, 'down');
+		}
+	},
+	
+	getNewtMessage: function(information){
+		if( information[0] != null )
+		{
+			chat.maxId = information.max;
+			chat.loadMessage(information, 'up');
+		}
+	},
+	
+	getOldMessage: function(information) {
 		
 		if( information[0] != null )
 		{
-			if(chat.flag == 0)
-			{	
-				chat.maxId = information.max;
-				chat.minId = information.min;
-				chat.flag = 1;
-				chat.loadMessage(information, 'down');
-			}
-			else if(chat.flag == 1)
-			{
-				chat.maxId = information.max;
-				chat.loadMessage(information, 'up');
-			}
-			else{
-				chat.flag = 1;
-				chat.loadMessage(information, 'down');
-			}
+			chat.loadMessage(information, 'down');
 		}
 	},
 	
@@ -121,8 +122,8 @@ var chat = {
 				var information = JSON.parse(data);
 				method(information);			
 			},
-			error: function(){
-				console.log('problem')
+			error: function(jqXHR){
+				console.log(jqXHR.status);
 			}
 				
 		});
