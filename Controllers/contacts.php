@@ -1127,7 +1127,6 @@ class Contacts extends Controller
 	
 	function chat_ajax(){
 		
-		//var_dump($_POST);
 		$messages = $this->chat->select_chat(
 				$what = array(
 	 
@@ -1169,11 +1168,15 @@ class Contacts extends Controller
 		if( !empty($messages))
 		{
 			$id = $this->date_for_chat($messages);
+			$messages['success'] = 'success';
 			$messages['min'] = $id['min'];
 			$messages['max'] = $id['max'];
 			
 			$this->view->set ( 'messages', $messages);
 		}
+		
+		$messages['success'] = 'success';
+		$this->view->set ( 'messages', $messages);
 		
 		$this->view->render ( $argument );
 	}
@@ -1192,6 +1195,14 @@ class Contacts extends Controller
 					)
 					
 				);
+		
+		$argument[0] = 'contacts';
+		$argument[1] = 'ajax_chat';
+		
+		$messages['success'] = 'success';
+		$this->view->set ( 'messages', $messages);
+		
+		$this->view->render ( $argument );
 		
 	}
 	

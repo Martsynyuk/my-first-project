@@ -13,8 +13,6 @@ $( document ).ready(function() {
 	 * sendButton - button for send message
 	 * loadMore - button for load old message
 	 * loadMessage - place for load message
-	 * minId - number for return old message
-	 * maxId - number for return new message
 	 * 
 	 */
 	chat.init({
@@ -23,10 +21,6 @@ $( document ).ready(function() {
 		sendButton: 'input.submit',
 		loadMore: 'span.load_more',
 		loadMessage: 'div.message_plase',
-		minId: 0,
-		maxId: 0,
-		count: 0,
-		flag: 0
 	});
 	
 	$('#delete_contact').on('click', '#close, #no', function(){

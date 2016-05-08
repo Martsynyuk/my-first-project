@@ -5,6 +5,15 @@
  */
 
 var chat = {
+	step: 5, 
+	inputMessage: 'input.for_message',
+	sendButton: 'input.submit',
+	loadMore: 'span.load_more',
+	loadMessage: 'div.message_plase',
+	minId: 0,
+	maxId: 0,
+	count: 0,
+	flag: 0,
 	
 	options: {},
 	init: function(options){
@@ -17,13 +26,13 @@ var chat = {
 		});
 		
 		$(options.loadMore).on('click', function(){
-			chat.options.flag = 2;
-			chat.options.count = chat.options.count + chat.options.step;
-			chat.return_messages(chat.options.count, chat.options.minId, '<', chat.getMessage);
+			chat.flag = 2;
+			chat.count = chat.count + chat.options.step;
+			chat.return_messages(chat.count, chat.minId, '<', chat.getMessage);
 		});
 		
 		setInterval(function(){
-			chat.return_messages(chat.options.step, chat.options.maxId, '>', chat.getMessage);
+			chat.return_messages(chat.options.step, chat.maxId, '>', chat.getMessage);
 		}, 1000);
 	
 	},
@@ -32,7 +41,7 @@ var chat = {
 		chat.ajax('/contacts/ajax_write_message', {'message': message}, chat.clearMessagePlace);
 	},
 	
-	clearMessagePlace: function(data){
+	clearMessagePlace: function(){
 		$(chat.options.inputMessage).val('');
 	},
 	
@@ -40,26 +49,24 @@ var chat = {
 		chat.ajax('/contacts/chat_ajax', {'count': count, 'id': id, 'delimeter': delimeter}, method);
 	},
 	
-	getMessage: function(data) {
-			
-		if( data.length > 2 )
+	getMessage: function(information) {
+		
+		if( information[0] != null )
 		{
-			var information = JSON.parse(data); 
-						
-			if(chat.options.flag == 0)
+			if(chat.flag == 0)
 			{	
-				chat.options.maxId = information.max;
-				chat.options.minId = information.min;
-				chat.options.flag = 1;
+				chat.maxId = information.max;
+				chat.minId = information.min;
+				chat.flag = 1;
 				chat.loadMessage(information, 'down');
 			}
-			else if(chat.options.flag == 1)
+			else if(chat.flag == 1)
 			{
-				chat.options.maxId = information.max;
+				chat.maxId = information.max;
 				chat.loadMessage(information, 'up');
 			}
 			else{
-				chat.options.flag = 1;
+				chat.flag = 1;
 				chat.loadMessage(information, 'down');
 			}
 		}
@@ -111,8 +118,8 @@ var chat = {
 			data: data,
 			response:'json',
 			success: function(data){
-				//console.log(data);
-				method(data);			
+				var information = JSON.parse(data);
+				method(information);			
 			},
 			error: function(){
 				console.log('problem')
