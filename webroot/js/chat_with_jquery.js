@@ -5,17 +5,14 @@
  */
 
 var chat = {
-	step: 5, 
-	inputMessage: 'input.for_message',
-	sendButton: 'input.submit',
-	loadMore: 'span.load_more',
-	loadMessage: 'div.message_plase',
+
 	minId: 0,
 	maxId: 0,
 	count: 0,
 	
 	options: {},
 	init: function(options){
+		
 		chat.options = options;
 		
 		chat.return_messages(chat.options.step, chat.maxId, '>', chat.getDefaultMessage);
