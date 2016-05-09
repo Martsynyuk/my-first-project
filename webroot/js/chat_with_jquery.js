@@ -13,6 +13,18 @@ var chat = {
 	options: {},
 	init: function(options){
 		
+	    requirejs(['mustashe'], function(mustache){
+			var view = {
+			  title: "Joe",
+			  calc: function () {
+			    return 2 + 4;
+			  }
+			};
+			
+			//var output = mustache.render("{{title}} spends {{calc}}", view);
+			//console.log(mustache);
+		});
+		
 		chat.options = options;
 		
 		chat.return_messages(chat.options.step, chat.maxId, '>', chat.getDefaultMessage);
@@ -107,6 +119,10 @@ var chat = {
 * url - url to action for request
 * data - request for data ( array or string )
 * callback - function with call'd after success query
+* 
+* jqXHR.status - 0 - Network Problem
+* 			   - 404 - Requested page not found
+* 		       - 500 - Internal Server Error 
 * 
 */
 	ajax: function(url, data, method){
