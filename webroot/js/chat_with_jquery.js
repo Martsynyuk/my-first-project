@@ -5,29 +5,17 @@
  */
 
 var chat = {
-
+	step: 5,	
 	minId: 0,
 	maxId: 0,
 	count: 0,
-	
+
 	options: {},
 	init: function(options){
 		
-	    requirejs(['mustashe'], function(mustache){
-			var view = {
-			  title: "Joe",
-			  calc: function () {
-			    return 2 + 4;
-			  }
-			};
-			
-			//var output = mustache.render("{{title}} spends {{calc}}", view);
-			//console.log(mustache);
-		});
-		
 		chat.options = options;
 		
-		chat.return_messages(chat.options.step, chat.maxId, '>', chat.getDefaultMessage);
+		chat.return_messages(chat.step, chat.maxId, '>', chat.getDefaultMessage);
 		
 		$(options.sendButton).on('click', function(){
 			if($(options.inputMessage).val() != ''){
@@ -36,14 +24,14 @@ var chat = {
 		});
 		
 		$(options.loadMore).on('click', function(){
-			chat.count = chat.count + chat.options.step;
+			chat.count = chat.count + chat.step;
 			chat.return_messages(chat.count, chat.minId, '<', chat.getOldMessage);
 		});
 		
 		setInterval(function(){
-			chat.return_messages(chat.options.step, chat.maxId, '>', chat.getNewtMessage);
+			chat.return_messages(chat.step, chat.maxId, '>', chat.getNewtMessage);
 		}, 1000);
-	
+		
 	},
 	
 	send_message: function(message){

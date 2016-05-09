@@ -4,7 +4,7 @@
  */
 
 /*global define: false Mustache: true*/
-// https://github.com/requirejs/text#xhr-restrictions
+
 (function defineMustache (global, factory) {
   if (typeof exports === 'object' && exports && typeof exports.nodeName !== 'string') {
     factory(exports); // CommonJS

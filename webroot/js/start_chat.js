@@ -14,11 +14,11 @@ $( document ).ready(function() {
 	 * 
 	 */
 	chat.init({
-		step: 5, 
 		inputMessage: 'input.for_message',
 		sendButton: 'input.submit',
 		loadMore: 'span.load_more',
 		loadMessage: 'div.message_plase',
 	});
 	
+	chat.step = 5;
 });
