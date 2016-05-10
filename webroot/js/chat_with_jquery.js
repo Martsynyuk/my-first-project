@@ -29,6 +29,7 @@ var chat = {
 		});
 		
 		setInterval(function(){
+			//console.log(chat.mustache);
 			chat.return_messages(chat.step, chat.maxId, true, chat.getNewtMessage);
 		}, 1000);
 		
