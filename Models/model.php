@@ -196,7 +196,7 @@ if( ! empty( $what['fields'] ) )
 				foreach ( $what['conditions']['field'] as $key => $value )
 				{
 			
-					$where = $where . ' AND ' .  $key . $what['conditions']['delimeter'] . $value;				
+					$where = $where . ' AND ' .  $key . $what['conditions']['condition'] . $value;				
 				}
 							
 				$where = ltrim ( $where, ' AND' );

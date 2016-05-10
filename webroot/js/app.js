@@ -19,19 +19,18 @@ define("muctacheWithChat", function() {
     };
 });
 
-/*define("main", ["muctacheWithChat", "mustache", "chat"], function (muctacheWithChat, mustache, chat) {
-    var john = new muctacheWithChat(mustache, chat);
-    return john;
-});*/
+define("next", ["muctacheWithChat", "mustache", "chat"], function (muctacheWithChat, mustache, chat) {
+    var mustache_chat = new muctacheWithChat(mustache, chat);
+    return mustache_chat;
+});
 
 
 require(['jquery'], function() {
 	require(['jquery.cookie']);
 	require(['mustache'], function(mustache){
-		require(['chat'], function(chat){
+		require(['chat'], function(){
 			require(['start_chat']);
 		});
-		//require(['test']);
 	});
 	require(['main']);
 });

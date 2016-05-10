@@ -15,7 +15,7 @@ var chat = {
 		
 		chat.options = options;
 		
-		chat.return_messages(chat.step, chat.maxId, '>', chat.getDefaultMessage);
+		chat.return_messages(chat.step, chat.maxId, true, chat.getDefaultMessage);
 		
 		$(options.sendButton).on('click', function(){
 			if($(options.inputMessage).val() != ''){
@@ -25,11 +25,11 @@ var chat = {
 		
 		$(options.loadMore).on('click', function(){
 			chat.count = chat.count + chat.step;
-			chat.return_messages(chat.count, chat.minId, '<', chat.getOldMessage);
+			chat.return_messages(chat.count, chat.minId, false, chat.getOldMessage);
 		});
 		
 		setInterval(function(){
-			chat.return_messages(chat.step, chat.maxId, '>', chat.getNewtMessage);
+			chat.return_messages(chat.step, chat.maxId, true, chat.getNewtMessage);
 		}, 1000);
 		
 	},
@@ -42,8 +42,8 @@ var chat = {
 		$(chat.options.inputMessage).val('');
 	},
 	
-	return_messages: function(count, id, delimeter, method){
-		chat.ajax('/contacts/chat_ajax', {'count': count, 'id': id, 'delimeter': delimeter}, method);
+	return_messages: function(count, id, condition, method){
+		chat.ajax('/contacts/chat_ajax', {'count': count, 'id': id, 'condition': condition}, method);
 	},
 	
 	getDefaultMessage: function(information){

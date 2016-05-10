@@ -1127,6 +1127,14 @@ class Contacts extends Controller
 	
 	function chat_ajax(){
 		
+		if($_POST['condition'])
+		{
+			$condition = '>';
+		}
+		else{
+			$condition = '<';
+		}
+		
 		$messages = $this->chat->select_chat(
 				$what = array(
 	 
@@ -1143,7 +1151,7 @@ class Contacts extends Controller
 												'field' => array(
 														'id' => $_POST['id']
 													),
-												'delimeter' => $_POST['delimeter']
+												'condition' => $condition
 											),
 	
 							 'order' => array(
