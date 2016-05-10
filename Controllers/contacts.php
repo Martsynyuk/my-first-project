@@ -1175,7 +1175,14 @@ class Contacts extends Controller
 		
 		if( !empty($messages))
 		{
-			$id = $this->date_for_chat($messages);
+			$id = $this->id_for_chat($messages);
+			
+			foreach ($messages as $key => $val)
+			{
+				$date = date_parse($messages[$key]['date']);
+				$messages[$key]['date'] = $date['day'] . '/' . $date['month'] . '/' . $date['year']; 
+			}
+			
 			$messages['success'] = 'success';
 			$messages['min'] = $id['min'];
 			$messages['max'] = $id['max'];
@@ -1213,12 +1220,12 @@ class Contacts extends Controller
 		$this->view->render ( $argument );
 	}
 	
-	function date_for_chat($array)
+	function id_for_chat($array)
 	{
 				
 		foreach ($array as $val)
 		{
-			$date[] = $val['id'];
+			$id[] = $val['id'];
 		}
 		
 		if( !empty($_POST['data_min']) && $_POST['data_min'] != 0)
@@ -1226,15 +1233,16 @@ class Contacts extends Controller
 			$min = $_POST['data_min'];
 		}
 		else{
-			$min = min($date);
+			$min = min($id);
 		}
 		
 		
-		$max = max($date);
+		$max = max($id);
 		
 		$date = array('min' => $min, 'max' => $max);
 		
 		return $date;
 	}
+	
 }
 	
