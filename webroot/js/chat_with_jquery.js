@@ -130,3 +130,4 @@ var chat = {
 		});
 	},
 };
+//console.log(mustache);

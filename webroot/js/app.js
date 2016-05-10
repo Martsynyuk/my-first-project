@@ -9,10 +9,11 @@ requirejs.config({
     	app: '/',
         jquery: 'jquery-2.2.0',
         chat: 'chat_with_jquery',
-    }
+    },
+
 });
 
-define("muctacheWithChat", function() {
+/*define("muctacheWithChat", function() {
 	return function Chat(mustache, chat) {
         this.mustache = mustache; 
         this.chat = chat;
@@ -22,13 +23,23 @@ define("muctacheWithChat", function() {
 define("next", ["muctacheWithChat", "mustache", "chat"], function (muctacheWithChat, mustache, chat) {
     var mustache_chat = new muctacheWithChat(mustache, chat);
     return mustache_chat;
+});*/
+
+define("muctache", function() {
+	 return function Muctache(mustache) {
+	        this.mustache = muctache;
+	    };
 });
 
+define("test", ["muctache"], function (muctache) {
+    var test = new Muctache(mustache);
+    return test;
+});
 
 require(['jquery'], function() {
 	require(['jquery.cookie']);
-	require(['mustache'], function(mustache){
-		require(['chat'], function(){
+	require(['test'], function(mustache){
+		require(['chat'], function(chat){
 			require(['start_chat']);
 		});
 	});
