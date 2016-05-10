@@ -625,5 +625,5 @@
   mustache.Scanner = Scanner;
   mustache.Context = Context;
   mustache.Writer = Writer;
-
+  
 }));
