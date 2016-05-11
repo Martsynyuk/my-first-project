@@ -14,12 +14,10 @@ requirejs.config({
 });
 
 require(['jquery'], function() {
-	require(['jquery.cookie']);
-	require(['mustache'], function(mustache){
+	require(['mustache', 'jquery.cookie', 'main'], function(mustache){
 		require(['chat'], function(){
 			chat.mustache = mustache;
 			require(['start_chat']);
 		});
 	});
-	require(['main']);
 });

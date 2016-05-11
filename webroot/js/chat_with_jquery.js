@@ -9,6 +9,7 @@ var chat = {
 	minId: 0,
 	maxId: 0,
 	count: 0,
+	template: '{{#messages}}<div class="message"><span class="name">{{user_name}}</span><span class="date">on {{date}}</span><div class="claer"></div>{{text}}</div>{{/messages}}',
 
 	options: {},
 	init: function(options){
@@ -29,7 +30,6 @@ var chat = {
 		});
 		
 		setInterval(function(){
-			//console.log(chat.mustache);
 			chat.return_messages(chat.step, chat.maxId, true, chat.getNewtMessage);
 		}, 1000);
 		
@@ -48,7 +48,7 @@ var chat = {
 	},
 	
 	getDefaultMessage: function(information){
-		if( information[0] != null ){
+		if( information.messages != null ){
 			chat.maxId = information.max;
 			chat.minId = information.min;
 			chat.loadMessage(information, 'down');
@@ -56,7 +56,7 @@ var chat = {
 	},
 	
 	getNewtMessage: function(information){
-		if( information[0] != null )
+		if( information.messages != null )
 		{
 			chat.maxId = information.max;
 			chat.loadMessage(information, 'up');
@@ -65,7 +65,7 @@ var chat = {
 	
 	getOldMessage: function(information) {
 		
-		if( information[0] != null )
+		if( information.messages != null )
 		{
 			chat.loadMessage(information, 'down');
 		}
@@ -73,28 +73,14 @@ var chat = {
 	
 	loadMessage: function(information, status){
 		if(status == 'down')
-		{
-			for( var key in information ){
-				if(information[key] !== null && typeof information[key] === 'object')
-				{					
-					$(chat.options.loadMessage).append('<div class="message"><span class="name">' + information[key].user_name + 
-							'</span><span class="date">on ' + information[key].date +
-							'</span><div class="claer"></div>' + information[key].text +
-							'</div>')
-				}
-			}
+		{	
+			var html = chat.mustache.render(chat.template, information);
+			$(chat.options.loadMessage).append(html);
 		}
 		else if(status == 'up')
 		{
-			for( var key in information ){
-				if(information[key] !== null && typeof information[key] === 'object')
-				{
-					$(chat.options.loadMessage).prepend('<div class="message"><span class="name">' + information[key].user_name + 
-							'</span><span class="date">on ' + information[key].date +
-							'</span><div class="claer"></div>' + information[key].text +
-							'</div>')
-				}
-			}
+			var html = chat.mustache.render(chat.template, information);
+			$(chat.options.loadMessage).prepend(html);
 		}
 	},
 	
@@ -127,4 +113,3 @@ var chat = {
 		});
 	},
 };
-//console.log(mustache);

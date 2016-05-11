@@ -1182,16 +1182,16 @@ class Contacts extends Controller
 				$date = date_parse($messages[$key]['date']);
 				$messages[$key]['date'] = $date['day'] . '/' . $date['month'] . '/' . $date['year']; 
 			}
+			$message['messages'] = $messages;
+			$message['success'] = 'success';
+			$message['min'] = $id['min'];
+			$message['max'] = $id['max'];
 			
-			$messages['success'] = 'success';
-			$messages['min'] = $id['min'];
-			$messages['max'] = $id['max'];
-			
-			$this->view->set ( 'messages', $messages);
+			$this->view->set ( 'messages', $message);
 		}
 		
-		$messages['success'] = 'success';
-		$this->view->set ( 'messages', $messages);
+		$message['success'] = 'success';
+		$this->view->set ( 'messages', $message);
 		
 		$this->view->render ( $argument );
 	}
