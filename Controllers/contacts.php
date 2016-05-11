@@ -1127,7 +1127,7 @@ class Contacts extends Controller
 	
 	function chat_ajax(){
 		
-		if($_POST['condition'])
+		if($_POST['delimiter'])
 		{
 			$condition = '>';
 		}

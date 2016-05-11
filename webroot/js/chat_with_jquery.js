@@ -30,7 +30,7 @@ var chat = {
 		});
 		
 		setInterval(function(){
-			chat.return_messages(chat.step, chat.maxId, true, chat.getNewtMessage);
+			chat.return_messages(chat.step, chat.maxId, true, chat.getNewMessage);
 		}, 1000);
 		
 	},
@@ -43,8 +43,8 @@ var chat = {
 		$(chat.options.inputMessage).val('');
 	},
 	
-	return_messages: function(count, id, condition, method){
-		chat.ajax('/contacts/chat_ajax', {'count': count, 'id': id, 'condition': condition}, method);
+	return_messages: function(count, id, delimiter, method){
+		chat.ajax('/contacts/chat_ajax', {'count': count, 'id': id, 'delimiter': delimiter}, method);
 	},
 	
 	getDefaultMessage: function(information){
@@ -55,7 +55,7 @@ var chat = {
 		}
 	},
 	
-	getNewtMessage: function(information){
+	getNewMessage: function(information){
 		if( information.messages != null )
 		{
 			chat.maxId = information.max;
@@ -101,7 +101,7 @@ var chat = {
 			data: data,
 			response:'json',
 			success: function(data){
-				var information = JSON.parse(data);
+				information = JSON.parse(data);
 				method(information);		
 			},
 			error: function(jqXHR){
