@@ -101,8 +101,7 @@ var chat = {
 			data: data,
 			response:'json',
 			success: function(data){
-				information = JSON.parse(data);
-				method(information);		
+				method(JSON.parse(data));		
 			},
 			error: function(jqXHR){
 				console.log(jqXHR.status);
