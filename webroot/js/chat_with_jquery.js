@@ -74,13 +74,11 @@ var chat = {
 	loadMessage: function(information, status){
 		if(status == 'down')
 		{	
-			var html = chat.mustache.render(chat.template, information);
-			$(chat.options.loadMessage).append(html);
+			$(chat.options.loadMessage).append(chat.mustache.render(chat.template, information));
 		}
 		else if(status == 'up')
 		{
-			var html = chat.mustache.render(chat.template, information);
-			$(chat.options.loadMessage).prepend(html);
+			$(chat.options.loadMessage).prepend(chat.mustache.render(chat.template, information));
 		}
 	},
 	
