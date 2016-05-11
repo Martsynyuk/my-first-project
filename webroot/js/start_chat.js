@@ -22,7 +22,4 @@ $( document ).ready(function() {
 	
 	chat.step = 5;
 	
-	/*require(['mustache'], function(mustache) {
-		chat.mustache = mustache;
-	});*/
 });

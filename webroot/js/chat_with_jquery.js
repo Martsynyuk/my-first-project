@@ -87,7 +87,7 @@ var chat = {
 *
 * url - url to action for request
 * data - request for data ( array or string )
-* callback - function with call'd after success query
+* method - function with call'd after success query
 * 
 * jqXHR.status - 0 - Network Problem
 * 			   - 404 - Requested page not found
