@@ -4,33 +4,39 @@
  * 
  */
 
-var chat = {
-	step: 5,	
-	minId: 0,
-	maxId: 0,
-	count: 0,
-	template: '{{#messages}}<div class="message"><span class="name">{{user_name}}</span><span class="date">on {{date}}</span><div class="claer"></div>{{text}}</div>{{/messages}}',
+chat = {
+	
+	options: {
+		step: 5,	
+		minId: 0,
+		maxId: 0,
+		count: 0,
+		inputMessage: 'input.for_message',
+		sendButton: 'input.submit',
+		loadMore: 'span.load_more',
+		loadMessage: 'div.message_plase',
+		template: '{{#messages}}<div class="message"><span class="name">{{user_name}}</span><span class="date">on {{date}}</span><div class="claer"></div>{{text}}</div>{{/messages}}',
+	},
+	
+	init: function(options){	
 
-	options: {},
-	init: function(options){
+		chat.options = $.extend(chat.options, options); 
 		
-		chat.options = options;
+		chat.return_messages(chat.options.step, chat.options.maxId, true, chat.getDefaultMessage);
 		
-		chat.return_messages(chat.step, chat.maxId, true, chat.getDefaultMessage);
-		
-		$(options.sendButton).on('click', function(){
-			if($(options.inputMessage).val() != ''){
-				chat.send_message($(options.inputMessage).val());
+		$(chat.options.sendButton).on('click', function(){
+			if($(chat.options.inputMessage).val() != ''){
+				chat.send_message($(chat.options.inputMessage).val());
 			}
 		});
 		
-		$(options.loadMore).on('click', function(){
-			chat.count = chat.count + chat.step;
-			chat.return_messages(chat.count, chat.minId, false, chat.getOldMessage);
+		$(chat.options.loadMore).on('click', function(){
+			chat.options.count = chat.options.count + chat.options.step;
+			chat.return_messages(chat.options.count, chat.options.minId, false, chat.getOldMessage);
 		});
 		
 		setInterval(function(){
-			chat.return_messages(chat.step, chat.maxId, true, chat.getNewMessage);
+			chat.return_messages(chat.options.step, chat.options.maxId, true, chat.getNewMessage);
 		}, 1000);
 		
 	},
@@ -49,8 +55,8 @@ var chat = {
 	
 	getDefaultMessage: function(information){
 		if( information.messages != null ){
-			chat.maxId = information.max;
-			chat.minId = information.min;
+			chat.options.maxId = information.max;
+			chat.options.minId = information.min;
 			chat.loadMessage(information, 'down');
 		}
 	},
@@ -58,7 +64,7 @@ var chat = {
 	getNewMessage: function(information){
 		if( information.messages != null )
 		{
-			chat.maxId = information.max;
+			chat.options.maxId = information.max;
 			chat.loadMessage(information, 'up');
 		}
 	},
@@ -74,11 +80,11 @@ var chat = {
 	loadMessage: function(information, status){
 		if(status == 'down')
 		{	
-			$(chat.options.loadMessage).append(chat.mustache.render(chat.template, information));
+			$(chat.options.loadMessage).append(chat.mustache.render(chat.options.template, information));
 		}
 		else if(status == 'up')
 		{
-			$(chat.options.loadMessage).prepend(chat.mustache.render(chat.template, information));
+			$(chat.options.loadMessage).prepend(chat.mustache.render(chat.options.template, information));
 		}
 	},
 	

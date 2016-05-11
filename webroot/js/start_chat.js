@@ -18,8 +18,9 @@ $( document ).ready(function() {
 		sendButton: 'input.submit',
 		loadMore: 'span.load_more',
 		loadMessage: 'div.message_plase',
+		step: 5,
 	});
 	
-	chat.step = 5;
+	
 	
 });
