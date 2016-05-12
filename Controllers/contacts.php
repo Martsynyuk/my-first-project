@@ -455,7 +455,7 @@ class Contacts extends Controller
 			}
 		}
 		
-		if (!empty($_POST)) {
+		if (!empty($post)) {
 			header("Location: ".$_SERVER["REQUEST_URI"]);
 			exit;
 		}
@@ -979,8 +979,9 @@ class Contacts extends Controller
   
 	function ajax_index()
 	{
+		$post = $this->post_controller();
 		
-		if(isset($_POST['page'])) {
+		if(isset($post['page'])) {
 				
 			$post = $this->post_controller();
 				
@@ -1027,9 +1028,9 @@ class Contacts extends Controller
 	
 	function ajax_select()
 	{
-		if(isset($_POST['page'])) {
-	
-			$post = $this->post_controller();
+		$post = $this->post_controller();
+		
+		if(isset($post['page'])) {
 	
 			$user = $this->Login->user();
 	
@@ -1091,10 +1092,10 @@ class Contacts extends Controller
 	
 	function ajax_valid()
 	{
-	
-		if(!empty($_POST['text']))
+		$post = $this->post_controller();
+		
+		if(!empty($post['text']))
 		{
-			$post = $this->post_controller();
 	
 			$post['text'] = preg_replace('/[a-zA-Z0-9,@,+,., ,-]/', '', $post['text']);
 				
@@ -1110,10 +1111,11 @@ class Contacts extends Controller
 	
 	function ajax_contact_delete()
 	{
-	
-		if(!empty($_POST['contact']))
+		$post = $this->post_controller ();
+		
+		if(!empty($post['contact']))
 		{
-			$post = $this->post_controller ();
+			
 			$user = $this->Login->user();
 			
 			if ( ! $this->Information->contacts_defender ( $post['contact'], $user['id'] ))
@@ -1127,7 +1129,9 @@ class Contacts extends Controller
 	
 	function chat_ajax(){
 		
-		if($_POST['delimiter'])
+		$post = $this->post_controller();
+		
+		if($post['delimiter'])
 		{
 			$condition = '>';
 		}
@@ -1149,7 +1153,7 @@ class Contacts extends Controller
 	
 							 'conditions' => array(
 												'field' => array(
-														'id' => $_POST['id']
+														'id' => $post['id']
 													),
 												'condition' => $condition
 											),
@@ -1164,7 +1168,7 @@ class Contacts extends Controller
 							 'limit' => array(
 	
 											'start' => '0',
-											'end'=> $_POST['count']
+											'end'=> $post['count']
 	
 										 )
 						 )
@@ -1175,7 +1179,7 @@ class Contacts extends Controller
 		
 		if( !empty($messages))
 		{
-			$id = $this->id_for_chat($messages);
+			$id = $this->id_for_chat($messages, $post);
 			
 			foreach ($messages as $key => $val)
 			{
@@ -1220,7 +1224,7 @@ class Contacts extends Controller
 		$this->view->render ( $argument );
 	}
 	
-	function id_for_chat($array)
+	function id_for_chat($array, $post)
 	{
 				
 		foreach ($array as $val)
@@ -1228,9 +1232,9 @@ class Contacts extends Controller
 			$id[] = $val['id'];
 		}
 		
-		if( !empty($_POST['data_min']) && $_POST['data_min'] != 0)
+		if( !empty($post['data_min']) && $post['data_min'] != 0)
 		{
-			$min = $_POST['data_min'];
+			$min = $post['data_min'];
 		}
 		else{
 			$min = min($id);
