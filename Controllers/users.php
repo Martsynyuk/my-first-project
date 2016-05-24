@@ -122,11 +122,9 @@ Class Users extends Controller
 	
 	function ajax_login()
 	{
-	
-		if(!empty($_POST['text']))
-		{
-			$post = $this->post_controller();
-				
+		$post = $this->post_controller();
+		if(!empty($post['text']))
+		{		
 			$post['text'] = preg_replace('/[a-zA-Z0-9]/', '', $post['text']);
 			
 			if(!empty ($post['text']) )
